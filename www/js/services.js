@@ -1,5 +1,5 @@
 app.factory('OfertaService', function() {
-	var usuarios = [
+	var ofertas = [
 		{
 			id: 1,
 			nome: 'iphone 4',

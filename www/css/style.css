@@ -1,1 +1,54 @@
-/* Empty. Add your own CSS if you like */
+.titulo-login {
+	border-width: 0;
+	margin-top: 50px;
+	font-size: 24px;
+	color: #8D8D8D;
+}
+
+.login-form {
+	margin-top: 100px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.item-input-coletivando {
+	border-bottom: #ddd 2px solid;
+}
+
+.manter-conectado {
+	height: 60px;
+	margin-top: 30px;
+	color: #555;
+	display: block;
+	font-size: 16px;
+}
+
+.manter-conectado span {
+	float: left;
+}
+
+input[type="checkbox"]:not(:checked) {
+	-webkit-appearance: none;
+	border: #888 2px solid;
+	border-radius: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+input[type="checkbox"]:checked {
+	-webkit-appearance: none;
+	background-color: #79C9AD;
+	border: #79C9AD 2px solid;
+	border-radius: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+.btn {
+	color: #ffffff;
+    font-size: 17px;
+}
+
+.btn-green {
+	background-color: #79C9AD;
+}

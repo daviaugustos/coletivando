@@ -21,8 +21,14 @@ app.run(function($ionicPlatform) {
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('oferta-lista', {
     url: '/oferta-lista',
-    templateUrl: 'templates/oferta-lista.html',
-    controller: 'OfertaListaCtrl'
+    templateUrl: 'templates/ofertas/oferta-lista.html',
+    controller: 'OfertaCtrl'
+  });
+
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'templates/usuarios/login.html',
+    controller: 'UsuarioCtrl'
   });
 
   $urlRouterProvider.otherwise('/oferta-lista');

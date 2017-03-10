@@ -1,0 +1,28 @@
+<ion-view title="Coletivando">
+	<ion-nav-bar class="titulo-login">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <form class="login-form">
+        <ion-list>
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="Email" ng-model="usuario.email"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Senha</span>
+                <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
+            </label>
+
+            <label class="manter-conectado">
+                <span class="col col-90">Manter conectado</span>
+                <input type="checkbox" class="col col-10">
+            </label>
+            
+            <button type="submit" class="button btn btn-green button-block">Entrar</button>
+
+        </ion-list>
+    </form>
+</ion-view>

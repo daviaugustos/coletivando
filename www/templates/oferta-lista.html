@@ -1,0 +1,14 @@
+<ion-view title="Coletivando">
+	<ion-nav-buttons side="right">
+		<button class="button button-clear icon ion-search"></button>
+	</ion-nav-buttons>
+
+	<ion-content>
+        <ion-list>
+            <ion-item ng-repeat="o in ofertas">
+                <h2>{{o.nome}}</h2>
+                <p>{{o.valor}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

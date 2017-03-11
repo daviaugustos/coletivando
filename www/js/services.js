@@ -2,13 +2,12 @@ app.factory('OfertaService', function() {
 	var ofertas = [
 		{
 			id: 1,
-			nome: 'iphone 4',
-			valor: 'R$1.800,00'
-		},
-		{
-			id: 2,
-			nome: 'Galaxy S6',
-			valor: 'R$2.000,00'
+			descricao: 'iphone 4',
+			imagem:'', //aqui possivelmente um array de img, porém como definir a principal do anuncio?
+			valorArrecadado: '',
+			desconto: '',
+			dataLimite: '',
+			valor: '1800'
 		}
 	]
 

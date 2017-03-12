@@ -10,22 +10,29 @@
         </ion-item>
 
         <ion-item>
-            <img src="" alt="">
-            <!--<button></button>-->
+            <!--Customizar a imagem com avatar do usuario-->
+            <div class="bg-personalizar-categorias"></div>
+            
+            <div class="row">
+                <div class="col"></div>
+                <div class="col col-80 center">
+                    <button class="button btn btn-green">Adicionar</button>
+                </div>
+                <div class="col"></div>
+            </div>
         </ion-item>
        
         <!--parte visivel a todos-->
-       
         <ion-item class="list-categorias">
             <h2>Todas as Categorias</h2>
             <ion-list>
-                <a class="item" ng-repeat="c in categorias">
+                <a ng-repeat="c in categorias" ng-click="filterHome(c.id)" class="item">
                     {{c.nome}}
                     <i class="icon ion-chevron-right"></i>
                 </a>
             </ion-list>
         </ion-item>
-       
+        
     
     </ion-content>
 </ion-view>

@@ -12,4 +12,9 @@ app.controller('UsuarioCtrl',
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 	$scope.categorias = CategoriaService.readAll();
+	
+	//aguardando implementação das ofertas na home e id de filtro na url
+	$scope.filterHome = function(filterId){
+		$state.go('oferta-lista', {filterId: filterId});
+	}
 });

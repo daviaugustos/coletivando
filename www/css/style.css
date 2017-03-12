@@ -1,3 +1,33 @@
+/*Classes gerais*/
+.button{
+	border-radius: 0;
+}
+.btn {
+	color: #fff;
+    font-size: 17px;
+}
+.btn-green {
+	width: 100%; 
+	background-color: #79C9AD;
+	-webkit-transition: all 0.5s ease delay;
+	-moz-transition: all 0.5s ease delay;
+	transition: all 0.5s ease delay;
+}
+.btn-green:hover {
+	background-color: #72bba1;
+	color: #fff;
+}
+.btn-green:active, .btn-green:focus {
+	background-color: #72bba1;
+	color: #fff;
+}
+
+.center{
+	text-align: center;
+}
+
+/*Login*/
+
 .titulo-login {
 	border-width: 0;
 	margin-top: 50px;
@@ -44,15 +74,6 @@ input[type="checkbox"]:checked {
 	height: 20px;
 }
 
-.btn {
-	color: #ffffff;
-    font-size: 17px;
-}
-
-.btn-green {
-	background-color: #79C9AD;
-}
-
 
 
 /*View Explore*/
@@ -84,4 +105,22 @@ input[type="checkbox"]:checked {
 	float: right;
 }
 
+.bg-personalizar-categorias{
+    background: url(../img/personalizar-categorias.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 80%;
+    height: 246px;
+    margin: auto;
+    z-index: 1;
+    position: relative;
+}
+
+#explore .btn-green{
+	padding: 2px;
+	min-height: 0px;
+	line-height: 0px;
+	height: 36px;
+}
 

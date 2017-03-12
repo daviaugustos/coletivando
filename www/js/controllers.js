@@ -9,3 +9,7 @@ app.controller('UsuarioCtrl',
 
 	
 });
+
+app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
+	$scope.categorias = CategoriaService.readAll();
+});

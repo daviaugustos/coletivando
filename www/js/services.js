@@ -17,3 +17,33 @@ app.factory('OfertaService', function() {
 		}
 	}
 });
+
+app.factory('CategoriaService', function() {
+	var categorias = [
+		{
+			id: 1,
+			nome: 'Smartphones',
+			img: ''
+		},
+		{
+			id: 2,
+			nome: 'Computadores',
+			img: ''
+		},
+		{
+			id: 3,
+			nome: 'Games',
+			img: ''
+		},
+		{
+			id: 4,
+			nome: 'Eletrônicos',
+			img: ''
+		}
+	]
+	return{
+		readAll: function(){
+			return categorias;
+		}
+	}
+});

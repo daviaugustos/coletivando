@@ -1,0 +1,31 @@
+<ion-view id="explore" title="Explore">  
+    <ion-content>
+
+        <!--parte visivel somente com login-->
+        <ion-item class="item-button-right colet-option">
+            <h2>Categorias Favoritas</h2>
+            <button class="button button-clear">
+                <i class="icon ion-gear-a"></i>
+            </button>
+        </ion-item>
+
+        <ion-item>
+            <img src="" alt="">
+            <!--<button></button>-->
+        </ion-item>
+       
+        <!--parte visivel a todos-->
+       
+        <ion-item class="list-categorias">
+            <h2>Todas as Categorias</h2>
+            <ion-list>
+                <a class="item" ng-repeat="c in categorias">
+                    {{c.nome}}
+                    <i class="icon ion-chevron-right"></i>
+                </a>
+            </ion-list>
+        </ion-item>
+       
+    
+    </ion-content>
+</ion-view>

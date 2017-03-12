@@ -31,5 +31,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'UsuarioCtrl'
   });
 
+  $stateProvider.state('explore', {
+    url: '/explore',
+    templateUrl: 'templates/usuarios/explore.html',
+    controller: 'CategoriaCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });

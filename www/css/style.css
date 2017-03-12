@@ -52,3 +52,36 @@ input[type="checkbox"]:checked {
 .btn-green {
 	background-color: #79C9AD;
 }
+
+
+
+/*View Explore*/
+#explore .colet-option h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 18px;
+}
+#explore .colet-option button{
+	color: #AA79B8;
+}
+#explore ion-item{
+	border: 0;
+}
+
+.list-categorias h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 18px;
+	padding-bottom: 20px;
+}
+#explore a{
+	border: 0;
+}
+#explore ion-list{
+	color: #555555;
+}
+#explore i{
+	float: right;
+}
+
+

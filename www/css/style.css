@@ -107,7 +107,7 @@ input[type="checkbox"]:checked {
 }
 
 .bg-personalizar-categorias{
-    background: url(../img/personalizar-categorias.png);
+    background: url(../img//categorias/personalizar-categorias.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -148,4 +148,13 @@ input[type="checkbox"]:checked {
 	padding: 10px; 
 	font-weight: 100;
 	font-size: 16px;
+}
+
+.categorias-group{
+	display: inline-block;
+}
+
+.categoria-icon{
+	width: 50%;
+	height: 50px;
 }

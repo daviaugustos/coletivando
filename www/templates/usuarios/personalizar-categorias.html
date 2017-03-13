@@ -3,4 +3,9 @@
         <h4>Personalização</h4>
         <h5>Selecione suas categorias favoritas</h5>
     </div>
+    <div class="categorias-group">
+        <div ng-repeat="c in categorias" class="categoria-icon">  
+            <img ng-src="img/categorias/outlined/{{c.img}}" alt="{{c.img}}">        
+        </div>
+    </div>
 </ion-view>

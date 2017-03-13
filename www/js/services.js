@@ -23,22 +23,22 @@ app.factory('CategoriaService', function() {
 		{
 			id: 1,
 			nome: 'Smartphones',
-			img: ''
+			img: 'Moderncam.png'
 		},
 		{
 			id: 2,
 			nome: 'Computadores',
-			img: ''
+			img: 'Classicswatch.png'
 		},
 		{
 			id: 3,
 			nome: 'Games',
-			img: ''
+			img: 'ioSlove.png'
 		},
 		{
 			id: 4,
 			nome: 'Eletrônicos',
-			img: ''
+			img: 'Ring.png'
 		}
 	]
 	return{

@@ -37,5 +37,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'CategoriaCtrl'
   });
 
+  $stateProvider.state('personalizar-categorias',{
+    url: '/personalizar-categorias',
+    templateUrl: 'templates/usuarios/personalizar-categorias.html',
+    controller: 'CategoriaCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });

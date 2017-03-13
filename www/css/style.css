@@ -1,4 +1,5 @@
 /*Classes gerais*/
+
 .button{
 	border-radius: 0;
 }
@@ -124,3 +125,26 @@ input[type="checkbox"]:checked {
 	height: 36px;
 }
 
+/* Personalizar categorias */
+
+#personalizar .bg-header{
+	background-color: #AA79B8;
+	height: 100px;
+	text-align: center;
+	box-shadow: 0 1px 28px rgba(0,0,0,0.25), 0 1px 10px rgba(0,0,0,0.22);
+}
+
+.bg-header h4{
+	color: #fff;
+	margin: 0;
+	padding: 10px; 
+	font-size: 20px;
+}
+
+.bg-header h5{
+	color: #e4e4e4;
+	margin: 0;
+	padding: 10px; 
+	font-weight: 100;
+	font-size: 16px;
+}

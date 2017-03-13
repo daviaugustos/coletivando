@@ -17,4 +17,7 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 	$scope.filterHome = function(filterId){
 		$state.go('oferta-lista', {filterId: filterId});
 	}
+	$scope.showPersonalizar = function(){
+		$state.go('personalizar-categorias');
+	}
 });

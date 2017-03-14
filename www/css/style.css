@@ -27,6 +27,26 @@
 	text-align: center;
 }
 
+input[type="checkbox"]:not(:checked) {
+	-webkit-appearance: none;
+	border: #888 2px solid;
+	border-radius: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+input[type="checkbox"]:checked {
+	background-color: #79C9AD;
+	border: #79C9AD 2px solid;
+	border-radius: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+input {
+	width: 100%;
+}
+
 /*Login*/
 
 .titulo-login {
@@ -58,26 +78,21 @@
 	float: left;
 }
 
-input[type="checkbox"]:not(:checked) {
-	-webkit-appearance: none;
-	border: #888 2px solid;
-	border-radius: 2px;
-	width: 20px;
-	height: 20px;
+.manter-conectado input {
+	margin-left: 20px;
 }
 
-input[type="checkbox"]:checked {
-	-webkit-appearance: none;
-	background-color: #79C9AD;
-	border: #79C9AD 2px solid;
-	border-radius: 2px;
-	width: 20px;
-	height: 20px;
+.cadastrar-div {
+	margin-top: 15px;
 }
 
-
+.cadastrar-div p {
+	color:#79C9AD; 
+	font-size: 17px;
+}
 
 /*View Explore*/
+
 #explore .colet-option h2{
 	color: #8D8D8D;
 	font-weight: 500;
@@ -160,6 +175,7 @@ input[type="checkbox"]:checked {
 }
 
 /*View cadastro-user*/
+
 #cadastro-user .btn-green {
 	margin-top: 20px;
 }

@@ -7,7 +7,7 @@ app.factory('OfertaService', function() {
 			qtdUnidadeMin: '1000',
 			desconto: '50',
 			dataLimite: '01/05/2017',
-			valorUnitario: '3000'
+			valorUnitario: ['3000','4500','4400']
 		}
 	]
 

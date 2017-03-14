@@ -2,12 +2,12 @@ app.factory('OfertaService', function() {
 	var ofertas = [
 		{
 			id: 1,
-			descricao: 'iphone 4',
-			imagem:'', //aqui possivelmente um array de img, porém como definir a principal do anuncio?
-			valorArrecadado: '',
-			desconto: '',
-			dataLimite: '',
-			valor: '1800'
+			descricao: 'Iphone 7 128GB',
+			enderecoImagem:'img/home/iphone.jpg', //aqui possivelmente um array de img, porém como definir a principal do anuncio?
+			qtdUnidadeMin: '1000',
+			desconto: '50',
+			dataLimite: '01/05/2017',
+			valorUnitario: '3000'
 		}
 	]
 

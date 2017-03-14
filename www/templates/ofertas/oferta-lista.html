@@ -9,9 +9,10 @@
 
 	<ion-content>
         <ion-list>
-            <ion-item ng-repeat="o in ofertas" class="card">
-                <h2>{{o.nome}}</h2>
-                <p>{{o.valor}}</p>
+            <ion-item ng-repeat="oferta in ofertas" class="card">
+                <img src="{{oferta.enderecoImagem}}" class="centralizarElemento" />
+                <h2 class="text-left">{{oferta.descricao}}</h2>
+                <p class="text-right">{{oferta.valorUnitario | currency: "R$ "}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

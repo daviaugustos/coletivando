@@ -163,4 +163,30 @@ input[type="checkbox"]:checked {
 #cadastro-user .btn-green {
 	margin-top: 20px;
 
+.centralizarElemento{
+	display: block; 
+	margin: auto; 
+	width: 40%;
+}
+
+.alinharEsquerdaElemento{
+	position: absolute;
+    left: 0px;
+    width: 300px;
+    padding: 10px;
+}
+
+.alinharDireitaElemento{
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+}
+
+.text-left {
+	float: left;
+}
+
+.text-right {
+	float: right;
 }

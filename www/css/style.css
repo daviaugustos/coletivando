@@ -159,28 +159,26 @@ input[type="checkbox"]:checked {
 	height: 50px;
 }
 
-/*view cadastro-user */
+/*View cadastro-user*/
 #cadastro-user .btn-green {
 	margin-top: 20px;
+}
+
+#cadastro-user input{
+	color: #adadad;
+}
+
+#cadastro-user .input-label{
+	color: #989898;
+}
+
+
+/*View Home*/
 
 .centralizarElemento{
 	display: block; 
 	margin: auto; 
 	width: 40%;
-}
-
-.alinharEsquerdaElemento{
-	position: absolute;
-    left: 0px;
-    width: 300px;
-    padding: 10px;
-}
-
-.alinharDireitaElemento{
-    position: absolute;
-    right: 0px;
-    width: 300px;
-    padding: 10px;
 }
 
 .text-left {

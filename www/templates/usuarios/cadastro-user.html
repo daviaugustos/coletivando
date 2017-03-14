@@ -1,0 +1,43 @@
+<ion-view id="cadastro-user" title="Coletivando">
+
+	<ion-nav-bar class="titulo-cadastro">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <form class="login-form">
+
+        <ion-list>
+
+                <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Nome</span>
+                <input type="text" placeholder="Nome" ng-model="usuario.nome"/>
+            </label>
+
+
+              <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="Email" ng-model="usuario.email"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Senha</span>
+                <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
+            </label>
+
+                  <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Confirmar senha</span>
+                <input type="password" placeholder="Confirmar senha" ng-model="usuario.senha2"/>
+            </label>
+            
+            <div class="row">
+                <div class="col"></div>
+                <div class="col col-80 center">
+                    <button class="button btn btn-green">Cadastrar</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </ion-list>
+    </form>
+</ion-view>

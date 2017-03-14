@@ -30,6 +30,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/usuarios/login.html',
     controller: 'UsuarioCtrl'
   });
+  
 
   $stateProvider.state('explore', {
     url: '/explore',
@@ -43,5 +44,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'CategoriaCtrl'
   });
 
+   $stateProvider.state('cadastro-user', {
+    url: '/cadastro-user',
+    templateUrl: 'templates/usuarios/cadastro-user.html',
+    controller: 'UsuarioCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
+

@@ -158,3 +158,9 @@ input[type="checkbox"]:checked {
 	width: 50%;
 	height: 50px;
 }
+
+/*view cadastro-user */
+#cadastro-user .btn-green {
+	margin-top: 20px;
+
+}

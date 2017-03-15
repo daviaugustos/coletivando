@@ -10,7 +10,8 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 			enderecoImagem: ofertaSalva.enderecoImagem,
 			valorUnitario: ofertaSalva.valorUnitario,
 			valorPromocional: valorDescontoAplicado,
-			dataLimite: ofertaSalva.dataLimite
+			dataLimite: ofertaSalva.dataLimite,
+			desconto: ofertaSalva.desconto
 		}
 		listaOfertasProcessadas.push(ofertaView);
 	});

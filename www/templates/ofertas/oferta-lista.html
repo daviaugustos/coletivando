@@ -10,20 +10,25 @@
 	<ion-content>
         <ion-list>
             <ion-item ng-repeat="ofertaView in listaOfertas" class="card">
-                
                 <div class="row">
                     <img src="{{ofertaView.enderecoImagem}}" class="centralizarElemento" />
                 </div>
                 <b><p class="text-left">{{ofertaView.titulo}}</p></b>
                 <div class="text-right">
                     <p>{{ofertaView.valorPromocional | currency: "R$ "}}</p>
-                    <h4>{{ofertaView.valorUnitario | currency: "R$ "}}</h4>
+                    <p style="text-decoration: line-through; font-size: smaller;">{{ofertaView.valorUnitario | currency: "R$ "}}</p>
                 </div>
                 <div class="row">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="margin-left:5%; width:50%; border-radius: 3px; height: 5px; background: #79C9AD;">
-                     valor arrecadado
+                    <div id="progressBarValorArrecadado" class="progress-bar" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100" style="margin-left:3.5%; width:50%; border-radius: 3px; height: 5px; background: #79C9AD;">
                     </div>
                 </div>
+                <div class="text-left"> 
+                    <p>36% completo</p>
+                </div>
+                <div class="text-right">
+                    <p>{{ofertaView.desconto}}% desconto</p>
+                </div>
+                
             </ion-item>
         </ion-list>
     </ion-content>

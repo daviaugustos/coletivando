@@ -4,10 +4,10 @@ app.factory('OfertaService', function() {
 			id: 1,
 			descricao: 'Iphone 7 128GB',
 			enderecoImagem:'img/home/iphone.jpg', //aqui possivelmente um array de img, porém como definir a principal do anuncio?
-			qtdUnidadeMin: '1000',
-			desconto: '50',
+			qtdUnidadeMin: 1000,
+			desconto: 50,
 			dataLimite: '01/05/2017',
-			valorUnitario: ['3000','4500','4400']
+			valorUnitario: 3000
 		}
 	]
 

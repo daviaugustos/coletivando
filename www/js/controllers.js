@@ -1,7 +1,21 @@
-app.controller('OfertaCtrl', 
-	function($scope, OfertaService, $state) {
+app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
+	var listaOfertasDados = OfertaService.readAll();
+	 var listaOfertasProcessadas = [];
 
-	$scope.ofertas = OfertaService.readAll();
+	listaOfertasDados.forEach(function(ofertaSalva){
+		var valorDescontoAplicado = ofertaSalva.valorUnitario - (ofertaSalva.valorUnitario * (ofertaSalva.desconto / 100));
+		
+		var ofertaView = {
+			titulo: ofertaSalva.descricao,
+			enderecoImagem: ofertaSalva.enderecoImagem,
+			valorUnitario: ofertaSalva.valorUnitario,
+			valorPromocional: valorDescontoAplicado,
+			dataLimite: ofertaSalva.dataLimite
+		}
+		listaOfertasProcessadas.push(ofertaView);
+	});
+
+	$scope.listaOfertas = listaOfertasProcessadas;
 });
 
 app.controller('UsuarioCtrl', 

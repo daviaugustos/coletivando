@@ -68,7 +68,12 @@ input[type="checkbox"]:checked {
 	width: 20px;
 	height: 20px;
 }
-/*
+
+.item-input-coletivando {
+	border-bottom: #ddd 2px solid;
+}
+
+/* Tentativa de deixar o checkbox mais bonito
 input[type=checkbox]:after {
     content: " ";
     background-color: #79c9ad;
@@ -84,6 +89,7 @@ input[type=checkbox]:checked:after {
     content: "\2714";
 }
 */
+
 input {
 	width: 100%;
 }
@@ -103,10 +109,6 @@ input {
 	padding-right: 40px;
 }
 
-.item-input-coletivando {
-	border-bottom: #ddd 2px solid;
-}
-
 .manter-conectado {
 	height: 60px;
 	margin-top: 30px;
@@ -119,7 +121,7 @@ input {
 	float: left;
 }
 
-.manter-conectado input {
+.manter-conectado [type="checkbox"] {
 	margin-left: 20px;
 }
 
@@ -130,6 +132,19 @@ input {
 .cadastrar-div p {
 	color:#79C9AD; 
 	font-size: 17px;
+}
+
+/*Alterar Senha*/
+
+.navbar-alterar-senha {
+	background-color: #aa79b8;
+	color: white;
+}
+
+.alterar-senha-form {
+	margin-top: 50px;
+	padding-left: 40px;
+	padding-right: 40px;
 }
 
 /*View Explore*/

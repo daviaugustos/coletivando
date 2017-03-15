@@ -1,35 +1,28 @@
-<ion-view title="Coletivando">
-	<ion-nav-bar class="titulo-login">
+<ion-view title="Alterar Senha">
+	<ion-nav-bar class="navbar-alterar-senha">
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
 
-    <form class="login-form">
+    <form class="alterar-senha-form">
         <ion-list>
             <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Email</span>
-                <input type="email" placeholder="Email" ng-model="usuario.email"/>
+                <span class="input-label">Senha atual</span>
+                <input type="password" placeholder="Senha atual"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Senha</span>
-                <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
+                <span class="input-label">Nova senha</span>
+                <input type="password" placeholder="Nova senha"/>
             </label>
 
-            <label class="manter-conectado">
-                <span>Manter conectado</span>
-                <input type="checkbox">
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Confirmar senha</span>
+                <input type="password" placeholder="Confirmar senha"/>
             </label>
             
-            <button type="submit" class="button btn btn-green button-block">Entrar</button>
+            <button type="submit" class="button btn btn-green button-block">Salvar</button>
 
         </ion-list>
     </form>
-
-    <div class="text-center cadastrar-div">
-        <p>Cadastre-se</p>
-    </div>
-
-    <!-- Botão Facebook -->
-    <!-- Botão Google + -->
-</ion-view>m
+</ion-view>

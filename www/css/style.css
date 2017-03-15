@@ -192,6 +192,13 @@ input {
 
 /*View cadastro-user*/
 
+
+.cadastro-form {
+	margin-top: 100px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
 #cadastro-user .btn-green {
 	margin-top: 20px;
 }

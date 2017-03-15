@@ -1,5 +1,30 @@
 /*Classes gerais*/
 
+ion-nav-bar.roxo ion-header-bar{
+	background-color: #AA79B8;
+}
+ion-nav-bar.green ion-header-bar{
+	background-color: #72bba1;
+}
+
+ion-header-bar div.title.header-item{
+	text-align: left;
+	left: 0px !important;
+	right: 0px !important;
+	color: #fff;
+}
+
+
+
+/*.header-item{
+	left: 0;
+	right: 0;
+	text-align: left;
+}*/
+
+
+
+
 .button{
 	border-radius: 0;
 }

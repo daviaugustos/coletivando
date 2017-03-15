@@ -209,7 +209,7 @@ input {
 
 .centralizarElemento{
 	display: block; 
-	margin: 0px;
+	margin-left: 15px;
 	padding-bottom: 20px;
 	padding-top: 15px; 
 	width: 100%;

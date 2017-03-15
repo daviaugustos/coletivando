@@ -94,7 +94,7 @@ input {
 	float: left;
 }
 
-.manter-conectado input {
+.manter-conectado [type="checkbox"] {
 	margin-left: 20px;
 }
 

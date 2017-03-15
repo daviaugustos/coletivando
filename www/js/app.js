@@ -44,9 +44,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'CategoriaCtrl'
   });
 
-   $stateProvider.state('cadastro-user', {
-    url: '/cadastro-user',
-    templateUrl: 'templates/usuarios/cadastro-user.html',
+  $stateProvider.state('alterar-senha', {
+    url: '/alterar-senha',
+    templateUrl: 'templates/usuarios/alterar-senha.html',
     controller: 'UsuarioCtrl'
   });
 

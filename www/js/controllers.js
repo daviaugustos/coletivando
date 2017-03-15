@@ -6,6 +6,7 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 		var valorDescontoAplicado = ofertaSalva.valorUnitario - (ofertaSalva.valorUnitario * (ofertaSalva.desconto / 100));
 		
 		var ofertaView = {
+			id: ofertaSalva.id,
 			titulo: ofertaSalva.descricao,
 			enderecoImagem: ofertaSalva.enderecoImagem,
 			valorUnitario: ofertaSalva.valorUnitario,

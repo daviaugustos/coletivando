@@ -298,3 +298,11 @@ input {
 .text-right {
 	float: right;
 }
+
+
+/* teste categoria bar */
+
+.wide-as-needed {
+  overflow: hidden;
+  white-space: nowrap;
+}

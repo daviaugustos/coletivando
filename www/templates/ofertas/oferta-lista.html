@@ -6,6 +6,20 @@
     </ion-nav-bar>
 
 	<ion-content>
+       <ion-scroll direction="x" class="wide-as-needed">
+           <button type="button" class="btn bar-stable">
+               Novidades
+           </button>
+           <button type="button" class="btn bar-stable">
+               Populares
+           </button>
+           <button type="button" class="btn bar-stable">
+               Mais arrecadados
+           </button>
+           <button type="button" class="btn bar-stable">
+               Finalizando
+           </button>
+        </ion-scroll>
         <ion-list>
             <ion-item ng-repeat="ofertaView in listaOfertas" class="card">
                 <div class="row">

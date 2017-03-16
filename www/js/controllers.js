@@ -57,3 +57,10 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 		categorias[indexCategoria].img = c.img;
 	}
 });
+
+app.controller('SearchCtrl', 
+	function($scope, PesquisaService, $state) {
+
+	$scope.pesquisas = PesquisaService.readAll();
+	
+});

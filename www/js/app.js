@@ -68,6 +68,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'UsuarioCtrl'
   });
 
+  $stateProvider.state('pesquisar', {
+    url: '/pesquisar',
+    templateUrl: 'templates/pesquisar.html',
+    controller: 'SearchCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
 

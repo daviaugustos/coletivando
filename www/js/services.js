@@ -95,4 +95,36 @@ app.factory('CategoriaService', function() {
 			return categorias;
 		}
 	}
+
+	
 });
+
+app.factory('PesquisaService', function(){
+
+    var pesquisas = [
+        {
+            id: 1,
+            name: 'Iphone 7',
+            cost: 'R$ 1800,00'
+        },
+        {
+            id: 2,
+            name: 'Playstation 4',
+            cost: 'R$ 2000,00'
+        },
+        {
+            id: 3,
+            name: 'Radeon RX 460 WINDFORCE',
+            cost: 'R$ 500,00'
+        }
+        
+    ]
+
+    return {
+
+        readAll: function() {
+            return pesquisas
+        }
+	}
+
+	});

@@ -1,25 +1,28 @@
 <ion-view title="Todas as ofertas">
     <ion-nav-bar class="roxo">
         <ion-nav-buttons side="right">
-            <button class="button button icon ion-search"></button>
+            
         </ion-nav-buttons>
     </ion-nav-bar>
 
 	<ion-content>
        <ion-scroll direction="x" class="wide-as-needed">
-           <button type="button" class="btn bar-stable">
+
+           <button type="button" class="button btn-nav-menu">
                Novidades
            </button>
-           <button type="button" class="btn bar-stable">
+           <button type="button" class="button btn-nav-menu">
                Populares
            </button>
-           <button type="button" class="btn bar-stable">
+           <button type="button" class="button btn-nav-menu">
                Mais arrecadados
            </button>
-           <button type="button" class="btn bar-stable">
+           <button type="button" class="button btn-nav-menu">
                Finalizando
            </button>
+
         </ion-scroll>
+
         <ion-list>
             <ion-item ng-repeat="ofertaView in listaOfertas" class="card">
                 <div class="row">
@@ -43,5 +46,6 @@
                 
             </ion-item>
         </ion-list>
+        
     </ion-content>
 </ion-view>

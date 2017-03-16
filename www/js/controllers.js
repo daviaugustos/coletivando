@@ -1,6 +1,6 @@
 app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 	var listaOfertasDados = OfertaService.readAll();
-	 var listaOfertasProcessadas = [];
+	var listaOfertasProcessadas = [];
 
 	listaOfertasDados.forEach(function(ofertaSalva){
 		var valorDescontoAplicado = ofertaSalva.valorUnitario - (ofertaSalva.valorUnitario * (ofertaSalva.desconto / 100));
@@ -18,11 +18,16 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 	});
 
 	$scope.listaOfertas = listaOfertasProcessadas;
+	
+	$scope.showLogin = function(){
+		$state.go('login');
+	};
+	$scope.showCadastro = function(){
+		$state.go('cadastro-user');
+	};
 });
 
-app.controller('UsuarioCtrl', 
-	function($scope, $state) {
-
+app.controller('UsuarioCtrl', function($scope, $state) {
 	
 });
 

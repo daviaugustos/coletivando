@@ -94,6 +94,7 @@ input {
 	width: 100%;
 }
 
+
 /*Login*/
 
 .titulo-login {
@@ -293,11 +294,10 @@ input {
 	color: #989898;
 }
 
-#cadastro-user .h2{
+#cadastro-user h2{
 	color: #8D8D8D;
 	font-weight: 500;
 	font-size: 27px;
-	margin-left: 100px;
 }
 
 /*View Home*/
@@ -319,11 +319,27 @@ input {
 	float: right;
 }
 
+.btn-nav-menu,
+.btn-nav-menu.activated{
+	background-color: transparent;
+    color: #888;
+    text-align: left;
+	border: none;
+}
+
+.btn-nav-menu:active,
+.btn-nav-menu:focus,
+.btn-nav-menu:visited{
+	background-color: transparent;
+    color: #888;
+    text-align: left;
+	border: none;
+}
 
 /* teste categoria bar */
 
 .wide-as-needed {
-  overflow: hidden;
+  overflow: hidden!important;
   white-space: nowrap;
 }
 
@@ -332,6 +348,11 @@ input {
 	background-color: transparent; 
 	color: #888; 
 	text-align: left;
+}
+.btn-minha-conta:focus,
+.btn-minha-conta:active,
+.btn-minha-conta:visited {
+	outline: 0;
 }
 
 .btn-minha-conta:first-child {

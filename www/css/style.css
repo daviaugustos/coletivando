@@ -203,6 +203,8 @@ input {
 	height: 100px;
 	text-align: center;
 	box-shadow: 0 1px 28px rgba(0,0,0,0.25), 0 1px 10px rgba(0,0,0,0.22);
+	position: relative;
+	z-index: 1;
 }
 
 .bg-header h4{
@@ -222,16 +224,34 @@ input {
 }
 
 .categorias-group{
-	display: inline-block;
+	z-index: -1;
+	position: relative;
+	-moz-column-count:2;
+    -webkit-column-count:2;
+    column-count:2;
+	margin-top: 80px;
+	padding: 6vw;
 }
 
 .categoria-icon{
+	padding: 10px;
+	text-align: center;
+}
+.categoria-icon p{
+	font-size: 1.1em;
+	color: #a7a7a7;
+}
+.categoria-icon p.selected{
+	font-size: 1.1em;
+	color: #464646;
+}
+
+.img-categoria{
 	width: 50%;
-	height: 50px;
+	height: 50%;
 }
 
 /*View cadastro-user*/
-
 
 .cadastro-form {
 	margin-top: 100px;
@@ -250,7 +270,6 @@ input {
 #cadastro-user .input-label{
 	color: #989898;
 }
-
 
 /*View Home*/
 

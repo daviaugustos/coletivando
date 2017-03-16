@@ -46,27 +46,49 @@ app.factory('OfertaService', function() {
 });
 
 app.factory('CategoriaService', function() {
+	
 	var categorias = [
 		{
 			id: 1,
 			nome: 'Smartphones',
-			img: 'Moderncam.png'
+			img: 'img/categorias/outlined/Moderncam.svg'
 		},
 		{
 			id: 2,
 			nome: 'Computadores',
-			img: 'Classicswatch.png'
+			img: 'img/categorias/outlined/Classicswatch.svg'
 		},
 		{
 			id: 3,
 			nome: 'Games',
-			img: 'ioSlove.png'
+			img: 'img/categorias/outlined/Classicswatch.png'
 		},
 		{
 			id: 4,
 			nome: 'Eletrônicos',
-			img: 'Ring.png'
+			img: 'img/categorias/outlined/Ring.svg'
+		},
+		{
+			id: 4,
+			nome: 'Eletrônicos',
+			img: 'img/categorias/outlined/Ring.svg'
+		},
+		{
+			id: 4,
+			nome: 'Eletrônicos',
+			img: 'img/categorias/outlined/Ring.svg'
+		},
+		{
+			id: 4,
+			nome: 'Eletrônicos',
+			img: 'img/categorias/outlined/Ring.svg'
+		},
+		{
+			id: 4,
+			nome: 'Eletrônicos',
+			img: 'img/categorias/outlined/Ring.svg'
 		}
+
 	]
 	return{
 		readAll: function(){

@@ -32,8 +32,23 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 	//aguardando implementação das ofertas na home e id de filtro na url
 	$scope.filterHome = function(filterId){
 		$state.go('oferta-lista', {filterId: filterId});
-	}
+	};
+
 	$scope.showPersonalizar = function(){
 		$state.go('personalizar-categorias');
+	};
+
+	$scope.trocaImagem = function(i){
+		var c = $scope.categorias[i];
+		var endereco = c.img;
+	
+		if (endereco.search('colored') != -1){
+			c.img = endereco.replace("colored", "outlined");
+		}
+		else{
+			c.img = endereco.replace("outlined", "colored");
+		}
+
+		categorias[indexCategoria].img = c.img;
 	}
 });

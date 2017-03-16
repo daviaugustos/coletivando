@@ -50,15 +50,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'UsuarioCtrl'
   });
 
-   $stateProvider.state('cadastro-empresa', {
+  $stateProvider.state('cadastro-empresa', {
     url: '/cadastro-empresa',
     templateUrl: 'templates/empresa/cadastro-empresa.html',
     controller: 'UsuarioCtrl'
   });
 
-   $stateProvider.state('cadastro-user', {
+  $stateProvider.state('cadastro-user', {
     url: '/cadastro-user',
     templateUrl: 'templates/usuarios/cadastro-user.html',
+    controller: 'UsuarioCtrl'
+  });
+
+  $stateProvider.state('minha-conta', {
+    url: '/minha-conta',
+    templateUrl: 'templates/usuarios/minha-conta.html',
     controller: 'UsuarioCtrl'
   });
 

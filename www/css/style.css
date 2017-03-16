@@ -293,8 +293,6 @@ input {
 	color: #989898;
 }
 
-<<<<<<< HEAD
-=======
 #cadastro-user .h2{
 	color: #8D8D8D;
 	font-weight: 500;
@@ -302,7 +300,6 @@ input {
 	margin-left: 100px;
 }
 
->>>>>>> ff77ac8a9abc5f6d8850f9014b7181086a7892d5
 /*View Home*/
 
 .centralizarElemento{
@@ -328,4 +325,54 @@ input {
 .wide-as-needed {
   overflow: hidden;
   white-space: nowrap;
+}
+
+/* Minha Conta */
+.btn-minha-conta {
+	background-color: transparent; 
+	color: #888; 
+	text-align: left;
+}
+
+.btn-minha-conta:first-child {
+	margin-top: 90px;
+}
+
+.icon-circle {
+	position: relative;
+	display: inline-block;
+	margin: -1px;
+	width: 45px;
+	height: 45px; 
+	font-size:30px; 
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius: 50%;
+	border: 1px solid #ebebeb;
+	text-align:center;
+}
+
+.icon-user {
+	background: #79c9ad;
+	color: #fff;
+}
+
+.icon-bag {
+	background: #f7ba7b;
+	color: #fff;
+}
+
+.icon-config {
+	background: #8bc8db;
+	color: #fff;
+}
+
+.icon-key {
+	background: #f2827e;
+	color: #fff;
+}
+
+.icon-door {
+	background: #aaaaaa;
+	color: #fff;
 }

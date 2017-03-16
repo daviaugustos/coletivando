@@ -230,6 +230,28 @@ input {
 	height: 50px;
 }
 
+
+/*View cadastro-empresa*/
+
+#cadastro-empresa .btn-green {
+	margin-top: 0px;
+}
+
+#cadastro-empresa .termos-de-uso {
+	height: 20px;
+	margin-top: 30px;
+	color: #555;
+	display: block;
+	font-size: 18px;
+}
+
+#cadastro-empresa .h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 20px;
+}
+
+
 /*View cadastro-user*/
 
 
@@ -251,6 +273,12 @@ input {
 	color: #989898;
 }
 
+#cadastro-user .h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 27px;
+	margin-left: 100px;
+}
 
 /*View Home*/
 

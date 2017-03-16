@@ -50,6 +50,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'UsuarioCtrl'
   });
 
+   $stateProvider.state('cadastro-empresa', {
+    url: '/cadastro-empresa',
+    templateUrl: 'templates/empresa/cadastro-empresa.html',
+    controller: 'UsuarioCtrl'
+  });
+
+   $stateProvider.state('cadastro-user', {
+    url: '/cadastro-user',
+    templateUrl: 'templates/usuarios/cadastro-user.html',
+    controller: 'UsuarioCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
 

@@ -1,10 +1,8 @@
-<ion-view title="Usuarios">
+<ion-view title="Pesquisa">
 
-
-
-<ion-content>
-
-  <div class="bar bar-header item-input-inset">
+<ion-nav-bar>
+ 
+<div class="bar bar-header item-input-inset">
   <button class="button icon-left ion-home"></button>
   <label class="item-input-wrapper">
     <i class="icon ion-ios-search placeholder-icon"></i>
@@ -12,6 +10,12 @@
   </label>
   <a class="button icon-left ion-backspace"></a>
   </div>
+
+  </ion-nav-bar>
+
+
+<ion-content>
+  
         <ion-list>
           <ion-item ng-repeat="pesquisa in pesquisas">
             <h2>{{pesquisa.name}}</h2>

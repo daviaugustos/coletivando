@@ -1,0 +1,100 @@
+<ion-view  id="cadastro-empresa" title="">
+
+	<ion-nav-bar class="green"><ion-nav-back-button></ion-nav-back-button></ion-nav-bar>
+
+
+    <form class="cadastro-form">
+
+<ion-content style="padding:50px">
+
+        <ion-list>
+
+                    <h2 class="h2"> Cadastre sua empresa </h2>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Nome(Fantasia)</span>
+                <input type="text" placeholder="Nome(Fantasia)" ng-model="empresa.nomeFantasia"/>
+            </label>
+            
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Nome</span>
+                <input type="text" placeholder="Nome" ng-model="empresa.nome"/>
+            </label>
+            
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">CNPJ</span>
+                <input type="text" placeholder="CNPJ" ng-model="empresa.cnpj"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">CNAE(Principal)</span>
+                <input type="text" placeholder="CNAE(Principal)" ng-model="empresa.cnae"/>
+            </label>
+
+          
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">CEP</span>
+                <input type="text" class"cep" placeholder="CEP" ng-model="empresa.cep" maxlength="9"/>
+                
+            </label>
+
+           <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Rua</span>
+                <input type="text" placeholder="Rua" ng-model="empresa.rua"/>
+            </label>
+
+             <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Bairro</span>
+                <input type="text" placeholder="Bairro" ng-model="empresa.bairro"/>
+            </label>
+
+             <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Cidade</span>
+                <input type="text" placeholder="Cidade" ng-model="empresa.cidade"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Estado</span>
+                <input type="text" placeholder="Estado" ng-model="empresa.estado"/>
+            </label>
+
+   
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Telefone</span>
+                <input type="text" placeholder="Seu Telefone:" ng-model="empresa.telefone"/>
+            </label>
+
+             <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="Email" ng-model="empresa.email"/>
+            </label>
+
+             <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Senha</span>
+                <input type="password" placeholder="Senha" ng-model="empresa.senha"/>
+            </label>
+
+             <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Confirmar senha</span>
+                <input type="password" placeholder="Confirmar senha" ng-model="empresa.senha2"/>
+            </label>
+
+            <label class="manter-conectado">
+                <span>Eu li e aceito os termos de uso</span>
+                <input type="checkbox">
+            </label>
+            
+
+            <div class="row">
+                <div class="col"></div>
+                <div class="col col-80 center">
+                    <button class="button btn btn-green">Cadastrar</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </ion-list>
+    </form>
+  </ion-content> 
+</ion-view>

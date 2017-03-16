@@ -251,6 +251,28 @@ input {
 	height: 50%;
 }
 
+
+/*View cadastro-empresa*/
+
+#cadastro-empresa .btn-green {
+	margin-top: 0px;
+}
+
+#cadastro-empresa .termos-de-uso {
+	height: 20px;
+	margin-top: 30px;
+	color: #555;
+	display: block;
+	font-size: 18px;
+}
+
+#cadastro-empresa .h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 20px;
+}
+
+
 /*View cadastro-user*/
 
 .cadastro-form {
@@ -271,6 +293,16 @@ input {
 	color: #989898;
 }
 
+<<<<<<< HEAD
+=======
+#cadastro-user .h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 27px;
+	margin-left: 100px;
+}
+
+>>>>>>> ff77ac8a9abc5f6d8850f9014b7181086a7892d5
 /*View Home*/
 
 .centralizarElemento{
@@ -288,4 +320,12 @@ input {
 
 .text-right {
 	float: right;
+}
+
+
+/* teste categoria bar */
+
+.wide-as-needed {
+  overflow: hidden;
+  white-space: nowrap;
 }

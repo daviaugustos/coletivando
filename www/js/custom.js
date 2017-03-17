@@ -1,3 +1,3 @@
-$(document).on('click', '.categoria-icon p', function(){
-    $(this).css('color', '#ddd');
+$(document).on('click', '.categoria-icon', function(){
+    $("p", this).toggleClass('selected');
 })

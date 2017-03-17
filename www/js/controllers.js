@@ -19,11 +19,8 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 
 	$scope.listaOfertas = listaOfertasProcessadas;
 	
-	$scope.showLogin = function(){
-		$state.go('login');
-	};
-	$scope.showCadastro = function(){
-		$state.go('cadastro-user');
+	$scope.showPesquisa = function(){
+		$state.go('pesquisar');
 	};
 });
 
@@ -45,7 +42,7 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 
 	$scope.trocaImagem = function(i){
 		var c = $scope.categorias[i];
-		var endereco = c.img;
+		var endereco = angular.copy(c.img);
 	
 		if (endereco.search('colored') != -1){
 			c.img = endereco.replace("colored", "outlined");
@@ -54,7 +51,7 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 			c.img = endereco.replace("outlined", "colored");
 		}
 
-		categorias[indexCategoria].img = c.img;
+		$scope.categorias[i].img = c.img;
 	}
 });
 

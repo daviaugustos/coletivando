@@ -34,13 +34,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('explore', {
     url: '/explore',
-    templateUrl: 'templates/usuarios/explore.html',
+    templateUrl: 'templates/categorias/explore.html',
     controller: 'CategoriaCtrl'
   });
 
   $stateProvider.state('personalizar-categorias',{
     url: '/personalizar-categorias',
-    templateUrl: 'templates/usuarios/personalizar-categorias.html',
+    templateUrl: 'templates/categorias/personalizar-categorias.html',
     controller: 'CategoriaCtrl'
   });
 

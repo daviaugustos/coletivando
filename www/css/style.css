@@ -203,6 +203,11 @@ input {
 
 /* Personalizar categorias */
 
+#personalizar button.btn.btn-green{
+	position: absolute;
+	bottom: 0;
+}
+
 #personalizar .bg-header{
 	background-color: #AA79B8;
 	height: 100px;

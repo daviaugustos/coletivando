@@ -25,6 +25,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'OfertaCtrl'
   });
 
+  $stateProvider.state('criar-oferta', {
+    url: '/criar-oferta',
+    templateUrl: 'templates/ofertas/criar-oferta.html',
+    controller: 'OfertaCtrl'
+  });
+
   $stateProvider.state('login', {
     url: '/login',
     templateUrl: 'templates/usuarios/login.html',

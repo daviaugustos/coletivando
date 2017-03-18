@@ -1,5 +1,8 @@
 /*Classes gerais*/
 
+ion-nav-bar.transp ion-header-bar{
+	background-color: rgba(0,0,0,0);
+}
 ion-nav-bar.roxo ion-header-bar{
 	background-color: #AA79B8;
 }
@@ -261,7 +264,6 @@ input {
 	height: 50%;
 }
 
-
 /*View cadastro-empresa*/
 
 #cadastro-empresa .btn-green {
@@ -416,5 +418,21 @@ input {
 	color: #fff;
 }
 
+
 /* Register Choose */
+
+
+/*Pesquisar*/
+
+#pesquisar label.item-input-wrapper{
+	background-color: rgba(0,0,0,0);
+}
+
+#pesquisar ion-content{
+	margin-top: 40px;
+}
+
+#pesquisar i::before{
+	font-size: 22px;
+}
 

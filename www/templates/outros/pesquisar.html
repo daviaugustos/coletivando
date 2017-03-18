@@ -1,29 +1,25 @@
-<ion-view title="Pesquisa">
-
-<ion-nav-bar>
- 
-<div class="bar bar-header item-input-inset">
-  <button class="button icon-left ion-home"></button>
-  <label class="item-input-wrapper">
-    <i class="icon ion-ios-search placeholder-icon"></i>
-    <input type="search" placeholder="Busque produtos">
-  </label>
-  <a class="button icon-left ion-backspace"></a>
+<ion-view id="pesquisar" title="Pesquisa">
+   
+  <div class="bar bar-header item-input-inset">
+    <button class="button button-icon">
+      <i class="icon ion-android-arrow-back"></i>
+    </button>
+    <label class="item-input-wrapper">
+        <input type="search" placeholder="Busque produtos">
+    </label>
+    <button class="button button-icon">
+        <i class="icon ion-android-close"></i>
+    </button>
   </div>
 
-  </ion-nav-bar>
-
-
-<ion-content>
-  
-        <ion-list>
-          <ion-item ng-repeat="pesquisa in pesquisas">
-            <h2>{{pesquisa.name}}</h2>
-            <p>{{pesquisa.cost}}</p>
-            </ion-item>
-        </ion-list>
-
-     </ion-content>
+  <ion-content>
+      <ion-list>
+        <ion-item ng-repeat="pesquisa in pesquisas">
+          <h2>{{pesquisa.name}}</h2>
+          <p>{{pesquisa.cost}}</p>
+        </ion-item>
+      </ion-list>
+  </ion-content>
 
 </ion-view>
 

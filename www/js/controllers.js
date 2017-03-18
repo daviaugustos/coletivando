@@ -61,3 +61,7 @@ app.controller('SearchCtrl',
 	$scope.pesquisas = PesquisaService.readAll();
 	
 });
+
+app.controller('RegisterChoose', function($scope, $state) {
+	
+});

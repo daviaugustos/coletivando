@@ -450,7 +450,7 @@ input {
 
 #aderir-oferta .card{
 	margin:0;
-	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 	color: #636363;
 }
 
@@ -471,4 +471,12 @@ input {
 
 #aderir-oferta .item.item-text-wrap{
 	display: flex
+}
+
+#aderir-oferta .icon::before{
+	/*padding-right: 15px;*/
+}
+
+#aderir-oferta .card h2{
+	padding: 3px 0px;
 }

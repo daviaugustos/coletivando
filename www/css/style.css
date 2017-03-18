@@ -271,11 +271,19 @@ input {
 }
 
 #cadastro-empresa .termos-de-uso {
-	height: 20px;
+	height: 60px;
 	margin-top: 30px;
 	color: #555;
 	display: block;
-	font-size: 18px;
+	font-size: 16px;
+}
+
+#cadastro-empresa .termos-de-uso span {
+	float: left;
+}
+
+#cadastro-empresa .termos-de-uso [type="checkbox"] {
+	margin-left: 20px;
 }
 
 #cadastro-empresa .h2{
@@ -283,6 +291,7 @@ input {
 	font-weight: 500;
 	font-size: 20px;
 }
+
 
 
 /*View cadastro-user*/
@@ -409,6 +418,10 @@ input {
 	color: #fff;
 }
 
+
+/* Register Choose */
+
+
 /*Pesquisar*/
 
 #pesquisar label.item-input-wrapper{
@@ -423,6 +436,8 @@ input {
 	font-size: 22px;
 }
 
+
 #pesquisar p1{
 	color: #AA79B8; 
 }
+

@@ -82,8 +82,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('pesquisar', {
     url: '/pesquisar',
-    templateUrl: 'templates/pesquisar.html',
+    templateUrl: 'templates/outros/pesquisar.html',
     controller: 'SearchCtrl'
+  });
+
+  $stateProvider.state('register-choose', {
+    url: '/register-choose',
+    templateUrl: 'templates/outros/register-choose.html',
+    controller: 'RegisterChoose'
   });
 
   $urlRouterProvider.otherwise('/oferta-lista');

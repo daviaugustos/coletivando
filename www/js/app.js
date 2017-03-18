@@ -92,6 +92,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'RegisterChoose'
   });
 
+  $stateProvider.state('aderir-oferta', {
+    url: '/aderir-oferta',
+    templateUrl: 'templates/ofertas/aderir-oferta.html',
+    controller: 'OfertaCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
 

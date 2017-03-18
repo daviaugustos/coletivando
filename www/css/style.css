@@ -9,18 +9,20 @@ ion-nav-bar.roxo ion-header-bar{
 ion-nav-bar.green ion-header-bar{
 	background-color: #72bba1;
 }
-
 ion-header-bar div.title.header-item{
 	text-align: left;
 	left: 0px !important;
 	right: 0px !important;
 	color: #fff;
 }
-
 ion-nav-bar button.button-icon{
 	color: #fff;
 }
 
+/*Para navbars com seta de voltar*/
+ion-header-bar.back .title.title-center.header-item {
+	margin-left: 50px;
+}
 
 
 /*.header-item{
@@ -436,8 +438,37 @@ input {
 	font-size: 22px;
 }
 
+#pesquisar a{
+	border: none;
+}
 
 #pesquisar p1{
 	color: #AA79B8; 
 }
 
+/*Aderir oferta*/
+
+#aderir-oferta .card{
+	margin:0;
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+	color: #636363;
+}
+
+#aderir-oferta ion-item{
+	border: 0;
+	margin-top: 20px;
+}
+
+#aderir-oferta h2{
+	color: #636363;
+	padding-bottom: 10px;
+}
+
+#aderir-oferta .card i{
+	font-size:45px;
+	color: #79c9ad;
+}
+
+#aderir-oferta .item.item-text-wrap{
+	display: flex
+}

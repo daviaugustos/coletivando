@@ -15,8 +15,16 @@
   <ion-content>
       <ion-list>
         <ion-item ng-repeat="pesquisa in pesquisas">
-          <h2>{{pesquisa.name}}</h2>
-          <p>{{pesquisa.cost}}</p>
+
+        <a class="item item-thumbnail-right" href="#">
+              <img src="{{pesquisa.image}}">
+              <h2>{{pesquisa.name}}</h2>
+              <p>{{pesquisa.cost}}</p>
+              <p1>{{pesquisa.company}}</p1>
+            </a>
+
+          <h2></h2>
+          <p></p>
         </ion-item>
       </ion-list>
   </ion-content>

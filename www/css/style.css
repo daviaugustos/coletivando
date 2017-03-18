@@ -422,3 +422,7 @@ input {
 #pesquisar i::before{
 	font-size: 22px;
 }
+
+#pesquisar p1{
+	color: #AA79B8; 
+}

@@ -104,18 +104,24 @@ app.factory('PesquisaService', function(){
     var pesquisas = [
         {
             id: 1,
-            name: 'Iphone 7',
-            cost: 'R$ 1800,00'
+            name: 'Iphone 5s',
+            cost: 'R$ 3000,00',
+			company: 'por Americanas',
+			image:'img/pesquisar/iphone5s.jpg'
         },
         {
             id: 2,
             name: 'Playstation 4',
-            cost: 'R$ 2000,00'
+            cost: 'R$ 2000,00',
+			company: 'por Submarino',
+			image: 'img/pesquisar/ps4.png'
         },
         {
             id: 3,
             name: 'Radeon RX 460 WINDFORCE',
-            cost: 'R$ 500,00'
+            cost: 'R$ 500,00',
+			company: 'por Kabum!',
+			image: 'img/pesquisar/rx.jpg'
         }
         
     ]

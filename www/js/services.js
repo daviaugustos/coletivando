@@ -250,3 +250,23 @@ app.factory('OfertasIncompletasService', function(){
 });
 
 // fim serviços das ofertas apoiadas
+
+app.factory('EmpresaPerfilService', function(){
+
+    var empresa = [
+        {
+            id: 2,
+            name: 'KaBuM!',
+            offer: '55 ofertas',
+			image: 'img/perfil-empresa/kabum.png'
+        }
+    ]
+
+    return {
+
+        readAll: function() {
+            return incompletas
+        }
+	}
+
+});

@@ -506,3 +506,13 @@ input {
 #apoiadas p{
 	color: #AA79B8; 
 }
+
+/*perfil-empresa*/
+
+#perfil-empresa ion-content{
+	margin-top: 25px;
+}
+
+#perfil-empresa i{
+	margin-left: 5px; 
+}

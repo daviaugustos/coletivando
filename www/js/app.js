@@ -121,6 +121,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'OfertasApoiadasCtrl'
   });
 
+  $stateProvider.state('perfil-empresa', {
+    url: '/perfil-empresa',
+    templateUrl: 'templates/empresa/perfil-empresa.html',
+    controller: 'UsuarioCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
 

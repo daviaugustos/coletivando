@@ -434,6 +434,8 @@ input {
 	margin-top: 40px;
 }
 
+
+
 #pesquisar i::before{
 	font-size: 22px;
 }
@@ -482,3 +484,27 @@ input {
 }
 
 /*Notifications*/
+
+/*ofertas-apoiadas*/
+
+#apoiadas label.item-input-wrapper{
+	background-color: rgba(0,0,0,0);
+}
+
+#apoiadas ion-content{
+	margin-top: 90px;
+}
+
+
+
+#apoiadas i::before{
+	font-size: 22px;
+}
+
+#apoiadas a{
+	border: none;
+}
+
+#apoiadas p1{
+	color: #AA79B8; 
+}

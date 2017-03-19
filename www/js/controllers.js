@@ -66,6 +66,31 @@ app.controller('SearchCtrl',
 	
 });
 
+app.controller('OfertasApoiadasCtrl', 
+	function($scope, OfertasApoiadasService, OfertasRealizadasService, OfertasIncompletasService, $state) {
+
+	$scope.apoiadas = OfertasApoiadasService.readAll();
+	$scope.realizadas = OfertasRealizadasService.readAll();
+	$scope.incompletas = OfertasIncompletasService.readAll();
+
+	$scope.showIndex = function(){
+		$state.go('oferta-lista');
+	};
+
+	$scope.showAndamento = function(){
+		$state.go('ofertas-apoiadas');
+	};
+
+	$scope.showRealizadas = function(){
+		$state.go('ofertas-apoiadas-realizadas');
+	};
+
+	$scope.showIncompletas = function(){
+		$state.go('ofertas-apoiadas-incompletas');
+	};
+	
+});
+
 app.controller('NotificationCtrl', 
 	function($scope, NotificationService, $state) {
 

@@ -166,4 +166,87 @@ app.factory('NotificationService', function(){
         }
 	}
 
-	});
+});
+
+// ofertas-apoiadas
+
+app.factory('OfertasApoiadasService', function(){
+
+    var apoiadas = [
+        {
+            id: 1,
+            name: 'Iphone 5s',
+            cost: 'R$ 3000,00',
+			company: 'por Americanas',
+			image:'img/pesquisar/iphone5s.jpg'
+        },
+        {
+            id: 2,
+            name: 'Playstation 4',
+            cost: 'R$ 2000,00',
+			company: 'por Submarino',
+			image: 'img/pesquisar/ps4.png'
+        },
+        {
+            id: 3,
+            name: 'Radeon RX 460 WINDFORCE',
+            cost: 'R$ 500,00',
+			company: 'por Kabum!',
+			image: 'img/pesquisar/rx.jpg'
+        }
+        
+    ]
+
+    return {
+
+        readAll: function() {
+            return apoiadas
+        }
+	}
+
+});
+
+app.factory('OfertasRealizadasService', function(){
+
+    var realizadas = [
+        {
+            id: 3,
+            name: 'Radeon RX 460 WINDFORCE',
+            cost: 'R$ 500,00',
+			company: 'por Kabum!',
+			image: 'img/pesquisar/rx.jpg'
+        }
+        
+    ]
+
+    return {
+
+        readAll: function() {
+            return realizadas
+        }
+	}
+
+});
+
+app.factory('OfertasIncompletasService', function(){
+
+    var incompletas = [
+        {
+            id: 2,
+            name: 'Playstation 4',
+            cost: 'R$ 2000,00',
+			company: 'por Submarino',
+			image: 'img/pesquisar/ps4.png'
+        }
+    ]
+
+    return {
+
+        readAll: function() {
+            return incompletas
+        }
+	}
+
+});
+
+// fim serviços das ofertas apoiadas

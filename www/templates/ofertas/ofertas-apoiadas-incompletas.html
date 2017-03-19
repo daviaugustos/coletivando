@@ -1,0 +1,39 @@
+<ion-view id="apoiadas" title="Ofertas Apoiadas">
+   
+<div class="bar bar-header bar-royal"> 
+  <button class="button button-icon" >
+      <i class="icon ion-android-arrow-back" ></i>
+    </button>
+  <h1 class="title">Ofertas Apoiadas - Incompletas</h1>
+  <button class="button button-icon" ng-click="showIndex()">
+        <i class="icon ion-android-close"></i>
+    </button>
+</div>
+
+<div class="tabs-striped tabs-top tabs-background-royal tabs-color-light">
+    <div class="tabs">
+      <a class="tab-item" ng-click="showAndamento()">
+        Em andamento
+      <a class="tab-item" ng-click="showRealizadas()">
+        Realizadas
+      <a class="tab-item active" ng-click="showIncompletas()">
+       Incompletas
+      </a>
+    </div>
+  </div>
+
+  <ion-content>
+      <ion-list>
+        <ion-item ng-repeat="i in incompletas">
+
+          <a class="item item-thumbnail-right">
+              <img src="{{i.image}}">
+              <h2>{{i.name}}</h2>
+              <p>{{i.cost}}</p>
+              <p1>{{i.company}}</p1>
+            </a>
+        </ion-item>
+      </ion-list>
+  </ion-content>
+
+</ion-view>

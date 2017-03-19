@@ -36,7 +36,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/usuarios/login.html',
     controller: 'UsuarioCtrl'
   });
-  
 
   $stateProvider.state('explore', {
     url: '/explore',
@@ -110,13 +109,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'OfertasApoiadasCtrl'
   });
 
-   $stateProvider.state('ofertas-apoiadas-realizadas', {
+  $stateProvider.state('ofertas-apoiadas-realizadas', {
     url: '/ofertas-apoiadas-realizadas',
     templateUrl: 'templates/ofertas/ofertas-apoiadas-realizadas.html',
     controller: 'OfertasApoiadasCtrl'
   });
 
-   $stateProvider.state('ofertas-apoiadas-incompletas', {
+  $stateProvider.state('ofertas-apoiadas-incompletas', {
     url: '/ofertas-apoiadas-incompletas',
     templateUrl: 'templates/ofertas/ofertas-apoiadas-incompletas.html',
     controller: 'OfertasApoiadasCtrl'

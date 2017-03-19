@@ -472,11 +472,7 @@ input {
 }
 
 #aderir-oferta .item.item-text-wrap{
-	display: flex
-}
-
-#aderir-oferta .icon::before{
-	/*padding-right: 15px;*/
+	display: flex;
 }
 
 #aderir-oferta .card h2{
@@ -499,8 +495,6 @@ input {
 	margin-top: 90px;
 }
 
-
-
 #apoiadas i::before{
 	font-size: 22px;
 }
@@ -509,6 +503,6 @@ input {
 	border: none;
 }
 
-#apoiadas p1{
+#apoiadas p{
 	color: #AA79B8; 
 }

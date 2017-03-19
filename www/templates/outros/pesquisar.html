@@ -5,7 +5,7 @@
       <i class="icon ion-android-arrow-back"></i>
     </button>
     <label class="item-input-wrapper">
-        <input type="search" placeholder="Busque produtos">
+        <input type="search" placeholder="Busque produtos" ng-model="filtro">
     </label>
     <button class="button button-icon">
         <i class="icon ion-android-close"></i>
@@ -14,9 +14,9 @@
 
   <ion-content>
       <ion-list>
-        <ion-item ng-repeat="pesquisa in pesquisas">
+        <ion-item ng-repeat="pesquisa in pesquisas | filter:filtro">
 
-          <a class="item item-thumbnail-right" href="#">
+          <a class="item item-thumbnail-right">
               <img src="{{pesquisa.image}}">
               <h2>{{pesquisa.name}}</h2>
               <p>{{pesquisa.cost}}</p>

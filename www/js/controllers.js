@@ -59,6 +59,21 @@ app.controller('SearchCtrl',
 	function($scope, PesquisaService, $state) {
 
 	$scope.pesquisas = PesquisaService.readAll();
+
+	$scope.showIndex = function(){
+		$state.go('oferta-lista');
+	};
+	
+});
+
+app.controller('NotificationCtrl', 
+	function($scope, NotificationService, $state) {
+
+	$scope.notification = NotificationService.readAll();
+
+	$scope.showIndex = function(){
+		$state.go('oferta-lista');
+	};
 	
 });
 

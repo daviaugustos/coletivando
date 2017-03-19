@@ -1,0 +1,40 @@
+<ion-view id="pesquisar" title="Notifications">
+   
+
+<!--<ion-nav-bar class="bar bar-header bar-royal">-->
+<div class="bar bar-header bar-royal">
+  <button class="button button-icon" >
+      <i class="icon ion-android-arrow-back" ></i>
+    </button>
+  <h1 class="title">Notifications</h1>
+  <button class="button button-icon" ng-click="showIndex()">
+        <i class="icon ion-android-close"></i>
+    </button>
+</div>
+
+<!--</ion-nav-bar>-->
+
+
+  <!--<div class="bar bar-header bar-royal">
+    <button class="button button-icon">
+      <i class="icon ion-android-arrow-back"></i>
+    </button>
+    <button class="button button-icon">
+        <i class="icon ion-android-close"></i>
+    </button>
+  </div>-->
+
+  <ion-content>
+      <ion-list>
+        <ion-item ng-repeat="n in notification">
+
+          <a class="item item-avatar-right">
+              <img src="{{n.image}}">
+              <h2>{{n.text}}</h2>
+              <p2>{{n.time}}</p2>
+            </a>
+        </ion-item>
+      </ion-list>
+  </ion-content>
+
+</ion-view>

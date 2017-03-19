@@ -133,4 +133,37 @@ app.factory('PesquisaService', function(){
         }
 	}
 
+});
+
+app.factory('NotificationService', function(){
+
+    var notification = [
+        {
+            id: 1,
+            text: 'A oferta de Iphone 7 foi concluída',
+            time: '17:00',
+			image:'img/notifications/bag.png'
+        },
+        {
+            id: 2,
+            text: 'Restam dois dias para o prazo da oferta de Iphone 7 acabar',
+            time: '2 d',
+			image: 'img/notifications/ampulheta.png'
+        },
+        {
+            id: 3,
+            text: 'O prazo da oferta de Xbox One acabou',
+            time: '4 d',
+			image: 'img/notifications/relogio.png'
+        }
+        
+    ]
+
+    return {
+
+        readAll: function() {
+            return notification
+        }
+	}
+
 	});

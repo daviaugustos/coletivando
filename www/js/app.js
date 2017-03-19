@@ -98,6 +98,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'OfertaCtrl'
   });
 
+  $stateProvider.state('notifications', {
+    url: '/notifications',
+    templateUrl: 'templates/outros/notifications.html',
+    controller: 'NotificationCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
 

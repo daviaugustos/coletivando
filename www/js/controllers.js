@@ -24,8 +24,10 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 	};
 });
 
-app.controller('UsuarioCtrl', function($scope, $state) {
-	
+app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state) {
+		$scope.showIndex = function(){
+		$state.go('oferta-lista');
+	};
 });
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
@@ -101,6 +103,16 @@ app.controller('NotificationCtrl',
 	};
 	
 });
+
+// app.controller('PerfilEmpresaCtrl', 
+// 	function($scope, $state) {
+
+// 	$scope.showIndex = function(){
+// 		$state.go('oferta-lista');
+// 	};
+	
+// });
+
 
 app.controller('RegisterChoose', function($scope, $state) {
 	

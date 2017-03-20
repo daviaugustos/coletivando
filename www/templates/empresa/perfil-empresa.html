@@ -1,50 +1,35 @@
-<ion-view id="perfil-empresa" title="Perfil - Empresa">
+<ion-view id="perfil-empresa" title="">
    
-<div class="bar bar-header bar-calm"> 
-  <button class="button button-icon" >
-      <i class="icon ion-android-arrow-back" ></i>
-    </button>
-  <h1 class="title">Perfil - Empresa</h1>
-  <button class="button button-icon" ng-click="showIndex()">
-        <i class="icon ion-android-close"></i>
-    </button>
-</div>
-
-
-<ion-content>
-
-<div class="list card" >
-<ion-item>
-  <div>
-    <img class="avatar" src="/img/perfil-empresa/kabum.png">
-  </div>
-
-  <div class="item item-body">
-Fundado no ano de 2003, o KaBuM! é um dos pioneiros no comércio eletrônico brasileiro e hoje está entre as maiores Empresas deste mercado na América Latina, sendo a maior referência brasileira do varejo on-line no segmento especializado de Informática e Eletrônicos.
-
-      <p class="ion-android-checkmark-circle"> 
-          <i>55 ofertas aprovadas</i>
-      </p>
-
-      <p class="ion-android-call"> 
-          <i>Central SAC: (19) 2114-4444</i>
-      </p>
-
-      <p class="ion-email"> 
-          <i>E-mail: atendimento@kabum.com.br</i>
-      </p>
-      
-      <p class="ion-android-pin">
-          <i>
-             Rua Santa Cruz, 787 - L1 
-Centro - Limeira (SP) - CEP: 13480-041
-          </i>
-      </p>
+    <ion-nav-bar class="transp">
+        <ion-nav-buttons side="left">
+            <button ng-click="" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
     
-  </div>
+    <ion-content>
 
-</div>
+        <img class="full-image" src="img/perfil-empresa/bg.jpg">
+        <div class="card-company">
+            <div class="avatar-company">
+                <center>    
+                    <img src="img/perfil-empresa/submarino.png">
+                </center>
+            </div>
 
-</ion-content>
+            <div class="header-company">
+                <h3>Submarino</h3>
+                <p>55 ofertas concluídas</p>
+            </div>
+
+            <div class="info-company">
+                <p>telefone</p>
+                <p>email</p>
+                <p>endereço</p>
+            </div>
+
+        </div>
+    </ion-content>
 
 </ion-view>

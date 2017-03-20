@@ -2,7 +2,14 @@
 
 ion-nav-bar.transp ion-header-bar{
 	background-color: rgba(0,0,0,0);
+	border: 0;
+	/*background-color: #333;*/
 }
+/*Seta branca para navbars transparentes*/
+ion-nav-bar.transp ion-header-bar i{
+	color: #fff;
+}
+
 ion-nav-bar.roxo ion-header-bar{
 	background-color: #AA79B8;
 }
@@ -24,6 +31,14 @@ ion-header-bar.back .title.title-center.header-item {
 	margin-left: 50px;
 }
 
+/*Float label dos inputs do ionic*/
+span.input-label{
+	color: #868686;
+}
+
+.margin-top{
+	margin-top: 40px;
+}
 
 /*.header-item{
 	left: 0;
@@ -285,16 +300,15 @@ input {
 }
 
 #cadastro-empresa .termos-de-uso [type="checkbox"] {
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
-#cadastro-empresa .h2{
+#cadastro-empresa h2{
 	color: #8D8D8D;
 	font-weight: 500;
 	font-size: 20px;
+	margin-bottom: 30px;
 }
-
-
 
 /*View cadastro-user*/
 
@@ -510,9 +524,47 @@ input {
 /*perfil-empresa*/
 
 #perfil-empresa ion-content{
-	margin-top: 25px;
+	top:0;
+}
+
+#perfil-empresa .full-image{
+	max-height: 150px;
 }
 
 #perfil-empresa i{
 	margin-left: 5px; 
 }
+
+.card-company{
+	position: relative;
+}
+
+.avatar-company img{
+    width: 130px;
+    height: 130px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+
+
+	transform: translateX(-50%)	translateY(-110%);
+	top:10%;
+	
+    position: absolute;
+    z-index: 100;
+	box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+}
+
+.header-company{
+	margin-top: 50px;
+	text-align: center;
+}
+
+.header-company h3{
+	color: #464646;
+}
+
+.header-company p{
+	color: #8D8D8D;
+}
+

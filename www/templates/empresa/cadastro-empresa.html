@@ -1,6 +1,12 @@
 <ion-view  id="cadastro-empresa" title="">
 
-	<ion-nav-bar class="green"><ion-nav-back-button></ion-nav-back-button></ion-nav-bar>
+	<ion-nav-bar class="green">
+        <ion-nav-buttons side="left">
+            <button ng-click="" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
 
 
     <form class="cadastro-form">
@@ -9,7 +15,7 @@
 
         <ion-list>
 
-            <h2 class="h2"> Cadastre sua empresa </h2>
+            <h2> Cadastre sua empresa </h2>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome(Fantasia)</span>
@@ -62,7 +68,7 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Telefone</span>
-                <input type="text" placeholder="Seu Telefone:" ng-model="empresa.telefone"/>
+                <input type="text" placeholder="Telefone" ng-model="empresa.telefone"/>
             </label>
 
              <label class="item-input-coletivando item-floating-label">
@@ -76,7 +82,7 @@
             </label>
 
              <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Confirmar senha</span>
+                <span class="input-label">Confirmar</span>
                 <input type="password" placeholder="Confirmar senha" ng-model="empresa.senha2"/>
             </label>
 
@@ -84,7 +90,6 @@
                 <span>Eu li e aceito os termos de uso</span>
                 <input type="checkbox">
             </label>
-            
 
             <div class="row">
                 <div class="col"></div>

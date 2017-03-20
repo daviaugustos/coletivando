@@ -1,6 +1,12 @@
 <ion-view  id="cadastro-empresa" title="">
 
-	<ion-nav-bar class="green"><ion-nav-back-button></ion-nav-back-button></ion-nav-bar>
+	<ion-nav-bar class="green">
+        <ion-nav-buttons side="left">
+            <button ng-click="" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
 
 
     <form class="cadastro-form">
@@ -19,11 +25,6 @@
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Telefone</span>
                 <input type="text" placeholder="Telefone" ng-model="empresa.telefone"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Email</span>
-                <input type="email" placeholder="Email" ng-model="empresa.email"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
@@ -51,10 +52,10 @@
                 <input type="text" placeholder="Estado" ng-model="empresa.estado"/>
             </label>
 
-            <div class="row">
+            <div class="margin-top row">
                 <div class="col"></div>
                 <div class="col col-80 center">
-                    <button class="button btn btn-green">Editar</button>
+                    <button class="button btn btn-green">Salvar</button>
                 </div>
                 <div class="col"></div>
             </div>

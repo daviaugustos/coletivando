@@ -569,17 +569,14 @@ input {
     background-position: center;
     border-radius: 50%;
 
-
 	transform: translateX(-50%)	translateY(-110%);
-	top:10%;
-	
     position: absolute;
     z-index: 100;
 	box-shadow: 0 1px 15px rgba(0,0,0,0.15);
 }
 
 .header-company{
-	margin-top: 50px;
+	margin-top: 70px;
 	text-align: center;
 }
 
@@ -588,6 +585,23 @@ input {
 }
 
 .header-company p{
-	color: #8D8D8D;
+	color: #808080;
+	font-size: 15px;
+	padding-bottom: 40px;
+	border-bottom: solid 1px;
+	border-color: #dcdcdc;
 }
 
+.info-company .item{
+	border: 0;
+	color: #808080;
+}
+
+.info-company .item i{
+	color: #72bba1;
+}
+
+.info-company .item p{
+	color: #808080;
+	font-size: 13px;
+}

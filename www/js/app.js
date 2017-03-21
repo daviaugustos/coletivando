@@ -127,6 +127,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'UsuarioCtrl'
   });
 
+  $stateProvider.state('visualizar-oferta', {
+    url: '/visualizar-oferta',
+    templateUrl: 'templates/ofertas/visualizar-oferta.html',
+    controller: 'OfertaCtrl'
+  });
+
   $urlRouterProvider.otherwise('/oferta-lista');
 });
 

@@ -24,13 +24,16 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 	};
 });
 
-app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state) {
-		$scope.showIndex = function(){
+app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $ionicHistory) {
+	$scope.showIndex = function(){
 		$state.go('oferta-lista');
+	};
+	$scope.showCadastros = function(){
+		$state.go("tabNavegacao.login.register-choose");
 	};
 });
 
-app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
+app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();
 	
 	//aguardando implementação das ofertas na home e id de filtro na url
@@ -38,8 +41,12 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 		$state.go('oferta-lista', {filterId: filterId});
 	};
 
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+
 	$scope.showPersonalizar = function(){
-		$state.go('personalizar-categorias');
+		$state.go('tabNavegacao.explore.personalizar-categorias');
 	};
 
 	$scope.trocaImagem = function(i){
@@ -58,12 +65,12 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state){
 });
 
 app.controller('SearchCtrl', 
-	function($scope, PesquisaService, $state) {
+	function($scope, PesquisaService, $state, $ionicHistory) {
 
 	$scope.pesquisas = PesquisaService.readAll();
 
-	$scope.showIndex = function(){
-		$state.go('oferta-lista');
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
 	};
 	
 });

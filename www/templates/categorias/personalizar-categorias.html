@@ -1,5 +1,11 @@
 <ion-view id="personalizar" title="Personalização">  
-   
+    <ion-nav-bar class="roxo back">
+        <ion-nav-buttons side="left">
+            <button ng-click="goBackHandler()" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
     <div class="bg-header"> 
         <h4>Personalização</h4>
         <h5>Selecione suas categorias favoritas</h5>
@@ -15,6 +21,6 @@
         </div>
     </ion-content>
     
-    <button class="button btn btn-green">Confirmar</button>
+    <button class="button btn btn-green" style="margin-bottom: 49px;">Confirmar</button>
     
 </ion-view>

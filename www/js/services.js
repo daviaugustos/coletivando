@@ -2,8 +2,8 @@ app.factory('OfertaService', function() {
 	var ofertas = [
 		{
 			id: 1,
-			descricao: 'Smartphone Apple iPhone 7 128GB',
-			enderecoImagem:'img/home/iphone.jpg', //aqui possivelmente um array de img, porém como definir a principal do anuncio?
+			descricao: 'iPhone 7',
+			enderecoImagem:'img/home/iphone2.jpg', //aqui possivelmente um array de img, porém como definir a principal do anuncio?
 			qtdUnidadeMin: 1000,
 			desconto: 50,
 			dataLimite: '01/05/2017',
@@ -11,8 +11,8 @@ app.factory('OfertaService', function() {
 		},
 		{
 			id: 2,
-			descricao: 'Tablet Apple iPad mini Tela Retina Wi-Fi 16 GB',
-			enderecoImagem:'img/home/ipad.jpg', 
+			descricao: 'iPad Mini',
+			enderecoImagem:'img/home/ipad2.jpg', 
 			qtdUnidadeMin: 1000,
 			desconto: 30,
 			dataLimite: '28/05/2017',
@@ -20,8 +20,8 @@ app.factory('OfertaService', function() {
 		},
 		{
 			id: 3,
-			descricao: 'Horizon Zero Dawn Playstation 4 Blu-Ray',
-			enderecoImagem:'img/home/game.jpg', 
+			descricao: 'Horizon Zero Dawn',
+			enderecoImagem:'img/home/game2.jpg', 
 			qtdUnidadeMin: 5000,
 			desconto: 23,
 			dataLimite: '05/06/2017',
@@ -29,7 +29,7 @@ app.factory('OfertaService', function() {
 		},
 		{
 			id: 1,
-			descricao: '212 Men Eau de Toilette 50ml',
+			descricao: '212 Men Eau',
 			enderecoImagem:'img/home/perfume.jpg', 
 			qtdUnidadeMin: 50,
 			desconto: 41,

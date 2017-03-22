@@ -654,3 +654,8 @@ input {
 
 /*Visualizar-Oferta*/
 
+#visualizar-oferta ion-content{
+	top:0;
+}
+
+

@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view id="visualizar-oferta">
     <ion-nav-bar class="transp"> 
         <ion-nav-buttons side="left"> 
             <button ng-click="" class="button button-icon"> 
@@ -7,18 +7,36 @@
         </ion-nav-buttons> 
     </ion-nav-bar>
 
-    <div>
-        <img height="250px" src="img/home/iphone.jpg" class="centralizarElemento"/>                                
-    </div>
-    <b><p class="text-left">Smartphone Apple <br/> iPhone 7 128GB</p></b>
-    <div class="text-right">
-        <p>R$ 200,00</p>
-        <p style="text-decoration: line-through; font-size: smaller;">R$ 1000,00</p>
-    </div>
-    <div class="row">
-        
-    </div>
-    
+    <ion-content>
+
+        <img height="250px" src="img/home/iphone2.jpg" class="centralizarElemento"/> 
+
+        <div class="info-card-home">
+            <div class="row">
+                <div class="col col-50 left">
+                    <h3>Iphone 7</h2>
+                </div>
+                <div class="col col-50 right">
+                    <p class="price">R$ 1500,00</p>
+                    <p class="price-old">R$ 3000,00</p>
+                </div>
+            </div>
+
+            <div class="row pb">
+                <div class="progress-bar" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+                    
+            <div class="row bottom">
+                <div class="col col-50 left">
+                    <p>36% completo</p>
+                </div>
+                <div class="col col-50 right">
+                    <p>50% desconto</p>
+                </div>
+            </div>
+        </div>    
+
     <div style="padding-top: 10%;" class="row">
         <button type="button" style="width: 100%;" ng-click="#">
             <p style="float: left;">Descrição</p>
@@ -26,6 +44,7 @@
         </button>
     </div>
 
+    </ion-content>
     
     
 </ion-view>

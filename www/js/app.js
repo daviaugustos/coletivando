@@ -19,34 +19,72 @@ app.run(function($ionicPlatform) {
 });
 
 app.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('oferta-lista', {
-    url: '/oferta-lista',
-    templateUrl: 'templates/ofertas/oferta-lista.html',
-    controller: 'OfertaCtrl'
+  $stateProvider.state('tabNavegacao', {
+    url: '/tabNavegacao',
+    abstract: true,
+    templateUrl: 'templates/outros/tabNavegacao.html'
+  });
+  
+  $stateProvider.state('tabNavegacao.home', {
+    url: '/home',
+    views: {
+      'home-tab' : {
+        templateUrl: 'templates/ofertas/oferta-lista.html',
+        controller: 'OfertaCtrl'
+      }
+    }
+  });
+
+  $stateProvider.state('tabNavegacao.explore', {
+    url: '/explore',
+    views: {
+      'explore-tab' : {
+        templateUrl: 'templates/categorias/explore.html',
+        controller: 'CategoriaCtrl'
+      }
+    }
+  });
+
+ /* $stateProvider.state('personalizar-categorias',{
+    url: '/personalizar-categorias',
+    templateUrl: 'templates/categorias/personalizar-categorias.html',
+    controller: 'CategoriaCtrl'
+  });*/
+
+  $stateProvider.state('tabNavegacao.explore.personalizar-categorias',{
+    url: '/personalizar-categorias',
+    views: {
+      'explore-tab@tabNavegacao' : {
+        templateUrl: 'templates/categorias/personalizar-categorias.html',
+        controller: 'CategoriaCtrl'
+      }
+    }
+  });
+
+  $stateProvider.state('tabNavegacao.login', {
+    url: '/login',
+    views: {
+      'login-tab' :{
+        templateUrl: 'templates/usuarios/login.html',
+        controller: 'UsuarioCtrl'
+      }
+    }
+  });
+
+  $stateProvider.state('tabNavegacao.login.register-choose', {
+    url: '/register-choose',
+    views: {
+      'login-tab@tabNavegacao' : {
+        templateUrl: 'templates/outros/register-choose.html',
+        controller: 'RegisterChoose'
+      }
+    }
   });
 
   $stateProvider.state('criar-oferta', {
     url: '/criar-oferta',
     templateUrl: 'templates/ofertas/criar-oferta.html',
     controller: 'OfertaCtrl'
-  });
-
-  $stateProvider.state('login', {
-    url: '/login',
-    templateUrl: 'templates/usuarios/login.html',
-    controller: 'UsuarioCtrl'
-  });
-
-  $stateProvider.state('explore', {
-    url: '/explore',
-    templateUrl: 'templates/categorias/explore.html',
-    controller: 'CategoriaCtrl'
-  });
-
-  $stateProvider.state('personalizar-categorias',{
-    url: '/personalizar-categorias',
-    templateUrl: 'templates/categorias/personalizar-categorias.html',
-    controller: 'CategoriaCtrl'
   });
 
   $stateProvider.state('alterar-senha', {
@@ -83,12 +121,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/pesquisar',
     templateUrl: 'templates/outros/pesquisar.html',
     controller: 'SearchCtrl'
-  });
-
-  $stateProvider.state('register-choose', {
-    url: '/register-choose',
-    templateUrl: 'templates/outros/register-choose.html',
-    controller: 'RegisterChoose'
   });
 
   $stateProvider.state('aderir-oferta', {
@@ -133,6 +165,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'OfertaCtrl'
   });
 
-  $urlRouterProvider.otherwise('/oferta-lista');
+  $urlRouterProvider.otherwise('/tabNavegacao/home');
 });
 

@@ -1,4 +1,4 @@
-<ion-view id="apoiadas" title="Ofertas Apoiadas">
+<!--<ion-view id="apoiadas" title="Ofertas Apoiadas">
    
 <div class="bar bar-header bar-royal"> 
   <button class="button button-icon" >
@@ -35,5 +35,95 @@
         </ion-item>
       </ion-list>
   </ion-content>
+
+</ion-view>-->
+
+<ion-view>
+
+<div class="bar bar-header bar-positive"> 
+  <button class="button button-icon" >
+      <i class="icon ion-android-arrow-back" ></i>
+    </button>
+  <h1 class="title">Ofertas Apoiadas</h1>
+  <button class="button button-icon">
+        <i class="icon ion-android-close"></i>
+    </button>
+</div>
+
+<ion-tabs class="tabs-positive tabs-top tabs-icon-top">
+
+  <ion-tab title="Apoiadas" icon-on="ion-flag" icon-off="ion-flag">
+
+    <ion-view>
+
+        <ion-content>
+
+<ion-list>
+        <ion-item ng-repeat="apoiadas in apoiadas">
+
+          <a class="item item-thumbnail-right">
+              <img src="{{apoiadas.image}}">
+              <h2>{{apoiadas.name}}</h2>
+              <p>{{apoiadas.cost}}</p>
+              <p1>{{apoiadas.company}}</p1>
+            </a>
+        </ion-item>
+      </ion-list>
+
+        </ion-content>
+
+    </ion-view>
+
+  </ion-tab>
+
+  <ion-tab title="Realizadas" icon-on="ion-checkmark-round" icon-off="ion-checkmark-round">
+
+    <ion-view>
+
+        <ion-content>
+
+<ion-list>
+        <ion-item ng-repeat="r in realizadas">
+
+          <a class="item item-thumbnail-right">
+              <img src="{{r.image}}">
+              <h2>{{r.name}}</h2>
+              <p>{{r.cost}}</p>
+              <p1>{{r.company}}</p1>
+            </a>
+        </ion-item>
+      </ion-list>
+
+        </ion-content>
+
+    </ion-view>
+
+  </ion-tab>
+
+  <ion-tab title="Incompletas" icon-on="ion-alert-circled" icon-off="ion-alert-circled">
+
+    <ion-view>
+
+        <ion-content>
+
+          <ion-list>
+        <ion-item ng-repeat="i in incompletas">
+
+          <a class="item item-thumbnail-right">
+              <img src="{{i.image}}">
+              <h2>{{i.name}}</h2>
+              <p>{{i.cost}}</p>
+              <p1>{{i.company}}</p1>
+            </a>
+        </ion-item>
+      </ion-list>
+
+        </ion-content>
+
+    </ion-view>
+
+  </ion-tab>
+
+  </ion-tabs>
 
 </ion-view>

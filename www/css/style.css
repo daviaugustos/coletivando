@@ -574,9 +574,9 @@ input {
 	background-color: rgba(0,0,0,0);
 }
 
-#apoiadas ion-content{
+/*#apoiadas ion-content{
 	margin-top: 90px;
-}
+}*/
 
 #apoiadas i::before{
 	font-size: 22px;

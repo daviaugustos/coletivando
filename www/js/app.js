@@ -18,7 +18,10 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+  $ionicConfigProvider.tabs.position('bottom');
+
   $stateProvider.state('tabNavegacao', {
     url: '/tabNavegacao',
     abstract: true,

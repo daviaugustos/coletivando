@@ -484,28 +484,52 @@ input {
 /* Register Choose */
 
 
-
+/*
  .container {
   position: relative;
   overflow: hidden;
-  width: 900px;
+  width: 180%;
   
 }
  .square {
-  width: 700px;
-  height: 800px;
+  width: 65%;
+  height: 95vh;
   background-color: #79c9ad;
 }
  .overlay {
-  width: 1200px;
-  height: 700px;
+  width: 182%;
+  height: 82%;
   background-color: #fff;
   -webkit-transform: rotate(225deg);
   -moz-transform: rotate(225deg);
   -ms-transform: rotate(225deg);
   transform: rotate(239deg);
 }
+*/
 
+.fonteh2{
+	color: #f2827e;
+	font-weight: 500;
+	font-size: 18px;
+    text-align:center;
+    text-align: left;
+
+
+}
+
+.fonteh3{
+	color: #f2827e;
+	font-weight: 500;
+	font-size: 18px;
+    text-align:center;
+    text-align: right;
+
+
+}
+
+.buttonbtn{
+	color: #f2827e;
+	}
 
 /*Pesquisar*/
 
@@ -574,9 +598,9 @@ input {
 	background-color: rgba(0,0,0,0);
 }
 
-#apoiadas ion-content{
+/*#apoiadas ion-content{
 	margin-top: 90px;
-}
+}*/
 
 #apoiadas i::before{
 	font-size: 22px;

@@ -26,6 +26,21 @@ ion-nav-bar button.button-icon{
 	color: #fff;
 }
 
+/*Navbar menu*/
+.tab-nav.tabs{
+	background-color: #f1f1f1;
+	color: #65476d;
+	padding-top: 2px;
+	border: 0;
+}
+
+.tab-item.tab-item-active{
+	color: #72bba1;
+}
+
+
+
+
 /*Para navbars com seta de voltar*/
 ion-header-bar.back .title.title-center.header-item {
 	margin-left: 50px;
@@ -39,15 +54,6 @@ span.input-label{
 .margin-top{
 	margin-top: 40px;
 }
-
-/*.header-item{
-	left: 0;
-	right: 0;
-	text-align: left;
-}*/
-
-
-
 
 .button{
 	border-radius: 0;
@@ -71,6 +77,23 @@ span.input-label{
 	background-color: #72bba1;
 	color: #fff;
 }
+
+.btn-roxo{
+	width: 100%; 
+	background-color: #aa79b8;
+	-webkit-transition: all 0.5s ease delay;
+	-moz-transition: all 0.5s ease delay;
+	transition: all 0.5s ease delay;
+}
+.btn-roxo:hover {
+	background-color: #aa79b8;
+	color: #fff;
+}
+.btn-roxo:active, .btn-roxo:focus {
+	background-color: #aa79b8;
+	color: #fff;
+}
+
 
 /*Text aligns*/
 .center{
@@ -128,17 +151,31 @@ input {
 
 /*Login*/
 
-.titulo-login {
-	border-width: 0;
-	margin-top: 50px;
-	font-size: 24px;
-	color: #8D8D8D;
+#login h2{
+	color: #848484;
 }
 
 .login-form {
-	margin-top: 100px;
+	margin-top: 40px;
 	padding-left: 40px;
 	padding-right: 40px;
+}
+
+.btn-cadastro{
+	color: #79C9AD;
+	font-size: 17px;
+	background-color: #fff;
+	-webkit-transition: all 0.5s ease delay;
+	-moz-transition: all 0.5s ease delay;
+	transition: all 0.5s ease delay;
+}
+.btn-cadastro:active,
+.btn-cadastro:focus,
+.btn-cadastro:visited,
+.btn-cadastro.activated{
+	background-color: #fff;
+   	color: #79C9AD;
+	   border: 0;
 }
 
 .manter-conectado {

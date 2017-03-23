@@ -61,7 +61,7 @@ app.factory('CategoriaService', function() {
 		{
 			id: 3,
 			nome: 'Games',
-			img: 'img/categorias/outlined/Classicswatch.png'
+			img: 'img/categorias/outlined/Classicswatch.svg'
 		},
 		{
 			id: 4,

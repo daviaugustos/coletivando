@@ -1,37 +1,36 @@
-<ion-view title="Coletivando">
-	<ion-nav-bar class="titulo-login">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
-    </ion-nav-bar>
+<ion-view id="login" title="Coletivando">
+    <ion-content>
 
-    <form class="login-form">
-        <ion-list>
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Email</span>
-                <input type="email" placeholder="Email" ng-model="usuario.email"/>
-            </label>
+        <form class="login-form">
+            <h2>Coletivando</h2>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Senha</span>
-                <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
-            </label>
+            <ion-list>
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="Email" ng-model="usuario.email"/>
+                </label>
 
-            <label class="manter-conectado">
-                <span>Manter conectado</span>
-                <input type="checkbox">
-            </label>
-            
-            <button type="submit" class="button btn btn-green button-block">Entrar</button>
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Senha</span>
+                    <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
+                </label>
 
-        </ion-list>
-    </form>
+                <label class="manter-conectado">
+                    <span>Manter conectado</span>
+                    <input type="checkbox">
+                </label>
+                
+                <button type="submit" class="button btn btn-green button-block">Entrar</button>
 
-    <div class="text-center cadastrar-div">
-        <button class="button-calm" ng-click="showCadastros()">
-            Cadastre-se
-        </button>
-    </div>
+            </ion-list>
+        </form>
 
+        <div class="text-center cadastrar-div">
+            <button class="button btn-cadastro" ng-click="showCadastros()">
+                Cadastre-se
+            </button>
+        </div>
+    </ion-content>
     <!-- Botão Facebook -->
     <!-- Botão Google + -->
 </ion-view>

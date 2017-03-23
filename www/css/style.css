@@ -658,4 +658,41 @@ input {
 	top:0;
 }
 
+.btn-descricao{
+	color: #848484;
+    font-size: 17px;
+	border: 0px;
+	border-bottom: 1px solid;
+	border-top: 1px solid;
+	border-color: #d8d8d8;
+	background-color: #fff;
+}
+
+.btn-descricao:active,
+.btn-descricao:focus,
+.btn-descricao:visited,
+.btn-descricao.activated{
+	background-color: #fff;
+    color: #848484;
+	border-color: #d8d8d8;
+}
+
+.btn-descricao p{
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+.info-visualizar-oferta{
+	margin-top: 15px;
+	padding: 10px;
+	color: #848484;
+}
+
+.info-visualizar-oferta p{
+	padding-bottom: 10px;
+}
+
+
+
 

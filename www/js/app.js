@@ -106,6 +106,26 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     }
   });
 
+  $stateProvider.state('cadastro-user', {
+    url: '/cadastro-user',
+    views:{
+      'login-tab@tabNavegacao': {
+        templateUrl: 'templates/usuarios/cadastro-user.html',
+        controller: 'UsuarioCtrl'
+      }
+    }
+  });
+  
+  $stateProvider.state('cadastro-empresa', {
+    url: '/cadastro-empresa',
+    views:{
+      'login-tab@tabNavegacao': {
+        templateUrl: 'templates/empresa/cadastro-empresa.html',
+        controller: 'UsuarioCtrl'
+      }
+    }
+  });
+
   $stateProvider.state('criar-oferta', {
     url: '/criar-oferta',
     templateUrl: 'templates/ofertas/criar-oferta.html',
@@ -118,21 +138,9 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     controller: 'UsuarioCtrl'
   });
 
-  $stateProvider.state('cadastro-empresa', {
-    url: '/cadastro-empresa',
-    templateUrl: 'templates/empresa/cadastro-empresa.html',
-    controller: 'UsuarioCtrl'
-  });
-
   $stateProvider.state('editar-empresa', {
     url: '/editar-empresa',
     templateUrl: 'templates/empresa/editar-empresa.html',
-    controller: 'UsuarioCtrl'
-  });
-
-  $stateProvider.state('cadastro-user', {
-    url: '/cadastro-user',
-    templateUrl: 'templates/usuarios/cadastro-user.html',
     controller: 'UsuarioCtrl'
   });
 

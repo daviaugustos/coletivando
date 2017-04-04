@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
+app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHistory) {
 	var listaOfertasDados = OfertaService.readAll();
 	var listaOfertasProcessadas = [];
 
@@ -22,6 +22,10 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state) {
 	$scope.showPesquisa = function(){
 		$state.go('pesquisar');
 	};
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });
 
 app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $ionicHistory) {
@@ -31,6 +35,9 @@ app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $io
 	$scope.showCadastros = function(){
 		$state.go("tabNavegacao.login.register-choose");
 	};
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
@@ -76,7 +83,7 @@ app.controller('SearchCtrl',
 });
 
 app.controller('OfertasApoiadasCtrl', 
-	function($scope, OfertasApoiadasService, OfertasRealizadasService, OfertasIncompletasService, $state) {
+	function($scope, OfertasApoiadasService, OfertasRealizadasService, OfertasIncompletasService, $state, $ionicHistory) {
 
 	$scope.apoiadas = OfertasApoiadasService.readAll();
 	$scope.realizadas = OfertasRealizadasService.readAll();
@@ -97,7 +104,9 @@ app.controller('OfertasApoiadasCtrl',
 	$scope.showIncompletas = function(){
 		$state.go('ofertas-apoiadas-incompletas');
 	};
-	
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });
 
 app.controller('NotificationCtrl', 
@@ -121,6 +130,8 @@ app.controller('NotificationCtrl',
 // });
 
 
-app.controller('RegisterChoose', function($scope, $state) {
-	
+app.controller('RegisterChoose', function($scope, $state, $ionicHistory) {
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });

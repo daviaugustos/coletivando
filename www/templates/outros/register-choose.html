@@ -1,6 +1,13 @@
 <ion-view>
+  <ion-nav-bar class="green"> 
+        <ion-nav-buttons side="left"> 
+            <button ng-click="goBackHandler()" class="button button-icon"> 
+                <i class="icon ion-android-arrow-back"></i> 
+            </button> 
+        </ion-nav-buttons> 
+    </ion-nav-bar>
   <ion-content>
-    <ion-item>
+    <ion-item ui-sref="cadastro-user">
         <center>
           <img height="200px" src="img/register-choose/user1.png"/>
         </center>
@@ -8,7 +15,7 @@
         <button class="button btn btn-green">Usuário</button>
     </ion-item>
 
-    <ion-item>
+    <ion-item ui-sref="cadastro-empresa">
         <center>
           <img height="184px" src="img/register-choose/enterprise.png"/>
         </center>

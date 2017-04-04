@@ -20,6 +20,28 @@ app.run(function($ionicPlatform) {
 
 app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAASmm1a3uZxkOpsDdQAkQ2o-NmEi4Z3s8",
+    authDomain: "coletivando-3e1e2.firebaseapp.com",
+    databaseURL: "https://coletivando-3e1e2.firebaseio.com",
+    projectId: "coletivando-3e1e2",
+    storageBucket: "coletivando-3e1e2.appspot.com",
+    messagingSenderId: "181251271144"
+  };
+  firebase.initializeApp(config);
+
+  const db = firebase.database();
+
+  /*const pessoaJuridica = db.ref().child("pessoaJuridica");
+  const primaryKey = "pessoaJuridica_one";
+
+  pessoaJuridica.child(primaryKey).set({
+    "firstName": "Marcos",
+    "lastName": "Moraes",
+    "location": "Rio Preto"
+  });*/
+
   $ionicConfigProvider.tabs.position('bottom');
 
   $stateProvider.state('tabNavegacao', {

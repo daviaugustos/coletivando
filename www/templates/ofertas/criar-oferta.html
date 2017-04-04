@@ -1,0 +1,55 @@
+<ion-view  id="cadastro-empresa" title="">
+
+	<ion-nav-bar class="green"><ion-nav-back-button></ion-nav-back-button></ion-nav-bar>
+
+
+    <form class="cadastro-form">
+
+<ion-content style="padding:50px">
+
+        <ion-list>
+
+            <h2 class="h2"> Crie sua oferta </h2>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Nome</span>
+                <input type="text" placeholder="Nome" ng-model="criarOferta.nome"/>
+            </label>
+            
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Data limite</span>
+                <input type="text" placeholder="Data limite" ng-model="criarOferta.dataLimite"/>
+            </label>
+            
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Valor do produto</span>
+                <input type="text" placeholder="Valor do produto" ng-model="criarOferta.valorProduto"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Valor com desconto</span>
+                <input type="text" placeholder="Valor com desconto(%)" ng-model="criarOferta.valorDesconto"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Qtd mínima de comprador</span>
+                <input type="text" placeholder="Qtd mínima de comprador" ng-model="criarOferta.qtdCompradores"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Descrição</span>
+                <input type="text" placeholder="Descrição" ng-model="criarOferta.descricao"/>
+            </label>
+
+            <div class="row">
+                <div class="col"></div>
+                <div class="col col-80 center">
+                    <button class="button btn btn-green">Lançar projeto!</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </ion-list>
+    </form>
+  </ion-content> 
+</ion-view>

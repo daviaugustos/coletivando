@@ -270,3 +270,6 @@ app.factory('EmpresaPerfilService', function(){
 	}
 
 });
+
+app.factory('EmpresaCadastroService', function(){
+});

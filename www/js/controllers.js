@@ -28,7 +28,7 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 	}
 });
 
-app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $ionicHistory) {
+app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $ionicHistory, $http) {
 	$scope.showIndex = function(){
 		$state.go('oferta-lista');
 	};
@@ -37,6 +37,20 @@ app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $io
 	};
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
+	}
+	$scope.buscaDadosEmpresa = function(cnpj){
+		var jsonpConfig = '?callback=JSON_CALLBACK';
+		var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
+		var jsonpUrl = wsUrl + cnpj + jsonpConfig;
+		$http.jsonp(jsonpUrl)
+		.then(
+			function (resposta){
+				return resposta.data;
+			},
+			function (error){
+				console.log(error.message);
+			}
+		)
 	}
 });
 

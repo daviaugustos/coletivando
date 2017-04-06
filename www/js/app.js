@@ -32,7 +32,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   firebase.initializeApp(config);
 
   const db = firebase.database();
-
+  
   /*const pessoaJuridica = db.ref().child("pessoaJuridica");
   const primaryKey = "pessoaJuridica_one";
 

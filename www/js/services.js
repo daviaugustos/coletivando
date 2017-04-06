@@ -273,7 +273,6 @@ app.factory('EmpresaPerfilService', function(){
 
 app.factory('EmpresaCadastroService', function(){
 	var pessoaJuridica = {
-		id: 1,
 		name: "Razão Social - ME",
 		shortname: "Nome Fantasia",
 		cnpj: "99999999999999",
@@ -323,9 +322,6 @@ app.factory('EmpresaCadastroService', function(){
 				modified: 	objPessoaJuridica.modified
 			});		
 		},
-
-
-		
 
 		read: function(id){
 

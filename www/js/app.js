@@ -1,4 +1,4 @@
-var app = angular.module('coletivando', ['ionic'])
+var app = angular.module('coletivando', ['ionic', 'firebase'])
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,7 +18,7 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider) {
 
   // Initialize Firebase
   var config = {
@@ -31,10 +31,16 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   };
   firebase.initializeApp(config);
 
+  //teste registrar rotas constantes para utilizar no app
+  $firebaseRefProvider.registerUrl({
+    url:            config.databaseURL,
+    pessoaJuridica: config.databaseURL + '/pessoaJuridica'
+  });
+
   const db = firebase.database();
-  
-  /*const pessoaJuridica = db.ref().child("pessoaJuridica");
-  const primaryKey = "pessoaJuridica_one";
+  const pessoaJuridica = db.ref().child('pessoaJuridica');
+
+  /*const primaryKey = "pessoaJuridica_one";
 
   pessoaJuridica.child(primaryKey).set({
     "firstName": "Marcos",

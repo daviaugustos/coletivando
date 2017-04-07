@@ -273,9 +273,9 @@ app.factory('EmpresaPerfilService', function(){
 
 app.factory('EmpresaCadastroService', function($firebaseArray){
 
-	var ref = db.ref().child('pessoaJuridica');
+	var ref = firebase.database().ref().child('pessoaJuridica');
 	var empresas = $firebaseArray(ref);
-	
+	console.log(empresas);
 	return {
 		create: function(objPessoaJuridica){
 			empresas.$add(objPessoaJuridica);

@@ -120,31 +120,59 @@ app.controller("LoginCtrl", function($scope, $state){
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, $ionicPopup){
+
+app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
 	$scope.validarCnpj = function(){
 		var txtCnpjValue = document.getElementById("txtCnpj");
 		if (txtCnpjValue.value != "") {
-		var jsonpConfig = '?callback=JSON_CALLBACK';
-		var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
-		var jsonpUrl = wsUrl + txtCnpjValue.value + jsonpConfig;
-		$http.jsonp(jsonpUrl)
-		.then(
-			function (resposta){
-			},
-			function (error){
-				$ionicPopup.alert({
-					title: 'CNPJ Inválido!',
-					template: 'Por favor <b>verifique</b> se os dado estão corretos'
-				}).then(function(){
-					txtCnpjValue.value = "";
-				});
-			}
-		);
+			var jsonpConfig = '?callback=JSON_CALLBACK';
+			var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
+			var jsonpUrl = wsUrl + txtCnpjValue.value + jsonpConfig;
+			$http.jsonp(jsonpUrl)
+			.then(
+				function (resposta){
+				},
+				function (error){
+					$ionicPopup.alert({
+						title: 'CNPJ Inválido!',
+						template: 'Por favor <b>verifique</b> se os dado estão corretos'
+					}).then(function(){
+						txtCnpjValue.value = "";
+					});
+				}
+
+			);
 		}
 	};
+
+	var pessoaJuridica = {
+		name: "EOQ25",
+		shortname: "Nome Fantasia",
+		cnpj: "99999999999999",
+		cnae: "Varejista",
+		phone: "(99) 9999-9999",
+		cel: "(99) 9999-9999",
+		email: "email@email.com",
+		status: 0,
+		image: "img/logo.png",
+		cep: "99999-999",
+		address: "rua quinze de novembro",
+		number: "999",
+		area: "bairro abril",
+		complement: "próximo da av. azul",
+		city: "rio preto",
+		state: "são paulo",
+		password: "algEJIG315LGojgalG",
+		created: "04-04-2017 08:47",
+		modified: "04-04-2017 13:47"
+	}
+    $scope.salvar = function(){
+        EmpresaCadastroService.create(pessoaJuridica);
+        $ionicHistory.goBack(-1);
+    }
 });
 
 app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){

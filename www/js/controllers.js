@@ -149,26 +149,27 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 	};
 
 	$scope.pessoaJuridica = {
-		name: "",
-		shortname: "",
+		nomeFantasia: "",
+		nome: "",
 		cnpj: "",
 		cnae: "",
-		phone: "",
-		cel: "",
+		enderecoCep: "",
+		enderecoRua: "",
+		enderecoBairro: "",
+		enderecoNumero: "",
+		enderecoComplemento: "",
+		enderecoEstado: "",
+		enderecoCidade: "",
+		telefone: "",
+		celular: "",
 		email: "",
-		status: 0,
-		image: "",
-		cep: "",
-		address: "",
-		number: "",
-		area: "",
-		complement: "",
-		city: "",
-		state: "",
-		password: "",
-		created: "",
-		modified: ""
+		senha: "",
+		imagem: "",
+		status: 1,
+		dataCriacao: new Date().toISOString(),
+		ultimaModificacao: new Date().toISOString(),
 	}
+
     $scope.salvar = function(pessoaJuridica){
         EmpresaCadastroService.create(pessoaJuridica);
         $ionicHistory.goBack(-1);

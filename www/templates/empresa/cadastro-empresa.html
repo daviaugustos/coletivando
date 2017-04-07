@@ -19,12 +19,12 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome(Fantasia)</span>
-                <input id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.shortname"/>
+                <input id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome</span>
-                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.name"/>
+                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
@@ -39,32 +39,47 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CEP</span>
-                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.cep" maxlength="9"/>
+                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Rua</span>
-                <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.address"/>
+                <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Número</span>
+                <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Complemento</span>
+                <input id="txtComplemento" type="text" placeholder="Complemento" ng-model="pessoaJuridica.enderecoComplemento"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Bairro</span>
-                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.area"/>
+                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Estado</span>
-                <input id="txtEstado" type="text" placeholder="Estado" ng-model="pessoaJuridica.state"/>
+                <input id="txtEstado" type="text" placeholder="Estado" ng-model="pessoaJuridica.enderecoEstado"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Cidade</span>
-                <input id="txtCidade" type="text" placeholder="Cidade" ng-model="pessoaJuridica.city"/>
+                <input id="txtCidade" type="text" placeholder="Cidade" ng-model="pessoaJuridica.enderecoCidade"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Telefone</span>
-                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.phone"/>
+                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.telefone"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Telefone celular</span>
+                <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
@@ -74,7 +89,7 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
-                <input id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaJuridica.password"/>
+                <input id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaJuridica.senha"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">

@@ -28,32 +28,6 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 	}
 });
 
-app.controller('UsuarioCtrl', function($scope, EmpresaPerfilService, $state, $ionicHistory, $http) {
-	$scope.showIndex = function(){
-		$state.go('oferta-lista');
-	};
-	$scope.showCadastros = function(){
-		$state.go("tabNavegacao.login.register-choose");
-	};
-	$scope.goBackHandler = function(){
-		$ionicHistory.goBack(-1);
-	}
-	$scope.buscaDadosEmpresa = function(cnpj){
-		var jsonpConfig = '?callback=JSON_CALLBACK';
-		var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
-		var jsonpUrl = wsUrl + cnpj + jsonpConfig;
-		$http.jsonp(jsonpUrl)
-		.then(
-			function (resposta){
-				return resposta.data;
-			},
-			function (error){
-				console.log(error.message);
-			}
-		)
-	}
-});
-
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();
 	
@@ -134,17 +108,40 @@ app.controller('NotificationCtrl',
 	
 });
 
-// app.controller('PerfilEmpresaCtrl', 
-// 	function($scope, $state) {
+app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+});
 
-// 	$scope.showIndex = function(){
-// 		$state.go('oferta-lista');
-// 	};
-	
-// });
+app.controller("LoginCtrl", function($scope, $state){
+	$scope.showCadastros = function(){
+		$state.go("tabNavegacao.login.register-choose");
+	};
+});
 
+app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory){
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 
-app.controller('RegisterChoose', function($scope, $state, $ionicHistory) {
+	$scope.buscaDadosEmpresa = function(cnpj){
+		var jsonpConfig = '?callback=JSON_CALLBACK';
+		var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
+		var jsonpUrl = wsUrl + cnpj + jsonpConfig;
+		$http.jsonp(jsonpUrl)
+		.then(
+			function (resposta){
+				return resposta.data;
+			},
+			function (error){
+				return error; //verificar se o erro é retornado direto no objeto de retorno
+			}
+		)
+	}
+});
+
+app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}

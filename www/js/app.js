@@ -70,12 +70,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     }
   });
 
- /* $stateProvider.state('personalizar-categorias',{
-    url: '/personalizar-categorias',
-    templateUrl: 'templates/categorias/personalizar-categorias.html',
-    controller: 'CategoriaCtrl'
-  });*/
-
   $stateProvider.state('tabNavegacao.explore.personalizar-categorias',{
     url: '/personalizar-categorias',
     views: {
@@ -91,7 +85,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     views: {
       'login-tab' :{
         templateUrl: 'templates/usuarios/login.html',
-        controller: 'UsuarioCtrl'
+        controller: 'LoginCtrl'
       }
     }
   });
@@ -101,7 +95,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     views: {
       'login-tab@tabNavegacao' : {
         templateUrl: 'templates/outros/register-choose.html',
-        controller: 'RegisterChoose'
+        controller: 'RegisterChooseCtrl'
       }
     }
   });
@@ -111,7 +105,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     views:{
       'login-tab@tabNavegacao': {
         templateUrl: 'templates/usuarios/cadastro-user.html',
-        controller: 'UsuarioCtrl'
+        controller: 'UsuarioFisicoCtrl'
       }
     }
   });
@@ -121,7 +115,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     views:{
       'login-tab@tabNavegacao': {
         templateUrl: 'templates/empresa/cadastro-empresa.html',
-        controller: 'UsuarioCtrl'
+        controller: 'UsuarioJuridicoCtrl'
       }
     }
   });
@@ -132,22 +126,32 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     controller: 'OfertaCtrl'
   });
 
-  $stateProvider.state('alterar-senha', {
-    url: '/alterar-senha',
-    templateUrl: 'templates/usuarios/alterar-senha.html',
-    controller: 'UsuarioCtrl'
+  $stateProvider.state('alterar-senha-fisica', {
+    url: '/alterar-senha-fisica',
+    controller: 'UsuarioFisicoCtrl'
+  });
+
+  $stateProvider.state('alterar-senha-juridica', {
+    url: '/alterar-senha-juridica',
+    controller: 'UsuarioJuridicoCtrl'
   });
 
   $stateProvider.state('editar-empresa', {
     url: '/editar-empresa',
     templateUrl: 'templates/empresa/editar-empresa.html',
-    controller: 'UsuarioCtrl'
+    controller: 'UsuarioJuridicoCtrl'
   });
 
-  $stateProvider.state('minha-conta', {
-    url: '/minha-conta',
+  $stateProvider.state('minha-conta-fisica', {
+    url: '/minha-conta-fisica',
     templateUrl: 'templates/usuarios/minha-conta.html',
-    controller: 'UsuarioCtrl'
+    controller: 'UsuarioFisicoCtrl'
+  });
+
+  $stateProvider.state('minha-conta-juridica', {
+    url: '/minha-conta-juridica',
+    templateUrl: 'templates/usuarios/minha-conta.html',
+    controller: 'UsuarioJuridicoCtrl'
   });
 
   $stateProvider.state('pesquisar', {

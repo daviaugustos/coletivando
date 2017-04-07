@@ -164,7 +164,7 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 
 	$('input').blur(function(){
 
-		var field_id    = $(this).attr('id');
+		var field_id = $(this).attr('id');
 
 		var isValid = !$(this).validationEngine('validate');
 
@@ -283,7 +283,7 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 		}
 
 	);
-
+	
 	$scope.pessoaJuridica = {
 		nomeFantasia: "",
 		nome: "",
@@ -306,33 +306,15 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 		ultimaModificacao: new Date().toISOString(),
 	}
 
-    $scope.salvar = function(pessoaJuridica){
-        //EmpresaCadastroService.create(pessoaJuridica);
-		//EmpresaCadastroService.delete("-Kh8QI8o4s_fcGxxAR96");
-		//console.log(EmpresaCadastroService.read("-Kh8KMh7kNthw6n-PLAA"));
-		var objeto = {
-			$id: "-Kh8QI8o4s_fcGxxAR96",
-			nomeFantasia: "OOH OHOH",
-			nome: "UHH UH UH",
-			cnpj: "Stroooong",
-			cnae: "uio opop",
-			enderecoCep: "heyheyhey hey hey",
-			enderecoRua: "silver",
-			enderecoBairro: "ho hey",
-			enderecoNumero: "xafadão",
-			enderecoComplemento: "ximba",
-			enderecoEstado: "laie",
-			enderecoCidade: "toda",
-			telefone: "vez",
-			celular: "q",
-			email: "the one",
-			senha: "aplicado",
-			imagem: "no jubileu",
-			status: 1,
-			dataCriacao: new Date().toISOString(),
-			ultimaModificacao: new Date().toISOString(),
-		};
-		EmpresaCadastroService.update(objeto);
+	$scope.create = function(pessoaJuridica){
+		EmpresaCadastroService.create(pessoaJuridica);
+		$ionicHistory.goBack(-1);
+	}
+
+	$scope.pessoaJuridica = EmpresaCadastroService.read('-Kh8VFiB1xCah84OrUHQ');
+
+    $scope.update = function(pessoaJuridica){
+		EmpresaCadastroService.update(pessoaJuridica);
         $ionicHistory.goBack(-1);
     }
 	

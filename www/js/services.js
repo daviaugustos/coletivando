@@ -276,7 +276,7 @@ app.factory('EmpresaCadastroService', function($firebaseArray){
 	//Pega ref até o nó de "keys"
 	var ref = firebase.database().ref().child('pessoaJuridica');
 	var empresas = $firebaseArray(ref);
-
+	console.log(empresas);
 	return {
 		create: function(objPessoaJuridica){
 			empresas.$add(objPessoaJuridica);
@@ -287,7 +287,7 @@ app.factory('EmpresaCadastroService', function($firebaseArray){
 		},
 
 		read: function(id){
-			return empresas[empresas.$indexFor(id)]; // 0
+			return empresas[empresas.$indexFor(id)];
 		},
 
 		update: function(objPessoaJuridica){
@@ -296,7 +296,6 @@ app.factory('EmpresaCadastroService', function($firebaseArray){
 		},
 
 		delete: function(id){
-			//ref.child(id).remove();
 			empresas.$remove(empresas.$indexFor(id));
 		}
 	}

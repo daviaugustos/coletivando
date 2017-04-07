@@ -120,25 +120,31 @@ app.controller("LoginCtrl", function($scope, $state){
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory){
+app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, $ionicPopup){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
-
-	$scope.buscaDadosEmpresa = function(cnpj){
+	$scope.validarCnpj = function(){
+		var txtCnpjValue = document.getElementById("txtCnpj");
+		if (txtCnpjValue.value != "") {
 		var jsonpConfig = '?callback=JSON_CALLBACK';
 		var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
-		var jsonpUrl = wsUrl + cnpj + jsonpConfig;
+		var jsonpUrl = wsUrl + txtCnpjValue.value + jsonpConfig;
 		$http.jsonp(jsonpUrl)
 		.then(
 			function (resposta){
-				return resposta.data;
 			},
 			function (error){
-				return error; //verificar se o erro é retornado direto no objeto de retorno
+				$ionicPopup.alert({
+					title: 'CNPJ Inválido!',
+					template: 'Por favor <b>verifique</b> se os dado estão corretos'
+				}).then(function(){
+					txtCnpjValue.value = "";
+				});
 			}
-		)
-	}
+		);
+		}
+	};
 });
 
 app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){

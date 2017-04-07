@@ -29,7 +29,7 @@
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CNPJ</span>
-                <input type="text" placeholder="CNPJ" ng-model="empresa.cnpj"/>
+                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="empresa.cnpj" ng-blur="validarCnpj()"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">

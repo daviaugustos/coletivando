@@ -122,33 +122,66 @@ app.controller("LoginCtrl", function($scope, $state){
 
 
 app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup){
+	
+	/* Mask */
+	$('.date').mask('00/00/0000');
+	$('.time').mask('00:00:00');
+	$('.date_time').mask('00/00/0000 00:00:00');
+	$('.cep').mask('00000-000');
+	$('.cpf').mask('000.000.000-00');
+	$('.cnpj').mask('00.000.000/0000-00');
+	$('.money').mask('000.000.000.000.000,00', {reverse: true});
+
+	var SPMaskBehavior = function (val) {
+		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+	},
+	spOptions = {
+		onKeyPress: function(val, e, field, options) {
+			field.mask(SPMaskBehavior.apply({}, arguments), options);
+		}
+	};
+
+	if($('.phone').length > 0){
+		$('.phone').mask(SPMaskBehavior, spOptions);
+	}
+
+
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
-	$scope.validarCnpj = function(){
-		var txtCnpjValue = document.getElementById("txtCnpj");
-		if (txtCnpjValue.value != "") {
-			//var jsonpConfig = '?callback=JSON_CALLBACK';
-			var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
-			var jsonpUrl = wsUrl + txtCnpjValue.value;//+ jsonpConfig;
-			$http.get(
-				jsonpUrl
-				,{
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-				}
-			})
-			.then(
-				function (resposta){
-					console.log(resposta);
-				},
-				function (error){
-					console.log(error);
-				}
 
-			);
+	var cnpj;
+
+	$scope.validarCnpj = function(){	
+		cnpj = apenasNumeros($('#txtCnpj').val());
+
+		if (cnpj > 0) {
+			$.ajax({
+				dataType: 'jsonp',
+				url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
+			}).done(function (data) {
+				console.log(data);
+				if(data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
+					$ionicPopup.alert({
+						title : 'CPNJ Inválido!',
+						template : 'Por favor <b>verifique</b> se os dados estão corretos'
+					}).then(function() {
+						$('#txtCnpj').val('');
+					});
+				} else if(data['situacao'] == 'ATIVA') {
+					$ionicPopup.alert({
+						title : data['nome']
+					});
+				}
+			});
 		}
 	};
+
+	function apenasNumeros(string) 
+	{
+		var numsStr = string.replace(/[^0-9]/g,'');
+		return parseInt(numsStr);
+	}
 
 	var jsonpUrl = "js/ajax/estados_cidades.json";
 	$http.get(jsonpUrl)

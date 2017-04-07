@@ -184,17 +184,17 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     controller: 'OfertasApoiadasCtrl'
   });
 
-  $stateProvider.state('ofertas-apoiadas-realizadas', {
-    url: '/ofertas-apoiadas-realizadas',
-    templateUrl: 'templates/ofertas/ofertas-apoiadas-realizadas.html',
-    controller: 'OfertasApoiadasCtrl'
-  });
+  // $stateProvider.state('ofertas-apoiadas-realizadas', {
+  //   url: '/ofertas-apoiadas-realizadas',
+  //   templateUrl: 'templates/ofertas/ofertas-apoiadas-realizadas.html',
+  //   controller: 'OfertasApoiadasCtrl'
+  // });
 
-  $stateProvider.state('ofertas-apoiadas-incompletas', {
-    url: '/ofertas-apoiadas-incompletas',
-    templateUrl: 'templates/ofertas/ofertas-apoiadas-incompletas.html',
-    controller: 'OfertasApoiadasCtrl'
-  });
+  // $stateProvider.state('ofertas-apoiadas-incompletas', {
+  //   url: '/ofertas-apoiadas-incompletas',
+  //   templateUrl: 'templates/ofertas/ofertas-apoiadas-incompletas.html',
+  //   controller: 'OfertasApoiadasCtrl'
+  // });
 
   $stateProvider.state('perfil-empresa', {
     url: '/perfil-empresa',

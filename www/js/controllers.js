@@ -246,9 +246,32 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 	}
 
     $scope.salvar = function(pessoaJuridica){
-        EmpresaCadastroService.create(pessoaJuridica);
-		EmpresaCadastroService.delete("-Kh8RH5j6MG09VE_uigX");
+        //EmpresaCadastroService.create(pessoaJuridica);
+		//EmpresaCadastroService.delete("-Kh8QI8o4s_fcGxxAR96");
 		//console.log(EmpresaCadastroService.read("-Kh8KMh7kNthw6n-PLAA"));
+		var objeto = {
+			$id: "-Kh8QI8o4s_fcGxxAR96",
+			nomeFantasia: "OOH OHOH",
+			nome: "UHH UH UH",
+			cnpj: "Stroooong",
+			cnae: "uio opop",
+			enderecoCep: "heyheyhey hey hey",
+			enderecoRua: "silver",
+			enderecoBairro: "ho hey",
+			enderecoNumero: "xafadão",
+			enderecoComplemento: "ximba",
+			enderecoEstado: "laie",
+			enderecoCidade: "toda",
+			telefone: "vez",
+			celular: "q",
+			email: "the one",
+			senha: "aplicado",
+			imagem: "no jubileu",
+			status: 1,
+			dataCriacao: new Date().toISOString(),
+			ultimaModificacao: new Date().toISOString(),
+		};
+		EmpresaCadastroService.update(objeto);
         $ionicHistory.goBack(-1);
     }
 	

@@ -19,69 +19,67 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome(Fantasia)</span>
-                <input type="text" placeholder="Nome(Fantasia)" ng-model="empresa.nomeFantasia"/>
+                <input id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.shortname"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome</span>
-                <input type="text" placeholder="Nome" ng-model="empresa.nome"/>
+                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.name"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CNPJ</span>
-                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="empresa.cnpj" ng-blur="validarCnpj()"/>
+                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CNAE(Principal)</span>
-                <input type="text" placeholder="CNAE(Principal)" ng-model="empresa.cnae"/>
+                <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae"/>
             </label>
 
-          
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CEP</span>
-                <input type="text" class"cep" placeholder="CEP" ng-model="empresa.cep" maxlength="9"/>
-                
+                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.cep" maxlength="9"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Rua</span>
-                <input type="text" placeholder="Rua" ng-model="empresa.rua"/>
+                <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.address"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Bairro</span>
-                <input type="text" placeholder="Bairro" ng-model="empresa.bairro"/>
+                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.area"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Estado</span>
-                <input type="text" placeholder="Estado" ng-model="empresa.estado"/>
+                <input id="txtEstado" type="text" placeholder="Estado" ng-model="pessoaJuridica.state"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Cidade</span>
-                <input type="text" placeholder="Cidade" ng-model="empresa.cidade"/>
+                <input id="txtCidade" type="text" placeholder="Cidade" ng-model="pessoaJuridica.city"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Telefone</span>
-                <input type="text" id="telefone" placeholder="Telefone" ng-model="empresa.telefone"/>
+                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.phone"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="Email" ng-model="empresa.email"/>
+                <input id="txtEmail" type="email" placeholder="Email" ng-model="pessoaJuridica.email"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
-                <input type="password" placeholder="Senha" ng-model="empresa.senha"/>
+                <input id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaJuridica.password"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Confirmar senha</span>
-                <input type="password" placeholder="Confirmar senha" ng-model="empresa.senha2"/>
+                <input type="password" placeholder="Confirmar senha" ng-model="pessoaJuridica.senha2"/>
             </label>
 
             <label class="termos-de-uso">
@@ -92,7 +90,7 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col col-80 center">
-                    <button ng-click="salvar()" type="submit" class="button btn btn-green">Cadastrar</button>
+                    <button ng-click="salvar(pessoaJuridica)" type="submit" class="button btn btn-green">Cadastrar</button>
                 </div>
                 <div class="col"></div>
             </div>

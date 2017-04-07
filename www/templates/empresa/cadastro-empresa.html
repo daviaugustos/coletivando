@@ -15,7 +15,14 @@
 
         <ion-list>
 
+            <div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>
+
             <h2> Cadastre sua empresa </h2>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">CNPJ</span>
+                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
+            </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome(Fantasia)</span>
@@ -25,11 +32,6 @@
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome</span>
                 <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome" class="validate[required]"/>
-            </label>
-            
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">CNPJ</span>
-                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">

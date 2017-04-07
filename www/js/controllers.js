@@ -145,6 +145,38 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 		$('.phone').mask(SPMaskBehavior, spOptions);
 	}
 
+	/* validate */
+	$('form').submit(function() {
+		var valid = $(this).validationEngine("validate");
+		if(valid) {
+			$(this).submit();
+		} else {
+			return false;
+		}
+	});
+
+	$('form').validationEngine({
+		binded: true,
+		updatePromptsPosition: true,
+		promptPosition: 'inline',
+		scroll: false
+	});
+
+	$('input').blur(function(){
+
+		var field_id    = $(this).attr('id');
+
+		var isValid = !$(this).validationEngine('validate');
+
+		if(!isValid){
+			$(this).addClass('validation_error');
+		}else{
+			$(this).removeClass('validation_error');
+		}
+
+	});
+	/* /validate */
+
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
@@ -160,19 +192,48 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 				dataType: 'jsonp',
 				url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
 			}).done(function (data) {
-				console.log(data);
-				if(data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
+				if (data['situacao'] == 'ATIVA') {
+					
+					if(data['atividade_principal'][0]['code']) {
+						$scope.pessoaJuridica.cnae = data['atividade_principal'][0]['code'];
+					}
+
+					if(data['fantasia']) {
+						$scope.pessoaJuridica.nomeFantasia = data['fantasia'];
+					}
+
+					if(data['cep']) {
+						$scope.pessoaJuridica.enderecoCep = data['cep'];
+					}
+
+					if(data['complemento']) {
+						$scope.pessoaJuridica.enderecoComplemento = data['complemento'];
+					}
+					
+					if(data['numero']) {
+						$scope.pessoaJuridica.enderecoNumero = data['numero'];
+					}
+					
+					if(data['bairro']) {
+						$scope.pessoaJuridica.enderecoBairro = data['bairro'];
+					}
+
+					if(data['nome']) {
+						$scope.pessoaJuridica.nome = data['nome'];
+					}
+					
+					if(data['telefone']) {
+						$scope.pessoaJuridica.telefone = data['telefone'];
+					}
+
+				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
 					$ionicPopup.alert({
 						title : 'CPNJ Inválido!',
 						template : 'Por favor <b>verifique</b> se os dados estão corretos'
 					}).then(function() {
 						$('#txtCnpj').val('');
 					});
-				} else if(data['situacao'] == 'ATIVA') {
-					$ionicPopup.alert({
-						title : data['nome']
-					});
-				}
+				}				
 			});
 		}
 	};

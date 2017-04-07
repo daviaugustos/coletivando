@@ -128,20 +128,22 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 	$scope.validarCnpj = function(){
 		var txtCnpjValue = document.getElementById("txtCnpj");
 		if (txtCnpjValue.value != "") {
-			var jsonpConfig = '?callback=JSON_CALLBACK';
+			//var jsonpConfig = '?callback=JSON_CALLBACK';
 			var wsUrl = "https://www.receitaws.com.br/v1/cnpj/"
-			var jsonpUrl = wsUrl + txtCnpjValue.value + jsonpConfig;
-			$http.jsonp(jsonpUrl)
+			var jsonpUrl = wsUrl + txtCnpjValue.value;//+ jsonpConfig;
+			$http.get(
+				jsonpUrl
+				,{
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				}
+			})
 			.then(
 				function (resposta){
+					console.log(resposta);
 				},
 				function (error){
-					$ionicPopup.alert({
-						title: 'CNPJ Inválido!',
-						template: 'Por favor <b>verifique</b> se os dado estão corretos'
-					}).then(function(){
-						txtCnpjValue.value = "";
-					});
+					console.log(error);
 				}
 
 			);

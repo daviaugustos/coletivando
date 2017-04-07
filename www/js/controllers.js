@@ -212,8 +212,11 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 
     $scope.salvar = function(pessoaJuridica){
         EmpresaCadastroService.create(pessoaJuridica);
+		EmpresaCadastroService.delete("-Kh8F_NmktTaZCHDZsg4");
         $ionicHistory.goBack(-1);
+		
     }
+	
 });
 
 app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){

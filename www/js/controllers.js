@@ -120,7 +120,7 @@ app.controller("LoginCtrl", function($scope, $state){
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory){
+app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
@@ -139,6 +139,31 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory){
 			}
 		)
 	}
+	var pessoaJuridica = {
+		name: "EOQ25",
+		shortname: "Nome Fantasia",
+		cnpj: "99999999999999",
+		cnae: "Varejista",
+		phone: "(99) 9999-9999",
+		cel: "(99) 9999-9999",
+		email: "email@email.com",
+		status: 0,
+		image: "img/logo.png",
+		cep: "99999-999",
+		address: "rua quinze de novembro",
+		number: "999",
+		area: "bairro abril",
+		complement: "próximo da av. azul",
+		city: "rio preto",
+		state: "são paulo",
+		password: "algEJIG315LGojgalG",
+		created: "04-04-2017 08:47",
+		modified: "04-04-2017 13:47"
+	}
+    $scope.salvar = function(){
+        EmpresaCadastroService.create(pessoaJuridica);
+        $ionicHistory.goBack(-1);
+    }
 });
 
 app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){

@@ -273,9 +273,11 @@ app.factory('EmpresaPerfilService', function(){
 
 app.factory('EmpresaCadastroService', function($firebaseArray){
 
+	//Pega ref até o nó de "keys"
 	var ref = firebase.database().ref().child('pessoaJuridica');
 	var empresas = $firebaseArray(ref);
 	console.log(empresas);
+
 	return {
 		create: function(objPessoaJuridica){
 			empresas.$add(objPessoaJuridica);
@@ -286,7 +288,7 @@ app.factory('EmpresaCadastroService', function($firebaseArray){
 		},
 
 		read: function(id){
-			return angular.copy(empresas[id]);
+			return empresas[empresas.$indexFor(id)]; // 0
 		},
 
 		update: function(id){
@@ -294,7 +296,8 @@ app.factory('EmpresaCadastroService', function($firebaseArray){
 		},
 
 		delete: function(id){
-			empresas.$remove(id);
+			//ref.child(id).remove();
+			empresas.$remove(empresas.$indexFor(id));
 		}
 	}
 });

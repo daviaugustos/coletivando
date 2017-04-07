@@ -271,66 +271,30 @@ app.factory('EmpresaPerfilService', function(){
 
 });
 
-app.factory('EmpresaCadastroService', function(){
-	var pessoaJuridica = {
-		name: "Razão Social - ME",
-		shortname: "Nome Fantasia",
-		cnpj: "99999999999999",
-		cnae: "Varejista",
-		phone: "(99) 9999-9999",
-		cel: "(99) 9999-9999",
-		email: "email@email.com",
-		status: 0,
-		image: "img/logo.png",
-		cep: "99999-999",
-		address: "rua quinze de novembro",
-		number: "999",
-		area: "bairro abril",
-		complement: "próximo da av. azul",
-		city: "rio preto",
-		state: "são paulo",
-		password: "algEJIG315LGojgalG",
-		created: "04-04-2017 08:47",
-		modified: "04-04-2017 13:47"
-	}
+app.factory('EmpresaCadastroService', function($firebaseArray){
+
+	var ref = db.ref().child('pessoaJuridica');
+	var empresas = $firebaseArray(ref);
 	
 	return {
 		create: function(objPessoaJuridica){
-			// Cria uma chave para o novo cadastro de empresa
-			var pessoaJuridicaKey = db.ref().child('pessoaJuridica').push().key;
+			empresas.$add(objPessoaJuridica);
+		},
 
-			//Grava os dados no objeto pessoaJuridica 
-			db.ref('pessoaJuridica/' + pessoaJuridicaKey).set({
-				name: 		objPessoaJuridica.name,
-				shortname: 	objPessoaJuridica.shortname,
-				cnpj: 		objPessoaJuridica.cnpj,
-				cnae: 		objPessoaJuridica.cnae,
-				phone: 		objPessoaJuridica.phone,
-				cel: 		objPessoaJuridica.cel,
-				email: 		objPessoaJuridica.email,
-				status: 	objPessoaJuridica.status,
-				image: 		objPessoaJuridica.image,
-				cep: 		objPessoaJuridica.cep,
-				address: 	objPessoaJuridica.address,
-				number: 	objPessoaJuridica.number,
-				area: 		objPessoaJuridica.area,
-				complement: objPessoaJuridica.complemento,
-				city: 		objPessoaJuridica.city,
-				state: 		objPessoaJuridica.state,
-				password: 	objPessoaJuridica.password,
-				created: 	objPessoaJuridica.created,
-				modified: 	objPessoaJuridica.modified
-			});		
+		readAll: function(){
+			return empresas;
 		},
 
 		read: function(id){
-
+			return angular.copy(empresas[id]);
 		},
-		update: function(){
 
+		update: function(id){
+			empresas.$save(id);
 		},
-		delete: function(){
 
+		delete: function(id){
+			empresas.$remove(id);
 		}
 	}
 });

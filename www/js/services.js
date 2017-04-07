@@ -271,72 +271,30 @@ app.factory('EmpresaPerfilService', function(){
 
 });
 
-app.factory('EmpresaCadastroService', function($firebaseObject){
+app.factory('EmpresaCadastroService', function($firebaseArray){
 
 	var ref = db.ref().child('pessoaJuridica');
 	var empresas = $firebaseArray(ref);
 	
 	return {
 		create: function(objPessoaJuridica){
-			// Grava os dados na pessoaJuridica já criando uma chave
-			// ref.push({
-			// 	name: 		objPessoaJuridica.name,
-			// 	shortname: 	objPessoaJuridica.shortname,
-			// 	cnpj: 		objPessoaJuridica.cnpj,
-			// 	cnae: 		objPessoaJuridica.cnae,
-			// 	phone: 		objPessoaJuridica.phone,
-			// 	cel: 		objPessoaJuridica.cel,
-			// 	email: 		objPessoaJuridica.email,
-			// 	status: 	objPessoaJuridica.status,
-			// 	image: 		objPessoaJuridica.image,
-			// 	cep: 		objPessoaJuridica.cep,
-			// 	address: 	objPessoaJuridica.address,
-			// 	number: 	objPessoaJuridica.number,
-			// 	area: 		objPessoaJuridica.area,
-			// 	complement: objPessoaJuridica.complemento,
-			// 	city: 		objPessoaJuridica.city,
-			// 	state: 		objPessoaJuridica.state,
-			// 	password: 	objPessoaJuridica.password,
-			// 	created: 	objPessoaJuridica.created,
-			// 	modified: 	objPessoaJuridica.modified
-			// });
-			ref.$add({
-				name: 		objPessoaJuridica.name,
-				shortname: 	objPessoaJuridica.shortname,
-				cnpj: 		objPessoaJuridica.cnpj,
-				cnae: 		objPessoaJuridica.cnae,
-				phone: 		objPessoaJuridica.phone,
-				cel: 		objPessoaJuridica.cel,
-				email: 		objPessoaJuridica.email,
-				status: 	objPessoaJuridica.status,
-				image: 		objPessoaJuridica.image,
-				cep: 		objPessoaJuridica.cep,
-				address: 	objPessoaJuridica.address,
-				number: 	objPessoaJuridica.number,
-				area: 		objPessoaJuridica.area,
-				complement: objPessoaJuridica.complemento,
-				city: 		objPessoaJuridica.city,
-				state: 		objPessoaJuridica.state,
-				password: 	objPessoaJuridica.password,
-				created: 	objPessoaJuridica.created,
-				modified: 	objPessoaJuridica.modified
-			});
+			empresas.$add(objPessoaJuridica);
 		},
 
 		readAll: function(){
-			return pessoaJuridicaList;
+			return empresas;
 		},
 
 		read: function(id){
-
+			return angular.copy(empresas[id]);
 		},
 
-		update: function(){
-
+		update: function(id){
+			empresas.$save(id);
 		},
 
-		delete: function(){
-
+		delete: function(id){
+			empresas.$remove(id);
 		}
 	}
 });

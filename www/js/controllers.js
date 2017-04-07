@@ -148,6 +148,46 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 		}
 	};
 
+	var jsonpUrl = "js/ajax/estados_cidades.json";
+	$http.get(jsonpUrl)
+	.then(
+		function (resposta){
+			console.log(resposta['data']);
+			var items = [];
+		    var options = '<option value="">escolha um estado</option>';  
+
+		    $.each(resposta['data'], function (key, val) {
+		      options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+		    });         
+		    $("#txtEstado").html(options);        
+		    
+		    $("#txtEstado").change(function () {        
+		    
+		      var options_cidades = '';
+		      var str = "";         
+		      
+		      $("#txtEstado option:selected").each(function () {
+		        str += $(this).text();
+		      });
+		      
+		      $.each(resposta['data'], function (key, val) {
+		        if(val.nome == str) {             
+		          $.each(val.cidades, function (key_city, val_city) {
+		            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+		          });             
+		        }
+		      });
+
+		      $("#txtCidade").html(options_cidades);
+		      
+		    }).change(); 
+		},
+		function (error){
+			console.log(error);
+		}
+
+	);
+
 	$scope.pessoaJuridica = {
 		nomeFantasia: "",
 		nome: "",

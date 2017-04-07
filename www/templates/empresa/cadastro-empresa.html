@@ -62,7 +62,7 @@
                 <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <!-- <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Estado</span>
                 <input id="txtEstado" type="text" placeholder="Estado" ng-model="pessoaJuridica.enderecoEstado"/>
             </label>
@@ -70,7 +70,13 @@
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Cidade</span>
                 <input id="txtCidade" type="text" placeholder="Cidade" ng-model="pessoaJuridica.enderecoCidade"/>
-            </label>
+            </label> -->
+
+            <span class="input-label">Estado</span>
+            <select id="txtEstado" ng-model="pessoaJuridica.enderecoEstado"></select>
+
+            <span class="input-label">Cidade</span>
+            <select id="txtCidade" ng-model="pessoaJuridica.enderecoCidade"></select>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Telefone</span>

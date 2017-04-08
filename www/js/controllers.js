@@ -120,7 +120,6 @@ app.controller("LoginCtrl", function($scope, $state){
 	};
 });
 
-
 app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup){
 	
 	/* Mask */

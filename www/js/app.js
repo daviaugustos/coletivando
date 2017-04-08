@@ -1,4 +1,4 @@
-var app = angular.module('coletivando', ['ionic', 'firebase'])
+var app = angular.module('coletivando', ['ionic', 'firebase', 'ionic.cloud'])
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

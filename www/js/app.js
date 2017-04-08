@@ -145,7 +145,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
   $stateProvider.state('editar-empresa', {
     url: '/editar-empresa/:id',
     templateUrl: 'templates/empresa/editar-empresa.html',
-    controller: 'UsuarioJuridicoCtrl'
+    controller: 'UsuarioJuridicoUpdateCtrl'
   });
 
   $stateProvider.state('minha-conta-fisica', {

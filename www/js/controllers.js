@@ -112,6 +112,10 @@ app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+
+	$scope.showUpdate = function(id){
+		$state.go('editar-empresa', {id: id})
+	}
 });
 
 app.controller("LoginCtrl", function($scope, $state){
@@ -305,20 +309,23 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 		dataCriacao: new Date().toISOString(),
 		ultimaModificacao: new Date().toISOString(),
 	}
-
 	$scope.create = function(pessoaJuridica){
 		EmpresaCadastroService.create(pessoaJuridica);
 		$ionicHistory.goBack(-1);
 	}
+});
 
-	$scope.pessoaJuridica = EmpresaCadastroService.read('-Kh8VFiB1xCah84OrUHQ');
+app.controller('UsuarioJuridicoUpdateCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup, $stateParams){
+	
+	var id = $stateParams.id;
+	//$scope.pessoaJuridica = EmpresaCadastroService.read(id);
 
     $scope.update = function(pessoaJuridica){
 		EmpresaCadastroService.update(pessoaJuridica);
         $ionicHistory.goBack(-1);
     }
-	
 });
+
 
 app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){
 	$scope.goBackHandler = function(){

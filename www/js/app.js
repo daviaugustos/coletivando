@@ -1,4 +1,4 @@
-var app = angular.module('coletivando', ['ionic', 'firebase'])
+var app = angular.module('coletivando', ['ionic', 'firebase', 'ionic.cloud'])
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,8 +18,9 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider, $ionicCloudProvider) {
 
+  //-----------------------------------------------------FIREBASE CONFIGS--------------------------------------------------
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAASmm1a3uZxkOpsDdQAkQ2o-NmEi4Z3s8",
@@ -48,8 +49,18 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     "location": "Rio Preto"
   });*/
 
+   //---------------------------------------------------CONFIGURAÇÕES DO IONIC CLOUD--------------------------------------
+
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "921ad049"
+    }
+  });
+
+ //-----------------------------------------------------OUTRAS CONFIGURAÇÕES----------------------------------------------
   $ionicConfigProvider.tabs.position('bottom');
 
+   //---------------------------------------------------CONFIGURAÇÕES DE ESTADOS------------------------------------------
   $stateProvider.state('tabNavegacao', {
     url: '/tabNavegacao',
     abstract: true,

@@ -41,14 +41,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
   const db = firebase.database();
   const pessoaJuridica = db.ref().child('pessoaJuridica');
 
-  /*const primaryKey = "pessoaJuridica_one";
-
-  pessoaJuridica.child(primaryKey).set({
-    "firstName": "Marcos",
-    "lastName": "Moraes",
-    "location": "Rio Preto"
-  });*/
-
    //---------------------------------------------------CONFIGURAÇÕES DO IONIC CLOUD--------------------------------------
 
   $ionicCloudProvider.init({

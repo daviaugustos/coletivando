@@ -294,6 +294,9 @@ app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth){
 		},
 
 		read: function(id){
+			console.log('id que chegou: '+id);
+			
+			console.log('posição na array: '+empresas.$indexFor(id));
 			return empresas[empresas.$indexFor(id)];
 		},
 

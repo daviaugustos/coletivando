@@ -317,14 +317,16 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 app.controller('UsuarioJuridicoUpdateCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup, $stateParams){
 	
 	var id = $stateParams.id;
+	var empresas;
+	empresas = EmpresaCadastroService.readAll();
+
 	$scope.pessoaJuridica = EmpresaCadastroService.read(id);
 
     $scope.update = function(pessoaJuridica){
-		//EmpresaCadastroService.update(pessoaJuridica);
+		EmpresaCadastroService.update(pessoaJuridica);
         $ionicHistory.goBack(-1);
     }
 });
-
 
 app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){
 	$scope.goBackHandler = function(){

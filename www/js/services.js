@@ -290,14 +290,18 @@ app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth){
 		},
 
 		readAll: function(){
-			return empresas;
+			empresas.$loaded().then(function(){
+				return empresas;
+			});
 		},
 
 		read: function(id){
-			console.log('id que chegou: '+id);
-			
-			console.log('posição na array: '+empresas.$indexFor(id));
-			return empresas[empresas.$indexFor(id)];
+			empresas.$loaded().then(function(){
+				console.log('id que chegou: '+id);
+				console.log('posição na array: '+empresas.$indexFor(id));
+				console.log('objeto lido: '+empresas[empresas.$indexFor(id)]);
+				return empresas[empresas.$indexFor(id)];
+			});
 		},
 
 		update: function(objPessoaJuridica){
@@ -306,7 +310,9 @@ app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth){
 		},
 
 		delete: function(id){
-			empresas.$remove(empresas.$indexFor(id));
+			empresas.$loaded().then(function(){
+				empresas.$remove(empresas.$indexFor(id));
+			});
 		}
 	}
 });

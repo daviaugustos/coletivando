@@ -315,13 +315,10 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 });
 
 app.controller('UsuarioJuridicoUpdateCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup, $stateParams){
-	
 	var id = $stateParams.id;
-	var empresas;
-	empresas = EmpresaCadastroService.readAll();
 
 	$scope.pessoaJuridica = EmpresaCadastroService.read(id);
-
+	console.log("oi "+$scope.pessoaJuridica);
     $scope.update = function(pessoaJuridica){
 		EmpresaCadastroService.update(pessoaJuridica);
         $ionicHistory.goBack(-1);

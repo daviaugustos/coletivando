@@ -271,7 +271,7 @@ app.factory('EmpresaPerfilService', function(){
 
 });
 
-app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth){
+app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth, $q){
 
 	//Pega ref até o nó de "keys"
 	var ref = firebase.database().ref().child('pessoaJuridica');
@@ -296,12 +296,17 @@ app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth){
 		},
 
 		read: function(id){
+			var defer = $q.defer();
 			empresas.$loaded().then(function(){
 				console.log('id que chegou: '+id);
 				console.log('posição na array: '+empresas.$indexFor(id));
 				console.log('objeto lido: '+empresas[empresas.$indexFor(id)]);
-				return empresas[empresas.$indexFor(id)];
+				var resp = empresas[empresas.$indexFor(id)];
+				
+				defer.resolve(resp);
 			});
+
+			return defer.promise;
 		},
 
 		update: function(objPessoaJuridica){

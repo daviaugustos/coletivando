@@ -754,6 +754,25 @@ input {
 	padding-bottom: 10px;
 }
 
+/* View - Editar User */
+.editar-user{
+	padding-top: 40px;
+}
+
+.editar-user h2{
+	color: #6f6f6f;
+}
+
+.editar-user input{
+	border-bottom: 1px solid;
+    border-color: #e0e0e0;
+	color: #8e8e8e;
+}
+
+.editar-user ion-item{
+	border: 0;
+}
+
 
 
 

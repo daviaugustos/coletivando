@@ -1,0 +1,43 @@
+<ion-view>
+   <ion-nav-bar class="roxo"> 
+        <ion-nav-buttons side="left"> 
+            <button ng-click="goBackHandler()" class="button button-icon"> 
+                <i class="icon ion-android-close"></i> 
+            </button> 
+        </ion-nav-buttons> 
+
+        <ion-nav-buttons side="right"> 
+            <button ng-click="update(pessoaFisica)" class="button button-icon"> 
+                SALVAR 
+            </button> 
+        </ion-nav-buttons> 
+    </ion-nav-bar>
+    
+    <form class="editar-user">
+        <ion-list>
+            <ion-item>
+                <h2>Nome</h2>
+                <input type="text" ng-model="pessoaFisica.name"/>
+            </ion-item>
+            <ion-item>
+                <h2>Email</h2>
+                <input type="email" ng-model="pessoaFisica.email"/>
+            </ion-item>
+            <ion-item>
+                <h2>Telefone</h2>
+                <input type="text" ng-model="pessoaFisica.telefone"/>
+            </ion-item>
+            <ion-item>
+                <h2>Endereço</h2>
+                <span ng-if="pessoaFisica.rua == ''">
+                    Adicionar
+                </span>
+                <span ng-if="pessoaFisica.rua != ''">
+                    {{pessoaFisica.rua}}, {{pessoaFisica.numero}}
+                </span>
+            </ion-item>
+        </ion-list>
+    </form>
+   
+
+</ion-view>

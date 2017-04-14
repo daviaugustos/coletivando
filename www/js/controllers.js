@@ -1,23 +1,23 @@
 app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHistory) {
-	var listaOfertasDados = OfertaService.readAll();
-	var listaOfertasProcessadas = [];
+	// var listaOfertasDados = OfertaService.readAll();
+	// var listaOfertasProcessadas = [];
 
-	listaOfertasDados.forEach(function(ofertaSalva){
-		var valorDescontoAplicado = ofertaSalva.valorUnitario - (ofertaSalva.valorUnitario * (ofertaSalva.desconto / 100));
+	// listaOfertasDados.forEach(function(ofertaSalva){
+	// 	var valorDescontoAplicado = ofertaSalva.valorUnitario - (ofertaSalva.valorUnitario * (ofertaSalva.desconto / 100));
 		
-		var ofertaView = {
-			id: ofertaSalva.id,
-			titulo: ofertaSalva.descricao,
-			enderecoImagem: ofertaSalva.enderecoImagem,
-			valorUnitario: ofertaSalva.valorUnitario,
-			valorPromocional: valorDescontoAplicado,
-			dataLimite: ofertaSalva.dataLimite,
-			desconto: ofertaSalva.desconto
-		}
-		listaOfertasProcessadas.push(ofertaView);
-	});
+	// 	var ofertaView = {
+	// 		id: ofertaSalva.id,
+	// 		titulo: ofertaSalva.descricao,
+	// 		enderecoImagem: ofertaSalva.enderecoImagem,
+	// 		valorUnitario: ofertaSalva.valorUnitario,
+	// 		valorPromocional: valorDescontoAplicado,
+	// 		dataLimite: ofertaSalva.dataLimite,
+	// 		desconto: ofertaSalva.desconto
+	// 	}
+	// 	listaOfertasProcessadas.push(ofertaView);
+	// });
 
-	$scope.listaOfertas = listaOfertasProcessadas;
+	// $scope.listaOfertas = listaOfertasProcessadas;
 	
 	$scope.showPesquisa = function(){
 		$state.go('pesquisar');
@@ -26,6 +26,10 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+
+	
+
+
 });
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
@@ -347,6 +351,8 @@ app.controller('UsuarioFisicoCtrl', function($firebaseArray, $scope, $ionicHisto
 		enderecoCidade: "",
 		celular: "",
 		status: 1,
+		dataCriacao: new Date().toISOString(),
+		ultimaModificacao: new Date().toISOString(),
 	}
 
 	$scope.create = function(pessoaFisica){

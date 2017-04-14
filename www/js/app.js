@@ -112,7 +112,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
 
   $stateProvider.state('editar-user', {
     url: '/editar-user/:id',
-    templateUrl: 'templates/empresa/editar-user.html',
+    templateUrl: 'templates/usuarios/editar-user.html',
     controller: 'UsuarioFisicoUpdateCtrl'
   });
   
@@ -142,7 +142,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     controller: 'UsuarioJuridicoCtrl'
   });
 
-  /*VOLTAR ISSO AO NORMAL - TESTE*/
   $stateProvider.state('editar-empresa', {
     url: '/editar-empresa/:id',
     templateUrl: 'templates/empresa/editar-empresa.html',

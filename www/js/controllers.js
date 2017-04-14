@@ -333,8 +333,43 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $h
     }
 });
 
-app.controller('UsuarioFisicoCtrl', function($scope, $ionicHistory){
+app.controller('UsuarioFisicoCtrl', function($firebaseArray, $scope, $ionicHistory){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+	$scope.pessoaFisica = {
+		name: "",
+		email: "",
+		enderecoCep: "",
+		enderecoRua: "",
+		enderecoNumero: "",
+		enderecoEstado: "",
+		enderecoCidade: "",
+		celular: "",
+		status: 1,
+	}
+
+	$scope.create = function(pessoaFisica){
+		var ref = firebase.database().ref('pessoaFisica');
+		var usuarios = $firebaseArray(ref);
+		
+		//*Aqui vai o código do ionicAuth
+		
+		usuarios.$add(pessoaFisica);
+
+		$ionicHistory.goBack(-1);
+	}
+});
+
+app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+	var id = $stateParams.id;
+    var ref = firebase.database().ref('pessoaFisica/'+id);
+    $scope.pessoaFisica = $firebaseObject(ref);
+
+    $scope.update = function(pessoaFisica){
+		ref = pessoaFisica;
+		ref.$save();
+
+        $ionicHistory.goBack(-1);
+    }
 });

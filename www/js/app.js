@@ -109,6 +109,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
       }
     }
   });
+
+  $stateProvider.state('editar-user', {
+    url: '/editar-user/:id',
+    templateUrl: 'templates/empresa/editar-user.html',
+    controller: 'UsuarioFisicoUpdateCtrl'
+  });
   
   $stateProvider.state('cadastro-empresa', {
     url: '/cadastro-empresa',

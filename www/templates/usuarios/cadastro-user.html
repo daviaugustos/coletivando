@@ -8,24 +8,24 @@
         </ion-nav-buttons> 
     </ion-nav-bar>
 
-    <form class="cadastro-form">
+    <form ng-submit="create(pessoaFisica)" class="cadastro-form">
 
         <ion-list>
             <h2 class="text-center">Cadastre-se</h2>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome</span>
-                <input type="text" placeholder="Nome" ng-model="usuario.nome"/>
+                <input type="text" placeholder="Nome" ng-model="pessoaFisica.name"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="Email" ng-model="usuario.email"/>
+                <input type="email" placeholder="Email" ng-model="pessoaFisica.email"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
-                <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
+                <input type="password" placeholder="Senha" ng-model="pessoaFisica.password"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">

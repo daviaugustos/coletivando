@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHistory) {
+app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
 	// var listaOfertasDados = OfertaService.readAll();
 	// var listaOfertasProcessadas = [];
 
@@ -18,6 +18,22 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 	// });
 
 	// $scope.listaOfertas = listaOfertasProcessadas;
+
+	$scope.criarOferta = {
+		nome: "",
+		dataLimite: "",
+		valorProduto: "",
+		valorComDesconto: "",
+		qtdMinimaComprador: "",
+		descricao: "",
+	}
+	$scope.create = function(criarOferta){
+		var ref = firebase.database().ref('criarOferta');
+		var ofertas = $firebaseArray(ref);
+		
+		//*Aqui vai o código do ionicAuth
+		
+		ofertas.$add(criarOferta);
 	
 	$scope.showPesquisa = function(){
 		$state.go('pesquisar');
@@ -27,7 +43,7 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 		$ionicHistory.goBack(-1);
 	}
 
-	
+	}
 
 
 });

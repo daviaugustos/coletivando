@@ -27,7 +27,7 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 		$ionicHistory.goBack(-1);
 	}
 
-	
+
 
 
 });
@@ -367,7 +367,7 @@ app.controller('UsuarioFisicoCtrl', function($firebaseArray, $scope, $ionicHisto
 	}
 });
 
-app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	var id = $stateParams.id;
     var ref = firebase.database().ref('pessoaFisica/'+id);
     $scope.pessoaFisica = $firebaseObject(ref);
@@ -378,4 +378,29 @@ app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $scope, $htt
 
         $ionicHistory.goBack(-1);
     }
+
+	$scope.showEndereco = function(id){
+		$state.go('editar-user-endereco', {id: id})
+	}
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+});
+
+app.controller('UsuarioFisicoUpdateEnderecoCtrl', function($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+	var id = $stateParams.id;
+    var ref = firebase.database().ref('pessoaFisica/'+id);
+    $scope.pessoaFisica = $firebaseObject(ref);
+
+    $scope.update = function(pessoaFisica){
+		ref = pessoaFisica;
+		ref.$save();
+
+        $ionicHistory.goBack(-1);
+    }
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });

@@ -13,31 +13,38 @@
         </ion-nav-buttons> 
     </ion-nav-bar>
     
-    <form class="editar-user">
-        <ion-list>
-            <ion-item>
-                <h2>Nome</h2>
-                <input type="text" ng-model="pessoaFisica.name"/>
-            </ion-item>
-            <ion-item>
-                <h2>Email</h2>
-                <input type="email" ng-model="pessoaFisica.email"/>
-            </ion-item>
-            <ion-item>
-                <h2>Telefone</h2>
-                <input type="text" ng-model="pessoaFisica.telefone"/>
-            </ion-item>
-            <ion-item>
-                <h2>Endereço</h2>
-                <span ng-if="pessoaFisica.rua == ''">
-                    Adicionar
-                </span>
-                <span ng-if="pessoaFisica.rua != ''">
-                    {{pessoaFisica.rua}}, {{pessoaFisica.numero}}
-                </span>
-            </ion-item>
-        </ion-list>
-    </form>
-   
+    <ion-content>
+        <form class="editar-user">
+            <ion-list>
+
+                <ion-item>
+                    <h2>Nome</h2>
+                    <input type="text" ng-model="pessoaFisica.name"/>
+                </ion-item>
+
+                <ion-item>
+                    <h2>Email</h2>
+                    <input type="email" ng-model="pessoaFisica.email"/>
+                </ion-item>
+
+                <ion-item>
+                    <h2>Telefone</h2>
+                    <input type="text" ng-model="pessoaFisica.telefone"/>
+                </ion-item>
+
+                <ion-item ng-click="showEndereco(pessoaFisica.$id)">
+                    <h2 class="padding-bot">Endereço</h2>
+                    <button ng-if="pessoaFisica.enderecoRua == null || pessoaFisica.enderecoRua == ''" class="button button-clear">
+                        <i class="icon ion-android-add"></i> </i>
+                        Adicionar
+                    </button>
+                    <span ng-if="pessoaFisica.enderecoRua != null && pessoaFisica.enderecoRua != ''">
+                        {{pessoaFisica.enderecoRua}}, {{pessoaFisica.enderecoNumero}}
+                    </span>
+                </ion-item>
+
+            </ion-list>
+        </form>
+    </ion-content>
 
 </ion-view>

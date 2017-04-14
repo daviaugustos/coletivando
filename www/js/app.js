@@ -115,6 +115,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     templateUrl: 'templates/usuarios/editar-user.html',
     controller: 'UsuarioFisicoUpdateCtrl'
   });
+
+  $stateProvider.state('editar-user-endereco', {
+    url: '/editar-user-endereco/:id',
+    templateUrl: 'templates/usuarios/editar-user-endereco.html',
+    controller: 'UsuarioFisicoUpdateEnderecoCtrl'
+  });
   
   $stateProvider.state('cadastro-empresa', {
     url: '/cadastro-empresa',

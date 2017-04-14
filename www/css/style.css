@@ -55,6 +55,10 @@ span.input-label{
 	margin-top: 40px;
 }
 
+.padding-bot{
+	padding-bottom: 10px;
+}
+
 .button{
 	border-radius: 0;
 }
@@ -755,10 +759,6 @@ input {
 }
 
 /* View - Editar User */
-.editar-user{
-	padding-top: 40px;
-}
-
 .editar-user h2{
 	color: #6f6f6f;
 }
@@ -769,8 +769,30 @@ input {
 	color: #8e8e8e;
 }
 
+.editar-user span{
+	color: #8e8e8e;
+}
+
 .editar-user ion-item{
 	border: 0;
+}
+
+.editar-user .button{
+	text-align: left;
+	color: #808080;
+}
+
+.editar-user {
+	padding-top: 15px;
+}
+
+/*View - Editar User - Endereço*/
+.editar-user.endereco .col, .editar-user.endereco .row{
+	padding: 0;
+}
+
+.editar-user.endereco .col-20 .item{
+	padding: 16px 12px;
 }
 
 

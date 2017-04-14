@@ -46,6 +46,23 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 
 });
 
+
+app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+	var id = $stateParams.id;
+    var ref = firebase.database().ref('criarOferta/'+id);
+    $scope.criarOferta = $firebaseObject(ref);
+
+    $scope.update = function(criarOferta){
+		ref = criarOferta;
+		ref.$save();
+	}
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+});
+
+
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();
 	

@@ -124,7 +124,7 @@ app.controller("LoginCtrl", function($scope, $state){
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup){
+app.controller('UsuarioJuridicoCtrl', function($firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
 	
 	/* Mask */
 	$('.date').mask('00/00/0000');
@@ -309,20 +309,26 @@ app.controller('UsuarioJuridicoCtrl', function($scope, $http, $ionicHistory, Emp
 		ultimaModificacao: new Date().toISOString(),
 	}
 	$scope.create = function(pessoaJuridica){
-		EmpresaCadastroService.create(pessoaJuridica);
+		var ref = firebase.database().ref('pessoaJuridica');
+		var empresas = $firebaseArray(ref);
+		
+		//*Aqui vai o código do ionicAuth
+		
+		empresas.$add(pessoaJuridica);
+
 		$ionicHistory.goBack(-1);
 	}
 });
 
-app.controller('UsuarioJuridicoUpdateCtrl', function($scope, $http, $ionicHistory, EmpresaCadastroService, $ionicPopup, $stateParams){
+app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	var id = $stateParams.id;
-
-	EmpresaCadastroService.read(id).then(function(dados) {
-		$scope.pessoaJuridica = dados;
-	})
+    var ref = firebase.database().ref('pessoaJuridica/'+id);
+    $scope.pessoaJuridica = $firebaseObject(ref);
 
     $scope.update = function(pessoaJuridica){
-		EmpresaCadastroService.update(pessoaJuridica);
+		ref = pessoaJuridica;
+		ref.$save();
+
         $ionicHistory.goBack(-1);
     }
 });

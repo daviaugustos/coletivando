@@ -32,16 +32,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
   };
   firebase.initializeApp(config);
 
-  //teste registrar rotas constantes para utilizar no app
-  $firebaseRefProvider.registerUrl({
-    url:            config.databaseURL,
-    pessoaJuridica: config.databaseURL + '/pessoaJuridica'
-  });
-
-  const db = firebase.database();
-  const pessoaJuridica = db.ref().child('pessoaJuridica');
-
-   //---------------------------------------------------CONFIGURAÇÕES DO IONIC CLOUD--------------------------------------
+  //---------------------------------------------------CONFIGURAÇÕES DO IONIC CLOUD--------------------------------------
 
   $ionicCloudProvider.init({
     "core": {
@@ -49,10 +40,10 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     }
   });
 
- //-----------------------------------------------------OUTRAS CONFIGURAÇÕES----------------------------------------------
+  //-----------------------------------------------------OUTRAS CONFIGURAÇÕES----------------------------------------------
   $ionicConfigProvider.tabs.position('bottom');
 
-   //---------------------------------------------------CONFIGURAÇÕES DE ESTADOS------------------------------------------
+  //---------------------------------------------------CONFIGURAÇÕES DE ESTADOS------------------------------------------
   $stateProvider.state('tabNavegacao', {
     url: '/tabNavegacao',
     abstract: true,

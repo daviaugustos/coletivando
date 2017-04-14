@@ -271,7 +271,7 @@ app.factory('EmpresaPerfilService', function(){
 
 });
 
-//service para ser deletado
+//service para ser deletado ---------------------------------------------------
 app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth, $q){
 
 	//Pega ref até o nó de "keys"
@@ -322,3 +322,4 @@ app.factory('EmpresaCadastroService', function($firebaseArray, $ionicAuth, $q){
 		}
 	}
 });
+//service para ser deletado ---------------------------------------------------

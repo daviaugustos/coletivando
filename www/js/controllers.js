@@ -159,7 +159,7 @@ app.controller("LoginCtrl", function($scope, $state){
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('UsuarioJuridicoCtrl', function($ionicAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
 	
 	/* Mask */
 	$('.date').mask('00/00/0000');
@@ -347,11 +347,16 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseArray, $scope, $http, $i
 		var ref = firebase.database().ref('pessoaJuridica');
 		var empresas = $firebaseArray(ref);
 		
-		//*Aqui vai o código do ionicAuth
+		var pessoaJuridicaIC = {
+			name: pessoaJuridica.nome,
+			email: pessoaJuridica.email,
+			password: pessoaJuridica.senha
+		}
 		
-		empresas.$add(pessoaJuridica);
-
-		$ionicHistory.goBack(-1);
+		$ionicAuth.signup(pessoaJuridicaIC).then(function(){
+			empresas.$add(pessoaJuridica);
+			$ionicHistory.goBack(-1);
+		});
 	}
 });
 
@@ -368,13 +373,14 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $h
     }
 });
 
-app.controller('UsuarioFisicoCtrl', function($firebaseArray, $scope, $ionicHistory){
+app.controller('UsuarioFisicoCtrl', function($ionicAuth, $firebaseArray, $scope, $ionicHistory){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
 	$scope.pessoaFisica = {
-		name: "",
+		nome: "",
 		email: "",
+		senha: "",
 		enderecoCep: "",
 		enderecoRua: "",
 		enderecoNumero: "",
@@ -390,11 +396,16 @@ app.controller('UsuarioFisicoCtrl', function($firebaseArray, $scope, $ionicHisto
 		var ref = firebase.database().ref('pessoaFisica');
 		var usuarios = $firebaseArray(ref);
 		
-		//*Aqui vai o código do ionicAuth
+		var pessoaFisicaIC = {
+			name: pessoaFisica.nome,
+			email: pessoaFisica.email,
+			password: pessoaFisica.senha
+		}
 		
-		usuarios.$add(pessoaFisica);
-
-		$ionicHistory.goBack(-1);
+		$ionicAuth.signup(pessoaFisicaIC).then(function(){
+			usuarios.$add(pessoaFisica);
+			$ionicHistory.goBack(-1);
+		});
 	}
 });
 

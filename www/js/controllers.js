@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
+app.controller('OfertaCtrl', function($scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
 	// var listaOfertasDados = OfertaService.readAll();
 	// var listaOfertasProcessadas = [];
 
@@ -19,43 +19,55 @@ app.controller('OfertaCtrl', function($scope, OfertaService, $state, $ionicHisto
 
 	// $scope.listaOfertas = listaOfertasProcessadas;
 
-	$scope.criarOferta = {
-		nome: "",
+	$scope.oferta = {
+		pessoaJuridicaId: "-Kh9xTcjGD5aZWfY32yk",
+		produto: "",
 		dataLimite: "",
-		valorProduto: "",
-		valorComDesconto: "",
-		qtdMinimaComprador: "",
+		precoInicialUn: "",
+		desconto: "",
+		qtdPessoas: "",
 		descricao: "",
+		enderecoImagem: "img/home/iphone2.jpg",
+		precoFinalUn: "",
+		status: "AGUARDANDO"
 	}
-	$scope.create = function(criarOferta){
-		var ref = firebase.database().ref('criarOferta');
+
+	$scope.create = function(oferta){
+		var ref = firebase.database().ref('ofertas');
 		var ofertas = $firebaseArray(ref);
 		
-		//*Aqui vai o código do ionicAuth
-		
-		ofertas.$add(criarOferta);
-	
+		ofertas.$add(oferta);
+	};
+
 	$scope.showPesquisa = function(){
 		$state.go('pesquisar');
 	};
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
-	}
-}
+	};
 
 });
 
 
 app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	var id = $stateParams.id;
-    var ref = firebase.database().ref('criarOferta/'+id);
-    $scope.criarOferta = $firebaseObject(ref);
+    var ref = firebase.database().ref('ofertas/'+id);
+    $scope.oferta = $firebaseObject(ref);
 
-    $scope.update = function(criarOferta){
-		ref = criarOferta;
+    $scope.update = function(oferta){
+		ref = oferta;
 		ref.$save();
 	}
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+});
+
+app.controller('OfertaListaCtrl', function($firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+    var ref = firebase.database().ref('ofertas');
+    $scope.ofertas = $firebaseArray(ref);
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);

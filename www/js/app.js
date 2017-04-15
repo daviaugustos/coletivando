@@ -55,7 +55,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     views: {
       'home-tab' : {
         templateUrl: 'templates/ofertas/oferta-lista.html',
-        controller: 'OfertaCtrl'
+        controller: 'OfertaListaCtrl'
       }
     }
   });

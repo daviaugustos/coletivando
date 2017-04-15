@@ -26,18 +26,18 @@
         </ion-scroll>
 
         <ion-list>
-            <ion-item ng-repeat="ofertaView in listaOfertas" class="card">
+            <ion-item ng-repeat="oferta in ofertas | filter:{ status: 'APROVADO' }" class="card">
                 
-                <img src="{{ofertaView.enderecoImagem}}" class="bg-card" />
+                <img src="{{oferta.enderecoImagem}}" class="bg-card" />
                 
                 <div class="info-card-home" ui-sref="visualizar-oferta">
                     <div class="row">
                         <div class="col col-50 left">
-                            <h2>{{ofertaView.titulo}}</h2>
+                            <h2>{{oferta.produto}}</h2>
                         </div>
                         <div class="col col-50 right">
-                            <p class="price">{{ofertaView.valorPromocional | currency: "R$ "}}</p>
-                            <p class="price-old">{{ofertaView.valorUnitario | currency: "R$ "}}</p>
+                            <p class="price">{{oferta.precoFinalUn | currency: "R$ "}}</p>
+                            <p class="price-old">{{oferta.precoInicialUn | currency: "R$ "}}</p>
                         </div>
                     </div>
 
@@ -51,7 +51,7 @@
                             <p>36% completo</p>
                         </div>
                         <div class="col col-50 right">
-                            <p>{{ofertaView.desconto}}% desconto</p>
+                            <p>{{oferta.desconto}}% desconto</p>
                         </div>
                     </div>
                 </div>

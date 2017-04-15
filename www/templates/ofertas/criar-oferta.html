@@ -1,50 +1,55 @@
 <ion-view  id="cadastro-empresa" title="">
 
-	<ion-nav-bar class="green"><ion-nav-back-button></ion-nav-back-button></ion-nav-bar>
-
+	<ion-nav-bar class="green back">
+        <ion-nav-buttons side="left">
+            <button ng-click="" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
 
     <form class="cadastro-form">
 
-<ion-content style="padding:50px">
+<ion-content style="padding:40px">
 
         <ion-list>
 
             <h2 class="h2"> Crie sua oferta </h2>
 
             <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Nome</span>
-                <input type="text" placeholder="Nome" ng-model="criarOferta.nome"/>
+                <span class="input-label">Produto</span>
+                <input type="text" placeholder="Produto" ng-model="oferta.produto"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Data limite</span>
-                <input type="text" placeholder="Data limite" ng-model="criarOferta.dataLimite"/>
+                <input type="text" placeholder="Data limite" ng-model="oferta.dataLimite"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Valor do produto</span>
-                <input type="text" placeholder="Valor do produto" ng-model="criarOferta.valorProduto"/>
+                <span class="input-label">Preço Inicial</span>
+                <input type="text" placeholder="Preço inicial por unidade" ng-model="oferta.precoInicialUn"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Valor com desconto</span>
-                <input type="text" placeholder="Valor com desconto(%)" ng-model="criarOferta.valorDesconto"/>
+                <span class="input-label">Desconto(%)</span>
+                <input type="text" placeholder="Desconto por unidade (%)" ng-model="oferta.desconto"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Qtd mínima de comprador</span>
-                <input type="text" placeholder="Qtd mínima de comprador" ng-model="criarOferta.qtdCompradores"/>
+                <span class="input-label">Qtd Pessoas</span>
+                <input type="text" placeholder="Qtd Pessoas" ng-model="oferta.qtdPessoas"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Descrição</span>
-                <input type="text" placeholder="Descrição" ng-model="criarOferta.descricao"/>
+                <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <div class="row">
+            <div class="row margin-top">
                 <div class="col"></div>
                 <div class="col col-80 center">
-                    <button class="button btn btn-green">Lançar projeto!</button>
+                    <button ng-click="create(oferta)" class="button btn btn-green">Enviar oferta</button>
                 </div>
                 <div class="col"></div>
             </div>

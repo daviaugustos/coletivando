@@ -49,7 +49,6 @@ app.controller('OfertaCtrl', function($scope, $state, $ionicHistory, $firebaseAr
 
 });
 
-
 app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	var id = $stateParams.id;
     var ref = firebase.database().ref('ofertas/'+id);
@@ -90,7 +89,7 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ioni
 	$scope.showPersonalizar = function(){
 		$state.go('tabNavegacao.explore.personalizar-categorias');
 	};
-
+	
 	$scope.trocaImagem = function(i){
 		var c = $scope.categorias[i];
 		var endereco = angular.copy(c.img);

@@ -355,19 +355,23 @@ app.controller('UsuarioJuridicoCtrl', function($ionicAuth, $firebaseArray, $scop
 		ultimaModificacao: new Date().toISOString(),
 	}
 	$scope.create = function(pessoaJuridica){
-		var ref = firebase.database().ref('pessoaJuridica');
-		var empresas = $firebaseArray(ref);
-		
-		var pessoaJuridicaIC = {
-			name: pessoaJuridica.nome,
-			email: pessoaJuridica.email,
-			password: pessoaJuridica.senha
+		if($('#txtSenha').val() == $('#txtConfirmSenha').val()) {
+			var ref = firebase.database().ref('pessoaJuridica');
+			var empresas = $firebaseArray(ref);
+			
+			var pessoaJuridicaIC = {
+				name: pessoaJuridica.nome,
+				email: pessoaJuridica.email,
+				password: pessoaJuridica.senha
+			}
+			
+			$ionicAuth.signup(pessoaJuridicaIC).then(function(){
+				empresas.$add(pessoaJuridica);
+				$ionicHistory.goBack(-1);
+			});
+		} else {
+			console.log('Senhas inválidas');
 		}
-		
-		$ionicAuth.signup(pessoaJuridicaIC).then(function(){
-			empresas.$add(pessoaJuridica);
-			$ionicHistory.goBack(-1);
-		});
 	}
 });
 

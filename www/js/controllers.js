@@ -54,7 +54,6 @@ app.controller('OfertaListaCtrl', function($firebaseArray, $scope, $http, $ionic
 	}
 });
 
-
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();
 	
@@ -145,13 +144,32 @@ app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
 	}
 });
 
-app.controller("LoginCtrl", function($scope, $state){
+app.controller("LoginCtrl", function($scope, $state, $firebaseAuth){
+
+	var firebaseUser = $firebaseAuth().$getAuth();
+	
+	//Se já estiver logado
+	if (firebaseUser) {
+        $state.go('tabNavegacao.home');
+    }
+
+	$scope.login = function(usuario){
+		$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
+			.then(function(firebaseUser){
+				console.log(firebaseUser.uid);
+				$state.go('tabNavegacao.home');
+			})
+			.catch(function(error){
+				console.log("Erro no login");
+			});
+	};
+	
 	$scope.showCadastros = function(){
 		$state.go("tabNavegacao.login.register-choose");
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($ionicAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup){
 	
 	/* Mask */
 	$('.date').mask('00/00/0000');
@@ -205,9 +223,8 @@ app.controller('UsuarioJuridicoCtrl', function($ionicAuth, $firebaseArray, $scop
 		}
 
 	});
+
 	/* /validate */
-
-
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
@@ -329,32 +346,37 @@ app.controller('UsuarioJuridicoCtrl', function($ionicAuth, $firebaseArray, $scop
 		telefone: "",
 		celular: "",
 		email: "",
-		senha: "",
 		imagem: "",
 		status: 1,
 		dataCriacao: new Date().toISOString(),
 		ultimaModificacao: new Date().toISOString(),
 	}
+	
 	$scope.create = function(pessoaJuridica){
+
 		if($('#txtSenha').val() == $('#txtConfirmSenha').val()) {
-			var ref = firebase.database().ref('pessoaJuridica');
-			var empresas = $firebaseArray(ref);
-			
-			var pessoaJuridicaIC = {
-				name: pessoaJuridica.nome,
-				email: pessoaJuridica.email,
-				password: pessoaJuridica.senha
-			}
-			
-			$ionicAuth.signup(pessoaJuridicaIC).then(function(){
-				empresas.$add(pessoaJuridica);
-				$ionicHistory.goBack(-1);
-			});
+			$firebaseAuth().$createUserWithEmailAndPassword(pessoaJuridica.email, pessoaJuridica.password)
+				.then(function(firebaseUser){
+					addPessoaJuridica(firebaseUser);
+				})
+				.catch(function(error){
+
+				});			
 		} else {
 			console.log('Senhas inválidas');
 		}
 	}
+
+	function addPessoaJuridica(firebaseUser){
+		var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);
+		var obj = $firebaseObject(ref);
+
+		obj = _.extend(obj, $scope.pessoaJuridica);
+		delete obj.password;
+		obj.$save();
+	}
 });
+
 
 app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	var id = $stateParams.id;
@@ -369,14 +391,13 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $h
     }
 });
 
-app.controller('UsuarioFisicoCtrl', function($ionicAuth, $firebaseArray, $scope, $ionicHistory){
+app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
 	$scope.pessoaFisica = {
 		nome: "",
 		email: "",
-		senha: "",
 		enderecoCep: "",
 		enderecoRua: "",
 		enderecoNumero: "",
@@ -389,19 +410,22 @@ app.controller('UsuarioFisicoCtrl', function($ionicAuth, $firebaseArray, $scope,
 	}
 
 	$scope.create = function(pessoaFisica){
-		var ref = firebase.database().ref('pessoaFisica');
-		var usuarios = $firebaseArray(ref);
-		
-		var pessoaFisicaIC = {
-			name: pessoaFisica.nome,
-			email: pessoaFisica.email,
-			password: pessoaFisica.senha
-		}
-		
-		$ionicAuth.signup(pessoaFisicaIC).then(function(){
-			usuarios.$add(pessoaFisica);
-			$ionicHistory.goBack(-1);
-		});
+		$firebaseAuth().$createUserWithEmailAndPassword(pessoaFisica.email, pessoaFisica.password)
+			.then(function(firebaseUser){
+				addPessoaFisica(firebaseUser);
+			})
+			.catch(function(error){
+
+			});
+	}
+
+	function addPessoaFisica(firebaseUser){
+		var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
+		var obj = $firebaseObject(ref);
+
+		obj = _.extend(obj, $scope.pessoaFisica);
+		delete obj.password;
+		obj.$save();
 	}
 });
 

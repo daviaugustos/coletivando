@@ -14,6 +14,12 @@ app.run(function($ionicPlatform) {
 
 app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider, $ionicCloudProvider) {
 
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "921ad049"
+    }
+  });
+ 
   // Firebase
   var config = {
     apiKey: "AIzaSyAASmm1a3uZxkOpsDdQAkQ2o-NmEi4Z3s8",

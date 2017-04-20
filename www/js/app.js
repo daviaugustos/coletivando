@@ -25,13 +25,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
   };
   firebase.initializeApp(config);
 
-  // Ionic Cloud
-  $ionicCloudProvider.init({
-    "core": {
-      "app_id": "921ad049"
-    }
-  });
-
   // States
   $ionicConfigProvider.tabs.position('bottom');
 

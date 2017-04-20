@@ -1,24 +1,5 @@
 app.controller('OfertaCtrl', function($scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
-	// var listaOfertasDados = OfertaService.readAll();
-	// var listaOfertasProcessadas = [];
-
-	// listaOfertasDados.forEach(function(ofertaSalva){
-	// 	var valorDescontoAplicado = ofertaSalva.valorUnitario - (ofertaSalva.valorUnitario * (ofertaSalva.desconto / 100));
-		
-	// 	var ofertaView = {
-	// 		id: ofertaSalva.id,
-	// 		titulo: ofertaSalva.descricao,
-	// 		enderecoImagem: ofertaSalva.enderecoImagem,
-	// 		valorUnitario: ofertaSalva.valorUnitario,
-	// 		valorPromocional: valorDescontoAplicado,
-	// 		dataLimite: ofertaSalva.dataLimite,
-	// 		desconto: ofertaSalva.desconto
-	// 	}
-	// 	listaOfertasProcessadas.push(ofertaView);
-	// });
-
-	// $scope.listaOfertas = listaOfertasProcessadas;
-
+	
 	$scope.oferta = {
 		pessoaJuridicaId: "-Kh9xTcjGD5aZWfY32yk",
 		produto: "",

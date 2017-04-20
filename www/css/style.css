@@ -3,8 +3,8 @@
 ion-nav-bar.transp ion-header-bar{
 	background-color: rgba(0,0,0,0);
 	border: 0;
-	/*background-color: #333;*/
 }
+
 /*Seta branca para navbars transparentes*/
 ion-nav-bar.transp ion-header-bar i{
 	color: #fff;
@@ -37,9 +37,6 @@ ion-nav-bar button.button-icon{
 .tab-item.tab-item-active{
 	color: #72bba1;
 }
-
-
-
 
 /*Para navbars com seta de voltar*/
 ion-header-bar.back .title.title-center.header-item {
@@ -98,7 +95,6 @@ span.input-label{
 	color: #fff;
 }
 
-
 /*Text aligns*/
 .center{
 	text-align: center;
@@ -119,7 +115,6 @@ input[type="checkbox"]:not(:checked) {
 }
 
 input[type="checkbox"]:checked {
-	/*-webkit-appearance: none;*/
 	background-color: #79C9AD;
 	border: #79C9AD 2px solid;
 	border-radius: 2px;
@@ -131,30 +126,11 @@ input[type="checkbox"]:checked {
 	border-bottom: #ddd 2px solid;
 }
 
-/* Tentativa de deixar o checkbox mais bonito
-input[type=checkbox]:after {
-    content: " ";
-    background-color: #79c9ad;
-    color: white;
-    display: inline-block;
-    visibility: visible;
-    width: 17px;
-    height: 17px;
-    font-size: 17px;
-}
-
-input[type=checkbox]:checked:after {
-    content: "\2714";
-}
-*/
-
 input {
 	width: 100%;
 }
 
-
 /*Login*/
-
 #login h2{
 	color: #848484;
 }
@@ -208,7 +184,6 @@ input {
 }
 
 /*Alterar Senha*/
-
 .navbar-alterar-senha {
 	background-color: #aa79b8;
 	color: white;
@@ -221,7 +196,6 @@ input {
 }
 
 /*View Explore*/
-
 #explore .colet-option h2{
 	color: #8D8D8D;
 	font-weight: 500;
@@ -270,7 +244,6 @@ input {
 }
 
 /* Personalizar categorias */
-
 #personalizar button.btn.btn-green{
 	position: absolute;
 	bottom: 0;
@@ -330,7 +303,6 @@ input {
 }
 
 /*View cadastro-empresa*/
-
 #cadastro-empresa .btn-green {
 	margin-top: 0px;
 }
@@ -359,7 +331,6 @@ input {
 }
 
 /*View cadastro-user*/
-
 .cadastro-form {
 	margin-top: 100px;
 	padding-left: 40px;
@@ -385,7 +356,6 @@ input {
 }
 
 /*View Home*/
-
 #home .list{
 	background-color: #f7f7f7;
 }
@@ -401,7 +371,6 @@ input {
 #home .bg-card{
 	display: block;
 	max-height: 56.62vw;
-	/*max-height: 200px;*/
 }
 
 #home ion-item{
@@ -521,33 +490,7 @@ input {
 	color: #fff;
 }
 
-
 /* Register Choose */
-
-
-/*
- .container {
-  position: relative;
-  overflow: hidden;
-  width: 180%;
-  
-}
- .square {
-  width: 65%;
-  height: 95vh;
-  background-color: #79c9ad;
-}
- .overlay {
-  width: 182%;
-  height: 82%;
-  background-color: #fff;
-  -webkit-transform: rotate(225deg);
-  -moz-transform: rotate(225deg);
-  -ms-transform: rotate(225deg);
-  transform: rotate(239deg);
-}
-*/
-
 .fonteh2{
 	color: #f2827e;
 	font-weight: 500;
@@ -572,8 +515,8 @@ input {
 	color: #f2827e;
 	}
 
-/*Pesquisar*/
 
+/*Pesquisar*/
 #pesquisar label.item-input-wrapper{
 	background-color: rgba(0,0,0,0);
 }
@@ -581,8 +524,6 @@ input {
 #pesquisar ion-content{
 	margin-top: 40px;
 }
-
-
 
 #pesquisar i::before{
 	font-size: 22px;
@@ -597,7 +538,6 @@ input {
 }
 
 /*Aderir oferta*/
-
 #aderir-oferta .card{
 	margin:0;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
@@ -639,10 +579,6 @@ input {
 	background-color: rgba(0,0,0,0);
 }
 
-/*#apoiadas ion-content{
-	margin-top: 90px;
-}*/
-
 #apoiadas i::before{
 	font-size: 22px;
 }
@@ -656,7 +592,6 @@ input {
 }
 
 /*perfil-empresa*/
-
 #perfil-empresa ion-content{
 	top:0;
 }
@@ -718,7 +653,6 @@ input {
 }
 
 /*Visualizar-Oferta*/
-
 #visualizar-oferta ion-content{
 	top:0;
 }

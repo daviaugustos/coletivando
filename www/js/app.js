@@ -3,13 +3,7 @@ var app = angular.module('coletivando', ['ionic', 'firebase', 'ionic.cloud'])
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }
     if(window.StatusBar) {
@@ -20,8 +14,7 @@ app.run(function($ionicPlatform) {
 
 app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider, $ionicCloudProvider) {
 
-  //-----------------------------------------------------FIREBASE CONFIGS--------------------------------------------------
-  // Initialize Firebase
+  // Firebase
   var config = {
     apiKey: "AIzaSyAASmm1a3uZxkOpsDdQAkQ2o-NmEi4Z3s8",
     authDomain: "coletivando-3e1e2.firebaseapp.com",
@@ -32,18 +25,16 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
   };
   firebase.initializeApp(config);
 
-  //---------------------------------------------------CONFIGURAÇÕES DO IONIC CLOUD--------------------------------------
-
+  // Ionic Cloud
   $ionicCloudProvider.init({
     "core": {
       "app_id": "921ad049"
     }
   });
 
-  //-----------------------------------------------------OUTRAS CONFIGURAÇÕES----------------------------------------------
+  // States
   $ionicConfigProvider.tabs.position('bottom');
 
-  //---------------------------------------------------CONFIGURAÇÕES DE ESTADOS------------------------------------------
   $stateProvider.state('tabNavegacao', {
     url: '/tabNavegacao',
     abstract: true,
@@ -189,18 +180,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $f
     templateUrl: 'templates/ofertas/ofertas-apoiadas.html',
     controller: 'OfertasApoiadasCtrl'
   });
-
-  // $stateProvider.state('ofertas-apoiadas-realizadas', {
-  //   url: '/ofertas-apoiadas-realizadas',
-  //   templateUrl: 'templates/ofertas/ofertas-apoiadas-realizadas.html',
-  //   controller: 'OfertasApoiadasCtrl'
-  // });
-
-  // $stateProvider.state('ofertas-apoiadas-incompletas', {
-  //   url: '/ofertas-apoiadas-incompletas',
-  //   templateUrl: 'templates/ofertas/ofertas-apoiadas-incompletas.html',
-  //   controller: 'OfertasApoiadasCtrl'
-  // });
 
   $stateProvider.state('perfil-empresa', {
     url: '/perfil-empresa',

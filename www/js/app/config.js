@@ -21,66 +21,66 @@ angular.module('coletivando')
         // States
         $ionicConfigProvider.tabs.position('bottom');
 
-        $stateProvider.state('tabNavegacao', {
-            url: '/tabNavegacao',
+        $stateProvider.state('tabsNaoLogado', {
+            url: '/tabsNaoLogado',
             abstract: true,
-            templateUrl: 'templates/outros/tabNavegacao.html'
+            templateUrl: 'templates/tabs/tabsNaoLogado.html'
         });
         
-        $stateProvider.state('tabNavegacao.home', {
-            url: '/home',
+        $stateProvider.state('tabsNaoLogado.home', {
+            url: '/nao-logado-home',
             views: {
-            'home-tab' : {
-                templateUrl: 'templates/ofertas/oferta-lista.html',
-                controller: 'OfertaListaCtrl'
-            }
+                'naoLogado-home-tab' : {
+                    templateUrl: 'templates/ofertas/oferta-lista.html',
+                    controller: 'OfertaListaCtrl'
+                }
             }
         });
 
-        $stateProvider.state('tabNavegacao.explore', {
-            url: '/explore',
+        $stateProvider.state('tabsNaoLogado.explore', {
+            url: '/nao-logado-explore',
             views: {
-            'explore-tab' : {
-                templateUrl: 'templates/categorias/explore.html',
-                controller: 'CategoriaCtrl'
-            }
+                'naoLogado-explore-tab' : {
+                    templateUrl: 'templates/categorias/explore.html',
+                    controller: 'CategoriaCtrl'
+                }
             }
         });
 
-        $stateProvider.state('tabNavegacao.explore.personalizar-categorias',{
-            url: '/personalizar-categorias',
+        $stateProvider.state('tabsNaoLogado.explore.personalizarCategorias',{
+            url: '/nao-logado-personalizarCategorias',
             views: {
-            'explore-tab@tabNavegacao' : {
-                templateUrl: 'templates/categorias/personalizar-categorias.html',
-                controller: 'CategoriaCtrl'
-            }
+                'naologado-explore-tab' : {
+                    templateUrl: 'templates/categorias/personalizar-categorias.html',
+                    controller: 'CategoriaCtrl'
+                }
             }
         });
 
-        $stateProvider.state('tabNavegacao.login', {
-            url: '/login',
+        $stateProvider.state('tabsNaoLogado.login', {
+            url: '/nao-logado-login',
             views: {
-            'login-tab' :{
+            'naoLogado-login-tab' :{
                 templateUrl: 'templates/usuarios/login.html',
                 controller: 'LoginCtrl'
             }
             }
         });
 
-        $stateProvider.state('tabNavegacao.login.register-choose', {
-            url: '/register-choose',
+        $stateProvider.state('tabsNaoLogado.login.register-choose', {
+            url: '/nao-logado-register-choose',
             views: {
-            'login-tab@tabNavegacao' : {
-                templateUrl: 'templates/outros/register-choose.html',
-                controller: 'RegisterChooseCtrl'
-            }
+                'naoLogado-login-tab' : {
+                    templateUrl: 'templates/outros/register-choose.html',
+                    controller: 'RegisterChooseCtrl'
+                }
             }
         });
 
         $stateProvider.state('cadastro-user', {
             url: '/cadastro-user',
             views:{
-            'login-tab@tabNavegacao': {
+            'login-tab': {
                 templateUrl: 'templates/usuarios/cadastro-user.html',
                 controller: 'UsuarioFisicoCtrl'
             }
@@ -102,7 +102,7 @@ angular.module('coletivando')
         $stateProvider.state('cadastro-empresa', {
             url: '/cadastro-empresa',
             views:{
-            'login-tab@tabNavegacao': {
+            'login-tab': {
                 templateUrl: 'templates/empresa/cadastro-empresa.html',
                 controller: 'UsuarioJuridicoCtrl'
             }
@@ -179,6 +179,6 @@ angular.module('coletivando')
             controller: 'OfertaCtrl'
         });
 
-        $urlRouterProvider.otherwise('/tabNavegacao/home');
+        $urlRouterProvider.otherwise('/tabsNaoLogado/nao-logado-home');
     });
 

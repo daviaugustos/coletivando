@@ -67,7 +67,7 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ioni
 	}
 
 	$scope.showPersonalizar = function(){
-		$state.go('tabNavegacao.explore.personalizar-categorias');
+		$state.go('tabsNaoLogado.explore.personalizar-categorias');
 	};
 	
 	$scope.trocaImagem = function(i){
@@ -150,14 +150,14 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth){
 	
 	//Se já estiver logado
 	if (firebaseUser) {
-        $state.go('tabNavegacao.home');
+        $state.go('tabsNaoLogado.home');
     }
 
 	$scope.login = function(usuario){
 		$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
 			.then(function(firebaseUser){
 				console.log(firebaseUser.uid);
-				$state.go('tabNavegacao.home');
+				$state.go('tabsNaoLogado.home');
 			})
 			.catch(function(error){
 				console.log("Erro no login");
@@ -165,7 +165,7 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth){
 	};
 	
 	$scope.showCadastros = function(){
-		$state.go("tabNavegacao.login.register-choose");
+		$state.go("tabsNaoLogado.login.register-choose");
 	};
 });
 

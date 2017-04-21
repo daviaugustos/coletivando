@@ -1,0 +1,734 @@
+/*Classes gerais*/
+
+ion-nav-bar.transp ion-header-bar{
+	background-color: rgba(0,0,0,0);
+	border: 0;
+}
+
+/*Seta branca para navbars transparentes*/
+ion-nav-bar.transp ion-header-bar i{
+	color: #fff;
+}
+
+ion-nav-bar.roxo ion-header-bar{
+	background-color: #AA79B8;
+}
+ion-nav-bar.green ion-header-bar{
+	background-color: #72bba1;
+}
+ion-header-bar div.title.header-item{
+	text-align: left;
+	left: 0px !important;
+	right: 0px !important;
+	color: #fff;
+}
+ion-nav-bar button.button-icon{
+	color: #fff;
+}
+
+/*Navbar menu*/
+.tab-nav.tabs{
+	background-color: #f1f1f1;
+	color: #65476d;
+	padding-top: 2px;
+	border: 0;
+}
+
+.tab-item.tab-item-active{
+	color: #72bba1;
+}
+
+/*Para navbars com seta de voltar*/
+ion-header-bar.back .title.title-center.header-item {
+	margin-left: 50px;
+}
+
+/*Float label dos inputs do ionic*/
+span.input-label{
+	color: #868686;
+}
+
+.margin-top{
+	margin-top: 40px;
+}
+
+.padding-bot{
+	padding-bottom: 10px;
+}
+
+.button{
+	border-radius: 0;
+}
+.btn {
+	color: #fff;
+    font-size: 17px;
+}
+.btn-green {
+	width: 100%; 
+	background-color: #79C9AD;
+	-webkit-transition: all 0.5s ease delay;
+	-moz-transition: all 0.5s ease delay;
+	transition: all 0.5s ease delay;
+}
+.btn-green:hover {
+	background-color: #72bba1;
+	color: #fff;
+}
+.btn-green:active, .btn-green:focus {
+	background-color: #72bba1;
+	color: #fff;
+}
+
+.btn-roxo{
+	width: 100%; 
+	background-color: #aa79b8;
+	-webkit-transition: all 0.5s ease delay;
+	-moz-transition: all 0.5s ease delay;
+	transition: all 0.5s ease delay;
+}
+.btn-roxo:hover {
+	background-color: #aa79b8;
+	color: #fff;
+}
+.btn-roxo:active, .btn-roxo:focus {
+	background-color: #aa79b8;
+	color: #fff;
+}
+
+/*Text aligns*/
+.center{
+	text-align: center;
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+
+input[type="checkbox"]:not(:checked) {
+	-webkit-appearance: none;
+	border: #888 2px solid;
+	border-radius: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+input[type="checkbox"]:checked {
+	background-color: #79C9AD;
+	border: #79C9AD 2px solid;
+	border-radius: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+.item-input-coletivando {
+	border-bottom: #ddd 2px solid;
+}
+
+input {
+	width: 100%;
+}
+
+/*Login*/
+#login h2{
+	color: #848484;
+}
+
+.login-form {
+	margin-top: 40px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.btn-cadastro{
+	color: #79C9AD;
+	font-size: 17px;
+	background-color: #fff;
+	-webkit-transition: all 0.5s ease delay;
+	-moz-transition: all 0.5s ease delay;
+	transition: all 0.5s ease delay;
+}
+.btn-cadastro:active,
+.btn-cadastro:focus,
+.btn-cadastro:visited,
+.btn-cadastro.activated{
+	background-color: #fff;
+   	color: #79C9AD;
+	   border: 0;
+}
+
+.manter-conectado {
+	height: 60px;
+	margin-top: 30px;
+	color: #555;
+	display: block;
+	font-size: 16px;
+}
+
+.manter-conectado span {
+	float: left;
+}
+
+.manter-conectado [type="checkbox"] {
+	margin-left: 20px;
+}
+
+.cadastrar-div {
+	margin-top: 15px;
+}
+
+.cadastrar-div p {
+	color:#79C9AD; 
+	font-size: 17px;
+}
+
+/*Alterar Senha*/
+.navbar-alterar-senha {
+	background-color: #aa79b8;
+	color: white;
+}
+
+.alterar-senha-form {
+	margin-top: 50px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+/*View Explore*/
+#explore .colet-option h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 18px;
+}
+#explore .colet-option button{
+	color: #AA79B8;
+}
+#explore ion-item{
+	border: 0;
+}
+
+.list-categorias h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 18px;
+	padding-bottom: 20px;
+}
+#explore a{
+	border: 0;
+}
+#explore ion-list{
+	color: #555555;
+}
+#explore i{
+	float: right;
+}
+
+.bg-personalizar-categorias{
+    background: url(../img//categorias/personalizar-categorias.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 80%;
+    height: 246px;
+    margin: auto;
+    z-index: 1;
+    position: relative;
+}
+
+#explore .btn-green{
+	padding: 2px;
+	min-height: 0px;
+	line-height: 0px;
+	height: 36px;
+}
+
+/* Personalizar categorias */
+#personalizar button.btn.btn-green{
+	position: absolute;
+	bottom: 0;
+}
+
+#personalizar .bg-header{
+	background-color: #AA79B8;
+	height: 100px;
+	text-align: center;
+	box-shadow: 0 1px 28px rgba(0,0,0,0.25), 0 1px 10px rgba(0,0,0,0.22);
+	position: relative;
+	z-index: 1;
+}
+
+.bg-header h4{
+	color: #fff;
+	margin: 0;
+	padding: 10px; 
+	font-size: 20px;
+	font-family: 'Fredoka One', cursive;
+}
+
+.bg-header h5{
+	color: #e4e4e4;
+	margin: 0;
+	padding: 10px; 
+	font-weight: 100;
+	font-size: 16px;
+}
+
+.categorias-group{
+	z-index: -1;
+	position: relative;
+	-moz-column-count:2;
+    -webkit-column-count:2;
+    column-count:2;
+	margin-top: 80px;
+	padding: 6vw;
+}
+
+.categoria-icon{
+	padding: 10px;
+	text-align: center;
+}
+.categoria-icon p{
+	font-size: 1.1em;
+	color: #a7a7a7;
+}
+.categoria-icon p.selected{
+	font-size: 1.1em;
+	color: #464646;
+}
+
+.img-categoria{
+	width: 50%;
+	height: 50%;
+}
+
+/*View cadastro-empresa*/
+#cadastro-empresa .btn-green {
+	margin-top: 0px;
+}
+
+#cadastro-empresa .termos-de-uso {
+	height: 60px;
+	margin-top: 30px;
+	color: #555;
+	display: block;
+	font-size: 16px;
+}
+
+#cadastro-empresa .termos-de-uso span {
+	float: left;
+}
+
+#cadastro-empresa .termos-de-uso [type="checkbox"] {
+	margin-left: 10px;
+}
+
+#cadastro-empresa h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+
+/*View cadastro-user*/
+.cadastro-form {
+	margin-top: 100px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#cadastro-user .btn-green {
+	margin-top: 20px;
+}
+
+#cadastro-user input{
+	color: #adadad;
+}
+
+#cadastro-user .input-label{
+	color: #989898;
+}
+
+#cadastro-user h2{
+	color: #8D8D8D;
+	font-weight: 500;
+	font-size: 27px;
+}
+
+/*View Home*/
+#home .list{
+	background-color: #f7f7f7;
+}
+
+#home .card:nth-child(1){
+	margin: 10px 10px;
+}
+#home .card{
+	box-shadow: 0 14px 20px rgba(0, 0, 0, 0.18),  0 10px 10px rgba(0,0,0,0.18); 
+	margin: 40px 10px;
+}
+
+#home .bg-card{
+	display: block;
+	max-height: 56.62vw;
+}
+
+#home ion-item{
+	padding: 0;
+}
+
+.info-card-home{
+	padding: 5px;
+}
+
+.info-card-home .row.pb{
+	padding: 5px 10px;
+}
+
+.progress-bar{
+	 width: 36%; 
+	 height: 5px; 
+	 background: #79C9AD;
+}
+
+.info-card-home h2{
+	font-weight: 700;
+	color: #5d5d5d;
+}
+
+.info-card-home p.price{
+	font-weight: 700;
+	color: #797979;
+}
+.info-card-home p.price-old{
+	text-decoration: line-through; 
+	font-size: smaller;
+	color: #a2a2a2;
+}
+.info-card-home .row.bottom p{
+	font-weight: 700;
+	color: #798e7e;
+}
+
+
+.btn-nav-menu,
+.btn-nav-menu.activated{
+	background-color: transparent;
+    color: #888;
+    text-align: left;
+	border: none;
+}
+
+.btn-nav-menu:active,
+.btn-nav-menu:focus,
+.btn-nav-menu:visited{
+	background-color: transparent;
+    color: #888;
+    text-align: left;
+	border: none;
+}
+
+/* teste categoria bar */
+
+.wide-as-needed {
+  overflow: hidden!important;
+  white-space: nowrap;
+}
+
+/* Minha Conta */
+.btn-minha-conta {
+	background-color: transparent; 
+	color: #888; 
+	text-align: left;
+}
+.btn-minha-conta:focus,
+.btn-minha-conta:active,
+.btn-minha-conta:visited {
+	outline: 0;
+}
+
+.btn-minha-conta:first-child {
+	margin-top: 90px;
+}
+
+.icon-circle {
+	position: relative;
+	display: inline-block;
+	margin: -1px;
+	width: 45px;
+	height: 45px; 
+	font-size:30px; 
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius: 50%;
+	border: 1px solid #ebebeb;
+	text-align:center;
+}
+
+.icon-user {
+	background: #79c9ad;
+	color: #fff;
+}
+
+.icon-bag {
+	background: #f7ba7b;
+	color: #fff;
+}
+
+.icon-config {
+	background: #8bc8db;
+	color: #fff;
+}
+
+.icon-key {
+	background: #f2827e;
+	color: #fff;
+}
+
+.icon-door {
+	background: #aaaaaa;
+	color: #fff;
+}
+
+/* Register Choose */
+.fonteh2{
+	color: #f2827e;
+	font-weight: 500;
+	font-size: 18px;
+    text-align:center;
+    text-align: left;
+
+
+}
+
+.fonteh3{
+	color: #f2827e;
+	font-weight: 500;
+	font-size: 18px;
+    text-align:center;
+    text-align: right;
+
+
+}
+
+.buttonbtn{
+	color: #f2827e;
+	}
+
+
+/*Pesquisar*/
+#pesquisar label.item-input-wrapper{
+	background-color: rgba(0,0,0,0);
+}
+
+#pesquisar ion-content{
+	margin-top: 40px;
+}
+
+#pesquisar i::before{
+	font-size: 22px;
+}
+
+#pesquisar a{
+	border: none;
+}
+
+#pesquisar p1{
+	color: #AA79B8; 
+}
+
+/*Aderir oferta*/
+#aderir-oferta .card{
+	margin:0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+	color: #636363;
+}
+
+#aderir-oferta ion-item{
+	border: 0;
+	margin-top: 20px;
+}
+
+#aderir-oferta h2{
+	color: #636363;
+	padding-bottom: 10px;
+}
+
+#aderir-oferta .card i{
+	font-size:45px;
+	color: #79c9ad;
+}
+
+#aderir-oferta .item.item-text-wrap{
+	display: flex;
+}
+
+#aderir-oferta .card h2{
+	padding: 3px 0px;
+}
+
+#aderir-oferta .button-prox{
+	margin-top: 95px;
+}
+
+/*Notifications*/
+
+/*ofertas-apoiadas*/
+
+#apoiadas label.item-input-wrapper{
+	background-color: rgba(0,0,0,0);
+}
+
+#apoiadas i::before{
+	font-size: 22px;
+}
+
+#apoiadas a{
+	border: none;
+}
+
+#apoiadas p{
+	color: #AA79B8; 
+}
+
+/*perfil-empresa*/
+#perfil-empresa ion-content{
+	top:0;
+}
+
+#perfil-empresa .full-image{
+	max-height: 150px;
+}
+
+#perfil-empresa i{
+	margin-left: 5px; 
+}
+
+.card-company{
+	position: relative;
+}
+
+.avatar-company img{
+    width: 130px;
+    height: 130px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+
+	transform: translateX(-50%)	translateY(-110%);
+    position: absolute;
+    z-index: 100;
+	box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+}
+
+.header-company{
+	margin-top: 70px;
+	text-align: center;
+}
+
+.header-company h3{
+	color: #464646;
+}
+
+.header-company p{
+	color: #808080;
+	font-size: 15px;
+	padding-bottom: 40px;
+	border-bottom: solid 1px;
+	border-color: #dcdcdc;
+}
+
+.info-company .item{
+	border: 0;
+	color: #808080;
+}
+
+.info-company .item i{
+	color: #72bba1;
+}
+
+.info-company .item p{
+	color: #808080;
+	font-size: 13px;
+}
+
+/*Visualizar-Oferta*/
+#visualizar-oferta ion-content{
+	top:0;
+}
+
+.btn-descricao{
+	color: #848484;
+    font-size: 17px;
+	border: 0px;
+	border-bottom: 1px solid;
+	border-top: 1px solid;
+	border-color: #d8d8d8;
+	background-color: #fff;
+}
+
+.btn-descricao:active,
+.btn-descricao:focus,
+.btn-descricao:visited,
+.btn-descricao.activated{
+	background-color: #fff;
+    color: #848484;
+	border-color: #d8d8d8;
+}
+
+.btn-descricao p{
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+.info-visualizar-oferta{
+	margin-top: 15px;
+	padding: 10px;
+	color: #848484;
+}
+
+.info-visualizar-oferta p{
+	padding-bottom: 10px;
+}
+
+/* View - Editar User */
+.editar-user h2{
+	color: #6f6f6f;
+}
+
+.editar-user input{
+	border-bottom: 1px solid;
+    border-color: #e0e0e0;
+	color: #8e8e8e;
+}
+
+.editar-user span{
+	color: #8e8e8e;
+}
+
+.editar-user ion-item{
+	border: 0;
+}
+
+.editar-user .button{
+	text-align: left;
+	color: #808080;
+}
+
+.editar-user {
+	padding-top: 15px;
+}
+
+/*View - Editar User - Endereço*/
+.editar-user.endereco .col, .editar-user.endereco .row{
+	padding: 0;
+}
+
+.editar-user.endereco .col-20 .item{
+	padding: 16px 12px;
+}
+
+
+
+

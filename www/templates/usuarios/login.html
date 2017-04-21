@@ -1,7 +1,7 @@
 <ion-view id="login" title="Coletivando">
     <ion-content>
 
-        <form class="login-form">
+        <form class="login-form" ng-submit="login(usuario)">
             <h2>Coletivando</h2>
 
             <ion-list>
@@ -12,7 +12,7 @@
 
                 <label class="item-input-coletivando item-floating-label">
                     <span class="input-label">Senha</span>
-                    <input type="password" placeholder="Senha" ng-model="usuario.senha"/>
+                    <input type="password" placeholder="Senha" ng-model="usuario.password"/>
                 </label>
 
                 <label class="manter-conectado">

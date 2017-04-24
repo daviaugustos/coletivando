@@ -155,7 +155,7 @@ app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
 	}
 });
 
-app.controller("LoginCtrl", function($scope, $state, $firebaseAuth){
+app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObject){
 
 	var firebaseUser = $firebaseAuth().$getAuth();
 	
@@ -167,7 +167,14 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth){
 	$scope.login = function(usuario){
 		$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
 			.then(function(firebaseUser){
-				console.log(firebaseUser.uid);
+				var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
+				var pessoaJuridica = $firebaseObject(ref).$loaded(function(cnpj){
+					if (cnpj.$value != null){
+						console.log("É pessoa juridica");
+					}else{
+						console.log("É pessoa fisica");
+					}
+				});
 				$state.go('tabsNaoLogado.home');
 			})
 			.catch(function(error){

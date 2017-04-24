@@ -1,0 +1,21 @@
+<ion-view title="Minhas Ofertas">
+
+    <ion-nav-bar class="green back">
+        <ion-nav-buttons side="left">
+            <button ng-click="" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content>
+
+        <ion-list>
+            <ion-item ng-repeat="oferta in ofertasPorPessoaJuridica">
+                <h2>{{oferta.produto}}</h2>
+                <p>{{oferta.status}}</p>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

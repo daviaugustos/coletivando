@@ -137,11 +137,18 @@ angular.module('coletivando')
             controller: 'UsuarioFisicoCtrl'
         });
 
+        /*State momentaneo - minha conta - juridica, minhas-ofertas*/
         $stateProvider.state('minha-conta-juridica', {
             url: '/minha-conta-juridica',
-            templateUrl: 'templates/usuarios/minha-conta.html',
+            templateUrl: 'templates/empresa/minha-conta-juridica.html',
             controller: 'UsuarioJuridicoCtrl'
         });
+        $stateProvider.state('minhas-ofertas', {
+            url: '/minhas-ofertas',
+            templateUrl: 'templates/ofertas/minhas-ofertas.html',
+            controller: 'OfertaListaCtrl'
+        });        
+        /*fim state momentaneo*/
 
         $stateProvider.state('pesquisar', {
             url: '/pesquisar',

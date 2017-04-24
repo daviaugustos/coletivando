@@ -1,7 +1,9 @@
-app.controller('OfertaCtrl', function($scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
+app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
 	
+	
+
 	$scope.oferta = {
-		pessoaJuridicaId: "-Kh9xTcjGD5aZWfY32yk",
+		pessoaJuridicaId: "",
 		produto: "",
 		dataLimite: "",
 		precoInicialUn: "",
@@ -14,10 +16,16 @@ app.controller('OfertaCtrl', function($scope, $state, $ionicHistory, $firebaseAr
 	}
 
 	$scope.create = function(oferta){
+		$scope.authObj = $firebaseAuth();
+    	var firebaseUser = $scope.authObj.$getAuth();
+
 		var ref = firebase.database().ref('ofertas');
 		var ofertas = $firebaseArray(ref);
 		
+		oferta.pessoaJuridicaId = firebaseUser.uid;
+
 		ofertas.$add(oferta);
+		$ionicHistory.goBack(-1);
 	};
 
 	$scope.showPesquisa = function(){
@@ -48,6 +56,9 @@ app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ion
 app.controller('OfertaListaCtrl', function($firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
     var ref = firebase.database().ref('ofertas');
     $scope.ofertas = $firebaseArray(ref);
+
+	// implementar underscore
+	$scope.ofertasPorPessoaJuridica = $scope.ofertas;
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
@@ -375,12 +386,19 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		delete obj.password;
 		obj.$save();
 	}
+
+	$scope.showUpdateJuridica = function(id){
+		$state.go('editar-empresa', {id: id})
+	}
 });
 
 
-app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
-	var id = $stateParams.id;
-    var ref = firebase.database().ref('pessoaJuridica/'+id);
+app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+	
+	$scope.authObj = $firebaseAuth();
+    var firebaseUser = $scope.authObj.$getAuth();
+
+	var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid);
     $scope.pessoaJuridica = $firebaseObject(ref);
 
     $scope.update = function(pessoaJuridica){
@@ -389,6 +407,9 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseObject, $scope, $h
 
         $ionicHistory.goBack(-1);
     }
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });
 
 app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory){

@@ -47,10 +47,10 @@ angular.module('coletivando')
             }
         });
 
-        $stateProvider.state('tabsNaoLogado.explore.personalizarCategorias',{
+        $stateProvider.state('tabsNaoLogado.personalizarCategorias',{
             url: '/nao-logado-personalizarCategorias',
             views: {
-                'naologado-explore-tab' : {
+                'naoLogado-explore-tab' : {
                     templateUrl: 'templates/categorias/personalizar-categorias.html',
                     controller: 'CategoriaCtrl'
                 }

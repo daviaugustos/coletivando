@@ -176,6 +176,7 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 						//É pessoa fisica
 					}
 				});
+				limparCamposCadastro();
 				$ionicLoading.hide();
 				$state.go('tabsNaoLogado.home');
 			})
@@ -184,6 +185,11 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 			});
 	};
 	
+	function limparCamposCadastro() {
+		$("#txtEmail").val("");
+		$("#txtSenha").val("");
+	}
+
 	$scope.showCadastros = function(){
 		$state.go("tabsNaoLogado.register-choose");
 	};

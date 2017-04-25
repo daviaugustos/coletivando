@@ -97,6 +97,32 @@ angular.module('coletivando')
             }
         });
 
+        $stateProvider.state('tabsJuridicoLogado', {
+            url: '/tabsJuridicoLogado',
+            abstract: true,
+            templateUrl: 'templates/tabs/tabsJuridicoLogado.html'
+        });
+        
+        $stateProvider.state('tabsJuridicoLogado.home', {
+            url: '/juridico-logado-home',
+            views: {
+                'juridicoLogado-home-tab' : {
+                    templateUrl: 'templates/ofertas/oferta-lista.html',
+                    controller: 'OfertaListaCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('tabsJuridicoLogado.explore', {
+            url: '/juridico-logado-explore',
+            views: {
+                'juridicoLogado-explore-tab' : {
+                    templateUrl: 'templates/categorias/explore.html',
+                    controller: 'CategoriaCtrl'
+                }
+            }
+        });
+
         $stateProvider.state('editar-user', {
             url: '/editar-user/:id',
             templateUrl: 'templates/usuarios/editar-user.html',
@@ -138,10 +164,15 @@ angular.module('coletivando')
         });
 
         /*State momentaneo - minha conta - juridica, minhas-ofertas*/
-        $stateProvider.state('minha-conta-juridica', {
-            url: '/minha-conta-juridica',
-            templateUrl: 'templates/empresa/minha-conta-juridica.html',
-            controller: 'UsuarioJuridicoCtrl'
+        $stateProvider.state('tabsJuridicoLogado.conta', {
+            url: '/juridicoLogado-minha-conta',
+            views: {
+                'juridicoLogado-conta-tab': {
+                    templateUrl: 'templates/empresa/minha-conta.html',
+                    controller: 'UsuarioJuridicoCtrl'
+                }
+            }
+
         });
         $stateProvider.state('minhas-ofertas', {
             url: '/minhas-ofertas',

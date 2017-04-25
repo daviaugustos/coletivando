@@ -171,14 +171,13 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 				var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
 				var pessoaJuridica = $firebaseObject(ref).$loaded(function(cnpj){
 					if (cnpj.$value != null){
-						//É pessoa juridica
+						$state.go('tabsJuridicoLogado.home');
 					}else{
 						//É pessoa fisica
 					}
 				});
 				limparCamposCadastro();
 				$ionicLoading.hide();
-				$state.go('tabsNaoLogado.home');
 			})
 			.catch(function(error){
 				console.log("Erro no login");
@@ -195,7 +194,7 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state){
 	
 	/* Mask */
 	$('.date').mask('00/00/0000');
@@ -311,8 +310,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		}
 	};
 
-	function apenasNumeros(string) 
-	{
+	function apenasNumeros(string) {
 		var numsStr = string.replace(/[^0-9]/g,'');
 		return parseInt(numsStr);
 	}
@@ -404,6 +402,11 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 
 	$scope.showUpdateJuridica = function(id){
 		$state.go('editar-empresa', {id: id})
+	}
+
+	$scope.logout = function(){
+		firebase.auth().signOut();
+		$state.go("tabsNaoLogado.home");
 	}
 });
 

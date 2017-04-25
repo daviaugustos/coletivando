@@ -163,7 +163,6 @@ angular.module('coletivando')
             controller: 'UsuarioFisicoCtrl'
         });
 
-        /*State momentaneo - minha conta - juridica, minhas-ofertas*/
         $stateProvider.state('tabsJuridicoLogado.conta', {
             url: '/juridicoLogado-minha-conta',
             views: {
@@ -174,10 +173,15 @@ angular.module('coletivando')
             }
 
         });
-        $stateProvider.state('minhas-ofertas', {
-            url: '/minhas-ofertas',
-            templateUrl: 'templates/ofertas/minhas-ofertas.html',
-            controller: 'OfertaListaCtrl'
+
+        $stateProvider.state('tabsJuridicoLogado.minhasOfertas', {
+            url: '/juridicoLogado-minhas-ofertas',
+            views: {
+                'juridicoLogado-conta-tab' : {
+                    templateUrl: 'templates/ofertas/minhas-ofertas.html',
+                    controller: 'OfertaListaCtrl'
+                }
+            }
         });        
         /*fim state momentaneo*/
 

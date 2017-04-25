@@ -419,7 +419,7 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseAuth, $firebaseObj
 	}
 });
 
-app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state){
+app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state, $ionicPopup){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
@@ -441,13 +441,35 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 		$firebaseAuth().$createUserWithEmailAndPassword(pessoaFisica.email, pessoaFisica.password)
 			.then(function(firebaseUser){
 				addPessoaFisica(firebaseUser);
-				$state.go('tabsNaoLogado.login');
+				$ionicPopup.alert({
+					title : 'Cadastro feito com sucesso',
+					template : 'Você está pronto pra efetuar seu login!'
+				}).then(function() {
+					limpaCamposCadastro();
+					$state.go('tabsNaoLogado.login');
+				});
 			})
 			.catch(function(error){
-
+				switch(error.code){
+					case 'auth/email-already-in-use' : tratarEmailJaExistente();
+				}
 			});
 	}
+	function tratarEmailJaExistente(){
+		$ionicPopup.alert({
+			title : 'Este email já está cadastrado em nosso sistema',
+			template : 'Por favor verifique se o email está correto, ou informe outro diferente.'
+		}).then(function() {
+			$("#txtEmail").val("");
+		});
+	}
 
+	function limpaCamposCadastro() {
+		$("#txtNome").val("");
+		$("#txtEmail").val("");
+		$("#txtSenha").val("");
+		$("#txtConfirmacaoSenha").val("");
+	}
 	function addPessoaFisica(firebaseUser){
 		var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
 		var obj = $firebaseObject(ref);

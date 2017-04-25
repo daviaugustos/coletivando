@@ -183,7 +183,7 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 	};
 	
 	$scope.showCadastros = function(){
-		$state.go("tabsNaoLogado.login.register-choose");
+		$state.go("tabsNaoLogado.register-choose");
 	};
 });
 
@@ -419,7 +419,7 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseAuth, $firebaseObj
 	}
 });
 
-app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory){
+app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state){
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
@@ -441,6 +441,7 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 		$firebaseAuth().$createUserWithEmailAndPassword(pessoaFisica.email, pessoaFisica.password)
 			.then(function(firebaseUser){
 				addPessoaFisica(firebaseUser);
+				$state.go('tabsNaoLogado.login');
 			})
 			.catch(function(error){
 

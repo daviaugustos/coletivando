@@ -60,14 +60,14 @@ angular.module('coletivando')
         $stateProvider.state('tabsNaoLogado.login', {
             url: '/nao-logado-login',
             views: {
-            'naoLogado-login-tab' :{
-                templateUrl: 'templates/usuarios/login.html',
-                controller: 'LoginCtrl'
-            }
+                'naoLogado-login-tab' :{
+                    templateUrl: 'templates/usuarios/login.html',
+                    controller: 'LoginCtrl'
+                }
             }
         });
 
-        $stateProvider.state('tabsNaoLogado.login.register-choose', {
+        $stateProvider.state('tabsNaoLogado.register-choose', {
             url: '/nao-logado-register-choose',
             views: {
                 'naoLogado-login-tab' : {
@@ -77,13 +77,23 @@ angular.module('coletivando')
             }
         });
 
-        $stateProvider.state('cadastro-user', {
+        $stateProvider.state('tabsNaoLogado.cadastro-user', {
             url: '/cadastro-user',
-            views:{
-            'login-tab': {
-                templateUrl: 'templates/usuarios/cadastro-user.html',
-                controller: 'UsuarioFisicoCtrl'
+                views:{
+                'naoLogado-login-tab': {
+                    templateUrl: 'templates/usuarios/cadastro-user.html',
+                    controller: 'UsuarioFisicoCtrl'
+                }
             }
+        });
+
+        $stateProvider.state('tabsNaoLogado.cadastro-empresa', {
+            url: '/cadastro-empresa',
+            views:{
+                'naoLogado-login-tab': {
+                    templateUrl: 'templates/empresa/cadastro-empresa.html',
+                    controller: 'UsuarioJuridicoCtrl'
+                }
             }
         });
 
@@ -99,16 +109,6 @@ angular.module('coletivando')
             controller: 'UsuarioFisicoUpdateEnderecoCtrl'
         });
         
-        $stateProvider.state('cadastro-empresa', {
-            url: '/cadastro-empresa',
-            views:{
-            'login-tab': {
-                templateUrl: 'templates/empresa/cadastro-empresa.html',
-                controller: 'UsuarioJuridicoCtrl'
-            }
-            }
-        });
-
         $stateProvider.state('criar-oferta', {
             url: '/criar-oferta',
             templateUrl: 'templates/ofertas/criar-oferta.html',

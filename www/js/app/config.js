@@ -123,46 +123,6 @@ angular.module('coletivando')
             }
         });
 
-        $stateProvider.state('editar-user', {
-            url: '/editar-user/:id',
-            templateUrl: 'templates/usuarios/editar-user.html',
-            controller: 'UsuarioFisicoUpdateCtrl'
-        });
-
-        $stateProvider.state('editar-user-endereco', {
-            url: '/editar-user-endereco/:id',
-            templateUrl: 'templates/usuarios/editar-user-endereco.html',
-            controller: 'UsuarioFisicoUpdateEnderecoCtrl'
-        });
-        
-        $stateProvider.state('criar-oferta', {
-            url: '/criar-oferta',
-            templateUrl: 'templates/ofertas/criar-oferta.html',
-            controller: 'OfertaCtrl'
-        });
-
-        $stateProvider.state('alterar-senha-fisica', {
-            url: '/alterar-senha-fisica',
-            controller: 'UsuarioFisicoCtrl'
-        });
-
-        $stateProvider.state('alterar-senha-juridica', {
-            url: '/alterar-senha-juridica',
-            controller: 'UsuarioJuridicoCtrl'
-        });
-
-        $stateProvider.state('editar-empresa', {
-            url: '/editar-empresa/:id',
-            templateUrl: 'templates/empresa/editar-empresa.html',
-            controller: 'UsuarioJuridicoUpdateCtrl'
-        });
-
-        $stateProvider.state('minha-conta-fisica', {
-            url: '/minha-conta-fisica',
-            templateUrl: 'templates/usuarios/minha-conta.html',
-            controller: 'UsuarioFisicoCtrl'
-        });
-
         $stateProvider.state('tabsJuridicoLogado.conta', {
             url: '/juridicoLogado-minha-conta',
             views: {
@@ -182,8 +142,55 @@ angular.module('coletivando')
                     controller: 'OfertaListaCtrl'
                 }
             }
-        });        
-        /*fim state momentaneo*/
+        }); 
+
+        $stateProvider.state('tabsJuridicoLogado.criarOferta', {
+            url: '/juridicoLogado-criar-oferta',
+            views: {
+                'juridicoLogado-conta-tab': {
+                    templateUrl: 'templates/ofertas/criar-oferta.html',
+                    controller: 'OfertaCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('tabsJuridicoLogado.editarEmpresa', {
+            url: '/juridicoLogado-editar-empresa/:id',
+            views: {
+                'juridicoLogado-conta-tab' : {
+                    templateUrl: 'templates/empresa/editar-empresa.html',
+                    controller: 'UsuarioJuridicoUpdateCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('editar-user', {
+            url: '/editar-user/:id',
+            templateUrl: 'templates/usuarios/editar-user.html',
+            controller: 'UsuarioFisicoUpdateCtrl'
+        });
+
+        $stateProvider.state('editar-user-endereco', {
+            url: '/editar-user-endereco/:id',
+            templateUrl: 'templates/usuarios/editar-user-endereco.html',
+            controller: 'UsuarioFisicoUpdateEnderecoCtrl'
+        });
+        
+        $stateProvider.state('alterar-senha-fisica', {
+            url: '/alterar-senha-fisica',
+            controller: 'UsuarioFisicoCtrl'
+        });
+
+        $stateProvider.state('alterar-senha-juridica', {
+            url: '/alterar-senha-juridica',
+            controller: 'UsuarioJuridicoCtrl'
+        });
+
+        $stateProvider.state('minha-conta-fisica', {
+            url: '/minha-conta-fisica',
+            templateUrl: 'templates/usuarios/minha-conta.html',
+            controller: 'UsuarioFisicoCtrl'
+        });
 
         $stateProvider.state('pesquisar', {
             url: '/pesquisar',

@@ -497,8 +497,6 @@ input {
 	font-size: 18px;
     text-align:center;
     text-align: left;
-
-
 }
 
 .fonteh3{
@@ -507,13 +505,26 @@ input {
 	font-size: 18px;
     text-align:center;
     text-align: right;
-
-
 }
 
 .buttonbtn{
 	color: #f2827e;
-	}
+}
+
+.register-icon{
+	color: #8e8e8e;
+	font-size: 7em;
+}
+
+.block{
+	padding-top: 6vh;
+}
+.block center{
+	padding-top: 8vh;
+}
+btn-register{
+	padding-top: 20px;
+}
 
 
 /*Pesquisar*/

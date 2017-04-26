@@ -1,7 +1,5 @@
 app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
 	
-	
-
 	$scope.oferta = {
 		pessoaJuridicaId: "",
 		produto: "",
@@ -10,7 +8,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		desconto: "",
 		qtdPessoas: "",
 		descricao: "",
-		enderecoImagem: "img/home/iphone2.jpg",
+		imagem: "",
 		precoFinalUn: "",
 		status: "AGUARDANDO"
 	}
@@ -413,7 +411,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 
 app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	
-		var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
+	var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
 	$http.get(jsonpUrl)
 	.then(
 		function (resposta){

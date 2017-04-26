@@ -13,7 +13,7 @@ angular.module('coletivando')
             authDomain: "coletivando-3e1e2.firebaseapp.com",
             databaseURL: "https://coletivando-3e1e2.firebaseio.com",
             projectId: "coletivando-3e1e2",
-            storageBucket: "coletivando-3e1e2.appspot.com",
+            storageBucket: "gs://coletivando-3e1e2.appspot.com/",
             messagingSenderId: "181251271144"
         };
         firebase.initializeApp(config);

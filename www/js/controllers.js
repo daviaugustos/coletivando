@@ -51,8 +51,16 @@ app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ion
 	}
 });
 
-app.controller('OfertaListaCtrl', function($firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
-    var ref = firebase.database().ref('ofertas');
+app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+    
+	var firebaseUser = $firebaseAuth().$getAuth();
+
+	//Se já estiver logado
+	if (firebaseUser) {
+        $state.go('tabsJuridicoLogado.home');
+    }
+	
+	var ref = firebase.database().ref('ofertas');
     $scope.ofertas = $firebaseArray(ref);
 
 	// implementar underscore
@@ -154,13 +162,6 @@ app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
 });
 
 app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading, $ionicPopup){
-
-	var firebaseUser = $firebaseAuth().$getAuth();
-	
-	//Se já estiver logado
-	if (firebaseUser) {
-        $state.go('tabsNaoLogado.home');
-    }
 
 	$scope.login = function(usuario){
 		if($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {

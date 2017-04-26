@@ -161,26 +161,34 @@ app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
 	}
 });
 
-app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading){
+app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading, $ionicPopup){
 
 	$scope.login = function(usuario){
-		$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
-		$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
-			.then(function(firebaseUser){
-				var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
-				var pessoaJuridica = $firebaseObject(ref).$loaded(function(cnpj){
-					if (cnpj.$value != null){
-						$state.go('tabsJuridicoLogado.home');
-					}else{
-						//É pessoa fisica
-					}
+		if($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {
+			$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
+			$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
+				.then(function(firebaseUser){
+					var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
+					var pessoaJuridica = $firebaseObject(ref).$loaded(function(cnpj){
+						if (cnpj.$value != null){
+							$state.go('tabsJuridicoLogado.home');
+						}else{
+							//É pessoa fisica
+						}
+					});
+					limparCamposCadastro();
+					$ionicLoading.hide();
+				})
+				.catch(function(error){
+					console.log("Erro no login");
 				});
-				limparCamposCadastro();
-				$ionicLoading.hide();
-			})
-			.catch(function(error){
-				console.log("Erro no login");
+		} else {
+			$ionicPopup.alert({
+				title : 'Erro!',
+				template : 'Email/Senha estão em branco.'
 			});
+		}
+
 	};
 	
 	function limparCamposCadastro() {

@@ -51,6 +51,12 @@ span.input-label{
 .margin-top{
 	margin-top: 40px;
 }
+.margin-top-10{
+	margin-top: 20px;
+}
+.margin-top-20{
+	margin-top: 20px;
+}
 
 .padding-bot{
 	padding-bottom: 10px;
@@ -517,15 +523,14 @@ input {
 }
 
 .block{
-	padding-top: 6vh;
+	padding-top: 2vh;
 }
 .block center{
 	padding-top: 8vh;
 }
-btn-register{
+.btn-register{
 	padding-top: 20px;
 }
-
 
 /*Pesquisar*/
 #pesquisar label.item-input-wrapper{

@@ -179,11 +179,20 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 					$ionicLoading.hide();
 				})
 				.catch(function(error){
-					console.log("Erro no login");
+					setTimeout(function() {
+						$ionicLoading.hide();
+					}, 800);
+					setTimeout(function() {
+						$ionicPopup.alert({
+							title : 'Erro',
+							template : 'Email/Senha inválidos!'
+						});
+					}, 1200);
 				});
 		} else {
+			$ionicLoading.hide();
 			$ionicPopup.alert({
-				title : 'Erro!',
+				title : 'Erro',
 				template : 'Email/Senha estão em branco.'
 			});
 		}

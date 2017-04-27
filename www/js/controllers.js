@@ -13,6 +13,11 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		status: "AGUARDANDO"
 	}
 
+	/* Mask */
+	$('.date').mask('00/00/0000');
+	$('.money').mask('000.000.000.000.000,00', {reverse: true});
+	$('.porcent').mask('00,00%', {reverse: true});
+
 	$scope.create = function(oferta){
 		$scope.authObj = $firebaseAuth();
     	var firebaseUser = $scope.authObj.$getAuth();

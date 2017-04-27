@@ -76,11 +76,9 @@ app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArr
 
 	var firebaseUser = $firebaseAuth().$getAuth();
 	var ref = firebase.database().ref('ofertas');
-	var listaOfertas = $firebaseArray(ref);
-	console.log(firebaseUser.uid);
-	console.log(listaOfertas);
-	// implementar underscore
-    console.log(_.where(listaOfertas, {pessoaJuridicaId: ""+firebaseUser.uid}));
+	var query = ref.orderByChild("pessoaJuridicaId").equalTo(firebaseUser.uid);
+	
+	$scope.ofertasPorPessoaJuridica = $firebaseArray(query);
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);

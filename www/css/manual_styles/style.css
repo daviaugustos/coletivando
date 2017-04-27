@@ -33,6 +33,11 @@ ion-nav-bar button.button-icon{
 	color: #fff;
 }
 
+.margin-lateral {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
 /*Navbar menu*/
 .tab-nav.tabs{
 	background-color: #f1f1f1;
@@ -147,10 +152,13 @@ input {
 	color: #848484;
 }
 
-.login-form {
-	margin-top: 40px;
+form {
 	padding-left: 40px;
 	padding-right: 40px;
+}
+
+.login-form {
+	margin-top: 40px;
 }
 
 .btn-cadastro{

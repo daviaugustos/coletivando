@@ -1,5 +1,12 @@
 /*Classes gerais*/
 
+select {
+	border: 0;
+	border-bottom: 2px solid #ddd;
+	width: 100%;
+	color: #aaa;
+}
+
 ion-nav-bar.transp ion-header-bar{
 	background-color: rgba(0,0,0,0);
 	border: 0;

@@ -60,17 +60,22 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
         $state.go('tabsJuridicoLogado.home');
     }
 
+	var ref = firebase.database().ref('ofertas');
+    $scope.ofertas = $firebaseArray(ref);
+
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
 });
 app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
 
+	var firebaseUser = $firebaseAuth().$getAuth();
 	var ref = firebase.database().ref('ofertas');
-    $scope.ofertas = $firebaseArray(ref);
-
+	var listaOfertas = $firebaseArray(ref);
+	console.log(firebaseUser.uid);
+	console.log(listaOfertas);
 	// implementar underscore
-	$scope.ofertasPorPessoaJuridica = $scope.ofertas;
+    console.log(_.where(listaOfertas, {pessoaJuridicaId: ""+firebaseUser.uid}));
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);

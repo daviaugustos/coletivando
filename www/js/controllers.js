@@ -72,13 +72,21 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 		$ionicHistory.goBack(-1);
 	}
 });
-app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
 
+	$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
+	
 	var firebaseUser = $firebaseAuth().$getAuth();
 	var ref = firebase.database().ref('ofertas');
+
 	var query = ref.orderByChild("pessoaJuridicaId").equalTo(firebaseUser.uid);
-	
-	$scope.ofertasPorPessoaJuridica = $firebaseArray(query);
+
+	$firebaseArray(query).$loaded(function(array){
+		$scope.ofertasPorPessoaJuridica = array;
+		setTimeout(function() {
+			$ionicLoading.hide();
+		}, 600);
+	});
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);

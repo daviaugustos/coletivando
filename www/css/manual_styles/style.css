@@ -49,15 +49,14 @@ span.input-label{
 }
 
 .margin-top{
-	margin-top: 40px;
+	margin-top: 40px !important;
 }
 .margin-top-10{
-	margin-top: 20px;
+	margin-top: 20px !important;
 }
 .margin-top-20{
-	margin-top: 20px;
+	margin-top: 20px !important;
 }
-
 .padding-bot{
 	padding-bottom: 10px;
 }

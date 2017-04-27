@@ -39,6 +39,24 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		$ionicHistory.goBack(-1);
 	};
 
+	$scope.teste = function(){
+		var options = {
+			maximumImagesCount: 10,
+			width: 800,
+			height: 800,
+			quality: 80
+		};
+
+		$cordovaImagePicker.getPictures(options)
+			.then(function (results) {
+				for (var i = 0; i < results.length; i++) {
+				console.log('Image URI: ' + results[i]);
+			}
+			}, function(error) {
+				// error getting photos
+			});
+	}
+
 });
 
 app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){

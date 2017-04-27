@@ -59,7 +59,13 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 	if (firebaseUser) {
         $state.go('tabsJuridicoLogado.home');
     }
-	
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+});
+app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+
 	var ref = firebase.database().ref('ofertas');
     $scope.ofertas = $firebaseArray(ref);
 
@@ -70,6 +76,7 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 		$ionicHistory.goBack(-1);
 	}
 });
+
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();

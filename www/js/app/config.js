@@ -139,7 +139,7 @@ angular.module('coletivando')
             views: {
                 'juridicoLogado-conta-tab' : {
                     templateUrl: 'templates/ofertas/minhas-ofertas.html',
-                    controller: 'OfertaListaCtrl'
+                    controller: 'MinhasOfertasCtrl'
                 }
             }
         }); 

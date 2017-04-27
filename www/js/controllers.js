@@ -92,18 +92,17 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 });
 app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
 
-	$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
-	
+	//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
+	$('#preloader').fadeIn();
+
 	var firebaseUser = $firebaseAuth().$getAuth();
 	var ref = firebase.database().ref('ofertas');
 
 	var query = ref.orderByChild("pessoaJuridicaId").equalTo(firebaseUser.uid);
 
 	$firebaseArray(query).$loaded(function(array){
+		$('#preloader').fadeOut();
 		$scope.ofertasPorPessoaJuridica = array;
-		setTimeout(function() {
-			$ionicLoading.hide();
-		}, 600);
 	});
 
 	$scope.goBackHandler = function(){
@@ -206,7 +205,9 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 
 	$scope.login = function(usuario){
 		if($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {
-			$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
+			//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
+			$('#preloader').fadeIn();
+
 			$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
 				.then(function(firebaseUser){
 					var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
@@ -218,11 +219,13 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 						}
 					});
 					limparCamposCadastro();
-					$ionicLoading.hide();
+					//$ionicLoading.hide();
+					$('#preloader').fadeOut();
 				})
 				.catch(function(error){
 					setTimeout(function() {
-						$ionicLoading.hide();
+						//$ionicLoading.hide();
+						$('#preloader').fadeOut();
 					}, 800);
 					setTimeout(function() {
 						$ionicPopup.alert({
@@ -232,7 +235,8 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 					}, 1200);
 				});
 		} else {
-			$ionicLoading.hide();
+			//$ionicLoading.hide();
+			$('#preloader').fadeOut();
 			$ionicPopup.alert({
 				title : 'Erro',
 				template : 'Email/Senha estão em branco.'

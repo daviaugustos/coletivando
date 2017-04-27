@@ -34,8 +34,8 @@ ion-nav-bar button.button-icon{
 }
 
 .margin-lateral {
-	margin-left: 40px;
-	margin-right: 40px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 /*Navbar menu*/
@@ -245,7 +245,7 @@ form {
 }
 
 .bg-personalizar-categorias{
-    background: url(../img//categorias/personalizar-categorias.png);
+    background: url(../../img/categorias/personalizar-categorias.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

@@ -1,5 +1,5 @@
-<ion-view id="login" title="Coletivando">
-    <ion-content>
+<ion-view id="login" title="Coletivando" style="transform: translate3d(0px, 0px, 0px) scale(1)!important;">
+    <ion-content scroll="false">
 
         <form class="login-form" name="login-form" ng-submit="login(usuario)">
             <h2>Coletivando</h2>
@@ -15,12 +15,12 @@
                     <input id="txtSenha" type="password" class="validate[required]" placeholder="Senha" ng-model="usuario.password"/>
                 </label>
 
-                <label class="manter-conectado">
+                <!-- <label class="manter-conectado">
                     <span>Manter conectado</span>
                     <input type="checkbox">
-                </label>
+                </label> -->
                 
-                <button type="submit" ng-click="{{ login-form.$valid }}" class="button btn btn-green button-block">Entrar</button>
+                <button type="submit" ng-click="{{ login-form.$valid }}" class="button btn btn-green button-block" style="margin-top:50px">Entrar</button>
 
             </ion-list>
         </form>

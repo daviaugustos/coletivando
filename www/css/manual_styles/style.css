@@ -1,5 +1,12 @@
 /*Classes gerais*/
 
+select {
+	border: 0;
+	border-bottom: 2px solid #ddd;
+	width: 100%;
+	color: #aaa;
+}
+
 ion-nav-bar.transp ion-header-bar{
 	background-color: rgba(0,0,0,0);
 	border: 0;
@@ -24,6 +31,11 @@ ion-header-bar div.title.header-item{
 }
 ion-nav-bar button.button-icon{
 	color: #fff;
+}
+
+.margin-lateral {
+	margin-left: 40px;
+	margin-right: 40px;
 }
 
 /*Navbar menu*/
@@ -140,10 +152,13 @@ input {
 	color: #848484;
 }
 
-.login-form {
-	margin-top: 40px;
+form {
 	padding-left: 40px;
 	padding-right: 40px;
+}
+
+.login-form {
+	margin-top: 40px;
 }
 
 .btn-cadastro{

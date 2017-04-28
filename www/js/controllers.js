@@ -86,6 +86,10 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 	var ref = firebase.database().ref('ofertas');
     $scope.ofertas = $firebaseArray(ref);
 
+	$scope.showOferta = function(id){
+		$state.go('visualizar-oferta', {id: id});
+	}
+
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
@@ -108,6 +112,19 @@ app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArr
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+});
+
+app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $state, $scope, $ionicHistory){
+	var empresa;
+	var ref = firebase.database().ref('ofertas/'+$stateParams.id);
+	
+	$firebaseObject(ref).$loaded(function(oferta){
+		var refEmpresa = firebase.database().ref('pessoaJuridica/'+oferta.pessoaJuridicaId);
+		$firebaseObject(refEmpresa).$loaded(function(empresa){
+			$scope.nomeEmpresa = empresa.nomeFantasia;
+			$scope.oferta = oferta;
+		});
+	});
 });
 
 

@@ -223,9 +223,9 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('visualizar-oferta', {
-            url: '/visualizar-oferta',
+            url: '/visualizar-oferta/:id',
             templateUrl: 'templates/ofertas/visualizar-oferta.html',
-            controller: 'OfertaCtrl'
+            controller: 'VisualizarOfertaCtrl'
         });
 
         $urlRouterProvider.otherwise('/tabsNaoLogado/nao-logado-home');

@@ -129,6 +129,10 @@ app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $
 			$scope.oferta = oferta;
 		});
 	});
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
 });
 
 

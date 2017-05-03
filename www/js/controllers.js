@@ -43,7 +43,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		$ionicHistory.goBack(-1);
 	};
 
-	$scope.teste = function(){
+	function cordovaImagemPickerFunction (){
 		var options = {
 			maximumImagesCount: 10,
 			width: 800,
@@ -56,9 +56,15 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 				for (var i = 0; i < results.length; i++) {
 				console.log('Image URI: ' + results[i]);
 			}
+			return results
 			}, function(error) {
 				// error getting photos
 			});
+	}
+	$scope.teste = function (){
+		cordovaImagemPickerFunction().then(function(resultados){
+			alert("show ta funfando cara");
+		})
 	}
 
 });

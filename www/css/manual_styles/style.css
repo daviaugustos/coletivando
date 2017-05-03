@@ -7,6 +7,35 @@ select {
 	color: #aaa;
 }
 
+/*navbar Personalizado*/
+.padding-navbar{
+	padding-top: 45px;
+}
+
+.nav-title{
+	text-align: left !important; 
+	margin-left: 50px !important;
+}
+
+.nav-title.white{
+	color: #fff;
+}
+
+.coletivando-bar{
+	border: 0;
+	margin-bottom: 30px;
+}
+.coletivando-bar.green{
+	/*background-color: #72bba1;*/
+	background-color: #41dea6; /*quem vota nessa cor bolada?*/
+	color: #fff !important;
+}
+
+i.icon.ion-android-arrow-back::before{
+	font-size:26px !important;
+	color: #fffffd;
+}
+
 ion-nav-bar.transp ion-header-bar{
 	background-color: rgba(0,0,0,0);
 	border: 0;

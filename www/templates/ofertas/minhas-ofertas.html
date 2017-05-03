@@ -1,14 +1,23 @@
 <ion-view title="Minhas ofertas">
 
-	<ion-nav-bar class="green back">
+	<!--<ion-nav-bar class="green back">
         <ion-nav-buttons side="left">
             <button ng-click="goBackHandler()" class="button button-icon">
                 <i class="icon ion-android-arrow-back"></i>
             </button>
         </ion-nav-buttons>
-    </ion-nav-bar>
+    </ion-nav-bar>-->
 
-    <ion-content>
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title white">
+            Minhas ofertas
+        </div>
+    </div>
+
+    <ion-content class="padding-navbar">
 
         <ion-list>
             <ion-item ng-repeat="oferta in ofertasPorPessoaJuridica">

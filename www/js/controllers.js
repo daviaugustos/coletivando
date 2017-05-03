@@ -484,6 +484,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		obj = _.extend(obj, $scope.pessoaJuridica);
 		delete obj.password;
 		obj.$save();
+		$ionicHistory.goBack(-1);
 	}
 
 	$scope.showUpdateJuridica = function(id){

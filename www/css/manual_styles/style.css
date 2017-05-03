@@ -14,6 +14,9 @@ select {
 
 .nav-title{
 	text-align: left !important; 
+}
+
+.nav-title.left{
 	margin-left: 50px !important;
 }
 

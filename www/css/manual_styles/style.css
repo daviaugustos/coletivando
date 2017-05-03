@@ -28,7 +28,8 @@
 }
 .btn-green {
 	width: 100%; 
-	background-color: #79C9AD;
+	/*background-color: #79C9AD;*/
+	background-color: #63d2aa;
 	-webkit-transition: all 0.5s ease delay;
 	-moz-transition: all 0.5s ease delay;
 	transition: all 0.5s ease delay;
@@ -73,7 +74,7 @@ select {
 	border: 0;
 	border-bottom: 2px solid #ddd;
 	width: 100%;
-	color: #aaa;
+	color: #b1b1b1;
 }
 
 /*Inputs personalizados*/
@@ -117,7 +118,7 @@ input {
 }
 .coletivando-bar.green{
 	/*background-color: #72bba1;*/
-	background-color: #41dea6; /*quem vota nessa cor bolada?*/
+	background-color: #63d2aa;
 	color: #fff !important;
 }
 i.icon.ion-android-arrow-back::before{
@@ -164,7 +165,8 @@ i.icon.ion-android-arrow-back::before{
 	border: 0;
 }
 .tab-item.tab-item-active{
-	color: #72bba1;
+	/*color: #72bba1;*/
+	color: #63d2aa;
 }
 
 /*Float label dos inputs do ionic*/
@@ -280,7 +282,7 @@ form {
 
 
 /* Personalizar categorias */
-#personalizar button.btn.btn-green{
+#personalizar button.btnbtn-green{
 	position: absolute;
 	bottom: 0;
 }
@@ -358,6 +360,12 @@ form {
 }
 .item-form{
 	padding-bottom: 20px;
+}
+.item-input-coletivando span{
+	color: #7d7d7d;
+}
+.item-input-coletivando input{
+	color: #b1b1b1;
 }
 
 
@@ -473,25 +481,24 @@ form {
 .icon-circle {
 	position: relative;
 	display: inline-block;
-	margin: -1px;
-	width: 45px;
-	height: 45px; 
-	font-size:30px; 
+	width: 40px;
+	height: 40px; 
+	font-size:22px; 
 	-moz-border-radius:50%;
 	-webkit-border-radius:50%;
 	border-radius: 50%;
-	border: 1px solid #ebebeb;
 	text-align:center;
 }
 .icon-user {
-	background: #79c9ad;
+	/*background: #79c9ad;*/
+	background: #63d2aa;
 	color: #fff;
 }
 .icon-bag {
 	background: #f7ba7b;
 	color: #fff;
 }
-.icon-config {
+.icon-plus {
 	background: #8bc8db;
 	color: #fff;
 }
@@ -802,3 +809,26 @@ form {
 	100%{transform:rotate(360deg); }
 }
 
+/*Minhas ofertas*/
+.minhas-ofertas-item p{
+	font-size: 12px;
+	color: #b1b1b1;
+}
+
+.minhas-ofertas-item h2{
+	font-size: 16px;
+	color: #a5a5a5;
+}
+
+.minhas-ofertas-item .aprovado p{
+	color: #70bf9f !important;
+}
+.minhas-ofertas-item .aprovado h2{
+	color: #757575 !important;
+}
+.minhas-ofertas-item .aguardando p{
+	color: #b1b1b1;
+}
+.minhas-ofertas-item .recusado p{
+	color: #da9b9b !important;
+}

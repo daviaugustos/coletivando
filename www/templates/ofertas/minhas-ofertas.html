@@ -20,9 +20,19 @@
     <ion-content class="padding-navbar">
 
         <ion-list>
-            <ion-item ng-repeat="oferta in ofertasPorPessoaJuridica">
-                <h2>{{oferta.produto}}</h2>
-                <p>{{oferta.status}}</p>
+            <ion-item class="minhas-ofertas-item" ng-repeat="oferta in ofertasPorPessoaJuridica">
+                <div ng-if="oferta.status == 'AGUARDANDO'" class="aguardando">
+                    <h2>{{oferta.produto}}</h2>
+                    <p>{{oferta.status}}</p>
+                </div>
+                <div ng-if="oferta.status == 'APROVADO'" class="aprovado">
+                    <h2>{{oferta.produto}}</h2>
+                    <p>{{oferta.status}}</p>
+                </div>
+                <div ng-if="oferta.status == 'RECUSADO'" class="recusado">
+                    <h2>{{oferta.produto}}</h2>
+                    <p>{{oferta.status}}</p>
+                </div>
             </ion-item>
         </ion-list>
 

@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
+app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $cordovaImagePicker) {
 	
 	$scope.oferta = {
 		pessoaJuridicaId: "",

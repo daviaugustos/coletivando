@@ -92,7 +92,7 @@ input[type="checkbox"]:checked {
 	height: 20px;
 }
 .item-input-coletivando {
-	border-bottom: #ddd 2px solid;
+	border-bottom: #ddd 1px solid;
 }
 input {
 	width: 100%;
@@ -356,9 +356,15 @@ form {
 	font-size: 20px;
 	margin-bottom: 30px;
 }
+.item-form{
+	padding-bottom: 20px;
+}
 
 
 /*View cadastro-user*/
+.input-label{
+	font-size: 14px;
+}
 .cadastro-form {
 	margin-top: 100px;
 	padding-left: 40px;

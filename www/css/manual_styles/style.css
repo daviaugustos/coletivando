@@ -1,98 +1,10 @@
 /*Classes gerais*/
 
-select {
-	border: 0;
-	border-bottom: 2px solid #ddd;
-	width: 100%;
-	color: #aaa;
-}
-
-/*navbar Personalizado*/
-.padding-navbar{
-	padding-top: 45px;
-}
-
-.nav-title{
-	text-align: left !important; 
-}
-
-.nav-title.left{
-	margin-left: 50px !important;
-}
-
-.nav-title.white{
-	color: #fff;
-}
-
-.coletivando-bar{
-	border: 0;
-	margin-bottom: 30px;
-}
-.coletivando-bar.green{
-	/*background-color: #72bba1;*/
-	background-color: #41dea6; /*quem vota nessa cor bolada?*/
-	color: #fff !important;
-}
-
-i.icon.ion-android-arrow-back::before{
-	font-size:26px !important;
-	color: #fffffd;
-}
-
-ion-nav-bar.transp ion-header-bar{
-	background-color: rgba(0,0,0,0);
-	border: 0;
-}
-
-/*Seta branca para navbars transparentes*/
-ion-nav-bar.transp ion-header-bar i{
-	color: #fff;
-}
-
-ion-nav-bar.roxo ion-header-bar{
-	background-color: #AA79B8;
-}
-ion-nav-bar.green ion-header-bar{
-	background-color: #72bba1;
-}
-ion-header-bar div.title.header-item{
-	text-align: left;
-	left: 0px !important;
-	right: 0px !important;
-	color: #fff;
-}
-ion-nav-bar button.button-icon{
-	color: #fff;
-}
-
+/*Margens personalizadas*/
 .margin-lateral {
 	margin-left: 20px;
 	margin-right: 20px;
 }
-
-/*Navbar menu*/
-.tab-nav.tabs{
-	background-color: #f1f1f1;
-	color: #65476d;
-	padding-top: 2px;
-	border: 0;
-}
-
-.tab-item.tab-item-active{
-	color: #72bba1;
-}
-
-/*Para navbars com seta de voltar*/
-/*ion-header-bar.back .title.title-center.header-item {*/
-.title.title-center.header-item {
-	margin-left: 50px;
-}
-
-/*Float label dos inputs do ionic*/
-span.input-label{
-	color: #868686;
-}
-
 .margin-top{
 	margin-top: 40px !important;
 }
@@ -106,6 +18,7 @@ span.input-label{
 	padding-bottom: 10px;
 }
 
+/*Botões personalizados*/
 .button{
 	border-radius: 0;
 }
@@ -128,7 +41,6 @@ span.input-label{
 	background-color: #72bba1;
 	color: #fff;
 }
-
 .btn-roxo{
 	width: 100%; 
 	background-color: #aa79b8;
@@ -156,6 +68,15 @@ span.input-label{
 	text-align: right;
 }
 
+/*Select personalizado*/
+select {
+	border: 0;
+	border-bottom: 2px solid #ddd;
+	width: 100%;
+	color: #aaa;
+}
+
+/*Inputs personalizados*/
 input[type="checkbox"]:not(:checked) {
 	-webkit-appearance: none;
 	border: #888 2px solid;
@@ -163,7 +84,6 @@ input[type="checkbox"]:not(:checked) {
 	width: 20px;
 	height: 20px;
 }
-
 input[type="checkbox"]:checked {
 	background-color: #79C9AD;
 	border: #79C9AD 2px solid;
@@ -171,29 +91,98 @@ input[type="checkbox"]:checked {
 	width: 20px;
 	height: 20px;
 }
-
 .item-input-coletivando {
 	border-bottom: #ddd 2px solid;
 }
-
 input {
 	width: 100%;
+}
+
+/*Navbar Personalizado*/
+.padding-navbar{
+	padding-top: 45px;
+}
+.nav-title{
+	text-align: left !important; 
+}
+.nav-title.left{
+	margin-left: 50px !important;
+}
+.nav-title.white{
+	color: #fff;
+}
+.coletivando-bar{
+	border: 0;
+	margin-bottom: 30px;
+}
+.coletivando-bar.green{
+	/*background-color: #72bba1;*/
+	background-color: #41dea6; /*quem vota nessa cor bolada?*/
+	color: #fff !important;
+}
+i.icon.ion-android-arrow-back::before{
+	font-size:26px !important;
+	color: #fffffd;
+}
+
+/*para excluir --->*/
+		ion-nav-bar.transp ion-header-bar{
+			background-color: rgba(0,0,0,0);
+			border: 0;
+		}
+		/*Seta branca para navbars transparentes*/
+		ion-nav-bar.transp ion-header-bar i{
+			color: #fff;
+		}
+		ion-nav-bar.roxo ion-header-bar{
+			background-color: #AA79B8;
+		}
+		ion-nav-bar.green ion-header-bar{
+			background-color: #72bba1;
+		}
+		ion-header-bar div.title.header-item{
+			text-align: left;
+			left: 0px !important;
+			right: 0px !important;
+			color: #fff;
+		}
+		ion-nav-bar button.button-icon{
+			color: #fff;
+		}
+		/*Para navbars com seta de voltar*/
+		/*ion-header-bar.back .title.title-center.header-item {*/
+		.title.title-center.header-item {
+			margin-left: 50px;
+		}
+/*<---*/
+
+/*Navbar Menu*/
+.tab-nav.tabs{
+	background-color: #f1f1f1;
+	color: #65476d;
+	padding-top: 2px;
+	border: 0;
+}
+.tab-item.tab-item-active{
+	color: #72bba1;
+}
+
+/*Float label dos inputs do ionic*/
+span.input-label{
+	color: #868686;
 }
 
 /*Login*/
 #login h2{
 	color: #848484;
 }
-
 form {
 	padding-left: 40px;
 	padding-right: 40px;
 }
-
 .login-form {
 	margin-top: 40px;
 }
-
 .btn-cadastro{
 	color: #79C9AD;
 	font-size: 17px;
@@ -210,7 +199,6 @@ form {
    	color: #79C9AD;
 	   border: 0;
 }
-
 .manter-conectado {
 	height: 60px;
 	margin-top: 30px;
@@ -218,35 +206,32 @@ form {
 	display: block;
 	font-size: 16px;
 }
-
 .manter-conectado span {
 	float: left;
 }
-
 .manter-conectado [type="checkbox"] {
 	margin-left: 20px;
 }
-
 .cadastrar-div {
 	margin-top: 15px;
 }
-
 .cadastrar-div p {
 	color:#79C9AD; 
 	font-size: 17px;
 }
+
 
 /*Alterar Senha*/
 .navbar-alterar-senha {
 	background-color: #aa79b8;
 	color: white;
 }
-
 .alterar-senha-form {
 	margin-top: 50px;
 	padding-left: 40px;
 	padding-right: 40px;
 }
+
 
 /*View Explore*/
 #explore .colet-option h2{
@@ -260,7 +245,6 @@ form {
 #explore ion-item{
 	border: 0;
 }
-
 .list-categorias h2{
 	color: #8D8D8D;
 	font-weight: 500;
@@ -276,7 +260,6 @@ form {
 #explore i{
 	float: right;
 }
-
 .bg-personalizar-categorias{
     background: url(../../img/categorias/personalizar-categorias.png);
     background-repeat: no-repeat;
@@ -288,7 +271,6 @@ form {
     z-index: 1;
     position: relative;
 }
-
 #explore .btn-green{
 	padding: 2px;
 	min-height: 0px;
@@ -296,12 +278,12 @@ form {
 	height: 36px;
 }
 
+
 /* Personalizar categorias */
 #personalizar button.btn.btn-green{
 	position: absolute;
 	bottom: 0;
 }
-
 #personalizar .bg-header{
 	background-color: #AA79B8;
 	height: 100px;
@@ -310,7 +292,6 @@ form {
 	position: relative;
 	z-index: 1;
 }
-
 .bg-header h4{
 	color: #fff;
 	margin: 0;
@@ -318,7 +299,6 @@ form {
 	font-size: 20px;
 	font-family: 'Fredoka One', cursive;
 }
-
 .bg-header h5{
 	color: #e4e4e4;
 	margin: 0;
@@ -326,7 +306,6 @@ form {
 	font-weight: 100;
 	font-size: 16px;
 }
-
 .categorias-group{
 	z-index: -1;
 	position: relative;
@@ -336,7 +315,6 @@ form {
 	margin-top: 80px;
 	padding: 6vw;
 }
-
 .categoria-icon{
 	padding: 10px;
 	text-align: center;
@@ -349,17 +327,16 @@ form {
 	font-size: 1.1em;
 	color: #464646;
 }
-
 .img-categoria{
 	width: 50%;
 	height: 50%;
 }
 
+
 /*View cadastro-empresa*/
 #cadastro-empresa .btn-green {
 	margin-top: 0px;
 }
-
 #cadastro-empresa .termos-de-uso {
 	height: 60px;
 	margin-top: 30px;
@@ -367,15 +344,12 @@ form {
 	display: block;
 	font-size: 16px;
 }
-
 #cadastro-empresa .termos-de-uso span {
 	float: left;
 }
-
 #cadastro-empresa .termos-de-uso [type="checkbox"] {
 	margin-left: 10px;
 }
-
 #cadastro-empresa h2{
 	color: #8D8D8D;
 	font-weight: 500;
@@ -383,36 +357,33 @@ form {
 	margin-bottom: 30px;
 }
 
+
 /*View cadastro-user*/
 .cadastro-form {
 	margin-top: 100px;
 	padding-left: 40px;
 	padding-right: 40px;
 }
-
 #cadastro-user .btn-green {
 	margin-top: 20px;
 }
-
 #cadastro-user input{
 	color: #adadad;
 }
-
 #cadastro-user .input-label{
 	color: #989898;
 }
-
 #cadastro-user h2{
 	color: #8D8D8D;
 	font-weight: 500;
 	font-size: 27px;
 }
 
+
 /*View Home*/
 #home .list{
 	background-color: #f7f7f7;
 }
-
 #home .card:nth-child(1){
 	margin: 10px 10px;
 }
@@ -420,35 +391,28 @@ form {
 	box-shadow: 0 14px 20px rgba(0, 0, 0, 0.18),  0 10px 10px rgba(0,0,0,0.18); 
 	margin: 40px 10px;
 }
-
 #home .bg-card{
 	display: block;
 	max-height: 56.62vw;
 }
-
 #home ion-item{
 	padding: 0;
 }
-
 .info-card-home{
 	padding: 5px;
 }
-
 .info-card-home .row.pb{
 	padding: 5px 10px;
 }
-
 .progress-bar{
 	 width: 36%; 
 	 height: 5px; 
 	 background: #79C9AD;
 }
-
 .info-card-home h2{
 	font-weight: 700;
 	color: #5d5d5d;
 }
-
 .info-card-home p.price{
 	font-weight: 700;
 	color: #797979;
@@ -462,8 +426,6 @@ form {
 	font-weight: 700;
 	color: #798e7e;
 }
-
-
 .btn-nav-menu,
 .btn-nav-menu.activated{
 	background-color: transparent;
@@ -471,7 +433,6 @@ form {
     text-align: left;
 	border: none;
 }
-
 .btn-nav-menu:active,
 .btn-nav-menu:focus,
 .btn-nav-menu:visited{
@@ -481,12 +442,13 @@ form {
 	border: none;
 }
 
-/* teste categoria bar */
 
+/* teste categoria bar */
 .wide-as-needed {
   overflow: hidden!important;
   white-space: nowrap;
 }
+
 
 /* Minha Conta */
 .btn-minha-conta {
@@ -499,11 +461,9 @@ form {
 .btn-minha-conta:visited {
 	outline: 0;
 }
-
 .btn-minha-conta:first-child {
 	margin-top: 90px;
 }
-
 .icon-circle {
 	position: relative;
 	display: inline-block;
@@ -517,31 +477,27 @@ form {
 	border: 1px solid #ebebeb;
 	text-align:center;
 }
-
 .icon-user {
 	background: #79c9ad;
 	color: #fff;
 }
-
 .icon-bag {
 	background: #f7ba7b;
 	color: #fff;
 }
-
 .icon-config {
 	background: #8bc8db;
 	color: #fff;
 }
-
 .icon-key {
 	background: #f2827e;
 	color: #fff;
 }
-
 .icon-door {
 	background: #aaaaaa;
 	color: #fff;
 }
+
 
 /* Register Choose */
 .fonteh2{
@@ -551,7 +507,6 @@ form {
     text-align:center;
     text-align: left;
 }
-
 .fonteh3{
 	color: #f2827e;
 	font-weight: 500;
@@ -559,16 +514,13 @@ form {
     text-align:center;
     text-align: right;
 }
-
 .buttonbtn{
 	color: #f2827e;
 }
-
 .register-icon{
 	color: #8e8e8e;
 	font-size: 7em;
 }
-
 .block{
 	padding-top: 2vh;
 }
@@ -579,26 +531,24 @@ form {
 	padding-top: 20px;
 }
 
+
 /*Pesquisar*/
 #pesquisar label.item-input-wrapper{
 	background-color: rgba(0,0,0,0);
 }
-
 #pesquisar ion-content{
 	margin-top: 40px;
 }
-
 #pesquisar i::before{
 	font-size: 22px;
 }
-
 #pesquisar a{
 	border: none;
 }
-
 #pesquisar p1{
 	color: #AA79B8; 
 }
+
 
 /*Aderir oferta*/
 #aderir-oferta .card{
@@ -606,93 +556,77 @@ form {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 	color: #636363;
 }
-
 #aderir-oferta ion-item{
 	border: 0;
 	margin-top: 20px;
 }
-
 #aderir-oferta h2{
 	color: #636363;
 	padding-bottom: 10px;
 }
-
 #aderir-oferta .card i{
 	font-size:45px;
 	color: #79c9ad;
 }
-
 #aderir-oferta .item.item-text-wrap{
 	display: flex;
 }
-
 #aderir-oferta .card h2{
 	padding: 3px 0px;
 }
-
 #aderir-oferta .button-prox{
 	margin-top: 95px;
 }
 
+
 /*Notifications*/
 
 /*ofertas-apoiadas*/
-
 #apoiadas label.item-input-wrapper{
 	background-color: rgba(0,0,0,0);
 }
-
 #apoiadas i::before{
 	font-size: 22px;
 }
-
 #apoiadas a{
 	border: none;
 }
-
 #apoiadas p{
 	color: #AA79B8; 
 }
 
-/*perfil-empresa*/
+
+/*Perfil-empresa*/
 #perfil-empresa ion-content{
 	top:0;
 }
-
 #perfil-empresa .full-image{
 	max-height: 150px;
 }
-
 #perfil-empresa i{
 	margin-left: 5px; 
 }
-
 .card-company{
 	position: relative;
 }
-
 .avatar-company img{
     width: 130px;
     height: 130px;
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-
 	transform: translateX(-50%)	translateY(-110%);
     position: absolute;
     z-index: 100;
 	box-shadow: 0 1px 15px rgba(0,0,0,0.15);
 }
-
 .header-company{
 	margin-top: 70px;
 	text-align: center;
 }
-
 .header-company h3{
 	color: #464646;
 }
-
 .header-company p{
 	color: #808080;
 	font-size: 15px;
@@ -700,26 +634,23 @@ form {
 	border-bottom: solid 1px;
 	border-color: #dcdcdc;
 }
-
 .info-company .item{
 	border: 0;
 	color: #808080;
 }
-
 .info-company .item i{
 	color: #72bba1;
 }
-
 .info-company .item p{
 	color: #808080;
 	font-size: 13px;
 }
 
+
 /*Visualizar-Oferta*/
 #visualizar-oferta ion-content{
 	top:0;
 }
-
 .btn-descricao{
 	color: #848484;
     font-size: 17px;
@@ -729,7 +660,6 @@ form {
 	border-color: #d8d8d8;
 	background-color: #fff;
 }
-
 .btn-descricao:active,
 .btn-descricao:focus,
 .btn-descricao:visited,
@@ -738,59 +668,53 @@ form {
     color: #848484;
 	border-color: #d8d8d8;
 }
-
 .btn-descricao p{
 	float: left;
 	padding: 0;
 	margin: 0;
 }
-
 .info-visualizar-oferta{
 	margin-top: 15px;
 	padding: 10px;
 	color: #848484;
 }
-
 .info-visualizar-oferta p{
 	padding-bottom: 10px;
 }
+
 
 /* View - Editar User */
 .editar-user h2{
 	color: #6f6f6f;
 }
-
 .editar-user input{
 	border-bottom: 1px solid;
     border-color: #e0e0e0;
 	color: #8e8e8e;
 }
-
 .editar-user span{
 	color: #8e8e8e;
 }
-
 .editar-user ion-item{
 	border: 0;
 }
-
 .editar-user .button{
 	text-align: left;
 	color: #808080;
 }
-
 .editar-user {
 	padding-top: 15px;
 }
+
 
 /*View - Editar User - Endereço*/
 .editar-user.endereco .col, .editar-user.endereco .row{
 	padding: 0;
 }
-
 .editar-user.endereco .col-20 .item{
 	padding: 16px 12px;
 }
+
 
 /* Preloader */
 #preloader {
@@ -846,7 +770,6 @@ form {
 	-ms-animation: cwSpin .666s linear .2s infinite;
 	animation: cwSpin .666s linear .2s infinite;
 }
-
 @-webkit-keyframes cwSpin
 {
 	0%{-webkit-transform:rotate(0deg);	}

@@ -22,12 +22,14 @@
 
         <ion-list>
 
-            <div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">CNPJ</span>
-                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
-            </label>
+            <!--<div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>-->
+            
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">CNPJ</span>
+                    <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
+                </label>
+            </div>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome(Fantasia)</span>

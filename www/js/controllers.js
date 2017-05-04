@@ -55,16 +55,27 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 		$cordovaImagePicker.getPictures(options)
 			.then(function (results) {
+				console.re.log("Entra no then do getPictures");
 					for (var i = 0; i < results.length; i++) {
+						console.re.log("Entra no for dos results");
+						console.re.log("Caminho da imagem: "+ i + " " + results[i]);
 						$scope.listaUrls.push(results[i]);
 						var nomeImagem = results[i].replace(/^.*[\\\/]/, "");
-						$cordovaFile.readAsText(cordova.file.dataDirectory, nomeImagem)
+						console.re.log("Nome da imagem: "+nomeImagem);
+						/*$cordovaFile.readAsArrayBuffer(cordova.file.dataDirectory, nomeImagem)
 							.then(function (imagem) {
 								var imageBlob = new Blob([imagem], {type: "image/jpeg"})
-								salvarImagemFirebase(imagemBlob, nomeImagem);
+								salvarImagemFirebase(imageBlob, nomeImagem);
 							}, function (error) {
 								// error
-							});
+							});*/
+						var imgBlob = fetch(results[i]).then(function(imagem){
+							return imagem.blob();
+						});
+						console.re.log("Blob da imagem:");
+						console.re.log(imgBlob);
+						salvarImagemFirebase(imgBlob, nomeImagem);
+						console.re.log("Acaba o método salvar");
 					}
 					return results
 				}, function(error) {
@@ -73,8 +84,11 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	}
 	
 	function salvarImagemFirebase(imagemBlob, nomeImagem){
-		var storageRef = firebase.storage().ref(nomeImagem);
-		var uploadTask = $firebaseStorage(storageRef).$put(imagemBlob);
+		console.re.log("Entra no salvarImagemFirebase");
+		var storageRef = firebase.storage().ref('imagens/'+nomeImagem);
+		var afRef= $firebaseStorage(storageRef);
+		afRef.$put(imagemBlob);
+
 	}
 	$scope.teste = function (){
 		cordovaImagemPickerFunction().then(function(resultados){

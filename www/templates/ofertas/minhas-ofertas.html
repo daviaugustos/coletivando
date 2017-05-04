@@ -21,17 +21,19 @@
 
         <ion-list>
             <ion-item class="minhas-ofertas-item" ng-repeat="oferta in ofertasPorPessoaJuridica">
-                <div ng-if="oferta.status == 'AGUARDANDO'" class="aguardando">
-                    <h2>{{oferta.produto}}</h2>
-                    <p>{{oferta.status}}</p>
-                </div>
-                <div ng-if="oferta.status == 'APROVADO'" class="aprovado">
-                    <h2>{{oferta.produto}}</h2>
-                    <p>{{oferta.status}}</p>
-                </div>
-                <div ng-if="oferta.status == 'RECUSADO'" class="recusado">
-                    <h2>{{oferta.produto}}</h2>
-                    <p>{{oferta.status}}</p>
+                <div ng-click="showOpcoesOfertas(oferta.$id)">
+                    <div ng-if="oferta.status == 'AGUARDANDO'" class="aguardando">
+                        <h2>{{oferta.produto}}</h2>
+                        <p>{{oferta.status}}</p>
+                    </div>
+                    <div ng-if="oferta.status == 'APROVADO'" class="aprovado">
+                        <h2>{{oferta.produto}}</h2>
+                        <p>{{oferta.status}}</p>
+                    </div>
+                    <div ng-if="oferta.status == 'RECUSADO'" class="recusado">
+                        <h2>{{oferta.produto}}</h2>
+                        <p>{{oferta.status}}</p>
+                    </div>
                 </div>
             </ion-item>
         </ion-list>

@@ -823,12 +823,12 @@ form {
 .minhas-ofertas-item .aprovado p{
 	color: #70bf9f !important;
 }
-.minhas-ofertas-item .aprovado h2{
+.minhas-ofertas-item .aprovado h2, .minhas-ofertas-item .recusado h2{
 	color: #757575 !important;
 }
 .minhas-ofertas-item .aguardando p{
 	color: #b1b1b1;
 }
 .minhas-ofertas-item .recusado p{
-	color: #da9b9b !important;
+	color: #e45e5e !important;
 }

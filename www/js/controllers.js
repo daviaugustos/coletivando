@@ -104,7 +104,7 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 		$ionicHistory.goBack(-1);
 	}
 });
-app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
+app.controller('MinhasOfertasCtrl', function($state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
 
 	//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
 	$('#preloader').fadeIn();
@@ -118,6 +118,21 @@ app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArr
 		$('#preloader').fadeOut();
 		$scope.ofertasPorPessoaJuridica = array;
 	});
+
+	$scope.showOpcoesOfertas = function(id){
+		var refStatus = firebase.database().ref('ofertas/'+id);
+		$firebaseObject(refStatus).$loaded(function(oferta){
+			if (oferta.status == 'APROVADO'){
+				$state.go('visualizar-oferta', {id: id});
+			}
+			else if (oferta.status == 'AGUARDANDO'){
+
+			}
+			else if (oferta.status == 'RECUSADO'){
+
+			}
+		});
+	}
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
@@ -140,7 +155,6 @@ app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $
 		$ionicHistory.goBack(-1);
 	}
 });
-
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();

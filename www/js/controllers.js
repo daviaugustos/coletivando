@@ -52,24 +52,29 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 			height: 800,
 			quality: 80
 		};
-
+		//Chama o plugin de seleção de imagens.
 		$cordovaImagePicker.getPictures(options)
 			.then(function (results) {
+				//Percorre o array com o caminho de cada imagem.
 					for (var i = 0; i < results.length; i++) {
-						$scope.listaUrls.push(results[i]);
-						var nomeImagem = results[i].replace(/^.*[\\\/]/, "");
-						/*$cordovaFile.readAsArrayBuffer(cordova.file.dataDirectory, nomeImagem)
+						//Acessa a imagem do indice especifico.
+						var caminhoImagem = results[i];
+						//Coloca o caminho em um array para renderizar as imagens selecionadas na interface.
+						$scope.listaUrls.push(caminhoImagem);
+						//Captura apenas o nome da imagem, já preparando para ser utilizado no plugin cordovaFile.
+						var nomeImagem = caminhoImagem.replace(/^.*[\\\/]/, "");
+						//Captura apenas o diretório em que está a imagem, também preparando para ser utilizado no plugin.
+						//TODO: ver como ficará a situação das barras de diretório de sistema operacional.
+						var diretorioImagem = caminhoImagem.substr(0, caminhoImagem.lastIndexOf('/'));
+						//Recupera a imagem de fato.
+						$cordovaFile.readAsArrayBuffer(diretorioImagem, nomeImagem)
 							.then(function (imagem) {
-								var imageBlob = new Blob([imagem], {type: "image/jpeg"})
+								//Cria uma nova instância do tipo Blob para armazenar no firebaseStorage.
+								var imageBlob = new Blob([imagem], {type: "image/jpeg"});
 								salvarImagemFirebase(imageBlob, nomeImagem);
 							}, function (error) {
 								// error
-							});*/
-						fetch(results[i]).then(function(resposta){
-							return resposta.blob();
-						}).then(function(blobImagem){
-							salvarImagemFirebase(blobImagem, nomeImagem);
-						});
+							});
 					}
 					return results
 				}, function(error) {
@@ -78,9 +83,11 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	}
 	
 	function salvarImagemFirebase(blobImagem, nomeImagem){
+		//Cria a referência no firebaseStorage para o arquivo que virá a seguir.
 		var storageRef = firebase.storage().ref('imagens/'+nomeImagem);
 		var afRef= $firebaseStorage(storageRef);
-		afRef.$put(imagemBlob);
+		//Salva a imagem
+		afRef.$put(blobImagem);
 
 	}
 	$scope.teste = function (){

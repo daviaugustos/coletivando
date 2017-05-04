@@ -28,26 +28,26 @@
 }
 .btn-green {
 	width: 100%; 
-	/*background-color: #79C9AD;*/
 	background-color: #63d2aa;
-	-webkit-transition: all 0.5s ease delay;
-	-moz-transition: all 0.5s ease delay;
-	transition: all 0.5s ease delay;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	border: none;
 }
 .btn-green:hover {
-	background-color: #72bba1;
+	/*background-color: #63d2aa;*/
 	color: #fff;
 }
 .btn-green:active, .btn-green:focus {
-	background-color: #72bba1;
+	background-color: #83d6b8;
 	color: #fff;
 }
 .btn-roxo{
 	width: 100%; 
 	background-color: #aa79b8;
-	-webkit-transition: all 0.5s ease delay;
-	-moz-transition: all 0.5s ease delay;
-	transition: all 0.5s ease delay;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
 }
 .btn-roxo:hover {
 	background-color: #aa79b8;
@@ -163,16 +163,23 @@ i.icon.ion-android-arrow-back::before{
 	color: #65476d;
 	padding-top: 2px;
 	border: 0;
+	transition: all 0.3s;
 }
 .tab-item.tab-item-active{
 	/*color: #72bba1;*/
+	transition: all 0.3s;
 	color: #63d2aa;
 }
-
+.tab-item:active{
+	transition: all 0.3s;
+	background-color: rgba(214, 214, 214, 0.37);
+	color: #63d2aa;
+}
 /*Float label dos inputs do ionic*/
 span.input-label{
 	color: #868686;
 }
+
 
 /*Login*/
 .login-coletivando{
@@ -182,13 +189,24 @@ span.input-label{
 	background: linear-gradient(to bottom, #63d2aa, #aa89c7);
 }
 .login-coletivando .btn-green{
-	background: #fff;
+	background: transparent;
+    color: #ffffff;
+    border: solid 1px;
+}
+.login-coletivando .btn-green:active,
+.login-coletivando .btn-green:focus,
+.login-coletivando .btn-green:visited,
+.login-coletivando .btn-green:hover,
+.login-coletivando .btn-green.activated{
+	background-color: #fff;
 	color: #63d2aa;
+	border-color:#fff;
 }
 .login-coletivando input{
 	background: transparent;
 	color: #fff !important;
 }
+
 
 /*Placeholder colors*/
 .login-coletivando input::-webkit-input-placeholder  { 
@@ -221,17 +239,19 @@ form {
 	color: #fff;
 	font-size: 17px;
 	background-color: transparent;
-	-webkit-transition: all 0.5s ease delay;
-	-moz-transition: all 0.5s ease delay;
-	transition: all 0.5s ease delay;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	border: 0;
 }
+.btn-cadastro:hover,
 .btn-cadastro:active,
 .btn-cadastro:focus,
 .btn-cadastro:visited,
 .btn-cadastro.activated{
-	background-color: #fff;
-   	color: #79C9AD;
-	   border: 0;
+	background-color: rgba(210, 210, 210, 0.19);
+   	color: #fff;
+	border: 0;
 }
 .manter-conectado {
 	height: 60px;
@@ -314,7 +334,7 @@ form {
 
 
 /* Personalizar categorias */
-#personalizar button.btnbtn-green{
+#personalizar button.btn.btn-green{
 	position: absolute;
 	bottom: 0;
 }

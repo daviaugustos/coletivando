@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $cordovaImagePicker) {
+app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $cordovaImagePicker, $cordovaFile, $firebaseStorage) {
 	
 	$scope.oferta = {
 		pessoaJuridicaId: "",
@@ -51,15 +51,30 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 			quality: 80
 		};
 
+		$scope.listaUrls = [];
+
 		$cordovaImagePicker.getPictures(options)
 			.then(function (results) {
-				for (var i = 0; i < results.length; i++) {
-				console.log('Image URI: ' + results[i]);
-			}
-			return results
-			}, function(error) {
-				// error getting photos
+					for (var i = 0; i < results.length; i++) {
+						$scope.listaUrls.push(results[i]);
+						var nomeImagem = results[i].replace(/^.*[\\\/]/, "");
+						$cordovaFile.readAsText(cordova.file.dataDirectory, nomeImagem)
+							.then(function (imagem) {
+								var imageBlob = new Blob([imagem], {type: "image/jpeg"})
+								salvarImagemFirebase(imagemBlob, nomeImagem);
+							}, function (error) {
+								// error
+							});
+					}
+					return results
+				}, function(error) {
+					// error getting photos
 			});
+	}
+	
+	function salvarImagemFirebase(imagemBlob, nomeImagem){
+		var storageRef = firebase.storage().ref(nomeImagem);
+		var uploadTask = $firebaseStorage(storageRef).$put(imagemBlob);
 	}
 	$scope.teste = function (){
 		cordovaImagemPickerFunction().then(function(resultados){

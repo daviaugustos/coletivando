@@ -175,8 +175,40 @@ span.input-label{
 }
 
 /*Login*/
+.login-coletivando{
+	background: #63d2aa;
+	background: -webkit-linear-gradient(bottom, #63d2aa, #aa89c7);
+	background: -o-linear-gradient(bottom, #63d2aa, #aa89c7);
+	background: linear-gradient(to bottom, #63d2aa, #aa89c7);
+}
+.login-coletivando .btn-green{
+	background: #fff;
+	color: #63d2aa;
+}
+.login-coletivando input{
+	background: transparent;
+	color: #fff !important;
+}
+
+/*Placeholder colors*/
+.login-coletivando input::-webkit-input-placeholder  { 
+	color:#fff !important ; 
+}
+.login-coletivando input:-moz-placeholder { 
+	color:#fff !important ; 
+}
+.login-coletivando textarea:-moz-placeholder {
+	color:#fff !important ; 
+}
+/*---*/
+
+.login-coletivando .item-input-coletivando{
+	padding-top: 5px;
+}
 #login h2{
-	color: #848484;
+	text-align: center;
+	color: #fff;
+	padding-bottom: 40px;
 }
 form {
 	padding-left: 40px;
@@ -186,9 +218,9 @@ form {
 	margin-top: 40px;
 }
 .btn-cadastro{
-	color: #79C9AD;
+	color: #fff;
 	font-size: 17px;
-	background-color: #fff;
+	background-color: transparent;
 	-webkit-transition: all 0.5s ease delay;
 	-moz-transition: all 0.5s ease delay;
 	transition: all 0.5s ease delay;
@@ -362,7 +394,7 @@ form {
 	padding-bottom: 20px;
 }
 .item-input-coletivando span{
-	color: #7d7d7d;
+	color: #fff;
 }
 .item-input-coletivando input{
 	color: #b1b1b1;

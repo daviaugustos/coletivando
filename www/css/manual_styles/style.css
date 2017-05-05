@@ -120,6 +120,15 @@ input {
 	/*background-color: #72bba1;*/
 	background-color: #63d2aa;
 	color: #fff !important;
+	fill: #fff;
+	-webkit-text-fill-color: #fff;
+}
+.coletivando-bar.transparente{
+	/*background-color: #72bba1;*/
+	background-color: #fff;
+	color: #333 !important;
+	fill: #333;
+	-webkit-text-fill-color: #63d2aa;
 }
 i.icon.ion-android-arrow-back::before{
 	font-size:26px !important;

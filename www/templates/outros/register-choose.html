@@ -1,24 +1,32 @@
 <ion-view title="Register">
-  <ion-nav-bar class="green back"> 
+    <!--<ion-nav-bar class="green back"> 
         <ion-nav-buttons side="left"> 
             <button ng-click="goBackHandler()" class="button button-icon"> 
                 <i class="icon ion-android-arrow-back"></i> 
             </button> 
         </ion-nav-buttons> 
-    </ion-nav-bar>
+    </ion-nav-bar>-->
 
-  <ion-content scroll="false">
-    <div class="block">  
-        <center>
-            <i class="register-icon ion-android-person"></i>
-        </center>
-        <button ui-sref="tabsNaoLogado.cadastro-user" class="button btn btn-green margin-top-20">Usuário</button>
-
-        <center>
-            <i class="register-icon ion-briefcase"></i>
-        </center>
-        <button ui-sref="tabsNaoLogado.cadastro-empresa" class="button btn btn-roxo margin-top-20">Empresa</button>
+    <div class="bar coletivando-bar transparente"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+        </div>
     </div>
- </ion-content>
+
+    <ion-content scroll="false">
+        <div class="block">  
+            <center>
+                <i class="register-icon ion-android-person"></i>
+            </center>
+            <button ui-sref="tabsNaoLogado.cadastro-user" class="button btn btn-green margin-top-20">Usuário</button>
+
+            <center>
+                <i class="register-icon ion-briefcase"></i>
+            </center>
+            <button ui-sref="tabsNaoLogado.cadastro-empresa" class="button btn btn-roxo margin-top-20">Empresa</button>
+        </div>
+    </ion-content>
 
 </ion-view>

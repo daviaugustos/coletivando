@@ -166,15 +166,29 @@ i.icon.ion-android-arrow-back::before{
 	transition: all 0.3s;
 }
 .tab-item.tab-item-active{
-	/*color: #72bba1;*/
+	color: #72bba1;
 	transition: all 0.3s;
-	color: #63d2aa;
+	/*color: #63d2aa;*/
 }
 .tab-item:active{
 	transition: all 0.3s;
 	background-color: rgba(214, 214, 214, 0.37);
 	color: #63d2aa;
 }
+a.tab-item{
+	border:0 !important;
+	transition: all 0.3s;
+}
+a.tab-item.tab-item-active, 
+a.tab-item.tab-item-active:active,
+a.tab-item.tab-item-active:visited,
+a.tab-item.tab-item-active:focus{
+	margin-top: 0px !important; 
+    border:0 !important; 
+	transition: all 0.3s;
+}
+
+
 /*Float label dos inputs do ionic*/
 span.input-label{
 	color: #868686;

@@ -177,7 +177,6 @@ i.icon.ion-android-arrow-back::before{
 }
 a.tab-item{
 	border:0 !important;
-	transition: all 0.3s;
 }
 a.tab-item.tab-item-active, 
 a.tab-item.tab-item-active:active,
@@ -185,7 +184,6 @@ a.tab-item.tab-item-active:visited,
 a.tab-item.tab-item-active:focus{
 	margin-top: 0px !important; 
     border:0 !important; 
-	transition: all 0.3s;
 }
 
 

@@ -1,5 +1,34 @@
 /*Classes gerais*/
 
+/*Adaptações de rows e cols do ionic*/
+.col-30{
+	-webkit-box-flex: 0;
+    -webkit-flex: 0 0 30%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 30%;
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+.col-70{
+	-webkit-box-flex: 0;
+    -webkit-flex: 0 0 70%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 70%;
+    -ms-flex: 0 0 70%;
+    flex: 0 0 70%;
+    max-width: 70%;
+}
+.row.no-padding{
+	padding: 0;
+}
+.col.no-padding-left{
+	padding-left: 0;
+}
+.col.no-padding-right{
+	padding-right: 0;
+}
+
 /*Margens personalizadas*/
 .margin-lateral {
 	margin-left: 20px;
@@ -198,7 +227,7 @@ a.tab-item.tab-item-active:focus{
 
 /*Float label dos inputs do ionic*/
 span.input-label{
-	color: #868686;
+	color: #868686 !important;
 }
 
 
@@ -225,6 +254,9 @@ span.input-label{
 }
 .login-coletivando input{
 	background: transparent;
+	color: #fff !important;
+}
+.login-coletivando span.input-label{
 	color: #fff !important;
 }
 

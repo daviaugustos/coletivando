@@ -154,7 +154,7 @@ app.controller('OfertaListaCtrl', function($ionicViewSwitcher, $state, $firebase
 		$ionicHistory.goBack(-1);
 	}
 });
-app.controller('MinhasOfertasCtrl', function($state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
+app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
 
 	//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
 	$('#preloader').fadeIn();
@@ -173,6 +173,7 @@ app.controller('MinhasOfertasCtrl', function($state, $firebaseObject, $firebaseA
 		var refStatus = firebase.database().ref('ofertas/'+id);
 		$firebaseObject(refStatus).$loaded(function(oferta){
 			if (oferta.status == 'APROVADO'){
+				$ionicViewSwitcher.nextDirection('forward');
 				$state.go('visualizar-oferta', {id: id});
 			}
 			else if (oferta.status == 'AGUARDANDO'){

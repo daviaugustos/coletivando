@@ -51,26 +51,27 @@
                     <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae" class="validate[required]"/>
                 </label>
             </div>
-
-             <div class="item-form">
+            
+            <div class="item-form">
                 <label class="item-input-coletivando item-floating-label">
                     <span class="input-label">CEP</span>
                     <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="validate[required] cep"/>
                 </label>
             </div>
-
-             <div class="item-form">
-                <label class="item-input-coletivando item-floating-label">
-                    <span class="input-label">Rua</span>
-                    <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
-                </label>
-            </div>
-
-            <div class="item-form">
-                <label class="item-input-coletivando item-floating-label">
-                    <span class="input-label">Número</span>
-                    <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
-                </label>
+            
+            <div class="row no-padding">
+                <div class="item-form col col-70 no-padding-left">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Rua</span>
+                        <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
+                    </label>
+                </div>
+                <div class="item-form col col-30 no-padding-right">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Número</span>
+                        <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
+                    </label>
+                </div>
             </div>
 
             <div class="item-form">

@@ -133,7 +133,7 @@ app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ion
 	}
 });
 
-app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('OfertaListaCtrl', function($ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
     
 	var firebaseUser = $firebaseAuth().$getAuth();
 
@@ -146,6 +146,7 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
     $scope.ofertas = $firebaseArray(ref);
 
 	$scope.showOferta = function(id){
+		$ionicViewSwitcher.nextDirection("forward");
 		$state.go('visualizar-oferta', {id: id});
 	}
 

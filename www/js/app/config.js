@@ -37,6 +37,22 @@ angular.module('coletivando')
             }
         });
 
+        //  $stateProvider.state('tabsNaoLogado.visualizarOferta', {
+        //     url: '/visualizar-oferta/:id',
+        //     views:{
+        //         'naoLogado-home-tab':{
+        //             templateUrl: 'templates/ofertas/visualizar-oferta.html',
+        //             controller: 'VisualizarOfertaCtrl'
+        //         }
+        //     }
+        // });
+
+        $stateProvider.state('visualizar-oferta', {
+            url: '/visualizar-oferta/:id',
+            templateUrl: 'templates/ofertas/visualizar-oferta.html',
+            controller: 'VisualizarOfertaCtrl'
+        });
+
         $stateProvider.state('tabsNaoLogado.explore', {
             url: '/nao-logado-explore',
             views: {
@@ -220,12 +236,6 @@ angular.module('coletivando')
             url: '/perfil-empresa',
             templateUrl: 'templates/empresa/perfil-empresa.html',
             controller: 'UsuarioCtrl'
-        });
-
-        $stateProvider.state('visualizar-oferta', {
-            url: '/visualizar-oferta/:id',
-            templateUrl: 'templates/ofertas/visualizar-oferta.html',
-            controller: 'VisualizarOfertaCtrl'
         });
 
         $stateProvider.state('descricao', {

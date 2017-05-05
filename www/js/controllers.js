@@ -31,7 +31,13 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
-		ofertas.$add(oferta);
+		ofertas.$add(oferta).then(function(referencia){
+			var idOfertaSalva = referencia.key;
+			var idPessoaJuridica = firebaseUser.uid;
+			var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
+			console.log(caminhoArmazenamentoImagens);
+			$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
+		});
 		$ionicHistory.goBack(-1);
 	};
 
@@ -42,59 +48,73 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	};
-
+	//Array com as urls das imagens para serem exibidas no preview do cadastro, antes de serem salvas.
 	$scope.listaUrls = [];
-
-	function cordovaImagemPickerFunction (){
-		var options = {
-			maximumImagesCount: 10,
-			width: 800,
-			height: 800,
-			quality: 80
-		};
-		//Chama o plugin de seleção de imagens.
-		$cordovaImagePicker.getPictures(options)
-			.then(function (results) {
-				//Percorre o array com o caminho de cada imagem.
-					for (var i = 0; i < results.length; i++) {
-						//Acessa a imagem do indice especifico.
-						var caminhoImagem = results[i];
-						//Coloca o caminho em um array para renderizar as imagens selecionadas na interface.
-						$scope.listaUrls.push(caminhoImagem);
-						//Captura apenas o nome da imagem, já preparando para ser utilizado no plugin cordovaFile.
-						var nomeImagem = caminhoImagem.replace(/^.*[\\\/]/, "");
-						//Captura apenas o diretório em que está a imagem, também preparando para ser utilizado no plugin.
-						//TODO: ver como ficará a situação das barras de diretório de sistema operacional.
-						var diretorioImagem = caminhoImagem.substr(0, caminhoImagem.lastIndexOf('/'));
-						//Recupera a imagem de fato.
-						$cordovaFile.readAsArrayBuffer(diretorioImagem, nomeImagem)
-							.then(function (imagem) {
-								//Cria uma nova instância do tipo Blob para armazenar no firebaseStorage.
-								var imageBlob = new Blob([imagem], {type: "image/jpeg"});
-								salvarImagemFirebase(imageBlob, nomeImagem);
-							}, function (error) {
-								// error
-							});
-					}
-					return results
-				}, function(error) {
-					// error getting photos
-			});
-	}
 	
-	function salvarImagemFirebase(blobImagem, nomeImagem){
-		//Cria a referência no firebaseStorage para o arquivo que virá a seguir.
-		var storageRef = firebase.storage().ref('imagens/'+nomeImagem);
-		var afRef= $firebaseStorage(storageRef);
-		//Salva a imagem
-		afRef.$put(blobImagem);
+	//Array de fileLists com os objetos das imagens de fato para serem persistidos.
+	$scope.fileListArray = [];
 
+	var inputFile = document.getElementById("fileInput");
+	inputFile.addEventListener("change", function(event){
+		//Filelist com o arquivo selecionado.
+		var fileList = event.target.files;
+		//TODO: Validar o tipo de arquivo
+		//Coloca no array para ser persistido no final do cadastro da oferta.
+		$scope.fileListArray.push(fileList);
+
+		//Percorre a lista de arquivos para capturar a url e enviar para a img na view.
+		for(var i = 0; i < fileList.length; i++){
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				var srcImagem = reader.result;
+				//TODO: Verificar como renderizar imagem base64 no angularjs.
+				$scope.listaUrls.push(srcImagem);
+			}
+
+			reader.readAsDataURL(fileList[i]);
+		}
+	});
+
+	//Método que inicia o processo de persistência das imagens.
+	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens){
+		//Array de filelists, onde cada filelist tem sua imagem unica para se armazenada.
+		var listaDaListaDeArquivos = $scope.fileListArray;
+
+		for(var i = 0; i < listaDaListaDeArquivos.length; i++){
+			//Percorre a filelist para pegar os objetos File individualmente e persistir.
+			for(var d = 0; d < listaDaListaDeArquivos[i].length; d++){
+				//Recupera o filelist do especifico do indice do for que percorre o array de filelist.
+				var listaImagens = listaDaListaDeArquivos[i];
+				
+				//Recupera o arquivo File(listaImagens[d]) e envia para o método de persistência.
+				var tarefaUpload = salvarImagemFirebaseStorage(listaImagens[d], caminhoArmazenamentoImagens);
+
+				//Recebe uma uploadTask(olhar documentação firebaseStorage) e monitora o progresso do upload.
+				controlarExibicaoProgressoUpload(tarefaUpload);
+			}
+		}
 	}
-	$scope.teste = function (){
-		cordovaImagemPickerFunction().then(function(resultados){
-			alert("show ta funfando cara");
-		})
-	}
+
+	//Método que armazena a imagem no firebase
+	function salvarImagemFirebaseStorage(arquivo, caminhoArmazenamentoImagens){
+		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens + arquivo.name);
+		var angularFireRef = $firebaseStorage(storageRef);
+		return angularFireRef.$put(arquivo);
+	};
+
+	//Método que controla a exibição do progresso dos uploads.
+	function controlarExibicaoProgressoUpload(tarefaUpload){
+		tarefaUpload.$progress(function(snapshot) {
+			//Divide o tamanho do total do arquivo pela quantidade já enviada pro servidor.
+			var percentUploaded = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			console.log(percentUploaded);
+		});
+		tarefaUpload.$complete(function(snapshot) {
+			$scope.listaUrls.push(snapshot.downloadURL);
+			console.log(snapshot.downloadURL);
+		});
+	};
 
 });
 

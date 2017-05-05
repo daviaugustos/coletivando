@@ -47,9 +47,9 @@
                 <span class="input-label">Qtd Pessoas</span>
                 <input type="text" placeholder="Qtd Pessoas" ng-model="oferta.qtdPessoas"/>
             </label>
-            <img ng-repeat="url in listaUrls" src="{{url}}">
-            <button ng-click="teste()" class="margin-top button button-block btn btn-green"> imagens</button>
-
+            <img ng-repeat="url in listaUrls" ng-src="{{url}}" width="200">
+            <button ng-click="executarSalvarImagem()" class="margin-top button button-block btn btn-green"> salvar imagens</button>
+            <input type="file" id="fileInput"/>
              <label class="item-input-coletivando item-floating-label">
                 <!-- <span class="input-label">Descrição</span> -->
                 <!-- <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/> -->

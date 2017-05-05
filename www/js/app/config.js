@@ -228,6 +228,12 @@ angular.module('coletivando')
             controller: 'VisualizarOfertaCtrl'
         });
 
+        $stateProvider.state('descricao', {
+            url: '/visualizar-oferta/descricao/:id',
+            templateUrl: 'templates/ofertas/descricao.html',
+            controller: 'VisualizarOfertaCtrl'
+        });
+
         $urlRouterProvider.otherwise('/tabsNaoLogado/nao-logado-home');
     });
 

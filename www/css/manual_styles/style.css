@@ -905,3 +905,13 @@ form {
 .minhas-ofertas-item .recusado p{
 	color: #e45e5e !important;
 }
+
+/*View Descricao*/
+
+.info-desc{
+	padding: 5px;
+}
+.info-desc .row.pb{
+	padding: 5px 10px;
+}
+

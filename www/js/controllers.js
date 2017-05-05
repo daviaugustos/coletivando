@@ -203,6 +203,10 @@ app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+
+	$scope.showDescricao = function(id){
+		$state.go('descricao', {id: id});
+	}
 });
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
@@ -706,6 +710,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $state, $sco
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+	
 });
 
 app.controller('UsuarioFisicoUpdateEnderecoCtrl', function($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){

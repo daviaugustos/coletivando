@@ -1,23 +1,30 @@
 <ion-view  id="cadastro-empresa" title="">
 
-	<ion-nav-bar class="green">
+	<!--<ion-nav-bar class="green">
         <ion-nav-buttons side="left">
             <button ng-click="goBackHandler()" class="button button-icon">
                 <i class="icon ion-android-arrow-back"></i>
             </button>
         </ion-nav-buttons>
-    </ion-nav-bar>
+    </ion-nav-bar>-->
+    <div class="bar coletivando-bar transparente"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+        </div>
+    </div>
 
 
     <form class="cadastro-form">
 
-    <ion-content style="padding:20px">
+    <ion-content style="padding:60px 20px 20px 20px">
 
         <ion-list>
 
             <div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>
 
-            <h2> Cadastre sua empresa </h2>
+            <h2 class="text-center">Cadastre sua empresa</h2>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CNPJ</span>

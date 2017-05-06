@@ -20,8 +20,8 @@
     <ion-content class="padding-navbar">
 
         <ion-list>
-            <ion-item class="minhas-ofertas-item" ng-repeat="oferta in ofertasPorPessoaJuridica">
-                <div ng-click="showOpcoesOfertas(oferta.$id)">
+            <a class="item minhas-ofertas-item" ng-repeat="oferta in ofertasPorPessoaJuridica" ng-click="showOpcoesOfertas(oferta.$id)">
+               
                     <div ng-if="oferta.status == 'AGUARDANDO'" class="aguardando">
                         <h2>{{oferta.produto}}</h2>
                         <p>{{oferta.status}}</p>
@@ -34,8 +34,8 @@
                         <h2>{{oferta.produto}}</h2>
                         <p>{{oferta.status}}</p>
                     </div>
-                </div>
-            </ion-item>
+               
+            </a>
         </ion-list>
 
     </ion-content>

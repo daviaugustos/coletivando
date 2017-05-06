@@ -145,6 +145,19 @@ input {
 	border: 0;
 	margin-bottom: 30px;
 }
+i.icon.ion-android-arrow-back:hover{
+	background: rgba(247, 247, 247, 0.11) !important;
+    border-radius: 50% !important;
+    -webkit-text-fill-color: red !important;
+	opacity: 1;
+}
+.coletivando-bar .button.activated{
+	background: rgba(247, 247, 247, 0.12) !important;
+    border-radius: 50% !important;
+    -webkit-text-fill-color: rgba(241, 241, 241, 0.89);
+	opacity: 1;
+	transition: all 0.2s;
+}
 .coletivando-bar.green{
 	/*background-color: #72bba1;*/
 	background-color: #63d2aa;
@@ -571,14 +584,27 @@ form {
 
 /* Minha Conta */
 .btn-minha-conta {
+	padding-top: 4px;
+    padding-bottom: 4px;
+
 	background-color: transparent; 
 	color: #888; 
 	text-align: left;
+	transition: all 0.2s;
+	border: 0;
+}
+.btn-minha-conta.activated{
+	border: 0;
+	color: #888; 
+	transition: all 0.2s;
+	background-color: rgba(232, 232, 232, 0.52);
 }
 .btn-minha-conta:focus,
 .btn-minha-conta:active,
-.btn-minha-conta:visited {
+.btn-minha-conta:visited,
+.btn-minha-conta:hover {
 	outline: 0;
+	color: #888;
 }
 .btn-minha-conta:first-child {
 	margin-top: 90px;
@@ -915,16 +941,21 @@ form {
 }
 
 /*Minhas ofertas*/
+.minhas-ofertas-item{
+	border-color: #e6e6e6;
+}
 .minhas-ofertas-item p{
 	font-size: 12px;
 	color: #b1b1b1;
 }
-
+.minhas-ofertas-item.activated{
+	background-color: rgba(204, 204, 204, 0.18);
+	border-color: #e6e6e6;
+}
 .minhas-ofertas-item h2{
 	font-size: 16px;
 	color: #a5a5a5;
 }
-
 .minhas-ofertas-item .aprovado p{
 	color: #70bf9f !important;
 }

@@ -190,7 +190,7 @@ app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $fireba
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $state, $scope, $ionicHistory){
+app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate){
 	var empresa;
 	var ref = firebase.database().ref('ofertas/'+$stateParams.id);
 	
@@ -201,6 +201,27 @@ app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $
 			$scope.oferta = oferta;
 		});
 	});
+
+			$scope.options = {
+			loop: true,
+			effect: 'slide',
+			speed: 500,
+			}
+
+				$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+				// data.slider is the instance of Swiper
+				$scope.slider = data.slider;
+				});
+
+				$scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+				console.log('Slide change is beginning');
+				});
+
+				$scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+				// note: the indexes are 0-based
+				$scope.activeIndex = data.slider.activeIndex;
+				$scope.previousIndex = data.slider.previousIndex;
+			});
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);

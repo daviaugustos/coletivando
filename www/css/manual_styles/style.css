@@ -978,3 +978,16 @@ form {
 	padding: 5px 10px;
 }
 
+
+/*CSS SLIDES*/
+
+.box {
+    width: 100%;
+    height: 100%;
+}
+
+ion-slides{
+    height: 38%;
+}
+
+

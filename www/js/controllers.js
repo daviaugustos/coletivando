@@ -440,9 +440,11 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 	var cnpj;
 
 	$scope.validarCnpj = function(){	
+		
 		cnpj = apenasNumeros($('#txtCnpj').val());
 
 		if (cnpj > 0) {
+			$('#preloader').fadeIn();
 			$.ajax({
 				dataType: 'jsonp',
 				url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
@@ -480,6 +482,8 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 					if(data['telefone']) {
 						$scope.pessoaJuridica.telefone = data['telefone'];
 					}
+					
+					$('#preloader').fadeOut();
 
 				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
 					$ionicPopup.alert({
@@ -487,6 +491,8 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 						template : 'Por favor <b>verifique</b> se os dados estão corretos'
 					}).then(function() {
 						$('#txtCnpj').val('');
+						//teste
+						$('#preloader').fadeOut();				
 					});
 				}				
 			});

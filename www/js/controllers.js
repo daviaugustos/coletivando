@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $cordovaImagePicker, $cordovaFile, $firebaseStorage) {
+app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage) {
 	
 	$scope.oferta = {
 		pessoaJuridicaId: "",
@@ -18,10 +18,6 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$('.money').mask('000.000.000.000.000,00', {reverse: true});
 	$('.porcent').mask('00,00%', {reverse: true});
 
-	var quill = new Quill('#editor', {
-		theme: 'snow'
-	});
-
 	$scope.create = function(oferta){
 		$scope.authObj = $firebaseAuth();
     	var firebaseUser = $scope.authObj.$getAuth();
@@ -30,6 +26,8 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		var ofertas = $firebaseArray(ref);
 		
 		oferta.pessoaJuridicaId = firebaseUser.uid;
+
+		oferta.descricao = $('#trix-input-1').val();
 
 		ofertas.$add(oferta).then(function(referencia){
 			var idOfertaSalva = referencia.key;
@@ -68,8 +66,9 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 			reader.onload = function(e) {
 				var srcImagem = reader.result;
-				//TODO: Verificar como renderizar imagem base64 no angularjs.
-				$scope.listaUrls.push(srcImagem);
+				$scope.$apply(function (){
+					$scope.listaUrls.push(srcImagem);
+				});
 			}
 
 			reader.readAsDataURL(fileList[i]);
@@ -439,9 +438,11 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 	var cnpj;
 
 	$scope.validarCnpj = function(){	
+		
 		cnpj = apenasNumeros($('#txtCnpj').val());
 
 		if (cnpj > 0) {
+			$('#preloader').fadeIn();
 			$.ajax({
 				dataType: 'jsonp',
 				url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
@@ -479,6 +480,8 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 					if(data['telefone']) {
 						$scope.pessoaJuridica.telefone = data['telefone'];
 					}
+					
+					$('#preloader').fadeOut();
 
 				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
 					$ionicPopup.alert({
@@ -486,6 +489,8 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 						template : 'Por favor <b>verifique</b> se os dados estão corretos'
 					}).then(function() {
 						$('#txtCnpj').val('');
+						//teste
+						$('#preloader').fadeOut();				
 					});
 				}				
 			});

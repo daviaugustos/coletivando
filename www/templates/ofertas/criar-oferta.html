@@ -52,18 +52,14 @@
                 <span class="input-label">Pessoas</span>
                 <input type="text" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
             </label>
-            
+            <br />
             <img ng-repeat="url in listaUrls" ng-src="{{url}}" width="200">
-            <button ng-click="executarSalvarImagem()" class="margin-top button button-block btn btn-green"> salvar imagens</button>
             <input type="file" id="fileInput"/>
+            <br />  
              <label class="item-input-coletivando item-floating-label">
                 <!-- <span class="input-label">Descrição</span> -->
                 <!-- <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/> -->
-                <div id="editor">
-                  <p>Hello World!</p>
-                  <p>Some initial <strong>bold</strong> text</p>
-                  <p><br></p>
-                </div>
+                <trix-editor angular-trix ng-model="oferta.descricao"></trix-editor>
             </label>
 
             <button ng-click="create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>

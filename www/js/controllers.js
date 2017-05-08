@@ -672,7 +672,8 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 	}
 
 	$scope.create = function(pessoaFisica){
-		$firebaseAuth().$createUserWithEmailAndPassword(pessoaFisica.email, pessoaFisica.password)
+		if(pessoaFisica.password == pessoaFisica.confirmPassword){
+			$firebaseAuth().$createUserWithEmailAndPassword(pessoaFisica.email, pessoaFisica.password)
 			.then(function(firebaseUser){
 				addPessoaFisica(firebaseUser);
 				$ionicPopup.alert({
@@ -688,6 +689,13 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 					case 'auth/email-already-in-use' : tratarEmailJaExistente();
 				}
 			});
+		}
+		else{
+			$ionicPopup.alert({
+				title: 'Senhas não coincidem',
+				template: 'Por favor informe as senhas corretamente'
+			});
+		}
 	}
 	function tratarEmailJaExistente(){
 		$ionicPopup.alert({
@@ -699,10 +707,10 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 	}
 
 	function limpaCamposCadastro() {
-		$("#txtNome").val("");
-		$("#txtEmail").val("");
-		$("#txtSenha").val("");
-		$("#txtConfirmacaoSenha").val("");
+		$scope.pessoaFisica.nome = "";
+		$scope.pessoaFisica.email = "";
+		$scope.pessoaFisica.password = "";
+		$scope.pessoaFisica.confirmPassword = "";
 	}
 	function addPessoaFisica(firebaseUser){
 		var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);

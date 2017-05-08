@@ -9,13 +9,14 @@
 
     <ion-content>
   
-          <div class="info-desc">
-              <div class="row">
-             <div class="col col-100 left">
-                 <h3>{{oferta.produto}}</h3>
-               <h4>{{oferta.descricao}}</h4>
+      <div class="info-desc">
+        <div class="row">
+          <div class="col col-100 left">
+            <h3>{{oferta.produto}}</h3>
+            <p ng-bind-html="oferta.descricao"></p>
           </div>
-    
+        </div>
+      </div>
     
     </ion-content>
 </ion-view>

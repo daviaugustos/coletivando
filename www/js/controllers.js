@@ -18,10 +18,6 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$('.money').mask('000.000.000.000.000,00', {reverse: true});
 	$('.porcent').mask('00,00%', {reverse: true});
 
-	var quill = new Quill('#editor', {
-		theme: 'snow'
-	});
-
 	$scope.create = function(oferta){
 		$scope.authObj = $firebaseAuth();
     	var firebaseUser = $scope.authObj.$getAuth();
@@ -30,6 +26,8 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		var ofertas = $firebaseArray(ref);
 		
 		oferta.pessoaJuridicaId = firebaseUser.uid;
+
+		oferta.descricao = $('#trix-input-1').val();
 
 		ofertas.$add(oferta).then(function(referencia){
 			var idOfertaSalva = referencia.key;

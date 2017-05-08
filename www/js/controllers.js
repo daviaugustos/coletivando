@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $cordovaImagePicker, $cordovaFile, $firebaseStorage) {
+app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage) {
 	
 	$scope.oferta = {
 		pessoaJuridicaId: "",
@@ -68,8 +68,9 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 			reader.onload = function(e) {
 				var srcImagem = reader.result;
-				//TODO: Verificar como renderizar imagem base64 no angularjs.
-				$scope.listaUrls.push(srcImagem);
+				$scope.$apply(function (){
+					$scope.listaUrls.push(srcImagem);
+				});
 			}
 
 			reader.readAsDataURL(fileList[i]);

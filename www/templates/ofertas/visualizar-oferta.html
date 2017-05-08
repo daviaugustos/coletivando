@@ -7,19 +7,33 @@
         </ion-nav-buttons> 
     </ion-nav-bar>
 
-    <ion-content>
+    <ion-content scroll="false">
 
-        <img height="250px" src="img/home/iphone2.jpg" class="centralizarElemento"/> 
+
+        <ion-slides  options="options" slider="data.slider">
+    <ion-slide-page>
+      <div class="box"><img height="250px" src="img/home/iphone2.jpg" class="centralizarElemento"/></div>
+    </ion-slide-page>
+    <ion-slide-page>
+      <div class="box"><img height="250px" src="img/pesquisar/iphone5s.jpg" class="centralizarElemento"/></div>
+    </ion-slide-page>
+    <ion-slide-page>
+      <div class="box"><img height="250px" src="img/pesquisar/iphone5ss.jpg" class="centralizarElemento"/></div>
+    </ion-slide-page>
+        </ion-slides>
+
+
+        <!--<img height="250px" src="img/home/iphone2.jpg" class="centralizarElemento"/> -->
 
         <div class="info-card-home">
             <div class="row">
                 <div class="col col-50 left">
-                    <h3>Iphone 7</h2>
-                    <p>por Submarino</p>
+                    <h3>{{oferta.produto}}</h2>
+                    <p>por {{nomeEmpresa}}</p>
                 </div>
                 <div class="col col-50 right">
-                    <p class="price">R$ 1500,00</p>
-                    <p class="price-old">R$ 3000,00</p>
+                    <p class="price">R$ {{oferta.precoFinalUn}}</p>
+                    <p class="price-old">R$ {{oferta.precoInicialUn}}</p>
                 </div>
             </div>
 
@@ -33,19 +47,19 @@
                     <p>36% completo</p>
                 </div>
                 <div class="col col-50 right">
-                    <p>50% desconto</p>
+                    <p>{{oferta.desconto}}% desconto</p>
                 </div>
             </div>
         </div>    
        
-        <button class="button btn btn-descricao" style="width: 100%;" ng-click="#">
+        <button class="button btn btn-descricao" style="width: 100%;" ng-click="showDescricao(oferta.$id)">
             <p>Descrição</p>
             <i class="icon ion-chevron-right" style="float: right;"></i>
         </button>
         
         <div class="info-visualizar-oferta">
-            <p>50 pessoas já aderiram esta oferta</p>
-            <p>Vence em 27/03/2017</p>
+            <p>{{oferta.qtdPessoas}} pessoas já aderiram esta oferta</p>
+            <p>Vence em {{oferta.dataLimite}}</p>
         </div>
 
         <div class="row">

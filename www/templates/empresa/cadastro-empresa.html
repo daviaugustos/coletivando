@@ -1,23 +1,30 @@
 <ion-view  id="cadastro-empresa" title="">
 
-	<ion-nav-bar class="green">
+	<!--<ion-nav-bar class="green">
         <ion-nav-buttons side="left">
             <button ng-click="goBackHandler()" class="button button-icon">
                 <i class="icon ion-android-arrow-back"></i>
             </button>
         </ion-nav-buttons>
-    </ion-nav-bar>
+    </ion-nav-bar>-->
+    <div class="bar coletivando-bar transparente"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+        </div>
+    </div>
 
 
     <form class="cadastro-form">
 
-    <ion-content style="padding:20px">
+    <ion-content style="padding:60px 20px 20px 20px">
 
         <ion-list>
 
             <div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>
 
-            <h2> Cadastre sua empresa </h2>
+            <h2 class="text-center">Cadastre sua empresa</h2>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CNPJ</span>
@@ -44,15 +51,20 @@
                 <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="validate[required] cep"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Rua</span>
-                <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Número</span>
-                <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
-            </label>
+            <div class="row no-padding">
+                <div class="col col-70 no-padding-left">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Rua</span>
+                        <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
+                    </label>
+                </div>
+                <div class="col col-30 no-padding-right">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Número</span>
+                        <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
+                    </label>
+                </div>
+            </div>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Complemento</span>

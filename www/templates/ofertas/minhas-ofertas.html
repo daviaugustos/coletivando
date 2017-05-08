@@ -1,20 +1,41 @@
 <ion-view title="Minhas ofertas">
 
-	<ion-nav-bar class="green back">
+	<!--<ion-nav-bar class="green back">
         <ion-nav-buttons side="left">
             <button ng-click="goBackHandler()" class="button button-icon">
                 <i class="icon ion-android-arrow-back"></i>
             </button>
         </ion-nav-buttons>
-    </ion-nav-bar>
+    </ion-nav-bar>-->
 
-    <ion-content>
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            Minhas ofertas
+        </div>
+    </div>
+
+    <ion-content class="padding-navbar">
 
         <ion-list>
-            <ion-item ng-repeat="oferta in ofertasPorPessoaJuridica">
-                <h2>{{oferta.produto}}</h2>
-                <p>{{oferta.status}}</p>
-            </ion-item>
+            <a class="item minhas-ofertas-item" ng-repeat="oferta in ofertasPorPessoaJuridica" ng-click="showOpcoesOfertas(oferta.$id)">
+               
+                    <div ng-if="oferta.status == 'AGUARDANDO'" class="aguardando">
+                        <h2>{{oferta.produto}}</h2>
+                        <p>{{oferta.status}}</p>
+                    </div>
+                    <div ng-if="oferta.status == 'APROVADO'" class="aprovado">
+                        <h2>{{oferta.produto}}</h2>
+                        <p>{{oferta.status}}</p>
+                    </div>
+                    <div ng-if="oferta.status == 'RECUSADO'" class="recusado">
+                        <h2>{{oferta.produto}}</h2>
+                        <p>{{oferta.status}}</p>
+                    </div>
+               
+            </a>
         </ion-list>
 
     </ion-content>

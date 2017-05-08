@@ -1,84 +1,116 @@
 <ion-view  id="cadastro-empresa" title="Editar dados da empresa">
 
-	<ion-nav-bar class="green back">
+	<!--<ion-nav-bar class="green back">
         <ion-nav-buttons side="left">
             <button ng-click="goBackHandler()" class="button button-icon">
                 <i class="icon ion-android-arrow-back"></i>
             </button>
         </ion-nav-buttons>
-    </ion-nav-bar>
-
+    </ion-nav-bar>-->
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            Editar empresa
+        </div>
+    </div>
 
     <form class="cadastro-form">
 
-    <ion-content style="padding:20px">
+    <ion-content style="padding: 60px 40px 40px 40px">
 
         <ion-list>
 
-            <div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">CNPJ</span>
-                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Nome(Fantasia)</span>
-                <input id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia" class="validate[required]"/>
-            </label>
+            <!--<div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>-->
             
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Nome</span>
-                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome" class="validate[required]"/>
-            </label>
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">CNPJ</span>
+                    <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
+                </label>
+            </div>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">CNAE(Principal)</span>
-                <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae" class="validate[required]"/>
-            </label>
+             <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Nome(Fantasia)</span>
+                    <input id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia" class="validate[required]"/>
+                </label>
+            </div>
+            
+             <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Nome</span>
+                    <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome" class="validate[required]"/>
+                </label>
+            </div>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">CEP</span>
-                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="validate[required] cep"/>
-            </label>
+             <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">CNAE(Principal)</span>
+                    <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae" class="validate[required]"/>
+                </label>
+            </div>
+            
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">CEP</span>
+                    <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="validate[required] cep"/>
+                </label>
+            </div>
+            
+            <div class="row no-padding">
+                <div class="item-form col col-70 no-padding-left">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Rua</span>
+                        <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
+                    </label>
+                </div>
+                <div class="item-form col col-30 no-padding-right">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Número</span>
+                        <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
+                    </label>
+                </div>
+            </div>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Rua</span>
-                <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
-            </label>
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Complemento</span>
+                    <input id="txtComplemento" type="text" placeholder="Complemento" ng-model="pessoaJuridica.enderecoComplemento" class="validate[optional]"/>
+                </label>
+            </div>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Número</span>
-                <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Complemento</span>
-                <input id="txtComplemento" type="text" placeholder="Complemento" ng-model="pessoaJuridica.enderecoComplemento" class="validate[optional]"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Bairro</span>
-                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro" class="validate[required]"/>
-            </label>
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Bairro</span>
+                    <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro" class="validate[required]"/>
+                </label>
+            </div>
 
             <!-- SELECT ESTADO E CIDADE -->
-            <span class="input-label">Estado</span>
-            <select id="txtEstado" ng-model="pessoaJuridica.enderecoEstado" class="validate[required]"></select>
+            <div class="item-form">
+                <span class="input-label">Estado</span>
+                <select id="txtEstado" ng-model="pessoaJuridica.enderecoEstado" class="validate[required]"></select>
+            </div>
+            <div class="item-form">
+                <span class="input-label">Cidade</span>
+                <select id="txtCidade" ng-model="pessoaJuridica.enderecoCidade" class="validate[required]"></select>
+            </div>
 
-            <span class="input-label">Cidade</span>
-            <select id="txtCidade" ng-model="pessoaJuridica.enderecoCidade" class="validate[required]"></select>
-            <!-- /SELECT ESTADO E CIDADE -->
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Telefone</span>
+                    <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.telefone" class="validate[required] phone"/>
+                </label>
+            </div>
 
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Telefone</span>
-                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.telefone" class="validate[required] phone"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Celular</span>
-                <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular" class="validate[required] phone"/>
-            </label>
+            <div class="item-form">
+                <label class="item-input-coletivando item-floating-label">
+                    <span class="input-label">Celular</span>
+                    <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular" class="validate[required] phone"/>
+                </label>
+            </div>
 
             <button ng-click="update(pessoaJuridica)" type="submit" class="margin-top button button-block btn btn-green">Salvar</button>
 

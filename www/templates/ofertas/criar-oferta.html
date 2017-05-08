@@ -1,16 +1,25 @@
-<ion-view  id="cadastro-empresa" title="Criar oferta">
+<ion-view  id="cadastro-empresa">
 
-	<ion-nav-bar class="green back">
+	<!--<ion-nav-bar class="green back">
         <ion-nav-buttons side="left">
             <button ng-click="goBackHandler()" class="button button-icon">
                 <i class="icon ion-android-arrow-back"></i>
             </button>
         </ion-nav-buttons>
-    </ion-nav-bar>
+    </ion-nav-bar>-->
+
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            Criar oferta
+        </div>
+    </div>
 
     <form class="cadastro-form">
 
-<ion-content style="padding:40px">
+<ion-content style="padding: 60px 40px 40px 40px">
 
         <ion-list>
 
@@ -23,27 +32,38 @@
                 <span class="input-label">Data limite</span>
                 <input type="text" placeholder="Data limite" class="date" ng-model="oferta.dataLimite"/>
             </label>
+
+            <div class="row no-padding">
+                <div class="col col-50 no-padding-left">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Preço</span>
+                        <input type="text" placeholder="Preço inicial" class="money" ng-model="oferta.precoInicialUn"/>
+                    </label>
+                </div>
+                <div class="col col-50 no-padding-right">                
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Desconto(%)</span>
+                        <input type="text" placeholder="Desconto (%)" class="porcent" ng-model="oferta.desconto"/>
+                    </label>
+                </div>
+            </div>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Pessoas</span>
+                <input type="text" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
+            </label>
             
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Preço Inicial</span>
-                <input type="text" placeholder="Preço inicial por unidade" class="money" ng-model="oferta.precoInicialUn"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Desconto(%)</span>
-                <input type="text" placeholder="Desconto por unidade (%)" class="porcent" ng-model="oferta.desconto"/>
-            </label>
-
-            <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Qtd Pessoas</span>
-                <input type="text" placeholder="Qtd Pessoas" ng-model="oferta.qtdPessoas"/>
-            </label>
-
-            <button ng-click="teste()" class="margin-top button button-block btn btn-green">Selecionar imagens</button>
-
+            <img ng-repeat="url in listaUrls" ng-src="{{url}}" width="200">
+            <button ng-click="executarSalvarImagem()" class="margin-top button button-block btn btn-green"> salvar imagens</button>
+            <input type="file" id="fileInput"/>
              <label class="item-input-coletivando item-floating-label">
-                <span class="input-label">Descrição</span>
-                <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/>
+                <!-- <span class="input-label">Descrição</span> -->
+                <!-- <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/> -->
+                <div id="editor">
+                  <p>Hello World!</p>
+                  <p>Some initial <strong>bold</strong> text</p>
+                  <p><br></p>
+                </div>
             </label>
 
             <button ng-click="create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>

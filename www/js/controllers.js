@@ -1,4 +1,4 @@
-app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup) {
+app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $cordovaImagePicker, $cordovaFile, $firebaseStorage) {
 	
 	$scope.oferta = {
 		pessoaJuridicaId: "",
@@ -18,6 +18,10 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$('.money').mask('000.000.000.000.000,00', {reverse: true});
 	$('.porcent').mask('00,00%', {reverse: true});
 
+	var quill = new Quill('#editor', {
+		theme: 'snow'
+	});
+
 	$scope.create = function(oferta){
 		$scope.authObj = $firebaseAuth();
     	var firebaseUser = $scope.authObj.$getAuth();
@@ -27,7 +31,13 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
-		ofertas.$add(oferta);
+		ofertas.$add(oferta).then(function(referencia){
+			var idOfertaSalva = referencia.key;
+			var idPessoaJuridica = firebaseUser.uid;
+			var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
+			console.log(caminhoArmazenamentoImagens);
+			$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
+		});
 		$ionicHistory.goBack(-1);
 	};
 
@@ -38,24 +48,73 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	};
+	//Array com as urls das imagens para serem exibidas no preview do cadastro, antes de serem salvas.
+	$scope.listaUrls = [];
+	
+	//Array de fileLists com os objetos das imagens de fato para serem persistidos.
+	$scope.fileListArray = [];
 
-	$scope.teste = function(){
-		var options = {
-			maximumImagesCount: 10,
-			width: 800,
-			height: 800,
-			quality: 80
-		};
+	var inputFile = document.getElementById("fileInput");
+	inputFile.addEventListener("change", function(event){
+		//Filelist com o arquivo selecionado.
+		var fileList = event.target.files;
+		//TODO: Validar o tipo de arquivo
+		//Coloca no array para ser persistido no final do cadastro da oferta.
+		$scope.fileListArray.push(fileList);
 
-		$cordovaImagePicker.getPictures(options)
-			.then(function (results) {
-				for (var i = 0; i < results.length; i++) {
-				console.log('Image URI: ' + results[i]);
+		//Percorre a lista de arquivos para capturar a url e enviar para a img na view.
+		for(var i = 0; i < fileList.length; i++){
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				var srcImagem = reader.result;
+				//TODO: Verificar como renderizar imagem base64 no angularjs.
+				$scope.listaUrls.push(srcImagem);
 			}
-			}, function(error) {
-				// error getting photos
-			});
+
+			reader.readAsDataURL(fileList[i]);
+		}
+	});
+
+	//Método que inicia o processo de persistência das imagens.
+	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens){
+		//Array de filelists, onde cada filelist tem sua imagem unica para se armazenada.
+		var listaDaListaDeArquivos = $scope.fileListArray;
+
+		for(var i = 0; i < listaDaListaDeArquivos.length; i++){
+			//Percorre a filelist para pegar os objetos File individualmente e persistir.
+			for(var d = 0; d < listaDaListaDeArquivos[i].length; d++){
+				//Recupera o filelist do especifico do indice do for que percorre o array de filelist.
+				var listaImagens = listaDaListaDeArquivos[i];
+				
+				//Recupera o arquivo File(listaImagens[d]) e envia para o método de persistência.
+				var tarefaUpload = salvarImagemFirebaseStorage(listaImagens[d], caminhoArmazenamentoImagens);
+
+				//Recebe uma uploadTask(olhar documentação firebaseStorage) e monitora o progresso do upload.
+				controlarExibicaoProgressoUpload(tarefaUpload);
+			}
+		}
 	}
+
+	//Método que armazena a imagem no firebase
+	function salvarImagemFirebaseStorage(arquivo, caminhoArmazenamentoImagens){
+		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens + arquivo.name);
+		var angularFireRef = $firebaseStorage(storageRef);
+		return angularFireRef.$put(arquivo);
+	};
+
+	//Método que controla a exibição do progresso dos uploads.
+	function controlarExibicaoProgressoUpload(tarefaUpload){
+		tarefaUpload.$progress(function(snapshot) {
+			//Divide o tamanho do total do arquivo pela quantidade já enviada pro servidor.
+			var percentUploaded = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			console.log(percentUploaded);
+		});
+		tarefaUpload.$complete(function(snapshot) {
+			$scope.listaUrls.push(snapshot.downloadURL);
+			console.log(snapshot.downloadURL);
+		});
+	};
 
 });
 
@@ -74,7 +133,7 @@ app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ion
 	}
 });
 
-app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('OfertaListaCtrl', function($ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
     
 	var firebaseUser = $firebaseAuth().$getAuth();
 
@@ -86,11 +145,16 @@ app.controller('OfertaListaCtrl', function($state, $firebaseAuth, $firebaseArray
 	var ref = firebase.database().ref('ofertas');
     $scope.ofertas = $firebaseArray(ref);
 
+	$scope.showOferta = function(id){
+		$ionicViewSwitcher.nextDirection("forward");
+		$state.go('visualizar-oferta', {id: id});
+	}
+
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
 });
-app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
+app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
 
 	//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
 	$('#preloader').fadeIn();
@@ -105,11 +169,68 @@ app.controller('MinhasOfertasCtrl', function($state, $firebaseAuth, $firebaseArr
 		$scope.ofertasPorPessoaJuridica = array;
 	});
 
+	$scope.showOpcoesOfertas = function(id){
+		var refStatus = firebase.database().ref('ofertas/'+id);
+		$firebaseObject(refStatus).$loaded(function(oferta){
+			if (oferta.status == 'APROVADO'){
+				$ionicViewSwitcher.nextDirection('forward');
+				$state.go('visualizar-oferta', {id: id});
+			}
+			else if (oferta.status == 'AGUARDANDO'){
+
+			}
+			else if (oferta.status == 'RECUSADO'){
+
+			}
+		});
+	}
+
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
 });
 
+app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate){
+	var empresa;
+	var ref = firebase.database().ref('ofertas/'+$stateParams.id);
+	
+	$firebaseObject(ref).$loaded(function(oferta){
+		var refEmpresa = firebase.database().ref('pessoaJuridica/'+oferta.pessoaJuridicaId);
+		$firebaseObject(refEmpresa).$loaded(function(empresa){
+			$scope.nomeEmpresa = empresa.nomeFantasia;
+			$scope.oferta = oferta;
+		});
+	});
+
+			$scope.options = {
+			loop: true,
+			effect: 'slide',
+			speed: 500,
+			}
+
+				$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+				// data.slider is the instance of Swiper
+				$scope.slider = data.slider;
+				});
+
+				$scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+				console.log('Slide change is beginning');
+				});
+
+				$scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+				// note: the indexes are 0-based
+				$scope.activeIndex = data.slider.activeIndex;
+				$scope.previousIndex = data.slider.previousIndex;
+			});
+
+	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+
+	$scope.showDescricao = function(id){
+		$state.go('descricao', {id: id});
+	}
+});
 
 app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
 	$scope.categorias = CategoriaService.readAll();
@@ -459,6 +580,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		obj = _.extend(obj, $scope.pessoaJuridica);
 		delete obj.password;
 		obj.$save();
+		$ionicHistory.goBack(-1);
 	}
 
 	$scope.showUpdateJuridica = function(id){
@@ -611,6 +733,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $state, $sco
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
+	
 });
 
 app.controller('UsuarioFisicoUpdateEnderecoCtrl', function($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){

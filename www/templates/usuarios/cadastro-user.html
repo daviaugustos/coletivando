@@ -22,22 +22,22 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome</span>
-                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaFisica.nome"/>
+                <input ng-required="true" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaFisica.nome"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Email</span>
-                <input id="txtEmail" type="email" placeholder="Email" ng-model="pessoaFisica.email"/>
+                <input  ng-required="true" id="txtEmail" type="email" placeholder="Email" ng-model="pessoaFisica.email"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
-                <input id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaFisica.password"/>
+                <input data-ng-minlength="6" ng-required="true" id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaFisica.password"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Confirmar</span>
-                <input id="txtConfirmacaoSenha" type="password" placeholder="Confirmar senha"/>
+                <input data-ng-minlength="6" ng-required="true" id="txtConfirmacaoSenha" type="password" placeholder="Confirmar senha" ng-model="pessoaFisica.confirmPassword"/>
             </label>
             
             <button class="margin-top button button-block btn btn-green">Cadastrar</button>

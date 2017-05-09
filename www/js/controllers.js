@@ -155,7 +155,6 @@ app.controller('OfertaListaCtrl', function($ionicViewSwitcher, $state, $firebase
 });
 app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
 
-	//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
 	$('#preloader').fadeIn();
 
 	var firebaseUser = $firebaseAuth().$getAuth();
@@ -325,7 +324,6 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 
 	$scope.login = function(usuario){
 		if($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {
-			//$ionicLoading.show({template: '<img	src="img/outros/preloader.gif"><br />Carregando..'});
 			$('#preloader').fadeIn();
 
 			$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
@@ -339,12 +337,10 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 						}
 					});
 					limparCamposCadastro();
-					//$ionicLoading.hide();
 					$('#preloader').fadeOut();
 				})
 				.catch(function(error){
 					setTimeout(function() {
-						//$ionicLoading.hide();
 						$('#preloader').fadeOut();
 					}, 800);
 					setTimeout(function() {
@@ -355,7 +351,6 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 					}, 1200);
 				});
 		} else {
-			//$ionicLoading.hide();
 			$('#preloader').fadeOut();
 			$ionicPopup.alert({
 				title : 'Erro',
@@ -599,7 +594,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 });
 
 
-app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+app.controller('UsuarioJuridicoUpdateCtrl', function($ionicPlatform, $firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	
 	var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
 	$http.get(jsonpUrl)
@@ -644,8 +639,14 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($firebaseAuth, $firebaseObj
 	$scope.authObj = $firebaseAuth();
     var firebaseUser = $scope.authObj.$getAuth();
 
-	var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid);
-    $scope.pessoaJuridica = $firebaseObject(ref);
+	$ionicPlatform.ready(function () {
+		$('#preloader').fadeIn();
+		var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid);
+		$firebaseObject(ref).$loaded(function(dadosJuridica){
+			$scope.pessoaJuridica = dadosJuridica;
+			$('#preloader').fadeOut();
+		});	
+	});
 
     $scope.update = function(pessoaJuridica){
 		ref = pessoaJuridica;

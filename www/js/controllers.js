@@ -132,7 +132,7 @@ app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ion
 	}
 });
 
-app.controller('OfertaListaCtrl', function($ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
+app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
     
 	var firebaseUser = $firebaseAuth().$getAuth();
 
@@ -140,9 +140,14 @@ app.controller('OfertaListaCtrl', function($ionicViewSwitcher, $state, $firebase
 	if (firebaseUser) {
         $state.go('tabsJuridicoLogado.home');
     }
-
-	var ref = firebase.database().ref('ofertas');
-    $scope.ofertas = $firebaseArray(ref);
+	$ionicPlatform.ready(function(){
+		$("#preloader").fadeIn();
+		var ref = firebase.database().ref('ofertas');
+		$firebaseArray(ref).$loaded(function(dadosOfertas){
+			$scope.ofertas = dadosOfertas;
+			$("#preloader").fadeOut();
+		});
+	});
 
 	$scope.showOferta = function(id){
 		$ionicViewSwitcher.nextDirection("forward");

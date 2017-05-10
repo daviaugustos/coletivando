@@ -28,8 +28,8 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
-		oferta.precoInicialUn = parseFloat(oferta.precoInicialUn).toFixed(2);
-		oferta.desconto = parseFloat(oferta.desconto).toFixed(2);
+		oferta.precoInicialUn = parseFloat(oferta.precoInicialUn.replace(/\./g,'').replace(',', '.'));
+		oferta.desconto = parseFloat(oferta.desconto.replace(/\./g,'').replace(',', '.'));
 		oferta.precoFinalUn = calculaPrecoFinal(oferta.precoInicialUn, oferta.desconto);
 
 		oferta.descricao = $('#trix-input-1').val();

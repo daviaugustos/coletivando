@@ -16,7 +16,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	/* Mask */
 	$('.date').mask('00/00/0000');
 	$('.money').mask('000.000.000.000.000,00', {reverse: true});
-	$('.porcent').mask('00,00%', {reverse: true});
+	$('.porcent').mask('00,00', {reverse: true});
 
 	$scope.create = function(oferta){
 		$scope.authObj = $firebaseAuth();
@@ -26,6 +26,11 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		var ofertas = $firebaseArray(ref);
 		
 		oferta.pessoaJuridicaId = firebaseUser.uid;
+
+		// Tratativa de armazenamento como número no banco e calculo de preço final
+		oferta.precoInicialUn = parseFloat(oferta.precoInicialUn).toFixed(2);
+		oferta.desconto = parseFloat(oferta.desconto).toFixed(2);
+		oferta.precoFinalUn = calculaPrecoFinal(oferta.precoInicialUn, oferta.desconto);
 
 		oferta.descricao = $('#trix-input-1').val();
 
@@ -37,6 +42,10 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 			$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
 		});
 		$ionicHistory.goBack(-1);
+	};
+
+	function calculaPrecoFinal(precoInicial, desconto){
+		return precoInicial - (precoInicial*(desconto/100));
 	};
 
 	$scope.showPesquisa = function(){

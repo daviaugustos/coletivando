@@ -53,7 +53,7 @@
                 <input type="text" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
             </label>
 
-            <ion-scroll direction="x" class="wide-as-needed lista-img">
+            <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
                 <div class="slide" ng-repeat="url in listaUrls">
                     <img ng-src="{{url}}">
                 </div>

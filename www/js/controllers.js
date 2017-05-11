@@ -41,7 +41,6 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 			console.log(caminhoArmazenamentoImagens);
 			$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
 		});
-		$ionicHistory.goBack(-1);
 	};
 
 	function calculaPrecoFinal(precoInicial, desconto){
@@ -77,35 +76,27 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		}
 	});
 
-	//Método que inicia o processo de persistência das imagens.
+	//Método que executa todo o processo de persistência das imagens.
 	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens){
+		$("#preloader").fadeIn();
 		var listaArquivos = $scope.fileArray;
-			for(var d = 0; d < listaArquivos.length; d++){
-				var imagem = listaArquivos[d];
-				var tarefaUpload = salvarImagemFirebaseStorage(imagem, caminhoArmazenamentoImagens);
-				controlarExibicaoProgressoUpload(tarefaUpload);
+
+		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
+			storageRef.constructor.prototype.putFiles = function(listaArquivos) { 
+				var ref = this;
+				return Promise.all(listaArquivos.map(function(file) {
+					return ref.child(file.name).put(file);
+				}));
 			}
+
+		storageRef.putFiles(listaArquivos).then(function(metadatas) {
+			console.log(metadatas);
+			$("#preloader").fadeOut();
+			$ionicHistory.goBack(-1);
+		}).catch(function(error) {
+			console.log("deu erro");
+		});
 	}
-
-	//Método que armazena a imagem no firebase
-	function salvarImagemFirebaseStorage(arquivo, caminhoArmazenamentoImagens){
-		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens + arquivo.name);
-		var angularFireRef = $firebaseStorage(storageRef);
-		return angularFireRef.$put(arquivo);
-	};
-
-	//Método que controla a exibição do progresso dos uploads.
-	function controlarExibicaoProgressoUpload(tarefaUpload){
-		tarefaUpload.$progress(function(snapshot) {
-			var percentUploaded = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			console.log(percentUploaded);
-		});
-		tarefaUpload.$complete(function(snapshot) {
-			$scope.listaUrls.push(snapshot.downloadURL);
-			console.log(snapshot.downloadURL);
-		});
-	};
-
 });
 
 app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){

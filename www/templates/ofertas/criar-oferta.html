@@ -58,11 +58,13 @@
                     <img ng-src="{{url}}">
                 </div>
             </ion-scroll>
-
+            
+            <button id="labelInput" for="fileInput">
+                <i class="icon ion-image"></i>
+                Adicionar imagens
+            </button>
             <input type="file" id="fileInput"/>
-            <br/> 
-            <br/>
-            <br/> 
+
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Descrição</span>
                 <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/>

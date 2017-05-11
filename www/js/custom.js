@@ -2,6 +2,10 @@ $(document).on('click', '.categoria-icon', function(){
     $("p", this).toggleClass('selected');
 })
 
+$(document).on('click', '#labelInput', function(){
+    $("#fileInput").click();
+});
+
 
 /* Cadastros */ 
 

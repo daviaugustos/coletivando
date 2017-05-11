@@ -991,11 +991,9 @@ ion-slides{
 }
 
 /*Imagens da criar ofertas*/
-
 .lista-img{
 	margin-top: 50px;
     width: 100%;
-    height: 170px;
     background-color: #fff;
     overflow-y: hidden;
     overflow-x: hidden;

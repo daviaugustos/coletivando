@@ -32,8 +32,6 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		oferta.desconto = parseFloat(oferta.desconto.replace(/\./g,'').replace(',', '.'));
 		oferta.precoFinalUn = calculaPrecoFinal(oferta.precoInicialUn, oferta.desconto);
 
-		oferta.descricao = $('#trix-input-1').val();
-
 		ofertas.$add(oferta).then(function(referencia){
 			var idOfertaSalva = referencia.key;
 			var idPessoaJuridica = firebaseUser.uid;

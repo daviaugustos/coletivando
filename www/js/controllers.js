@@ -545,7 +545,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 	
 	$scope.create = function(pessoaJuridica){
 
-		if($('#txtSenha').val() == $('#txtConfirmSenha').val()) {
+		if (pessoaJuridica.password == pessoaJuridica.confirmPassword) {
 			$firebaseAuth().$createUserWithEmailAndPassword(pessoaJuridica.email, pessoaJuridica.password)
 				.then(function(firebaseUser){
 					addPessoaJuridica(firebaseUser);
@@ -554,7 +554,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 
 				});			
 		} else {
-			console.log('Senhas inválidas');
+			alert("Senhas inválidas");
 		}
 	}
 

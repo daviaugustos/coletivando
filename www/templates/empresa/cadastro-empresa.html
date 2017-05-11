@@ -101,19 +101,18 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
-                <input id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaJuridica.password" class="validate[required]"/>
+                <input id="txtSenhaNovo" type="password" placeholder="Senha" ng-model="pessoaJuridica.password" class="validate[required]"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Confirmar senha</span>
-                <input type="password" id="txtConfirmSenha" placeholder="Confirmar senha" class="validate[required]"/>
+                <input type="password" id="txtConfirmSenha" placeholder="Confirmar senha" ng-model="pessoaJuridica.confirmPassword" class="validate[required]"/>
             </label>
 
-            <label class="termos-de-uso">
+            <!--<label class="termos-de-uso">
                 <span>Eu li e aceito os termos de uso</span>
                 <input type="checkbox" class="validate[required]">
-            </label>
-
+            </label>-->
             <button ng-click="create(pessoaJuridica)" type="submit" class="margin-top button button-block btn btn-green">Cadastrar</button>
 
         </ion-list>

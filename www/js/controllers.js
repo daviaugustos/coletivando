@@ -611,44 +611,6 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 app.controller('UsuarioJuridicoUpdateCtrl', function($ionicPlatform, $firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
 	
 	var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
-	$http.get(jsonpUrl)
-	.then(
-		function (resposta){
-			console.log(resposta['data']);
-			var items = [];
-		    var options = '<option value="">Escolha um estado</option>';  
-
-		    $.each(resposta['data'], function (key, val) {
-		      options += '<option value="' + val.nome + '">' + val.nome + '</option>';
-		    });         
-		    $("#txtEstado").html(options);        
-		    
-		    $("#txtEstado").change(function () {        
-		    
-		      var options_cidades = '';
-		      var str = "";         
-		      
-		      $("#txtEstado option:selected").each(function () {
-		        str += $(this).text();
-		      });
-		      
-		      $.each(resposta['data'], function (key, val) {
-		        if(val.nome == str) {             
-		          $.each(val.cidades, function (key_city, val_city) {
-		            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-		          });             
-		        }
-		      });
-
-		      $("#txtCidade").html(options_cidades);
-		      
-		    }).change(); 
-		},
-		function (error){
-			console.log(error);
-		}
-
-	);
 	
 	$scope.authObj = $firebaseAuth();
     var firebaseUser = $scope.authObj.$getAuth();
@@ -658,6 +620,50 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($ionicPlatform, $firebaseAu
 		var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid);
 		$firebaseObject(ref).$loaded(function(dadosJuridica){
 			$scope.pessoaJuridica = dadosJuridica;
+			var estado = dadosJuridica.enderecoEstado;
+			var cidade = dadosJuridica.enderecoCidade;
+
+			$http.get(jsonpUrl)
+			.then(
+				function (resposta){
+					console.log(resposta['data']);
+					var items = [];
+				    var options = '<option value="">Escolha um estado</option>';  
+
+				    $.each(resposta['data'], function (key, val) {
+				      options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+				    });         
+				    $("#txtEstado").html(options);        
+				    $("#txtEstado").val(estado);        
+				    
+				    $("#txtEstado").change(function () {        
+				    
+				      var options_cidades = '';
+				      var str = "";         
+				      
+				      $("#txtEstado option:selected").each(function () {
+				        str += $(this).text();
+				      });
+				      
+				      $.each(resposta['data'], function (key, val) {
+				        if(val.nome == str) {             
+				          $.each(val.cidades, function (key_city, val_city) {
+				            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+				          });             
+				        }
+				      });
+
+				      $("#txtCidade").html(options_cidades);
+				      $("#txtCidade").val(cidade);
+				      
+				    }).change(); 
+				},
+				function (error){
+					console.log(error);
+				}
+
+			);
+
 			$('#preloader').fadeOut();
 		});	
 	});

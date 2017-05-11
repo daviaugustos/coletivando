@@ -55,22 +55,15 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	};
-	//Array com as urls das imagens para serem exibidas no preview do cadastro, antes de serem salvas.
 	$scope.listaUrls = [];
-	
-	//Array de fileLists com os objetos das imagens de fato para serem persistidos.
-	$scope.fileListArray = [];
+	$scope.fileArray = [];
 
 	var inputFile = document.getElementById("fileInput");
 	inputFile.addEventListener("change", function(event){
-		//Filelist com o arquivo selecionado.
 		var fileList = event.target.files;
-		//TODO: Validar o tipo de arquivo
-		//Coloca no array para ser persistido no final do cadastro da oferta.
-		$scope.fileListArray.push(fileList);
 
-		//Percorre a lista de arquivos para capturar a url e enviar para a img na view.
 		for(var i = 0; i < fileList.length; i++){
+			$scope.fileArray.push(fileList[i]);
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
@@ -86,22 +79,12 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 	//Método que inicia o processo de persistência das imagens.
 	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens){
-		//Array de filelists, onde cada filelist tem sua imagem unica para se armazenada.
-		var listaDaListaDeArquivos = $scope.fileListArray;
-
-		for(var i = 0; i < listaDaListaDeArquivos.length; i++){
-			//Percorre a filelist para pegar os objetos File individualmente e persistir.
-			for(var d = 0; d < listaDaListaDeArquivos[i].length; d++){
-				//Recupera o filelist do especifico do indice do for que percorre o array de filelist.
-				var listaImagens = listaDaListaDeArquivos[i];
-				
-				//Recupera o arquivo File(listaImagens[d]) e envia para o método de persistência.
-				var tarefaUpload = salvarImagemFirebaseStorage(listaImagens[d], caminhoArmazenamentoImagens);
-
-				//Recebe uma uploadTask(olhar documentação firebaseStorage) e monitora o progresso do upload.
+		var listaArquivos = $scope.fileArray;
+			for(var d = 0; d < listaArquivos.length; d++){
+				var imagem = listaArquivos[d];
+				var tarefaUpload = salvarImagemFirebaseStorage(imagem, caminhoArmazenamentoImagens);
 				controlarExibicaoProgressoUpload(tarefaUpload);
 			}
-		}
 	}
 
 	//Método que armazena a imagem no firebase
@@ -114,7 +97,6 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	//Método que controla a exibição do progresso dos uploads.
 	function controlarExibicaoProgressoUpload(tarefaUpload){
 		tarefaUpload.$progress(function(snapshot) {
-			//Divide o tamanho do total do arquivo pela quantidade já enviada pro servidor.
 			var percentUploaded = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			console.log(percentUploaded);
 		});

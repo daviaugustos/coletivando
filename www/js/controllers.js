@@ -8,7 +8,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		desconto: "",
 		qtdPessoas: "",
 		descricao: "",
-		imagem: "",
+		imagem: "img/home/iphone2.jpg",
 		precoFinalUn: "",
 		status: "AGUARDANDO"
 	}
@@ -517,7 +517,7 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		function (resposta){
 			console.log(resposta['data']);
 			var items = [];
-		    var options = '<option value="">escolha um estado</option>';  
+		    var options = '<option value="">Escolha um estado</option>';  
 
 		    $.each(resposta['data'], function (key, val) {
 		      options += '<option value="' + val.nome + '">' + val.nome + '</option>';
@@ -616,7 +616,7 @@ app.controller('UsuarioJuridicoUpdateCtrl', function($ionicPlatform, $firebaseAu
 		function (resposta){
 			console.log(resposta['data']);
 			var items = [];
-		    var options = '<option value="">escolha um estado</option>';  
+		    var options = '<option value="">Escolha um estado</option>';  
 
 		    $.each(resposta['data'], function (key, val) {
 		      options += '<option value="' + val.nome + '">' + val.nome + '</option>';

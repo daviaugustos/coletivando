@@ -18,24 +18,29 @@
 
     <form novalidate name="cadastroForm" ng-submit="create(pessoaJuridica)" class="cadastro-form">
 
-    <ion-content style="padding:60px 20px 20px 20px">
+    <ion-content overflow-scroll="false" has-bouncing="true" style="padding:60px 20px 20px 20px">
         <ion-list>
 
             <h2 class="text-center">Cadastre sua empresa</h2>
 
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.cnpj.$invalid && cadastroForm.cnpj.$dirty, 'no-errors' : cadastroForm.cnpj.$valid}">
+            <label style="display:none" class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.gambiarra.$invalid, 'no-errors' : cadastroForm.gambiarra.$valid}">
                 <span class="input-label">CNPJ</span>
-                <input name="cnpj" required id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
+                <input ng-required="true" name="gambiarra" id="txtGambiarra" type="text" placeholder="Gambiarra" ng-model="Gambiarra"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nomeFantasia.$invalid && cadastroForm.nomeFanatasia.$dirty, 'no-errors' : cadastroForm.nomeFantasia.$valid}">
+            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.cnpj.$invalid && !cadastroForm.cnpj.$pristine, 'no-errors' : cadastroForm.cnpj.$valid}">
+                <span class="input-label">CNPJ</span>
+                <input ng-required=true name="cnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nomeFantasia.$invalid && !cadastroForm.nomeFantasia.$pristine, 'no-errors' : cadastroForm.nomeFantasia.$valid}">
                 <span class="input-label">Nome(Fantasia)</span>
-                <input name="nomeFantasia" ng-required="true" id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia"/>
+                <input ng-required="true" name="nomeFantasia" id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia"/>
             </label>
             
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nome.$invalid && cadastroForm.nome.$dirty, 'no-errors' : cadastroForm.nome.$valid}">
+            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nome.$invalid && !cadastroForm.nome.$pristine, 'no-errors' : cadastroForm.nome.$valid}">
                 <span class="input-label">Nome</span>
-                <input ng-required="true" name="nome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
+                <input required name="nome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">

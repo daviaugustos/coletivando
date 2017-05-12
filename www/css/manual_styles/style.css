@@ -298,6 +298,12 @@ form {
 	padding-left: 40px;
 	padding-right: 40px;
 }
+.has-errors {
+    border-bottom-color: #e88a83;
+}
+.no-errors {
+    border-bottom-color: #63d2aa;
+}
 .login-form {
 	margin-top: 40px;
 }

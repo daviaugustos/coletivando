@@ -1,5 +1,5 @@
-app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage) {
-	
+app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage) {
+
 	$scope.oferta = {
 		pessoaJuridicaId: "",
 		produto: "",
@@ -15,16 +15,16 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 	/* Mask */
 	$('.date').mask('00/00/0000');
-	$('.money').mask('000.000.000.000.000,00', {reverse: true});
-	$('.porcent').mask('00,00', {reverse: true});
+	$('.money').mask('000.000.000.000.000,00', { reverse: true });
+	$('.porcent').mask('00,00', { reverse: true });
 
-	$scope.create = function(oferta){
+	$scope.create = function (oferta) {
 		$scope.authObj = $firebaseAuth();
-    	var firebaseUser = $scope.authObj.$getAuth();
+		var firebaseUser = $scope.authObj.$getAuth();
 
 		var ref = firebase.database().ref('ofertas');
 		var ofertas = $firebaseArray(ref);
-		
+
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
@@ -86,15 +86,15 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		}
 	};
 
-	function calculaPrecoFinal(precoInicial, desconto){
-		return precoInicial - (precoInicial*(desconto/100));
+	function calculaPrecoFinal(precoInicial, desconto) {
+		return precoInicial - (precoInicial * (desconto / 100));
 	};
 
-	$scope.showPesquisa = function(){
+	$scope.showPesquisa = function () {
 		$state.go('pesquisar');
 	};
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	};
 	$scope.listaUrls = [];
@@ -102,17 +102,17 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	$scope.idOferta = "";
 
 	var inputFile = document.getElementById("fileInput");
-	inputFile.addEventListener("change", function(event){
+	inputFile.addEventListener("change", function (event) {
 		var fileList = event.target.files;
 
-		for(var i = 0; i < fileList.length; i++){
+		for (var i = 0; i < fileList.length; i++) {
 			$scope.fileArray.push(fileList[i]);
 			var reader = new FileReader();
 
-			reader.onload = function(e) {
+			reader.onload = function (e) {
 				var srcImagem = reader.result;
 				if (srcImagem.match(/^data:image\//)) {
-					$scope.$apply(function (){
+					$scope.$apply(function () {
 						$scope.listaUrls.push(srcImagem);
 					});
 				} else {
@@ -125,72 +125,80 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	});
 
 	//Método que executa todo o processo de persistência das imagens.
-	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens){
+	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
 		$("#preloader").fadeIn();
 		var listaArquivos = $scope.fileArray;
 
 		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
-			storageRef.constructor.prototype.putFiles = function(listaArquivos) { 
-				var ref = this;
-				return Promise.all(listaArquivos.map(function(file) {
-					return ref.child(file.name).put(file);
-				}));
-			}
+		storageRef.constructor.prototype.putFiles = function (listaArquivos) {
+			var ref = this;
+			return Promise.all(listaArquivos.map(function (file) {
+				return ref.child(file.name).put(file);
+			}));
+		}
 
-		storageRef.putFiles(listaArquivos).then(function(arrayMetadados) {
+		storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
 			var objetoModeloImagem = {
 				ofertaId: $scope.idOferta,
 				imagemUrl: ""
 			}
-			arrayMetadados.forEach(function(infoImagem){
+			arrayMetadados.forEach(function (infoImagem) {
 				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
 				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
 
-				imagensCollection.$add(objetoModeloImagem).then(function(referencia){
+				imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
 					console.log(referencia);
 				});
 			});
 			$("#preloader").fadeOut();
 			$ionicHistory.goBack(-1);
-		}).catch(function(error) {
+		}).catch(function (error) {
 			console.log("deu erro");
 		});
 	}
 });
 
-app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+app.controller('OfertaUpdateCtrl', function ($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
 	var id = $stateParams.id;
-    var ref = firebase.database().ref('ofertas/'+id);
-    $scope.oferta = $firebaseObject(ref);
+	var ref = firebase.database().ref('ofertas/' + id);
+	$scope.oferta = $firebaseObject(ref);
 
-    $scope.update = function(oferta){
+	$scope.update = function (oferta) {
 		ref = oferta;
 		ref.$save();
 	}
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });
 
-app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
-    
-	var firebaseUser = $firebaseAuth().$getAuth();
+app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
 
-	//Se já estiver logado
-	if (firebaseUser) {
-        $state.go('tabsJuridicoLogado.home');
-    }
-	$ionicPlatform.ready(function(){
+	$ionicPlatform.ready(function () {
+		// Tratativa de continuar sessão.
+		// var firebaseUser = $firebaseAuth().$getAuth();
+		// //Se já estiver logado
+		// if (firebaseUser) {
+		// 	var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
+		// 	$firebaseObject(ref).$loaded(function(cnpj){
+		// 		if (cnpj.$value != null){
+		// 			$state.go('tabsJuridicoLogado.home');
+		// 		}else{
+		// 			$state.go('tabsFisicoLogado.home');
+		// 		}
+		// 	});
+		// }
+
 		$("#preloader").fadeIn();
 		getObjOfertaComImagem();
 	});
 
-	function getObjOfertaComImagem(){
+	function getObjOfertaComImagem() {
 		var ref = firebase.database().ref('ofertas');
-		$firebaseArray(ref).$loaded(function(dadosOfertas){
-			dadosOfertas = dadosOfertas.map(function(oferta){
-				getImagemExibicao(oferta.$id).then(function(urlImagem){
+		$firebaseArray(ref).$loaded(function (dadosOfertas) {
+			dadosOfertas = dadosOfertas.map(function (oferta) {
+				getImagemExibicao(oferta.$id).then(function (urlImagem) {
 					oferta.imagem = urlImagem;
 				});
 				return oferta;
@@ -199,29 +207,29 @@ app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $
 			$("#preloader").fadeOut();
 		});
 	}
-	
-	function getImagemExibicao(ofertaId){
+
+	function getImagemExibicao(ofertaId) {
 		var refImagens = firebase.database().ref("imagens");
 		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
-		
-		return $firebaseArray(query).$loaded(function(arrayImagensOfertaEspecifica){
-			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function(noImagem){
+
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
 				return noImagem.imagemUrl;
 			});
 			return arrayImagensUrl[0];
 		});
 	};
 
-	$scope.showOferta = function(id){
+	$scope.showOferta = function (id) {
 		$ionicViewSwitcher.nextDirection("forward");
-		$state.go('visualizar-oferta', {id: id});
+		$state.go('visualizar-oferta', { id: id });
 	}
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });
-app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading){
+app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading) {
 
 	$('#preloader').fadeIn();
 
@@ -230,57 +238,57 @@ app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $fireba
 
 	var query = ref.orderByChild("pessoaJuridicaId").equalTo(firebaseUser.uid);
 
-	$firebaseArray(query).$loaded(function(array){
+	$firebaseArray(query).$loaded(function (array) {
 		$('#preloader').fadeOut();
 		$scope.ofertasPorPessoaJuridica = array;
 	});
 
-	$scope.showOpcoesOfertas = function(id){
-		var refStatus = firebase.database().ref('ofertas/'+id);
-		$firebaseObject(refStatus).$loaded(function(oferta){
-			if (oferta.status == 'APROVADO'){
+	$scope.showOpcoesOfertas = function (id) {
+		var refStatus = firebase.database().ref('ofertas/' + id);
+		$firebaseObject(refStatus).$loaded(function (oferta) {
+			if (oferta.status == 'APROVADO') {
 				$ionicViewSwitcher.nextDirection('forward');
-				$state.go('visualizar-oferta', {id: id});
+				$state.go('visualizar-oferta', { id: id });
 			}
-			else if (oferta.status == 'AGUARDANDO'){
+			else if (oferta.status == 'AGUARDANDO') {
 
 			}
-			else if (oferta.status == 'RECUSADO'){
+			else if (oferta.status == 'RECUSADO') {
 
 			}
 		});
 	}
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate){
+app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
 	var empresa;
 	var ofertaId = $stateParams.id;
-	var ref = firebase.database().ref('ofertas/'+ofertaId);
+	var ref = firebase.database().ref('ofertas/' + ofertaId);
 
-	getImagensSlider(ofertaId).then(function(arrayImagens){
+	getImagensSlider(ofertaId).then(function (arrayImagens) {
 		$scope.imagensUrlSlider = arrayImagens;
-	}, function(error){
+	}, function (error) {
 		console.log(error);
 	})
-	function getImagensSlider(ofertaId){
+	function getImagensSlider(ofertaId) {
 		var refImagens = firebase.database().ref("imagens");
 		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
 
-		return $firebaseArray(query).$loaded(function(arrayImagensOfertaEspecifica){
-			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function(noImagem){
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
 				return noImagem.imagemUrl;
 			});
 			return arrayImagensUrl;
 		});
 	};
-	
-	$firebaseObject(ref).$loaded(function(oferta){
-		var refEmpresa = firebase.database().ref('pessoaJuridica/'+oferta.pessoaJuridicaId);
-		$firebaseObject(refEmpresa).$loaded(function(empresa){
+
+	$firebaseObject(ref).$loaded(function (oferta) {
+		var refEmpresa = firebase.database().ref('pessoaJuridica/' + oferta.pessoaJuridicaId);
+		$firebaseObject(refEmpresa).$loaded(function (empresa) {
 			$scope.nomeEmpresa = empresa.nomeFantasia;
 			$scope.oferta = oferta;
 		});
@@ -292,52 +300,52 @@ app.controller('VisualizarOfertaCtrl', function($firebaseArray, $stateParams, $f
 		speed: 500,
 	}
 
-	$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+	$scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
 		$scope.slider = data.slider;
 	});
 
-	$scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+	$scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
 		console.log('Slide change is beginning');
 	});
 
-	$scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+	$scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
 		$scope.activeIndex = data.slider.activeIndex;
 		$scope.previousIndex = data.slider.previousIndex;
 	});
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 
-	$scope.showDescricao = function(id){
-		$state.go('descricao', {id: id});
+	$scope.showDescricao = function (id) {
+		$state.go('descricao', { id: id });
 	}
 });
 
-app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ionicHistory){
+app.controller('CategoriaCtrl', function ($scope, CategoriaService, $state, $ionicHistory) {
 	$scope.categorias = CategoriaService.readAll();
-	
+
 	//aguardando implementação das ofertas na home e id de filtro na url
-	$scope.filterHome = function(filterId){
-		$state.go('oferta-lista', {filterId: filterId});
+	$scope.filterHome = function (filterId) {
+		$state.go('oferta-lista', { filterId: filterId });
 	};
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 
-	$scope.showPersonalizar = function(){
+	$scope.showPersonalizar = function () {
 		$state.go('tabsNaoLogado.explore.personalizar-categorias');
 	};
-	
-	$scope.trocaImagem = function(i){
+
+	$scope.trocaImagem = function (i) {
 		var c = $scope.categorias[i];
 		var endereco = angular.copy(c.img);
-	
-		if (endereco.search('colored') != -1){
+
+		if (endereco.search('colored') != -1) {
 			c.img = endereco.replace("colored", "outlined");
 		}
-		else{
+		else {
 			c.img = endereco.replace("outlined", "colored");
 		}
 
@@ -345,117 +353,117 @@ app.controller('CategoriaCtrl', function($scope, CategoriaService, $state, $ioni
 	}
 });
 
-app.controller('SearchCtrl', 
-	function($scope, PesquisaService, $state, $ionicHistory) {
+app.controller('SearchCtrl',
+	function ($scope, PesquisaService, $state, $ionicHistory) {
 
-	$scope.pesquisas = PesquisaService.readAll();
+		$scope.pesquisas = PesquisaService.readAll();
 
-	$scope.goBackHandler = function(){
+		$scope.goBackHandler = function () {
+			$ionicHistory.goBack(-1);
+		};
+
+	});
+
+app.controller('OfertasApoiadasCtrl',
+	function ($scope, OfertasApoiadasService, OfertasRealizadasService, OfertasIncompletasService, $state, $ionicHistory) {
+
+		$scope.apoiadas = OfertasApoiadasService.readAll();
+		$scope.realizadas = OfertasRealizadasService.readAll();
+		$scope.incompletas = OfertasIncompletasService.readAll();
+
+		$scope.showIndex = function () {
+			$state.go('oferta-lista');
+		};
+
+		$scope.showAndamento = function () {
+			$state.go('ofertas-apoiadas');
+		};
+
+		$scope.showRealizadas = function () {
+			$state.go('ofertas-apoiadas-realizadas');
+		};
+
+		$scope.showIncompletas = function () {
+			$state.go('ofertas-apoiadas-incompletas');
+		};
+		$scope.goBackHandler = function () {
+			$ionicHistory.goBack(-1);
+		}
+	});
+
+app.controller('NotificationCtrl',
+	function ($scope, NotificationService, $state) {
+
+		$scope.notification = NotificationService.readAll();
+
+		$scope.showIndex = function () {
+			$state.go('oferta-lista');
+		};
+
+	});
+
+app.controller('RegisterChooseCtrl', function ($scope, $state, $ionicHistory) {
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
-	};
-	
-});
+	}
 
-app.controller('OfertasApoiadasCtrl', 
-	function($scope, OfertasApoiadasService, OfertasRealizadasService, OfertasIncompletasService, $state, $ionicHistory) {
-
-	$scope.apoiadas = OfertasApoiadasService.readAll();
-	$scope.realizadas = OfertasRealizadasService.readAll();
-	$scope.incompletas = OfertasIncompletasService.readAll();
-
-	$scope.showIndex = function(){
-		$state.go('oferta-lista');
-	};
-
-	$scope.showAndamento = function(){
-		$state.go('ofertas-apoiadas');
-	};
-
-	$scope.showRealizadas = function(){
-		$state.go('ofertas-apoiadas-realizadas');
-	};
-
-	$scope.showIncompletas = function(){
-		$state.go('ofertas-apoiadas-incompletas');
-	};
-	$scope.goBackHandler = function(){
-		$ionicHistory.goBack(-1);
+	$scope.showUpdate = function (id) {
+		$state.go('editar-empresa', { id: id })
 	}
 });
 
-app.controller('NotificationCtrl', 
-	function($scope, NotificationService, $state) {
+app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading, $ionicPopup) {
 
-	$scope.notification = NotificationService.readAll();
-
-	$scope.showIndex = function(){
-		$state.go('oferta-lista');
-	};
-	
-});
-
-app.controller('RegisterChooseCtrl', function($scope, $state, $ionicHistory) {
-	$scope.goBackHandler = function(){
-		$ionicHistory.goBack(-1);
-	}
-
-	$scope.showUpdate = function(id){
-		$state.go('editar-empresa', {id: id})
-	}
-});
-
-app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading, $ionicPopup){
-
-	$scope.login = function(usuario){
-		if($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {
+	$scope.login = function (usuario) {
+		if ($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {
 			$('#preloader').fadeIn();
 
 			$firebaseAuth().$signInWithEmailAndPassword(usuario.email, usuario.password)
-				.then(function(firebaseUser){
-					var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
-					var pessoaJuridica = $firebaseObject(ref).$loaded(function(cnpj){
-						if (cnpj.$value != null){
+				.then(function (firebaseUser) {
+					var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid + '/cnpj');
+					var pessoaJuridica = $firebaseObject(ref).$loaded(function (cnpj) {
+						if (cnpj.$value != null) {
 							$state.go('tabsJuridicoLogado.home');
-						}else{
+						} else {
 							$state.go('tabsFisicoLogado.home');
 						}
 					});
 					limparCamposCadastro();
 					$('#preloader').fadeOut();
 				})
-				.catch(function(error){
-					setTimeout(function() {
+				.catch(function (error) {
+					setTimeout(function () {
 						$('#preloader').fadeOut();
 					}, 800);
-					setTimeout(function() {
+					setTimeout(function () {
 						$ionicPopup.alert({
-							title : 'Erro',
-							template : 'Email/Senha inválidos!'
+							title: 'Erro',
+							template: 'Email/Senha inválidos!'
 						});
 					}, 1200);
 				});
 		} else {
 			$('#preloader').fadeOut();
 			$ionicPopup.alert({
-				title : 'Erro',
-				template : 'Email/Senha estão em branco.'
+				title: 'Erro',
+				template: 'Email/Senha estão em branco.'
 			});
 		}
 
 	};
-	
+
 	function limparCamposCadastro() {
 		$("#txtEmail").val("");
 		$("#txtSenha").val("");
 	}
 
-	$scope.showCadastros = function(){
+	$scope.showCadastros = function () {
 		$state.go("tabsNaoLogado.register-choose");
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state){
-	
+app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state) {
+
 	/* Mask */
 	$('.date').mask('00/00/0000');
 	$('.time').mask('00:00:00');
@@ -463,25 +471,25 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 	$('.cep').mask('00000-000');
 	$('.cpf').mask('000.000.000-00');
 	$('.cnpj').mask('00.000.000/0000-00');
-	$('.money').mask('000.000.000.000.000,00', {reverse: true});
+	$('.money').mask('000.000.000.000.000,00', { reverse: true });
 
 	var SPMaskBehavior = function (val) {
 		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 	},
-	spOptions = {
-		onKeyPress: function(val, e, field, options) {
-			field.mask(SPMaskBehavior.apply({}, arguments), options);
-		}
-	};
+		spOptions = {
+			onKeyPress: function (val, e, field, options) {
+				field.mask(SPMaskBehavior.apply({}, arguments), options);
+			}
+		};
 
-	if($('.phone').length > 0){
+	if ($('.phone').length > 0) {
 		$('.phone').mask(SPMaskBehavior, spOptions);
 	}
 
 	/* validate */
-	$('form').submit(function() {
+	$('form').submit(function () {
 		var valid = $(this).validationEngine("validate");
-		if(valid) {
+		if (valid) {
 			$(this).submit();
 		} else {
 			return false;
@@ -495,29 +503,29 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		scroll: false
 	});
 
-	$('input').blur(function(){
+	$('input').blur(function () {
 
 		var field_id = $(this).attr('id');
 
 		var isValid = !$(this).validationEngine('validate');
 
-		if(!isValid){
+		if (!isValid) {
 			$(this).addClass('validation_error');
-		}else{
+		} else {
 			$(this).removeClass('validation_error');
 		}
 
 	});
 
 	/* /validate */
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 
 	var cnpj;
 
-	$scope.validarCnpj = function(){	
-		
+	$scope.validarCnpj = function () {
+
 		cnpj = apenasNumeros($('#txtCnpj').val());
 
 		if (cnpj > 0) {
@@ -527,100 +535,100 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 				url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
 			}).done(function (data) {
 				if (data['situacao'] == 'ATIVA') {
-					
-					if(data['atividade_principal'][0]['code']) {
+
+					if (data['atividade_principal'][0]['code']) {
 						$scope.pessoaJuridica.cnae = data['atividade_principal'][0]['code'];
 					}
 
-					if(data['fantasia']) {
+					if (data['fantasia']) {
 						$scope.pessoaJuridica.nomeFantasia = data['fantasia'];
 					}
 
-					if(data['cep']) {
+					if (data['cep']) {
 						$scope.pessoaJuridica.enderecoCep = data['cep'];
 					}
 
-					if(data['complemento']) {
+					if (data['complemento']) {
 						$scope.pessoaJuridica.enderecoComplemento = data['complemento'];
 					}
-					
-					if(data['numero']) {
+
+					if (data['numero']) {
 						$scope.pessoaJuridica.enderecoNumero = data['numero'];
 					}
-					
-					if(data['bairro']) {
+
+					if (data['bairro']) {
 						$scope.pessoaJuridica.enderecoBairro = data['bairro'];
 					}
 
-					if(data['nome']) {
+					if (data['nome']) {
 						$scope.pessoaJuridica.nome = data['nome'];
 					}
-					
-					if(data['telefone']) {
+
+					if (data['telefone']) {
 						$scope.pessoaJuridica.telefone = data['telefone'];
 					}
-					
+
 					$('#preloader').fadeOut();
 
 				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
 					$ionicPopup.alert({
-						title : 'CPNJ Inválido!',
-						template : 'Por favor <b>verifique</b> se os dados estão corretos'
-					}).then(function() {
+						title: 'CPNJ Inválido!',
+						template: 'Por favor <b>verifique</b> se os dados estão corretos'
+					}).then(function () {
 						$('#txtCnpj').val('');
 						//teste
-						$('#preloader').fadeOut();				
+						$('#preloader').fadeOut();
 					});
-				}				
+				}
 			});
 		}
 	};
 
 	function apenasNumeros(string) {
-		var numsStr = string.replace(/[^0-9]/g,'');
+		var numsStr = string.replace(/[^0-9]/g, '');
 		return parseInt(numsStr);
 	}
 
 	var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
 	$http.get(jsonpUrl)
-	.then(
-		function (resposta){
+		.then(
+		function (resposta) {
 			console.log(resposta['data']);
 			var items = [];
-		    var options = '<option value="">Escolha um estado</option>';  
+			var options = '<option value="">Escolha um estado</option>';
 
-		    $.each(resposta['data'], function (key, val) {
-		      options += '<option value="' + val.nome + '">' + val.nome + '</option>';
-		    });         
-		    $("#txtEstado").html(options);        
-		    
-		    $("#txtEstado").change(function () {        
-		    
-		      var options_cidades = '';
-		      var str = "";         
-		      
-		      $("#txtEstado option:selected").each(function () {
-		        str += $(this).text();
-		      });
-		      
-		      $.each(resposta['data'], function (key, val) {
-		        if(val.nome == str) {             
-		          $.each(val.cidades, function (key_city, val_city) {
-		            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-		          });             
-		        }
-		      });
+			$.each(resposta['data'], function (key, val) {
+				options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+			});
+			$("#txtEstado").html(options);
 
-		      $("#txtCidade").html(options_cidades);
-		      
-		    }).change(); 
+			$("#txtEstado").change(function () {
+
+				var options_cidades = '';
+				var str = "";
+
+				$("#txtEstado option:selected").each(function () {
+					str += $(this).text();
+				});
+
+				$.each(resposta['data'], function (key, val) {
+					if (val.nome == str) {
+						$.each(val.cidades, function (key_city, val_city) {
+							options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+						});
+					}
+				});
+
+				$("#txtCidade").html(options_cidades);
+
+			}).change();
 		},
-		function (error){
+		function (error) {
 			console.log(error);
 		}
 
-	);
-	
+		);
+
 	$scope.pessoaJuridica = {
 		nomeFantasia: "",
 		nome: "",
@@ -641,23 +649,23 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		dataCriacao: new Date().toISOString(),
 		ultimaModificacao: new Date().toISOString(),
 	}
-	
-	$scope.create = function(pessoaJuridica){
+
+	$scope.create = function (pessoaJuridica) {
 
 		if (pessoaJuridica.password == pessoaJuridica.confirmPassword) {
 			$firebaseAuth().$createUserWithEmailAndPassword(pessoaJuridica.email, pessoaJuridica.password)
-				.then(function(firebaseUser){
+				.then(function (firebaseUser) {
 					addPessoaJuridica(firebaseUser);
 				})
-				.catch(function(error){
+				.catch(function (error) {
 
-				});			
+				});
 		} else {
 			alert("Senhas inválidas");
 		}
 	}
 
-	function addPessoaJuridica(firebaseUser){
+	function addPessoaJuridica(firebaseUser) {
 		var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);
 		var obj = $firebaseObject(ref);
 
@@ -667,90 +675,90 @@ app.controller('UsuarioJuridicoCtrl', function($firebaseAuth, $firebaseObject, $
 		$ionicHistory.goBack(-1);
 	}
 
-	$scope.showUpdateJuridica = function(id){
-		$state.go('editar-empresa', {id: id})
+	$scope.showUpdateJuridica = function (id) {
+		$state.go('editar-empresa', { id: id })
 	}
 
-	$scope.logout = function(){
+	$scope.logout = function () {
 		firebase.auth().signOut();
 		$state.go("tabsNaoLogado.home");
 	}
 });
 
 
-app.controller('UsuarioJuridicoUpdateCtrl', function($ionicPlatform, $firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
-	
+app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
+
 	var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
-	
+
 	$scope.authObj = $firebaseAuth();
-    var firebaseUser = $scope.authObj.$getAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
 
 	$ionicPlatform.ready(function () {
 		$('#preloader').fadeIn();
-		var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid);
-		$firebaseObject(ref).$loaded(function(dadosJuridica){
+		var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);
+		$firebaseObject(ref).$loaded(function (dadosJuridica) {
 			$scope.pessoaJuridica = dadosJuridica;
 			var estado = dadosJuridica.enderecoEstado;
 			var cidade = dadosJuridica.enderecoCidade;
 
 			$http.get(jsonpUrl)
-			.then(
-				function (resposta){
+				.then(
+				function (resposta) {
 					console.log(resposta['data']);
 					var items = [];
-				    var options = '<option value="">Escolha um estado</option>';  
+					var options = '<option value="">Escolha um estado</option>';
 
-				    $.each(resposta['data'], function (key, val) {
-				      options += '<option value="' + val.nome + '">' + val.nome + '</option>';
-				    });         
-				    $("#txtEstado").html(options);        
-				    $("#txtEstado").val(estado);        
-				    
-				    $("#txtEstado").change(function () {        
-				    
-				      var options_cidades = '';
-				      var str = "";         
-				      
-				      $("#txtEstado option:selected").each(function () {
-				        str += $(this).text();
-				      });
-				      
-				      $.each(resposta['data'], function (key, val) {
-				        if(val.nome == str) {             
-				          $.each(val.cidades, function (key_city, val_city) {
-				            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-				          });             
-				        }
-				      });
+					$.each(resposta['data'], function (key, val) {
+						options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+					});
+					$("#txtEstado").html(options);
+					$("#txtEstado").val(estado);
 
-				      $("#txtCidade").html(options_cidades);
-				      $("#txtCidade").val(cidade);
-				      
-				    }).change(); 
+					$("#txtEstado").change(function () {
+
+						var options_cidades = '';
+						var str = "";
+
+						$("#txtEstado option:selected").each(function () {
+							str += $(this).text();
+						});
+
+						$.each(resposta['data'], function (key, val) {
+							if (val.nome == str) {
+								$.each(val.cidades, function (key_city, val_city) {
+									options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+								});
+							}
+						});
+
+						$("#txtCidade").html(options_cidades);
+						$("#txtCidade").val(cidade);
+
+					}).change();
 				},
-				function (error){
+				function (error) {
 					console.log(error);
 				}
 
-			);
+				);
 
 			$('#preloader').fadeOut();
-		});	
+		});
 	});
 
-    $scope.update = function(pessoaJuridica){
+	$scope.update = function (pessoaJuridica) {
 		ref = pessoaJuridica;
 		ref.$save();
 
-        $ionicHistory.goBack(-1);
-    }
-	$scope.goBackHandler = function(){
+		$ionicHistory.goBack(-1);
+	}
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });
 
-app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state, $ionicPopup){
-	$scope.goBackHandler = function(){
+app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state, $ionicPopup) {
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 	$scope.pessoaFisica = {
@@ -767,37 +775,37 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 		ultimaModificacao: new Date().toISOString(),
 	}
 
-	$scope.create = function(pessoaFisica){
-		if(pessoaFisica.password == pessoaFisica.confirmPassword){
+	$scope.create = function (pessoaFisica) {
+		if (pessoaFisica.password == pessoaFisica.confirmPassword) {
 			$firebaseAuth().$createUserWithEmailAndPassword(pessoaFisica.email, pessoaFisica.password)
-			.then(function(firebaseUser){
-				addPessoaFisica(firebaseUser);
-				$ionicPopup.alert({
-					title : 'Cadastro feito com sucesso',
-					template : 'Você está pronto pra efetuar seu login!'
-				}).then(function() {
-					limpaCamposCadastro();
-					$state.go('tabsNaoLogado.login');
+				.then(function (firebaseUser) {
+					addPessoaFisica(firebaseUser);
+					$ionicPopup.alert({
+						title: 'Cadastro feito com sucesso',
+						template: 'Você está pronto pra efetuar seu login!'
+					}).then(function () {
+						limpaCamposCadastro();
+						$state.go('tabsNaoLogado.login');
+					});
+				})
+				.catch(function (error) {
+					switch (error.code) {
+						case 'auth/email-already-in-use': tratarEmailJaExistente();
+					}
 				});
-			})
-			.catch(function(error){
-				switch(error.code){
-					case 'auth/email-already-in-use' : tratarEmailJaExistente();
-				}
-			});
 		}
-		else{
+		else {
 			$ionicPopup.alert({
 				title: 'Senhas não coincidem',
 				template: 'Por favor informe as senhas corretamente'
 			});
 		}
 	}
-	function tratarEmailJaExistente(){
+	function tratarEmailJaExistente() {
 		$ionicPopup.alert({
-			title : 'Este email já está cadastrado em nosso sistema',
-			template : 'Por favor verifique se o email está correto, ou informe outro diferente.'
-		}).then(function() {
+			title: 'Este email já está cadastrado em nosso sistema',
+			template: 'Por favor verifique se o email está correto, ou informe outro diferente.'
+		}).then(function () {
 			$("#txtEmail").val("");
 		});
 	}
@@ -808,7 +816,7 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 		$scope.pessoaFisica.password = "";
 		$scope.pessoaFisica.confirmPassword = "";
 	}
-	function addPessoaFisica(firebaseUser){
+	function addPessoaFisica(firebaseUser) {
 		var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
 		var obj = $firebaseObject(ref);
 
@@ -818,41 +826,41 @@ app.controller('UsuarioFisicoCtrl', function($firebaseAuth, $firebaseObject, $sc
 	}
 });
 
-app.controller('UsuarioFisicoUpdateCtrl', function($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
 	var id = $stateParams.id;
-    var ref = firebase.database().ref('pessoaFisica/'+id);
-    $scope.pessoaFisica = $firebaseObject(ref);
+	var ref = firebase.database().ref('pessoaFisica/' + id);
+	$scope.pessoaFisica = $firebaseObject(ref);
 
-    $scope.update = function(pessoaFisica){
+	$scope.update = function (pessoaFisica) {
 		ref = pessoaFisica;
 		ref.$save();
 
-        $ionicHistory.goBack(-1);
-    }
-
-	$scope.showEndereco = function(id){
-		$state.go('editar-user-endereco', {id: id})
-	}
-
-	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);
 	}
-	
+
+	$scope.showEndereco = function (id) {
+		$state.go('editar-user-endereco', { id: id })
+	}
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+
 });
 
-app.controller('UsuarioFisicoUpdateEnderecoCtrl', function($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams){
+app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
 	var id = $stateParams.id;
-    var ref = firebase.database().ref('pessoaFisica/'+id);
-    $scope.pessoaFisica = $firebaseObject(ref);
+	var ref = firebase.database().ref('pessoaFisica/' + id);
+	$scope.pessoaFisica = $firebaseObject(ref);
 
-    $scope.update = function(pessoaFisica){
+	$scope.update = function (pessoaFisica) {
 		ref = pessoaFisica;
 		ref.$save();
 
-        $ionicHistory.goBack(-1);
-    }
+		$ionicHistory.goBack(-1);
+	}
 
-	$scope.goBackHandler = function(){
+	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });

@@ -373,7 +373,7 @@ app.controller("LoginCtrl", function($scope, $state, $firebaseAuth, $firebaseObj
 						if (cnpj.$value != null){
 							$state.go('tabsJuridicoLogado.home');
 						}else{
-							//É pessoa fisica
+							$state.go('tabsFisicoLogado.home');
 						}
 					});
 					limparCamposCadastro();

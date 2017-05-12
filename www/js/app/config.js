@@ -37,16 +37,6 @@ angular.module('coletivando')
             }
         });
 
-        //  $stateProvider.state('tabsNaoLogado.visualizarOferta', {
-        //     url: '/visualizar-oferta/:id',
-        //     views:{
-        //         'naoLogado-home-tab':{
-        //             templateUrl: 'templates/ofertas/visualizar-oferta.html',
-        //             controller: 'VisualizarOfertaCtrl'
-        //         }
-        //     }
-        // });
-
         $stateProvider.state('visualizar-oferta', {
             url: '/visualizar-oferta/:id',
             templateUrl: 'templates/ofertas/visualizar-oferta.html',
@@ -176,6 +166,52 @@ angular.module('coletivando')
                 'juridicoLogado-conta-tab' : {
                     templateUrl: 'templates/empresa/editar-empresa.html',
                     controller: 'UsuarioJuridicoUpdateCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('tabsFisicoLogado', {
+            url: '/tabsFisicoLogado',
+            abstract: true,
+            templateUrl: 'templates/tabs/tabsFisicoLogado.html'
+        });
+
+        $stateProvider.state('tabsFisicoLogado.home', {
+            url: '/fisico-logado-home',
+            views: {
+                'fisicoLogado-home-tab' : {
+                    templateUrl: 'templates/ofertas/oferta-lista.html',
+                    controller: 'OfertaListaCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('tabsFisicoLogado.explore', {
+            url: '/fisico-logado-explore',
+            views: {
+                'fisicoLogado-explore-tab' : {
+                    templateUrl: 'templates/categorias/explore.html',
+                    controller: 'CategoriaCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('tabsFisicoLogado.conta', {
+            url: '/fisico-logado-conta',
+            views: {
+                'fisicoLogado-conta-tab' : {
+                    templateUrl: 'templates/usuarios/minha-conta.html',
+                    controller: 'UsuarioFisicoCtrl'
+                }
+            }
+        });
+
+        $stateProvider.state('tabsFisicoLogado.notificacoes', {
+            url: '/fisico-logado-notificacoes',
+            views: {
+                'fisicoLogado-notificacoes-tab' : {
+                    templateUrl: 'templates/outros/notifications.html',
+                    controller: 'NotificationCtrl'
                 }
             }
         });

@@ -34,6 +34,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 		ofertas.$add(oferta).then(function(referencia){
 			var idOfertaSalva = referencia.key;
+			$scope.idOferta = idOfertaSalva;
 			var idPessoaJuridica = firebaseUser.uid;
 			var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
 			console.log(caminhoArmazenamentoImagens);
@@ -54,6 +55,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 	};
 	$scope.listaUrls = [];
 	$scope.fileArray = [];
+	$scope.idOferta = "";
 
 	var inputFile = document.getElementById("fileInput");
 	inputFile.addEventListener("change", function(event){
@@ -87,8 +89,19 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 				}));
 			}
 
-		storageRef.putFiles(listaArquivos).then(function(metadatas) {
-			console.log(metadatas);
+		storageRef.putFiles(listaArquivos).then(function(arrayMetadados) {
+			var objetoModeloImagem = {
+				ofertaId: $scope.idOferta,
+				imagemUrl: ""
+			}
+			arrayMetadados.forEach(function(infoImagem){
+				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
+				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
+
+				imagensCollection.$add(objetoModeloImagem).then(function(referencia){
+					console.log(referencia);
+				});
+			});
 			$("#preloader").fadeOut();
 			$ionicHistory.goBack(-1);
 		}).catch(function(error) {

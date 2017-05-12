@@ -208,9 +208,27 @@ app.controller('MinhasOfertasCtrl', function($ionicViewSwitcher, $state, $fireba
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate){
+app.controller('VisualizarOfertaCtrl', function($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate){
 	var empresa;
-	var ref = firebase.database().ref('ofertas/'+$stateParams.id);
+	var ofertaId = $stateParams.id;
+	var ref = firebase.database().ref('ofertas/'+ofertaId);
+
+	getImagensSlider(ofertaId).then(function(arrayImagens){
+		$scope.imagensUrlSlider = arrayImagens;
+	}, function(error){
+		console.log(error);
+	})
+	function getImagensSlider(ofertaId){
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
+
+		return $firebaseArray(query).$loaded(function(arrayImagensOfertaEspecifica){
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function(noImagem){
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl;
+		});
+	};
 	
 	$firebaseObject(ref).$loaded(function(oferta){
 		var refEmpresa = firebase.database().ref('pessoaJuridica/'+oferta.pessoaJuridicaId);
@@ -220,26 +238,24 @@ app.controller('VisualizarOfertaCtrl', function($stateParams, $firebaseObject, $
 		});
 	});
 
-			$scope.options = {
-			loop: true,
-			effect: 'slide',
-			speed: 500,
-			}
+	$scope.options = {
+		loop: true,
+		effect: 'slide',
+		speed: 500,
+	}
 
-				$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
-				// data.slider is the instance of Swiper
-				$scope.slider = data.slider;
-				});
+	$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+		$scope.slider = data.slider;
+	});
 
-				$scope.$on("$ionicSlides.slideChangeStart", function(event, data){
-				console.log('Slide change is beginning');
-				});
+	$scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+		console.log('Slide change is beginning');
+	});
 
-				$scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
-				// note: the indexes are 0-based
-				$scope.activeIndex = data.slider.activeIndex;
-				$scope.previousIndex = data.slider.previousIndex;
-			});
+	$scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+		$scope.activeIndex = data.slider.activeIndex;
+		$scope.previousIndex = data.slider.previousIndex;
+	});
 
 	$scope.goBackHandler = function(){
 		$ionicHistory.goBack(-1);

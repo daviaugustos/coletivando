@@ -67,9 +67,13 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 
 			reader.onload = function(e) {
 				var srcImagem = reader.result;
-				$scope.$apply(function (){
-					$scope.listaUrls.push(srcImagem);
-				});
+				if (srcImagem.match(/^data:image\//)) {
+					$scope.$apply(function (){
+						$scope.listaUrls.push(srcImagem);
+					});
+				} else {
+					console.error('Not an image');
+				}
 			}
 
 			reader.readAsDataURL(fileList[i]);

@@ -8,7 +8,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		desconto: "",
 		qtdPessoas: "",
 		descricao: "",
-		imagem: "",
+		imagem: "img/imagePreloader.gif",
 		precoFinalUn: "",
 		status: "AGUARDANDO"
 	}
@@ -135,6 +135,10 @@ app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $
     }
 	$ionicPlatform.ready(function(){
 		$("#preloader").fadeIn();
+		getObjOfertaComImagem();
+	});
+
+	function getObjOfertaComImagem(){
 		var ref = firebase.database().ref('ofertas');
 		$firebaseArray(ref).$loaded(function(dadosOfertas){
 			dadosOfertas = dadosOfertas.map(function(oferta){
@@ -146,7 +150,7 @@ app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $
 			$scope.ofertas = dadosOfertas;
 			$("#preloader").fadeOut();
 		});
-	});
+	}
 	
 	function getImagemExibicao(ofertaId){
 		var refImagens = firebase.database().ref("imagens");

@@ -28,7 +28,7 @@
         <ion-list>
             <ion-item ng-repeat="oferta in ofertas | filter:{ status: 'APROVADO' }" class="card">
                 <div ng-click="showOferta(oferta.$id)">                   
-                    <img src="{{oferta.imagem}}" class="bg-card" />
+                    <img src="{{oferta.imagem}}" class="bg-card" width="100%"/>
                     
                     <div class="info-card-home">
                         <div class="row">

@@ -570,7 +570,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 						$scope.pessoaJuridica.telefone = data['telefone'];
 					}
 
-					$('#preloader').fadeOut();
+	
 
 				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
 					$ionicPopup.alert({
@@ -579,10 +579,9 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 					}).then(function () {
 						$('#txtCnpj').val('');
 						//teste
-						$('#preloader').fadeOut();
 					});
 				}
-			});
+			}); $('#preloader').fadeOut();
 		}
 	};
 
@@ -656,16 +655,20 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 
 		if (pessoaJuridica.password == pessoaJuridica.confirmPassword) {
 			$firebaseAuth().$createUserWithEmailAndPassword(pessoaJuridica.email, pessoaJuridica.password)
-				.then(function (firebaseUser) {
+				.then(function (firebaseUser) {$('#preloader').fadeIn();
 					addPessoaJuridica(firebaseUser);
+					$state.go('tabsNaoLogado.login');
+					$('#preloader').fadeOut();	
 				})
+				
 				.catch(function (error) {
 
 				});
+				
 		} else {
 			alert("Senhas inválidas");
 		}
-	}
+	} 
 
 	function addPessoaJuridica(firebaseUser) {
 		var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);

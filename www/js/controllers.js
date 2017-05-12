@@ -130,14 +130,22 @@ app.controller('OfertaUpdateCtrl', function($firebaseObject, $scope, $http, $ion
 });
 
 app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup){
-    
-	var firebaseUser = $firebaseAuth().$getAuth();
 
-	//Se já estiver logado
-	if (firebaseUser) {
-        $state.go('tabsJuridicoLogado.home');
-    }
 	$ionicPlatform.ready(function(){
+		// Tratativa de continuar sessão.
+		// var firebaseUser = $firebaseAuth().$getAuth();
+		// //Se já estiver logado
+		// if (firebaseUser) {
+		// 	var ref = firebase.database().ref('pessoaJuridica/'+firebaseUser.uid+'/cnpj');
+		// 	$firebaseObject(ref).$loaded(function(cnpj){
+		// 		if (cnpj.$value != null){
+		// 			$state.go('tabsJuridicoLogado.home');
+		// 		}else{
+		// 			$state.go('tabsFisicoLogado.home');
+		// 		}
+		// 	});
+		// }
+
 		$("#preloader").fadeIn();
 		getObjOfertaComImagem();
 	});

@@ -28,18 +28,62 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
-		oferta.precoInicialUn = parseFloat(oferta.precoInicialUn.replace(/\./g,'').replace(',', '.'));
-		oferta.desconto = parseFloat(oferta.desconto.replace(/\./g,'').replace(',', '.'));
+		$('.oferta-precoinicial').bind();
+		$('.oferta-desconto').bind();
+
+		var desconto     = oferta.desconto;
+		var precoInicial = oferta.precoInicialUn;
+
+		desconto     = desconto.toString().replace('.', '').replace(',', '.');
+		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
+
+		desconto     = parseFloat(desconto);
+		precoInicial = parseFloat(precoInicial);
+
+		oferta.precoInicialUn = precoInicial;
+		oferta.desconto = desconto;
 		oferta.precoFinalUn = calculaPrecoFinal(oferta.precoInicialUn, oferta.desconto);
 
-		ofertas.$add(oferta).then(function(referencia){
-			var idOfertaSalva = referencia.key;
-			$scope.idOferta = idOfertaSalva;
-			var idPessoaJuridica = firebaseUser.uid;
-			var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
-			console.log(caminhoArmazenamentoImagens);
-			$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
-		});
+		// Verificação se data limite é maior que a data atual
+		data_atual = new Date();
+		data_limite = new Date();
+
+		data = oferta.dataLimite.split('/');
+		data[1] = data[1] - 1;
+
+		data_limite.setDate(data[0]);
+		data_limite.setMonth(data[1]);
+		data_limite.setFullYear(data[2]);
+
+		if(oferta.precoInicialUn > 0.0) {
+			if(data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
+				if(data_limite >= data_atual) {
+					ofertas.$add(oferta).then(function(referencia){
+						var idOfertaSalva = referencia.key;
+						$scope.idOferta = idOfertaSalva;
+						var idPessoaJuridica = firebaseUser.uid;
+						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
+						console.log(caminhoArmazenamentoImagens);
+						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
+					});
+				} else {
+					$ionicPopup.alert({
+						title : 'Erro',
+						template : 'A data limite deve ser maior que a data atual!'
+					});
+				}
+			} else {
+				$ionicPopup.alert({
+					title : 'Erro',
+					template : 'Coloque uma data limite válida!'
+				});
+			}
+		} else {
+			$ionicPopup.alert({
+				title : 'Erro',
+				template : 'O valor deve ser maior que 0!'
+			});
+		}
 	};
 
 	function calculaPrecoFinal(precoInicial, desconto){

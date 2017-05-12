@@ -16,106 +16,106 @@
     </div>
 
 
-    <form class="cadastro-form">
+    <form novalidate name="cadastroForm" ng-submit="create(pessoaJuridica);" class="cadastro-form">
 
     <ion-content style="padding:60px 20px 20px 20px">
-
         <ion-list>
-
-            <div id="teste-div" style="width: 400px; height: 400px; background-color: black; display: none"></div>
 
             <h2 class="text-center">Cadastre sua empresa</h2>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors': cadastroForm.cnpj.$invalid && !cadastroForm.cnpj.$pristine, 'no-errors': cadastroForm.cnpj.$valid}">
                 <span class="input-label">CNPJ</span>
-                <input id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
+                <input required id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors': cadastroForm.nomeFantasia.$invalid, 'no-errors': cadastroForm.nomeFantasia.$valid}">
                 <span class="input-label">Nome(Fantasia)</span>
-                <input id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia" class="validate[required]"/>
+                <p ng-show="cadastroForm.nomeFanatasia.$invalid">* teste</p>
+                <input required id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia"/>
             </label>
             
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Nome</span>
-                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome" class="validate[required]"/>
+                <input id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CNAE(Principal)</span>
-                <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae" class="validate[required]"/>
+                <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">CEP</span>
-                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="validate[required] cep"/>
+                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="cep"/>
             </label>
 
             <div class="row no-padding">
                 <div class="col col-70 no-padding-left">
                     <label class="item-input-coletivando item-floating-label">
                         <span class="input-label">Rua</span>
-                        <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua" class="validate[required]"/>
+                        <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua"/>
                     </label>
                 </div>
                 <div class="col col-30 no-padding-right">
                     <label class="item-input-coletivando item-floating-label">
                         <span class="input-label">Número</span>
-                        <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero" class="validate[required]"/>
+                        <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero"/>
                     </label>
                 </div>
             </div>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Complemento</span>
-                <input id="txtComplemento" type="text" placeholder="Complemento" ng-model="pessoaJuridica.enderecoComplemento" class="validate[optional]"/>
+                <input id="txtComplemento" type="text" placeholder="Complemento" ng-model="pessoaJuridica.enderecoComplemento"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Bairro</span>
-                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro" class="validate[required]"/>
+                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro"/>
             </label>
 
             <!-- SELECT ESTADO E CIDADE -->
             <span class="input-label">Estado</span>
-            <select id="txtEstado" ng-model="pessoaJuridica.enderecoEstado" class="validate[required]"></select>
+            <select id="txtEstado" ng-model="pessoaJuridica.enderecoEstado"></select>
 
             <span class="input-label">Cidade</span>
-            <select id="txtCidade" ng-model="pessoaJuridica.enderecoCidade" class="validate[required]"></select>
+            <select id="txtCidade" ng-model="pessoaJuridica.enderecoCidade"></select>
             <!-- /SELECT ESTADO E CIDADE -->
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Telefone</span>
-                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.telefone" class="validate[required] phone"/>
+                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.telefone" class="phone"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Celular</span>
-                <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular" class="validate[required] phone"/>
+                <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular" class="phone"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Email</span>
-                <input id="txtEmail" type="email" placeholder="Email" ng-model="pessoaJuridica.email" class="validate[required, custom[email]]"/>
+                <input id="txtEmail" type="email" placeholder="Email" ng-model="pessoaJuridica.email" class="custom[email]]"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
-                <input id="txtSenhaNovo" type="password" placeholder="Senha" ng-model="pessoaJuridica.password" class="validate[required]"/>
+                <input id="txtSenhaNovo" type="password" placeholder="Senha" ng-model="pessoaJuridica.password"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Confirmar senha</span>
-                <input type="password" id="txtConfirmSenha" placeholder="Confirmar senha" ng-model="pessoaJuridica.confirmPassword" class="validate[required]"/>
+                <input type="password" id="txtConfirmSenha" placeholder="Confirmar senha" ng-model="pessoaJuridica.confirmPassword"/>
             </label>
 
             <!--<label class="termos-de-uso">
                 <span>Eu li e aceito os termos de uso</span>
                 <input type="checkbox" class="validate[required]">
             </label>-->
-            <button ng-click="create(pessoaJuridica)" type="submit" class="margin-top button button-block btn btn-green">Cadastrar</button>
+            <button type="submit" class="margin-top button button-block btn btn-green">Cadastrar</button>
 
         </ion-list>
+        </ion-content> 
+        
     </form>
-  </ion-content> 
+
 </ion-view>

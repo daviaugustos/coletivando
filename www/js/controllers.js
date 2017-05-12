@@ -8,7 +8,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 		desconto: "",
 		qtdPessoas: "",
 		descricao: "",
-		imagem: "img/home/iphone2.jpg",
+		imagem: "",
 		precoFinalUn: "",
 		status: "AGUARDANDO"
 	}
@@ -137,10 +137,28 @@ app.controller('OfertaListaCtrl', function($ionicPlatform, $ionicViewSwitcher, $
 		$("#preloader").fadeIn();
 		var ref = firebase.database().ref('ofertas');
 		$firebaseArray(ref).$loaded(function(dadosOfertas){
+			dadosOfertas = dadosOfertas.map(function(oferta){
+				getImagemExibicao(oferta.$id).then(function(urlImagem){
+					oferta.imagem = urlImagem;
+				});
+				return oferta;
+			});
 			$scope.ofertas = dadosOfertas;
 			$("#preloader").fadeOut();
 		});
 	});
+	
+	function getImagemExibicao(ofertaId){
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
+		
+		return $firebaseArray(query).$loaded(function(arrayImagensOfertaEspecifica){
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function(noImagem){
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl[0];
+		});
+	};
 
 	$scope.showOferta = function(id){
 		$ionicViewSwitcher.nextDirection("forward");

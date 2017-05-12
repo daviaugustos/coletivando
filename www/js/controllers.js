@@ -412,7 +412,7 @@ app.controller('RegisterChooseCtrl', function ($scope, $state, $ionicHistory) {
 	}
 });
 
-app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading, $ionicPopup) {
+app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseObject, $ionicLoading, $ionicPopup, $ionicViewSwitcher) {
 
 	$scope.login = function (usuario) {
 		if ($('#txtEmail').val().length > 0 && $('#txtSenha').val().length > 0) {
@@ -423,8 +423,10 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 					var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid + '/cnpj');
 					var pessoaJuridica = $firebaseObject(ref).$loaded(function (cnpj) {
 						if (cnpj.$value != null) {
+							$ionicViewSwitcher.nextDirection("back");
 							$state.go('tabsJuridicoLogado.home');
 						} else {
+							$ionicViewSwitcher.nextDirection("forward");
 							$state.go('tabsFisicoLogado.home');
 						}
 					});
@@ -462,7 +464,7 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state) {
+app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state, $ionicViewSwitcher) {
 
 	/* Mask */
 	$('.date').mask('00/00/0000');
@@ -681,6 +683,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 
 	$scope.logout = function () {
 		firebase.auth().signOut();
+		$ionicViewSwitcher.nextDirection("forward");
 		$state.go("tabsNaoLogado.home");
 	}
 });
@@ -757,7 +760,7 @@ app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseA
 	}
 });
 
-app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state, $ionicPopup) {
+app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state, $ionicPopup, $ionicViewSwitcher) {
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
@@ -824,6 +827,13 @@ app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $s
 		delete obj.password;
 		obj.$save();
 	}
+
+	$scope.logout = function () {
+		firebase.auth().signOut();
+		$ionicViewSwitcher.nextDirection("back");
+		$state.go("tabsNaoLogado.home");
+	}
+
 });
 
 app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {

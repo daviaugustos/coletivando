@@ -72,7 +72,7 @@ app.controller('OfertaCtrl', function($firebaseAuth, $scope, $state, $ionicHisto
 						$scope.listaUrls.push(srcImagem);
 					});
 				} else {
-					console.error('Not an image');
+					//TODO: Erro_ArquivoNaoImagem
 				}
 			}
 

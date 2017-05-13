@@ -877,3 +877,12 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 		$ionicHistory.goBack(-1);
 	}
 });
+
+app.controller('ValidacaoCtrl', function ($scope) {
+	$scope.submit = function(){
+		// Set the 'submitted' flag to true
+		$scope.submitted = true;
+		// Send the form to server
+		// $http.post ...
+	} 
+});

@@ -1,12 +1,5 @@
 <ion-view  id="cadastro-empresa" title="">
 
-	<!--<ion-nav-bar class="green">
-        <ion-nav-buttons side="left">
-            <button ng-click="goBackHandler()" class="button button-icon">
-                <i class="icon ion-android-arrow-back"></i>
-            </button>
-        </ion-nav-buttons>
-    </ion-nav-bar>-->
     <div class="bar coletivando-bar transparente"> 
         <button ng-click="goBackHandler()" class="button button-icon">
             <i class="icon ion-android-arrow-back"></i>
@@ -15,55 +8,61 @@
         </div>
     </div>
 
-
-    <form novalidate name="cadastroForm" ng-submit="create(pessoaJuridica)" class="cadastro-form">
+    <form name="cadastroForm" ng-submit="create(pessoaJuridica)" ng-controller="ValidacaoCtrl" class="cadastro-form">
 
     <ion-content overflow-scroll="false" has-bouncing="true" style="padding:60px 20px 20px 20px">
         <ion-list>
 
             <h2 class="text-center">Cadastre sua empresa</h2>
 
-            <label style="display:none" class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.gambiarra.$invalid, 'no-errors' : cadastroForm.gambiarra.$valid}">
+            <!--<label style="display:none" class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.gambiarra.$invalid, 'no-errors' : cadastroForm.gambiarra.$valid}">
                 <span class="input-label">CNPJ</span>
                 <input ng-required="true" name="gambiarra" id="txtGambiarra" type="text" placeholder="Gambiarra" ng-model="Gambiarra"/>
-            </label>
+            </label>-->
 
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.cnpj.$invalid && !cadastroForm.cnpj.$pristine, 'no-errors' : cadastroForm.cnpj.$valid}">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.cnpj.$invalid && !cadastroForm.cnpj.$pristine) || cadastroForm.cnpj.$invalid && submitted, 'no-errors' : cadastroForm.cnpj.$valid}">
                 <span class="input-label">CNPJ</span>
-                <input ng-required=true name="cnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
+                <input ng-minlength="18" ng-required=true name="cnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nomeFantasia.$invalid && !cadastroForm.nomeFantasia.$pristine, 'no-errors' : cadastroForm.nomeFantasia.$valid}">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.nomeFantasia.$invalid && !cadastroForm.nomeFantasia.$pristine) || (cadastroForm.nomeFantasia.$invalid && submitted), 'no-errors' : cadastroForm.nomeFantasia.$valid}">
                 <span class="input-label">Nome(Fantasia)</span>
                 <input ng-required="true" name="nomeFantasia" id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia"/>
             </label>
             
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nome.$invalid && !cadastroForm.nome.$pristine, 'no-errors' : cadastroForm.nome.$valid}">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.nome.$invalid && !cadastroForm.nome.$pristine) || (cadastroForm.nome.$invalid && submitted), 'no-errors' : cadastroForm.nome.$valid}">
                 <span class="input-label">Nome</span>
-                <input required name="nome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
+                <input ng-required="true" name="nome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.cnae.$invalid && !cadastroForm.cnae.$pristine) || (cadastroForm.cnae.$invalid && submitted), 'no-errors' : cadastroForm.cnae.$valid}">
                 <span class="input-label">CNAE(Principal)</span>
-                <input id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae"/>
+                <input ng-required="true" name="cnae" id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label"
+            ng-class="{'has-errors' : (cadastroForm.cep.$invalid && !cadastroForm.cep.$pristine) || (cadastroForm.cep.$invalid && submitted), 'no-errors' : cadastroForm.cep.$valid}">
                 <span class="input-label">CEP</span>
-                <input id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="cep"/>
+                <input ng-required="true" name="cep" id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="cep"/>
             </label>
 
             <div class="row no-padding">
                 <div class="col col-70 no-padding-left">
-                    <label class="item-input-coletivando item-floating-label">
+                    <label class="item-input-coletivando item-floating-label" 
+                    ng-class="{'has-errors' : (cadastroForm.rua.$invalid && !cadastroForm.rua.$pristine) || (cadastroForm.rua.$invalid && submitted), 'no-errors' : cadastroForm.rua.$valid}">
                         <span class="input-label">Rua</span>
-                        <input id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua"/>
+                        <input ng-required="true" name="rua" id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua"/>
                     </label>
                 </div>
                 <div class="col col-30 no-padding-right">
-                    <label class="item-input-coletivando item-floating-label">
+                    <label class="item-input-coletivando item-floating-label" 
+                    ng-class="{'has-errors' : (cadastroForm.numero.$invalid && !cadastroForm.numero.$pristine) || (cadastroForm.numero.$invalid && submitted), 'no-errors' : cadastroForm.numero.$valid}">
                         <span class="input-label">Número</span>
-                        <input id="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero"/>
+                        <input ng-required="true" id="txtNumero" name="numero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero"/>
                     </label>
                 </div>
             </div>
@@ -80,10 +79,10 @@
 
             <!-- SELECT ESTADO E CIDADE -->
             <span class="input-label">Estado</span>
-            <select id="txtEstado" ng-model="pessoaJuridica.enderecoEstado"></select>
+            <select ng-required="true" id="txtEstado" ng-model="pessoaJuridica.enderecoEstado"></select>
 
             <span class="input-label">Cidade</span>
-            <select id="txtCidade" ng-model="pessoaJuridica.enderecoCidade"></select>
+            <select ng-required="true" id="txtCidade" ng-model="pessoaJuridica.enderecoCidade"></select>
             <!-- /SELECT ESTADO E CIDADE -->
 
             <label class="item-input-coletivando item-floating-label">
@@ -96,26 +95,29 @@
                 <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular" class="phone"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.email.$invalid && !cadastroForm.email.$pristine) || (cadastroForm.email.$invalid && submitted), 'no-errors' : cadastroForm.email.$valid}">
                 <span class="input-label">Email</span>
-                <input id="txtEmail" type="email" placeholder="Email" ng-model="pessoaJuridica.email" class="custom[email]]"/>
+                <input ng-required="true" name="email" id="txtEmail" type="email" placeholder="Email" ng-model="pessoaJuridica.email"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.senha.$invalid && !cadastroForm.senha.$pristine) || (cadastroForm.senha.$invalid && submitted), 'no-errors' : cadastroForm.senha.$valid}">
                 <span class="input-label">Senha</span>
-                <input id="txtSenhaNovo" type="password" placeholder="Senha" ng-model="pessoaJuridica.password"/>
+                <input ng-required="true" ng-minlength="6" name="senha" id="txtSenhaNovo" type="password" placeholder="Senha" ng-model="pessoaJuridica.password"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.senha2.$invalid && !cadastroForm.senha2.$pristine) || (cadastroForm.senha2.$invalid && submitted), 'no-errors' : cadastroForm.senha2.$valid}">
                 <span class="input-label">Confirmar senha</span>
-                <input type="password" id="txtConfirmSenha" placeholder="Confirmar senha" ng-model="pessoaJuridica.confirmPassword"/>
+                <input ng-required="true" ng-minlength="6" name="senha2" type="password" id="txtConfirmSenha" placeholder="Confirmar senha" ng-model="pessoaJuridica.confirmPassword"/>
             </label>
 
             <!--<label class="termos-de-uso">
                 <span>Eu li e aceito os termos de uso</span>
                 <input type="checkbox" class="validate[required]">
             </label>-->
-            <button type="submit" class="margin-top button button-block btn btn-green">Cadastrar</button>
+            <button ng-click="submit()" class="margin-top button button-block btn btn-green">Cadastrar</button>
 
         </ion-list>
         </ion-content> 

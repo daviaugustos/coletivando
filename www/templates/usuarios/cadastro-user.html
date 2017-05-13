@@ -1,12 +1,5 @@
 <ion-view id="cadastro-user" title="">
 
-    <!--<ion-nav-bar class="green"> 
-        <ion-nav-buttons side="left"> 
-            <button ng-click="goBackHandler()" class="button button-icon"> 
-                <i class="icon ion-android-arrow-back"></i> 
-            </button> 
-        </ion-nav-buttons> 
-    </ion-nav-bar>-->
     <div class="bar coletivando-bar transparente"> 
         <button ng-click="goBackHandler()" class="button button-icon">
             <i class="icon ion-android-arrow-back"></i>
@@ -15,14 +8,14 @@
         </div>
     </div>
 
-    <form ng-submit="create(pessoaFisica)" class="cadastro-form">
+    <form novalidate ng-submit="create(pessoaFisica)" class="cadastro-form">
 
         <ion-list>
             <h2 class="text-center">Cadastre-se</h2>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nome.$invalid && !cadastroForm.nome.$pristine, 'no-errors' : cadastroForm.nome.$valid}">
                 <span class="input-label">Nome</span>
-                <input ng-required="true" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaFisica.nome"/>
+                <input ng-required="true" name="nome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaFisica.nome"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label">

@@ -15,11 +15,6 @@
 
             <h2 class="text-center">Cadastre sua empresa</h2>
 
-            <!--<label style="display:none" class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.gambiarra.$invalid, 'no-errors' : cadastroForm.gambiarra.$valid}">
-                <span class="input-label">CNPJ</span>
-                <input ng-required="true" name="gambiarra" id="txtGambiarra" type="text" placeholder="Gambiarra" ng-model="Gambiarra"/>
-            </label>-->
-
             <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.cnpj.$invalid && !cadastroForm.cnpj.$pristine) || cadastroForm.cnpj.$invalid && submitted, 'no-errors' : cadastroForm.cnpj.$valid}">
                 <span class="input-label">CNPJ</span>

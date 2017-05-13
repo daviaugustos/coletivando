@@ -879,10 +879,7 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 });
 
 app.controller('ValidacaoCtrl', function ($scope) {
-	$scope.submit = function(){
-		// Set the 'submitted' flag to true
+	$scope.submit = function() {
 		$scope.submitted = true;
-		// Send the form to server
-		// $http.post ...
 	} 
 });

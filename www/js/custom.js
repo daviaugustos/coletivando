@@ -6,7 +6,6 @@ $(document).on('click', '#labelInput', function(){
     $("#fileInput").click();
 });
 
-
 /* Cadastros */ 
 
 /*

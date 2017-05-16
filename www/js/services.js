@@ -49,43 +49,43 @@ app.factory('CategoriaService', function() {
 	
 	var categorias = [
 		{
-			id: 1,
-			nome: 'Smartphones',
+			id: "CELULARES",
+			nome: 'Celulares',
 			img: 'img/categorias/outlined/Moderncam.svg'
 		},
 		{
-			id: 2,
-			nome: 'Computadores',
+			id: "INFORMATICA",
+			nome: 'Informática',
 			img: 'img/categorias/outlined/Classicswatch.svg'
 		},
 		{
-			id: 3,
+			id: "GAMES",
 			nome: 'Games',
 			img: 'img/categorias/outlined/Classicswatch.svg'
 		},
 		{
-			id: 4,
+			id: "ELETRONICOS",
 			nome: 'Eletrônicos',
 			img: 'img/categorias/outlined/Ring.svg'
 		},
 		{
-			id: 4,
-			nome: 'Eletrônicos',
+			id: "TV",
+			nome: 'TV',
 			img: 'img/categorias/outlined/Ring.svg'
 		},
 		{
-			id: 4,
-			nome: 'Eletrônicos',
+			id: "ELETRODOMESTICOS",
+			nome: 'Eletrodomésticos',
 			img: 'img/categorias/outlined/Ring.svg'
 		},
 		{
-			id: 4,
-			nome: 'Eletrônicos',
+			id: "ESPORTE_LAZER",
+			nome: 'Esporte e Lazer',
 			img: 'img/categorias/outlined/Ring.svg'
 		},
 		{
-			id: 4,
-			nome: 'Eletrônicos',
+			id: "LIVROS",
+			nome: 'Livros',
 			img: 'img/categorias/outlined/Ring.svg'
 		}
 

@@ -21,13 +21,26 @@
 
 <ion-content style="padding: 60px 40px 40px 40px">
 
-        <ion-list>
-
+        <ion-list>            
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Produto</span>
                 <input type="text" placeholder="Produto" ng-model="oferta.produto"/>
             </label>
-            
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Categoria</span>
+                <select ng-model="oferta.categoria">
+                    <option value="TV">TV</option>
+                    <option value="CELULARES">Celulares</option>
+                    <option value="ELETRONICOS">Eletrônicos</option>
+                    <option value="INFORMATICA">Informática</option>
+                    <option value="ELETRODOMESTICOS">Eletrodomésticos</option>
+                    <option value="ESPORTE_LAZER">Esporte e Lazer</option>
+                    <option value="LIVROS">Livros</option>
+                    <option value="GAMES">Games</option>
+                </select>
+            </label>
+
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Data limite</span>
                 <input type="text" placeholder="Data limite" class="date" ng-model="oferta.dataLimite"/>

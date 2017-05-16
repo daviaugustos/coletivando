@@ -3,6 +3,7 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 	$scope.oferta = {
 		pessoaJuridicaId: "",
 		produto: "",
+		categoria: "",
 		dataLimite: "",
 		precoInicialUn: "",
 		desconto: "",

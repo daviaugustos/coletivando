@@ -883,7 +883,7 @@ app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scop
 	$scope.submit = function(form) {
 		$scope.submitted = true;
 		if (!form.$valid) {
-			$location.hash(form.getElementById('txtCnpj'));
+			$location.hash('txtCnpj');
 			$ionicScrollDelegate.anchorScroll(true);
 		}
 			

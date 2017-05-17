@@ -1,3 +1,4 @@
+
 app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage) {
 
 	$scope.oferta = {
@@ -11,7 +12,7 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		descricao: "",
 		imagem: "img/imagePreloader.gif",
 		precoFinalUn: "",
-		status: "AGUARDANDO"
+		status: "CRIANDO"
 	}
 
 	/* Mask */
@@ -91,10 +92,6 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		return precoInicial - (precoInicial * (desconto / 100));
 	};
 
-	$scope.showPesquisa = function () {
-		$state.go('pesquisar');
-	};
-
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	};
@@ -164,7 +161,7 @@ app.controller('OfertaUpdateCtrl', function ($firebaseObject, $scope, $http, $io
 	var ref = firebase.database().ref('ofertas/' + id);
 	$scope.oferta = $firebaseObject(ref);
 
-	$scope.update = function (oferta) {
+	$scope.salvar = function (oferta) {
 		ref = oferta;
 		ref.$save();
 	}

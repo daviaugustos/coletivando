@@ -1,0 +1,85 @@
+<ion-view  id="cadastro-empresa">
+
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            Editar oferta
+        </div>
+    </div>
+
+    <form class="cadastro-form">
+
+    <ion-content style="padding: 60px 40px 40px 40px">
+
+        <ion-list>            
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Produto</span>
+                <input type="text" placeholder="Produto" ng-model="oferta.produto"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Categoria</span>
+                <select ng-model="oferta.categoria">
+                    <option value="TV">TV</option>
+                    <option value="CELULARES">Celulares</option>
+                    <option value="ELETRONICOS">Eletrônicos</option>
+                    <option value="INFORMATICA">Informática</option>
+                    <option value="ELETRODOMESTICOS">Eletrodomésticos</option>
+                    <option value="ESPORTE_LAZER">Esporte e Lazer</option>
+                    <option value="LIVROS">Livros</option>
+                    <option value="GAMES">Games</option>
+                </select>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Data limite</span>
+                <input type="text" placeholder="Data limite" class="date" ng-model="oferta.dataLimite"/>
+            </label>
+
+            <div class="row no-padding">
+                <div class="col col-50 no-padding-left">
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Preço</span>
+                        <input type="text" placeholder="Preço inicial" class="money oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
+                    </label>
+                </div>
+                <div class="col col-50 no-padding-right">                
+                    <label class="item-input-coletivando item-floating-label">
+                        <span class="input-label">Desconto(%)</span>
+                        <input type="text" placeholder="Desconto (%)" class="porcent oferta-desconto" ng-model="oferta.desconto"/>
+                    </label>
+                </div>
+            </div>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Pessoas</span>
+                <input type="text" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
+            </label>
+
+            <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
+                <div class="slide" ng-repeat="url in listaUrls">
+                    <img ng-src="{{url}}">
+                </div>
+            </ion-scroll>
+            
+            <button id="labelInput" for="fileInput">
+                <i class="icon ion-image"></i>
+                Adicionar imagem
+            </button>
+            <input type="file" id="fileInput"/>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Descrição</span>
+                <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/>
+            </label>
+
+            <button ng-click="salvar(oferta)" class="margin-top button button-block btn btn-green">Salvar oferta</button>
+
+            <button ng-click="finalizar(oferta)" class="margin-top button button-block btn btn-green">Finalizar oferta</button>
+             
+        </ion-list>
+    </form>
+  </ion-content> 
+</ion-view>

@@ -880,9 +880,21 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 });
 
 app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scope) {
-	$scope.submit = function() {
+	$scope.submit = function(form) {
 		$scope.submitted = true;
-		$location.hash('txtCnpj');
-        $ionicScrollDelegate.anchorScroll(true);
+
+		if (form.$invalid) {
+			var formInputs = [];
+
+			angular.forEach(form, function(item) {
+				//verifica se o item do formControll é um objeto de input e se está inválido
+				if (typeof item === 'object' && item.hasOwnProperty('$modelValue') && item.$invalid){
+					formInputs.push(item)
+				}                       
+			});
+
+			$location.hash(formInputs[0].$name);
+			$ionicScrollDelegate.anchorScroll(true);
+		}	
 	} 
 });

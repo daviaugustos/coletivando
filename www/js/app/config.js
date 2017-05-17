@@ -269,9 +269,9 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('perfil-empresa', {
-            url: '/perfil-empresa',
+            url: '/perfil-empresa/:id',
             templateUrl: 'templates/empresa/perfil-empresa.html',
-            controller: 'UsuarioCtrl'
+            controller: 'PerfilEmpresa'
         });
 
         $stateProvider.state('descricao', {

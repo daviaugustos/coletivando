@@ -290,7 +290,7 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 	$firebaseObject(ref).$loaded(function (oferta) {
 		var refEmpresa = firebase.database().ref('pessoaJuridica/' + oferta.pessoaJuridicaId);
 		$firebaseObject(refEmpresa).$loaded(function (empresa) {
-			$scope.nomeEmpresa = empresa.nomeFantasia;
+			$scope.empresa = empresa;
 			$scope.oferta = oferta;
 		});
 	});
@@ -897,4 +897,22 @@ app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scop
 			$ionicScrollDelegate.anchorScroll(true);
 		}	
 	} 
+});
+
+app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+	$("#preloader").fadeIn();
+	
+	var id = $stateParams.id;
+	var ref = firebase.database().ref('pessoaJuridica/' + id);
+	
+	$firebaseObject(ref).$loaded(function(empresa) {
+		$scope.pessoaJuridica = empresa;
+		$scope.enderecoRua = empresa.enderecoRua+', '+empresa.enderecoNumero;
+		$scope.enderecoCidade = empresa.enderecoCep+' '+empresa.enderecoCidade+' - '+empresa.enderecoEstado;
+		$("#preloader").fadeOut();
+	});
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
 });

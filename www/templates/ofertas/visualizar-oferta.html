@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col col-50 left">
                     <h3>{{oferta.produto}}</h2>
-                    <p>por {{nomeEmpresa}}</p>
+                    <a ng-href="#/perfil-empresa/{{empresa.$id}}">por {{empresa.nomeFantasia}}</a>
                 </div>
                 <div class="col col-50 right">
                     <p class="price">R$ {{oferta.precoFinalUn}}</p>

@@ -880,9 +880,12 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 });
 
 app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scope) {
-	$scope.submit = function() {
+	$scope.submit = function(form) {
 		$scope.submitted = true;
-		$location.hash('txtCnpj');
-        $ionicScrollDelegate.anchorScroll(true);
+		if (!form.$valid) {
+			$location.hash(form.getElementById('txtCnpj'));
+			$ionicScrollDelegate.anchorScroll(true);
+		}
+			
 	} 
 });

@@ -160,6 +160,16 @@ angular.module('coletivando')
             }
         });
 
+        $stateProvider.state('tabsJuridicoLogado.editarOferta', {
+            url: '/juridicoLogado-editar-oferta',
+            views: {
+                'juridicoLogado-conta-tab': {
+                    templateUrl: 'templates/ofertas/editar-oferta.html',
+                    controller: 'UpdateOfertaCtrl'
+                }
+            }
+        });
+
         $stateProvider.state('tabsJuridicoLogado.editarEmpresa', {
             url: '/juridicoLogado-editar-empresa/:id',
             views: {
@@ -276,9 +286,9 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('perfil-empresa', {
-            url: '/perfil-empresa',
+            url: '/perfil-empresa/:id',
             templateUrl: 'templates/empresa/perfil-empresa.html',
-            controller: 'UsuarioCtrl'
+            controller: 'PerfilEmpresa'
         });
 
         $stateProvider.state('descricao', {

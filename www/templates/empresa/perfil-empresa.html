@@ -19,24 +19,24 @@
             </div>
 
             <div class="header-company">
-                <h3>Submarino</h3>
+                <h3>{{pessoaJuridica.nomeFantasia}}</h3>
                 <p>55 ofertas concluídas</p>
             </div>
 
             <div class="info-company">
-                <a href="#" class="item item-icon-left">
+                <div class="item item-icon-left">
                     <i class="icon ion-ios-telephone"></i>
-                    0800 555 4756
-                </a>
-                <a href="#" class="item item-icon-left">
+                    {{pessoaJuridica.telefone}}
+                </div>
+                <div class="item item-icon-left">
                     <i class="icon ion-ios-location"></i>
-                    Rua Fulano de Tal, 499
-                    <p>1222000 São Paulo - SP</p>
-                </a>
-                <a href="#" class="item item-icon-left">
+                    {{enderecoRua}}
+                    <p>{{enderecoCidade}}</p>
+                </div>
+                <div class="item item-icon-left">
                     <i class="icon ion-email"></i>
-                    atendimento@submarino.com
-                </a>
+                    {{pessoaJuridica.email}}
+                </div>
             </div>
 
         </div>

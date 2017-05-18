@@ -579,9 +579,10 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 						//teste
 					});
 				}
-			}); $('#preloader').fadeOut();
-		}
-	};
+			});
+				$('#preloader').fadeOut();
+		};
+	}
 
 	function apenasNumeros(string) {
 		var numsStr = string.replace(/[^0-9]/g, '');
@@ -683,10 +684,13 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 	}
 
 	$scope.logout = function () {
+		$('#preloader').fadeIn();
 		firebase.auth().signOut();
 		$ionicViewSwitcher.nextDirection("forward");
 		$state.go("tabsNaoLogado.home");
-	}
+     	$('#preloader').fadeOut();
+	} 
+
 });
 
 

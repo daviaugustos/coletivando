@@ -1,0 +1,50 @@
+<ion-view title="Minhas ofertas">
+
+    <div class="bar coletivando-bar green">
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            {{tituloHeaderBar}}
+        </div>
+    </div>
+
+    <ion-content class="padding-navbar">
+
+        <ion-list>
+            <ion-item ng-repeat="oferta in ofertas | filter:{ status: 'APROVADO' }" class="card">
+                <div ng-click="showOferta(oferta.$id)">
+                    <img src="{{oferta.imagem}}" class="bg-card" width="100%" />
+
+                    <div class="info-card-home">
+                        <div class="row">
+                            <div class="col col-50 left">
+                                <h2>{{oferta.produto}}</h2>
+                            </div>
+                            <div class="col col-50 right">
+                                <p class="price">{{oferta.precoFinalUn | currency: "R$ "}}</p>
+                                <p class="price-old">{{oferta.precoInicialUn | currency: "R$ "}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row pb">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+
+                        <div class="row bottom">
+                            <div class="col col-50 left">
+                                <p>36% completo</p>
+                            </div>
+                            <div class="col col-50 right">
+                                <p>{{oferta.desconto}}% desconto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

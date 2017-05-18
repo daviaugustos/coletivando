@@ -978,8 +978,11 @@ ion-view #perfil-empresa{
 .minhas-ofertas-item .aprovado p{
 	color: #70bf9f !important;
 }
-.minhas-ofertas-item .aprovado h2, .minhas-ofertas-item .recusado h2{
+.minhas-ofertas-item .aprovado h2, .minhas-ofertas-item .criando h2, .minhas-ofertas-item .recusado h2{
 	color: #757575 !important;
+}
+.minhas-ofertas-item .criando p{
+	color: #5e89a2;
 }
 .minhas-ofertas-item .aguardando p{
 	color: #b1b1b1;

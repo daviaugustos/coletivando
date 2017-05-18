@@ -1,12 +1,12 @@
 angular.module('coletivando')
-    .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider, $ionicCloudProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $firebaseRefProvider, $ionicCloudProvider) {
         // Ionic Cloud
         $ionicCloudProvider.init({
             "core": {
-            "app_id": "921ad049"
+                "app_id": "921ad049"
             }
         });
-        
+
         // Firebase
         var config = {
             apiKey: "AIzaSyAASmm1a3uZxkOpsDdQAkQ2o-NmEi4Z3s8",
@@ -26,11 +26,11 @@ angular.module('coletivando')
             abstract: true,
             templateUrl: 'templates/tabs/tabsNaoLogado.html'
         });
-        
+
         $stateProvider.state('tabsNaoLogado.home', {
             url: '/nao-logado-home',
             views: {
-                'naoLogado-home-tab' : {
+                'naoLogado-home-tab': {
                     templateUrl: 'templates/ofertas/oferta-lista.html',
                     controller: 'OfertaListaCtrl'
                 }
@@ -46,17 +46,17 @@ angular.module('coletivando')
         $stateProvider.state('tabsNaoLogado.explore', {
             url: '/nao-logado-explore',
             views: {
-                'naoLogado-explore-tab' : {
+                'naoLogado-explore-tab': {
                     templateUrl: 'templates/categorias/explore.html',
                     controller: 'CategoriaCtrl'
                 }
             }
         });
 
-        $stateProvider.state('tabsNaoLogado.personalizarCategorias',{
+        $stateProvider.state('tabsNaoLogado.personalizarCategorias', {
             url: '/nao-logado-personalizarCategorias',
             views: {
-                'naoLogado-explore-tab' : {
+                'naoLogado-explore-tab': {
                     templateUrl: 'templates/categorias/personalizar-categorias.html',
                     controller: 'CategoriaCtrl'
                 }
@@ -66,7 +66,7 @@ angular.module('coletivando')
         $stateProvider.state('tabsNaoLogado.login', {
             url: '/nao-logado-login',
             views: {
-                'naoLogado-login-tab' :{
+                'naoLogado-login-tab': {
                     templateUrl: 'templates/usuarios/login.html',
                     controller: 'LoginCtrl'
                 }
@@ -76,7 +76,7 @@ angular.module('coletivando')
         $stateProvider.state('tabsNaoLogado.register-choose', {
             url: '/nao-logado-register-choose',
             views: {
-                'naoLogado-login-tab' : {
+                'naoLogado-login-tab': {
                     templateUrl: 'templates/outros/register-choose.html',
                     controller: 'RegisterChooseCtrl'
                 }
@@ -85,7 +85,7 @@ angular.module('coletivando')
 
         $stateProvider.state('tabsNaoLogado.cadastro-user', {
             url: '/cadastro-user',
-                views:{
+            views: {
                 'naoLogado-login-tab': {
                     templateUrl: 'templates/usuarios/cadastro-user.html',
                     controller: 'UsuarioFisicoCtrl'
@@ -95,7 +95,7 @@ angular.module('coletivando')
 
         $stateProvider.state('tabsNaoLogado.cadastro-empresa', {
             url: '/cadastro-empresa',
-            views:{
+            views: {
                 'naoLogado-login-tab': {
                     templateUrl: 'templates/empresa/cadastro-empresa.html',
                     controller: 'UsuarioJuridicoCtrl'
@@ -108,11 +108,11 @@ angular.module('coletivando')
             abstract: true,
             templateUrl: 'templates/tabs/tabsJuridicoLogado.html'
         });
-        
+
         $stateProvider.state('tabsJuridicoLogado.home', {
             url: '/juridico-logado-home',
             views: {
-                'juridicoLogado-home-tab' : {
+                'juridicoLogado-home-tab': {
                     templateUrl: 'templates/ofertas/oferta-lista.html',
                     controller: 'OfertaListaCtrl'
                 }
@@ -122,7 +122,7 @@ angular.module('coletivando')
         $stateProvider.state('tabsJuridicoLogado.explore', {
             url: '/juridico-logado-explore',
             views: {
-                'juridicoLogado-explore-tab' : {
+                'juridicoLogado-explore-tab': {
                     templateUrl: 'templates/categorias/explore.html',
                     controller: 'CategoriaCtrl'
                 }
@@ -143,12 +143,12 @@ angular.module('coletivando')
         $stateProvider.state('tabsJuridicoLogado.minhasOfertas', {
             url: '/juridicoLogado-minhas-ofertas',
             views: {
-                'juridicoLogado-conta-tab' : {
+                'juridicoLogado-conta-tab': {
                     templateUrl: 'templates/ofertas/minhas-ofertas.html',
                     controller: 'MinhasOfertasCtrl'
                 }
             }
-        }); 
+        });
 
         $stateProvider.state('tabsJuridicoLogado.criarOferta', {
             url: '/juridicoLogado-criar-oferta',
@@ -161,7 +161,7 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('tabsJuridicoLogado.editarOferta', {
-            url: '/juridicoLogado-editar-oferta',
+            url: '/juridicoLogado-editar-oferta/:id',
             views: {
                 'juridicoLogado-conta-tab': {
                     templateUrl: 'templates/ofertas/editar-oferta.html',
@@ -169,11 +169,11 @@ angular.module('coletivando')
                 }
             }
         });
-
+        
         $stateProvider.state('tabsJuridicoLogado.editarEmpresa', {
             url: '/juridicoLogado-editar-empresa/:id',
             views: {
-                'juridicoLogado-conta-tab' : {
+                'juridicoLogado-conta-tab': {
                     templateUrl: 'templates/empresa/editar-empresa.html',
                     controller: 'UsuarioJuridicoUpdateCtrl'
                 }
@@ -189,7 +189,7 @@ angular.module('coletivando')
         $stateProvider.state('tabsFisicoLogado.home', {
             url: '/fisico-logado-home',
             views: {
-                'fisicoLogado-home-tab' : {
+                'fisicoLogado-home-tab': {
                     templateUrl: 'templates/ofertas/oferta-lista.html',
                     controller: 'OfertaListaCtrl'
                 }
@@ -199,17 +199,24 @@ angular.module('coletivando')
         $stateProvider.state('tabsFisicoLogado.explore', {
             url: '/fisico-logado-explore',
             views: {
-                'fisicoLogado-explore-tab' : {
+                'fisicoLogado-explore-tab': {
                     templateUrl: 'templates/categorias/explore.html',
                     controller: 'CategoriaCtrl'
                 }
             }
         });
 
+        $stateProvider.state('categoriaOfertas', {
+            url: '/categoria-ofertas/:id',
+            templateUrl: 'templates/ofertas/categoria-ofertas.html',
+            controller: 'CategoriaOfertasCtrl'
+
+        });
+
         $stateProvider.state('tabsFisicoLogado.conta', {
             url: '/fisico-logado-conta',
             views: {
-                'fisicoLogado-conta-tab' : {
+                'fisicoLogado-conta-tab': {
                     templateUrl: 'templates/usuarios/minha-conta.html',
                     controller: 'UsuarioFisicoCtrl'
                 }
@@ -219,7 +226,7 @@ angular.module('coletivando')
         $stateProvider.state('tabsFisicoLogado.notificacoes', {
             url: '/fisico-logado-notificacoes',
             views: {
-                'fisicoLogado-notificacoes-tab' : {
+                'fisicoLogado-notificacoes-tab': {
                     templateUrl: 'templates/outros/notifications.html',
                     controller: 'NotificationCtrl'
                 }
@@ -237,7 +244,7 @@ angular.module('coletivando')
             templateUrl: 'templates/usuarios/editar-user-endereco.html',
             controller: 'UsuarioFisicoUpdateEnderecoCtrl'
         });
-        
+
         $stateProvider.state('alterar-senha-fisica', {
             url: '/alterar-senha-fisica',
             controller: 'UsuarioFisicoCtrl'

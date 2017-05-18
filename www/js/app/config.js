@@ -161,7 +161,7 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('tabsJuridicoLogado.editarOferta', {
-            url: '/juridicoLogado-editar-oferta',
+            url: '/juridicoLogado-editar-oferta/:id',
             views: {
                 'juridicoLogado-conta-tab': {
                     templateUrl: 'templates/ofertas/editar-oferta.html',
@@ -169,7 +169,7 @@ angular.module('coletivando')
                 }
             }
         });
-
+        
         $stateProvider.state('tabsJuridicoLogado.editarEmpresa', {
             url: '/juridicoLogado-editar-empresa/:id',
             views: {

@@ -156,20 +156,170 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 	}
 });
 
-app.controller('OfertaUpdateCtrl', function ($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
+
+app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage, $stateParams) {
+
+	$scope.authObj = $firebaseAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
+
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
 	$scope.oferta = $firebaseObject(ref);
 
+	/* Mask */
+	$('.date').mask('00/00/0000');
+	$('.money').mask('000.000.000.000.000,00', { reverse: true });
+	$('.porcent').mask('00,00', { reverse: true });
+
 	$scope.salvar = function (oferta) {
-		ref = oferta;
-		ref.$save();
-	}
+		// Tratativa de armazenamento como número no banco e calculo de preço final
+		$('.oferta-precoinicial').bind();
+		$('.oferta-desconto').bind();
+
+		var desconto     = oferta.desconto;
+		var precoInicial = oferta.precoInicialUn;
+
+		desconto     = desconto.toString().replace('.', '').replace(',', '.');
+		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
+
+		desconto     = parseFloat(desconto);
+		precoInicial = parseFloat(precoInicial);
+
+		oferta.precoInicialUn = precoInicial;
+		oferta.desconto = desconto;
+		oferta.precoFinalUn = calculaPrecoFinal(oferta.precoInicialUn, oferta.desconto);
+
+		// Verificação se data limite é maior que a data atual
+		data_atual = new Date();
+		data_limite = new Date();
+
+		data = oferta.dataLimite.split('/');
+		data[1] = data[1] - 1;
+
+		data_limite.setDate(data[0]);
+		data_limite.setMonth(data[1]);
+		data_limite.setFullYear(data[2]);
+
+		if(oferta.precoInicialUn > 0.0) {
+			if(data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
+				if(data_limite >= data_atual) {
+					ref = oferta;
+					ref.$save().then(function(referencia){
+						var idOfertaSalva = referencia.key;
+						$scope.idOferta = idOfertaSalva;
+						var idPessoaJuridica = firebaseUser.uid;
+						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
+						console.log(caminhoArmazenamentoImagens);
+						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
+					});
+				} else {
+					$ionicPopup.alert({
+						title : 'Erro',
+						template : 'A data limite deve ser maior que a data atual!'
+					});
+				}
+			} else {
+				$ionicPopup.alert({
+					title : 'Erro',
+					template : 'Coloque uma data limite válida!'
+				});
+			}
+		} else {
+			$ionicPopup.alert({
+				title : 'Erro',
+				template : 'O valor deve ser maior que 0!'
+			});
+		}
+	};
+
+	$scope.finalizar = function (oferta) {
+		oferta.status = "AGUARDANDO";
+		$scope.salvar(oferta);
+	};
+
+	function calculaPrecoFinal(precoInicial, desconto) {
+		return precoInicial - (precoInicial * (desconto / 100));
+	};
 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
+	};
+	$scope.listaUrls = [];
+	$scope.fileArray = [];
+	$scope.idOferta = "";
+
+	var inputFile = document.getElementById("fileInput");
+	inputFile.addEventListener("change", function (event) {
+		var fileList = event.target.files;
+
+		for (var i = 0; i < fileList.length; i++) {
+			$scope.fileArray.push(fileList[i]);
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				var srcImagem = reader.result;
+				if (srcImagem.match(/^data:image\//)) {
+					$scope.$apply(function () {
+						$scope.listaUrls.push(srcImagem);
+					});
+				} else {
+					//TODO: Erro_ArquivoNaoImagem
+				}
+			}
+
+			reader.readAsDataURL(fileList[i]);
+		}
+	});
+
+	//Método que executa todo o processo de persistência das imagens.
+	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
+		$("#preloader").fadeIn();
+		var listaArquivos = $scope.fileArray;
+
+		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
+		storageRef.constructor.prototype.putFiles = function (listaArquivos) {
+			var ref = this;
+			return Promise.all(listaArquivos.map(function (file) {
+				return ref.child(file.name).put(file);
+			}));
+		}
+
+		storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
+			var objetoModeloImagem = {
+				ofertaId: $scope.idOferta,
+				imagemUrl: ""
+			}
+			arrayMetadados.forEach(function (infoImagem) {
+				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
+				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
+
+				imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
+					console.log(referencia);
+				});
+			});
+			$("#preloader").fadeOut();
+			$ionicHistory.goBack(-1);
+		}).catch(function (error) {
+			console.log("deu erro");
+		});
 	}
 });
+
+
+// app.controller('OfertaUpdateCtrl', function ($firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
+// 	var id = $stateParams.id;
+// 	var ref = firebase.database().ref('ofertas/' + id);
+// 	$scope.oferta = $firebaseObject(ref);
+
+// 	$scope.salvar = function (oferta) {
+// 		ref = oferta;
+// 		ref.$save();
+// 	}
+
+// 	$scope.goBackHandler = function () {
+// 		$ionicHistory.goBack(-1);
+// 	}
+// });
 
 app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
 
@@ -248,8 +398,8 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 				$ionicViewSwitcher.nextDirection('forward');
 				$state.go('visualizar-oferta', { id: id });
 			}
-			else if (oferta.status == 'AGUARDANDO') {
-
+			else if (oferta.status == 'CRIANDO') {
+				$state.go('tabsJuridicoLogado.editarOferta', { id: id });
 			}
 			else if (oferta.status == 'RECUSADO') {
 

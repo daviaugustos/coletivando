@@ -1029,6 +1029,22 @@ ion-slides{
 	padding-right: 4px;
 }
 
+#orangeBox {
+	background: #f90;
+	color: #fff;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 5px;
+	position: absolute;
+	top: 0px;
+	left: 250px;
+}
+
+
 /*Input file customização*/
 #fileInput{
 	display: none;
@@ -1050,3 +1066,4 @@ ion-slides{
 #labelInput i{
 	padding-right: 10px;
 }
+

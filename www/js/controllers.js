@@ -33,13 +33,13 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		$('.oferta-precoinicial').bind();
 		$('.oferta-desconto').bind();
 
-		var desconto     = oferta.desconto;
+		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto     = desconto.toString().replace('.', '').replace(',', '.');
+		desconto = desconto.toString().replace('.', '').replace(',', '.');
 		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
 
-		desconto     = parseFloat(desconto);
+		desconto = parseFloat(desconto);
 		precoInicial = parseFloat(precoInicial);
 
 		oferta.precoInicialUn = precoInicial;
@@ -57,10 +57,10 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		data_limite.setMonth(data[1]);
 		data_limite.setFullYear(data[2]);
 
-		if(oferta.precoInicialUn > 0.0) {
-			if(data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
-				if(data_limite >= data_atual) {
-					ofertas.$add(oferta).then(function(referencia){
+		if (oferta.precoInicialUn > 0.0) {
+			if (data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
+				if (data_limite >= data_atual) {
+					ofertas.$add(oferta).then(function (referencia) {
 						var idOfertaSalva = referencia.key;
 						$scope.idOferta = idOfertaSalva;
 						var idPessoaJuridica = firebaseUser.uid;
@@ -70,20 +70,20 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 					});
 				} else {
 					$ionicPopup.alert({
-						title : 'Erro',
-						template : 'A data limite deve ser maior que a data atual!'
+						title: 'Erro',
+						template: 'A data limite deve ser maior que a data atual!'
 					});
 				}
 			} else {
 				$ionicPopup.alert({
-					title : 'Erro',
-					template : 'Coloque uma data limite válida!'
+					title: 'Erro',
+					template: 'Coloque uma data limite válida!'
 				});
 			}
 		} else {
 			$ionicPopup.alert({
-				title : 'Erro',
-				template : 'O valor deve ser maior que 0!'
+				title: 'Erro',
+				template: 'O valor deve ser maior que 0!'
 			});
 		}
 	};
@@ -470,12 +470,13 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 	}
 });
 
-app.controller('CategoriaCtrl', function ($scope, CategoriaService, $state, $ionicHistory) {
+app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaService, $state, $ionicHistory) {
 	$scope.categorias = CategoriaService.readAll();
 
 	//aguardando implementação das ofertas na home e id de filtro na url
-	$scope.filterHome = function (filterId) {
-		$state.go('oferta-lista', { filterId: filterId });
+	$scope.filterHome = function (categoriaId) {
+		$ionicViewSwitcher.nextDirection("forward");
+		$state.go('categoriaOfertas', { id: categoriaId });
 	};
 
 	$scope.goBackHandler = function () {
@@ -718,7 +719,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 						$scope.pessoaJuridica.telefone = data['telefone'];
 					}
 
-	
+
 
 				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
 					$ionicPopup.alert({
@@ -803,20 +804,21 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 
 		if (pessoaJuridica.password == pessoaJuridica.confirmPassword) {
 			$firebaseAuth().$createUserWithEmailAndPassword(pessoaJuridica.email, pessoaJuridica.password)
-				.then(function (firebaseUser) {$('#preloader').fadeIn();
+				.then(function (firebaseUser) {
+					$('#preloader').fadeIn();
 					addPessoaJuridica(firebaseUser);
 					$state.go('tabsNaoLogado.login');
-					$('#preloader').fadeOut();	
+					$('#preloader').fadeOut();
 				})
-				
+
 				.catch(function (error) {
 
 				});
-				
+
 		} else {
 			alert("Senhas inválidas");
 		}
-	} 
+	}
 
 	function addPessoaJuridica(firebaseUser) {
 		var ref = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);
@@ -1027,35 +1029,83 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 });
 
 app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scope) {
-	$scope.submit = function(form) {
+	$scope.submit = function (form) {
 		$scope.submitted = true;
 
 		if (form.$invalid) {
 			var formInputs = [];
 
-			angular.forEach(form, function(item) {
+			angular.forEach(form, function (item) {
 				//verifica se o item do formControll é um objeto de input e se está inválido
-				if (typeof item === 'object' && item.hasOwnProperty('$modelValue') && item.$invalid){
+				if (typeof item === 'object' && item.hasOwnProperty('$modelValue') && item.$invalid) {
 					formInputs.push(item)
-				}                       
+				}
 			});
 
 			$location.hash(formInputs[0].$name);
 			$ionicScrollDelegate.anchorScroll(true);
-		}	
-	} 
+		}
+	}
+});
+
+app.controller('CategoriaOfertasCtrl', function ($ionicHistory, $state, $ionicViewSwitcher, $firebaseArray, $ionicPlatform, $scope, $stateParams) {
+
+	$ionicPlatform.ready(function () {
+		$("#preloader").fadeIn();
+		getObjOfertaComImagem();
+	});
+
+	function getObjOfertaComImagem() {
+		var categoriaId = $stateParams.id;
+		$scope.tituloHeaderBar = categoriaId;
+		var refOfertas = firebase.database().ref("ofertas");
+		var query = refOfertas.orderByChild("categoria").equalTo(categoriaId);
+		$firebaseArray(query).$loaded(function (dadosOfertas) {
+			dadosOfertas = dadosOfertas.map(function (oferta) {
+				getImagemExibicao(oferta.$id).then(function (urlImagem) {
+					oferta.imagem = urlImagem;
+				});
+				return oferta;
+			});
+			$scope.ofertas = dadosOfertas;
+			$("#preloader").fadeOut();
+		});
+	}
+
+	function getImagemExibicao(ofertaId) {
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
+
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl[0];
+		});
+	};
+
+	$scope.showOferta = function (id) {
+		$ionicViewSwitcher.nextDirection("forward");
+		$state.go('visualizar-oferta', { id: id });
+	}
+
+	$scope.goBackHandler = function () {
+		$ionicViewSwitcher.nextDirection("back");
+		$ionicHistory.goBack(-1);
+	};
+
 });
 
 app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
 	$("#preloader").fadeIn();
-	
+
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('pessoaJuridica/' + id);
-	
-	$firebaseObject(ref).$loaded(function(empresa) {
+
+	$firebaseObject(ref).$loaded(function (empresa) {
 		$scope.pessoaJuridica = empresa;
-		$scope.enderecoRua = empresa.enderecoRua+', '+empresa.enderecoNumero;
-		$scope.enderecoCidade = empresa.enderecoCep+' '+empresa.enderecoCidade+' - '+empresa.enderecoEstado;
+		$scope.enderecoRua = empresa.enderecoRua + ', ' + empresa.enderecoNumero;
+		$scope.enderecoCidade = empresa.enderecoCep + ' ' + empresa.enderecoCidade + ' - ' + empresa.enderecoEstado;
 		$("#preloader").fadeOut();
 	});
 

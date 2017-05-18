@@ -1029,21 +1029,20 @@ ion-slides{
 	padding-right: 4px;
 }
 
-#orangeBox {
-	background: #f90;
-	color: #fff;
-	font-family: 'Helvetica', 'Arial', sans-serif;
-	font-size: 2em;
-	font-weight: bold;
-	text-align: center;
+.exclude-image-box {
+	cursor: pointer;
+	color: rgb(226, 12, 12);
+	font-size: 22px;
 	width: 20px;
 	height: 20px;
-	border-radius: 5px;
 	position: absolute;
-	top: 0px;
-	left: 250px;
+	top: 7px;
+    left: 250px;
 }
 
+.box-images {
+	position: relative;
+}
 
 /*Input file customização*/
 #fileInput{

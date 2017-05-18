@@ -166,6 +166,23 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	var ref = firebase.database().ref('ofertas/' + id);
 	$scope.oferta = $firebaseObject(ref);
 
+	getImagensSlider(id).then(function (arrayImagens) {
+		$scope.listaUrls = arrayImagens;
+	}, function (error) {
+		console.log(error);
+	})
+	function getImagensSlider(ofertaId) {
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(id);
+
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl;
+		});
+	};
+
 	/* Mask */
 	$('.date').mask('00/00/0000');
 	$('.money').mask('000.000.000.000.000,00', { reverse: true });
@@ -176,13 +193,13 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		$('.oferta-precoinicial').bind();
 		$('.oferta-desconto').bind();
 
-		var desconto     = oferta.desconto;
+		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto     = desconto.toString().replace('.', '').replace(',', '.');
+		desconto = desconto.toString().replace('.', '').replace(',', '.');
 		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
 
-		desconto     = parseFloat(desconto);
+		desconto = parseFloat(desconto);
 		precoInicial = parseFloat(precoInicial);
 
 		oferta.precoInicialUn = precoInicial;
@@ -200,11 +217,11 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		data_limite.setMonth(data[1]);
 		data_limite.setFullYear(data[2]);
 
-		if(oferta.precoInicialUn > 0.0) {
-			if(data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
-				if(data_limite >= data_atual) {
+		if (oferta.precoInicialUn > 0.0) {
+			if (data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
+				if (data_limite >= data_atual) {
 					ref = oferta;
-					ref.$save().then(function(referencia){
+					ref.$save().then(function (referencia) {
 						var idOfertaSalva = referencia.key;
 						$scope.idOferta = idOfertaSalva;
 						var idPessoaJuridica = firebaseUser.uid;
@@ -214,20 +231,20 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 					});
 				} else {
 					$ionicPopup.alert({
-						title : 'Erro',
-						template : 'A data limite deve ser maior que a data atual!'
+						title: 'Erro',
+						template: 'A data limite deve ser maior que a data atual!'
 					});
 				}
 			} else {
 				$ionicPopup.alert({
-					title : 'Erro',
-					template : 'Coloque uma data limite válida!'
+					title: 'Erro',
+					template: 'Coloque uma data limite válida!'
 				});
 			}
 		} else {
 			$ionicPopup.alert({
-				title : 'Erro',
-				template : 'O valor deve ser maior que 0!'
+				title: 'Erro',
+				template: 'O valor deve ser maior que 0!'
 			});
 		}
 	};
@@ -731,7 +748,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 					});
 				}
 			});
-				$('#preloader').fadeOut();
+			$('#preloader').fadeOut();
 		};
 	}
 
@@ -840,8 +857,8 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 		firebase.auth().signOut();
 		$ionicViewSwitcher.nextDirection("forward");
 		$state.go("tabsNaoLogado.home");
-     	$('#preloader').fadeOut();
-	} 
+		$('#preloader').fadeOut();
+	}
 
 });
 

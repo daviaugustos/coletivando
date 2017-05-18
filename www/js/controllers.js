@@ -183,6 +183,13 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		});
 	};
 
+	$scope.removerImagemLista = function (urlRemovida){
+		console.log(urlRemovida);
+		var listaAtualizada = _.filter($scope.listaUrls, function(url){ return url != urlRemovida });
+		console.log(listaAtualizada);
+		$scope.listaUrls = listaAtualizada;
+	};
+
 	/* Mask */
 	$('.date').mask('00/00/0000');
 	$('.money').mask('000.000.000.000.000,00', { reverse: true });

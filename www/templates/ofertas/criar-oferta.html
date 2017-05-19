@@ -1,13 +1,5 @@
 <ion-view  id="cadastro-empresa">
 
-	<!--<ion-nav-bar class="green back">
-        <ion-nav-buttons side="left">
-            <button ng-click="goBackHandler()" class="button button-icon">
-                <i class="icon ion-android-arrow-back"></i>
-            </button>
-        </ion-nav-buttons>
-    </ion-nav-bar>-->
-
     <div class="bar coletivando-bar green"> 
         <button ng-click="goBackHandler()" class="button button-icon">
             <i class="icon ion-android-arrow-back"></i>
@@ -74,7 +66,6 @@
 
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
                 <div class="slide" ng-repeat="url in listaUrls">
-                    
                     <div class="box-images">
                         <img ng-src="{{url}}">
 
@@ -82,9 +73,7 @@
                            <span ng-click="removerImagemLista(url)" class="icon-exclude-image icon ion-close-circled"></span>
                         </div>
                     </div>
-
                 </div>
-       
             </ion-scroll>
             
             <button id="labelInput" for="fileInput">
@@ -99,8 +88,7 @@
                 <input type="text" ng-required="true" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <button class="margin-top button button-block btn btn-green">Enviar oferta</button>
-             <!-- ng-click="submit(cadastroForm)" -->
+            <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
         </ion-list>
     </form>
   </ion-content> 

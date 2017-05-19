@@ -16,7 +16,7 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 	}
 
 	/* Mask */
-	$('.date').mask('00/00/0000');
+	//$('.date').mask('00/00/0000');
 	$('.money').mask('000.000.000.000.000,00', { reverse: true });
 	$('.porcent').mask('00,00', { reverse: true });
 
@@ -36,11 +36,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto = desconto.toString().replace('.', '').replace(',', '.');
-		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
-
-		desconto = parseFloat(desconto);
-		precoInicial = parseFloat(precoInicial);
+		desconto     = parseFloat(desconto) * .01;
+		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;

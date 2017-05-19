@@ -46,7 +46,7 @@
             <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtDataLimite.$invalid && !cadastroForm.txtDataLimite.$pristine) || cadastroForm.txtDataLimite.$invalid && submitted, 'no-errors' : cadastroForm.txtDataLimite.$valid}">
                 <span class="input-label">Data limite</span>
-                <input type="text" name="txtDataLimite" ng-required="true" placeholder="Data limite" class="date" ng-model="oferta.dataLimite"/>
+                <input type="text" name="txtDataLimite" ng-required="true" placeholder="Data limite" mask='39/19/9999' ng-model="oferta.dataLimite"/>
             </label>
 
             <div class="row no-padding">
@@ -54,14 +54,14 @@
                     <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtPrecoInicial.$invalid && !cadastroForm.txtPrecoInicial.$pristine) || cadastroForm.txtPrecoInicial.$invalid && submitted, 'no-errors' : cadastroForm.txtPrecoInicial.$valid}">
                         <span class="input-label">Preço</span>
-                        <input type="text" ng-required="true" ng-minlength="3" name="txtPrecoInicial" placeholder="Preço inicial" class="money oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
+                        <input type="text" clean="true" ng-required="true" name="txtPrecoInicial" placeholder="Preço inicial" mask='9?9?9?9?9?9?9?9?9.99' class="oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
                     </label>
                 </div>
                 <div class="col col-50 no-padding-right">                
                     <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtDesconto.$invalid && !cadastroForm.txtDesconto.$pristine) || cadastroForm.txtDesconto.$invalid && submitted, 'no-errors' : cadastroForm.txtDesconto.$valid}">
                         <span class="input-label">Desconto(%)</span>
-                        <input type="text" ng-required="true" placeholder="Desconto (%)" class="porcent oferta-desconto" name="txtDesconto" ng-model="oferta.desconto"/>
+                        <input type="text" clean="true" ng-required="true" placeholder="Desconto (%)" class="oferta-desconto" mask='99.99' name="txtDesconto" ng-model="oferta.desconto"/>
                     </label>
                 </div>
             </div>
@@ -99,8 +99,8 @@
                 <input type="text" ng-required="true" ng-minlength="50" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
-             
+            <button ng-click="create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
+             <!-- ng-click="submit(cadastroForm)" -->
         </ion-list>
     </form>
   </ion-content> 

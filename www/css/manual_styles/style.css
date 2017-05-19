@@ -667,6 +667,7 @@ form {
     text-align:center;
     text-align: right;
 }
+
 .buttonbtn{
 	color: #f2827e;
 }
@@ -845,6 +846,13 @@ ion-view #perfil-empresa{
 	padding-bottom: 10px;
 }
 
+.info-perfil-empresa{
+	color: #AA79B8;
+	font-weight: 340;
+	font-size: 16px;
+    text-align:center;
+    text-align: right;
+}
 
 /* View - Editar User */
 .editar-user h2{
@@ -1027,6 +1035,29 @@ ion-slides{
 	width: 280px;
 	height: 140px;
 	padding-right: 4px;
+}
+
+.exclude-image-box {
+	cursor: pointer;
+	color: rgb(226, 12, 12);
+	font-size: 24px;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 7px;
+    left: 250px;
+}
+
+.icon-exclude-image::before {
+	background-color: white;
+	border-radius: 50px;
+	line-height: 19px;
+	height: 19px;
+	width: 20px;
+}
+
+.box-images {
+	position: relative;
 }
 
 /*Input file customização*/

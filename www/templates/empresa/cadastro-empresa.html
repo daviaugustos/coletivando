@@ -18,7 +18,7 @@
             <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtCnpj.$invalid && !cadastroForm.txtCnpj.$pristine) || cadastroForm.txtCnpj.$invalid && submitted, 'no-errors' : cadastroForm.txtCnpj.$valid}">
                 <span class="input-label">CNPJ</span>
-                <input ng-minlength="18" ng-required=true name="txtCnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
+                <input ng-minlength="18" ng-required="true" name="txtCnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
             </label>
 
             <label class="item-input-coletivando item-floating-label" 

@@ -61,7 +61,7 @@
                     <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtDesconto.$invalid && !cadastroForm.txtDesconto.$pristine) || cadastroForm.txtDesconto.$invalid && submitted, 'no-errors' : cadastroForm.txtDesconto.$valid}">
                         <span class="input-label">Desconto(%)</span>
-                        <input type="text" placeholder="Desconto (%)" class="porcent oferta-desconto" name="txtDesconto" ng-model="oferta.desconto"/>
+                        <input type="text" ng-required="true" placeholder="Desconto (%)" class="porcent oferta-desconto" name="txtDesconto" ng-model="oferta.desconto"/>
                     </label>
                 </div>
             </div>
@@ -69,7 +69,7 @@
             <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtPessoas.$invalid && !cadastroForm.txtPessoas.$pristine) || cadastroForm.txtPessoas.$invalid && submitted, 'no-errors' : cadastroForm.txtPessoas.$valid}">
                 <span class="input-label">Pessoas</span>
-                <input type="text" name="txtPessoas" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
+                <input type="text" ng-required="true" name="txtPessoas" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
             </label>
 
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">

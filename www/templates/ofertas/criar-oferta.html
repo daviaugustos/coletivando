@@ -1,13 +1,5 @@
 <ion-view  id="cadastro-empresa">
 
-	<!--<ion-nav-bar class="green back">
-        <ion-nav-buttons side="left">
-            <button ng-click="goBackHandler()" class="button button-icon">
-                <i class="icon ion-android-arrow-back"></i>
-            </button>
-        </ion-nav-buttons>
-    </ion-nav-bar>-->
-
     <div class="bar coletivando-bar green"> 
         <button ng-click="goBackHandler()" class="button button-icon">
             <i class="icon ion-android-arrow-back"></i>
@@ -61,7 +53,7 @@
                     <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtDesconto.$invalid && !cadastroForm.txtDesconto.$pristine) || cadastroForm.txtDesconto.$invalid && submitted, 'no-errors' : cadastroForm.txtDesconto.$valid}">
                         <span class="input-label">Desconto(%)</span>
-                        <input type="text" clean="true" ng-required="true" placeholder="Desconto (%)" class="oferta-desconto" mask='99.99' name="txtDesconto" ng-model="oferta.desconto"/>
+                        <input type="text" clean="true" ng-required="true" placeholder="Desconto (%)" class="oferta-desconto" mask='99' name="txtDesconto" ng-model="oferta.desconto"/>
                     </label>
                 </div>
             </div>
@@ -74,7 +66,6 @@
 
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
                 <div class="slide" ng-repeat="url in listaUrls">
-                    
                     <div class="box-images">
                         <img ng-src="{{url.imagemBase64}}">
 
@@ -82,9 +73,7 @@
                            <span ng-click="removerImagemLista(url)" class="icon-exclude-image icon ion-close-circled"></span>
                         </div>
                     </div>
-
                 </div>
-       
             </ion-scroll>
             
             <button id="labelInput" for="fileInput">
@@ -96,11 +85,10 @@
             <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtDescricao.$invalid && !cadastroForm.txtDescricao.$pristine) || cadastroForm.txtDescricao.$invalid && submitted, 'no-errors' : cadastroForm.txtDescricao.$valid}">
                 <span class="input-label">Descrição</span>
-                <input type="text" ng-required="true" ng-minlength="50" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
+                <input type="text" ng-required="true" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <button ng-click="create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
-             <!-- ng-click="submit(cadastroForm)" -->
+            <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
         </ion-list>
     </form>
   </ion-content> 

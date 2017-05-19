@@ -17,8 +17,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 
 	/* Mask */
 	//$('.date').mask('00/00/0000');
-	$('.money').mask('000.000.000.000.000,00', { reverse: true });
-	$('.porcent').mask('00,00', { reverse: true });
+	// $('.money').mask('000.000.000.000.000,00', { reverse: true });
+	// $('.porcent').mask('00,00', { reverse: true });
 
 	$scope.create = function (oferta) {
 		$scope.authObj = $firebaseAuth();
@@ -30,13 +30,13 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
-		$('.oferta-precoinicial').bind();
-		$('.oferta-desconto').bind();
+		// $('.oferta-precoinicial').bind();
+		// $('.oferta-desconto').bind();
 
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto = parseFloat(desconto) * .01;
+		// desconto     = parseFloat(desconto) * .01;
 		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
@@ -57,14 +57,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		if (oferta.precoInicialUn > 0.0) {
 			if (data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
 				if (data_limite >= data_atual) {
-					ofertas.$add(oferta).then(function (referencia) {
-						var idOfertaSalva = referencia.key;
-						$scope.idOferta = idOfertaSalva;
-						var idPessoaJuridica = firebaseUser.uid;
-						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
-						console.log(caminhoArmazenamentoImagens);
-						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
-					});
+					ofertas.$add(oferta);
+					
 				} else {
 					$ionicPopup.alert({
 						title: 'Erro',
@@ -330,6 +324,12 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 						$scope.listaUrls.push(srcImagem);
 					});
 				} else {
+
+					$ionicPopup.alert({
+							title: 'Erro',
+							template: 'Por favor, insira uma imagem válida'
+						});
+
 					//TODO: Erro_ArquivoNaoImagem
 				}
 			}
@@ -455,7 +455,28 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 
 	$firebaseArray(query).$loaded(function (array) {
 		$('#preloader').fadeOut();
-		$scope.ofertasPorPessoaJuridica = array;
+
+		var arrayAprovadas = [];
+		var arrayAguardando = [];
+		var arrayCriando = [];
+		var arrayRecusadas = [];
+
+		array.forEach(function (item, index) {
+			if (item.status == 'APROVADO') {
+				arrayAprovadas.push(item);
+			} else if (item.status == 'AGUARDANDO') {
+				arrayAguardando.push(item);
+			} else if (item.status == 'CRIANDO') {
+				arrayCriando.push(item);
+			} else if (item.status == 'RECUSADO') {
+				arrayRecusadas.push(item);
+			}		
+		});
+
+		$scope.ofertasAprovadasPorPessoaJuridica = arrayAprovadas;
+		$scope.ofertasAguardandoPorPessoaJuridica = arrayAguardando;
+		$scope.ofertasCriandoPorPessoaJuridica = arrayCriando;
+		$scope.ofertasRecusadasPorPessoaJuridica = arrayRecusadas;
 	});
 
 	$scope.showOpcoesOfertas = function (id) {
@@ -902,6 +923,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 
 		obj = _.extend(obj, $scope.pessoaJuridica);
 		delete obj.password;
+		delete obj.confirmPassword;
 		obj.$save();
 		$ionicHistory.goBack(-1);
 	}
@@ -1057,6 +1079,7 @@ app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $s
 
 		obj = _.extend(obj, $scope.pessoaFisica);
 		delete obj.password;
+		delete obj.confirmPassword;
 		obj.$save();
 	}
 

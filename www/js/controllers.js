@@ -36,7 +36,7 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto     = parseFloat(desconto) * .01;
+		desconto = parseFloat(desconto) * .01;
 		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
@@ -106,18 +106,34 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 
 			reader.onload = function (e) {
 				var srcImagem = reader.result;
-				if (srcImagem.match(/^data:image\//)) {
-					$scope.$apply(function () {
-						$scope.listaUrls.push(srcImagem);
-					});
-				} else {
-					//TODO: Erro_ArquivoNaoImagem
-				}
+				validarImagem(srcImagem);
 			}
 
 			reader.readAsDataURL(fileList[i]);
 		}
 	});
+
+	function validarImagem(base64Imagem) {
+		if (base64Imagem.match(/^data:image\//)) {
+			$scope.$apply(function () {
+				var objModeloImagemLocal = {
+					id: "",
+					imagemBase64: ""
+				}
+				var idImagem = gerarIdUnico();
+				objModeloImagemLocal.id = idImagem;
+				objModeloImagemLocal.imagemBase64 = base64Imagem;
+				$scope.listaUrls.push(objModeloImagemLocal);
+			});
+		} else {
+			//TODO: Erro_ArquivoNaoImagem
+		}
+	}
+
+	function gerarIdUnico() {
+		//Código pra gerar id unico
+		return "teste";
+	}
 
 	//Método que executa todo o processo de persistência das imagens.
 	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
@@ -135,11 +151,13 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
 			var objetoModeloImagem = {
 				ofertaId: $scope.idOferta,
-				imagemUrl: ""
+				imagemUrl: "",
+				fullPath: "",
 			}
 			arrayMetadados.forEach(function (infoImagem) {
 				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
 				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
+				objetoModeloImagem.fullPath = infoImagem.metadata.fullPath;
 
 				imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
 					console.log(referencia);
@@ -151,13 +169,19 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 			console.log("deu erro");
 		});
 	}
+
+	$scope.removerImagemLista = function (idImagemLocal) {
+		var listaAtualizada = _.filter($scope.listaUrls, function (url) { return url != urlRemovida });
+		$scope.listaUrls = listaAtualizada;
+	};
+
 });
 
 
 app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $scope, $state, $ionicHistory, $firebaseArray, $ionicPopup, $firebaseStorage, $stateParams) {
 
-	$scope.authObj = $firebaseAuth();
-	var firebaseUser = $scope.authObj.$getAuth();
+	// $scope.authObj = $firebaseAuth().$getAuth().uid;
+	// $scope.firebaseUser = $scope.authObj.$getAuth();
 
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
@@ -191,7 +215,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		debugger;
 		var imagensFirebase = $scope.listaUrlsFirebase;
 		var imagensSeremRemovidas = _.difference(imagensFirebase, listaImagems);
-		var storageRef = firebase.storage();
+		var storageRef = firebase.storage().ref();
 
 		storageRef.constructor.prototype.removeFiles = function (imagensSeremRemovidas) {
 			var ref = this;
@@ -249,7 +273,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 					ref.$save().then(function (referencia) {
 						var idOfertaSalva = referencia.key;
 						$scope.idOferta = idOfertaSalva;
-						var idPessoaJuridica = firebaseUser.uid;
+						var idPessoaJuridica = $firebaseAuth().$getAuth().uid;
 						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
 
 						$scope.removerImagemFirebase($scope.listaUrls, caminhoArmazenamentoImagens);
@@ -515,7 +539,7 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 	$scope.showEmpresa = function (id) {
 		$state.go('perfil-empresa', { id: id });
 	}
-	
+
 });
 
 app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaService, $state, $ionicHistory) {
@@ -622,9 +646,9 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 						if (cnpj.$value != null) {
 							$ionicViewSwitcher.nextDirection("back");
 							$state.go('tabsJuridicoLogado.home');
-						} else if (usuario.email = "admin@admin.com"){
+						} else if (usuario.email = "admin@admin.com") {
 							$state.go('ofertas-triagem');
-						}						
+						}
 						else {
 							$ionicViewSwitcher.nextDirection("forward");
 							$state.go('tabsFisicoLogado.home');
@@ -1170,7 +1194,7 @@ app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ioni
 });
 
 
-app.controller('OfertaTriagemCtrl', function($ionicViewSwitcher, $firebaseAuth, $firebaseArray, $firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+app.controller('OfertaTriagemCtrl', function ($ionicViewSwitcher, $firebaseAuth, $firebaseArray, $firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
 	$("#preloader").fadeIn();
 
 	var id = $stateParams.id;
@@ -1183,36 +1207,36 @@ app.controller('OfertaTriagemCtrl', function($ionicViewSwitcher, $firebaseAuth, 
 		$("#preloader").fadeOut();
 	});
 
-	$scope.showVisualizarOferta = function(id){
+	$scope.showVisualizarOferta = function (id) {
 		$state.go('visualizar-oferta-triagem', { id: id });
 	}
-	
+
 	$scope.logout = function () {
 		$('#preloader').fadeIn();
 		firebase.auth().signOut();
 		$ionicViewSwitcher.nextDirection("back");
 		$state.go("tabsNaoLogado.home");
-     	$('#preloader').fadeOut();
-	} 
+		$('#preloader').fadeOut();
+	}
 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });
 
-app.controller('VisualizarOfertaTriagemCtrl', function($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
 
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
 	$scope.oferta = $firebaseObject(ref);
 
-	$scope.aprovar = function(){
+	$scope.aprovar = function () {
 		$scope.oferta.status = "APROVADO";
 		$scope.oferta.$save();
 		$ionicHistory.goBack(-1);
 	};
 
-	$scope.recusar = function(){
+	$scope.recusar = function () {
 		$scope.oferta.status = "RECUSADO";
 		$scope.oferta.$save();
 		$ionicHistory.goBack(-1);
@@ -1221,5 +1245,5 @@ app.controller('VisualizarOfertaTriagemCtrl', function($firebaseObject, $state, 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
-	
+
 });

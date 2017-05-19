@@ -16,7 +16,7 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 	}
 
 	/* Mask */
-	$('.date').mask('00/00/0000');
+	//$('.date').mask('00/00/0000');
 	$('.money').mask('000.000.000.000.000,00', { reverse: true });
 	$('.porcent').mask('00,00', { reverse: true });
 
@@ -36,11 +36,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto = desconto.toString().replace('.', '').replace(',', '.');
-		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
-
-		desconto = parseFloat(desconto);
-		precoInicial = parseFloat(precoInicial);
+		desconto     = parseFloat(desconto) * .01;
+		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;
@@ -514,6 +511,11 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 	$scope.showDescricao = function (id) {
 		$state.go('descricao', { id: id });
 	}
+
+	$scope.showEmpresa = function (id) {
+		$state.go('perfil-empresa', { id: id });
+	}
+	
 });
 
 app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaService, $state, $ionicHistory) {
@@ -620,7 +622,10 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 						if (cnpj.$value != null) {
 							$ionicViewSwitcher.nextDirection("back");
 							$state.go('tabsJuridicoLogado.home');
-						} else {
+						} else if (usuario.email = "admin@admin.com"){
+							$state.go('ofertas-triagem');
+						}						
+						else {
 							$ionicViewSwitcher.nextDirection("forward");
 							$state.go('tabsFisicoLogado.home');
 						}
@@ -1162,4 +1167,59 @@ app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ioni
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
+});
+
+
+app.controller('OfertaTriagemCtrl', function($ionicViewSwitcher, $firebaseAuth, $firebaseArray, $firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+	$("#preloader").fadeIn();
+
+	var id = $stateParams.id;
+	var ref = firebase.database().ref('ofertas');
+
+	var query = ref.orderByChild("status").equalTo("AGUARDANDO");
+
+	$firebaseArray(query).$loaded(function (ofertas) {
+		$scope.ofertas = ofertas;
+		$("#preloader").fadeOut();
+	});
+
+	$scope.showVisualizarOferta = function(id){
+		$state.go('visualizar-oferta-triagem', { id: id });
+	}
+	
+	$scope.logout = function () {
+		$('#preloader').fadeIn();
+		firebase.auth().signOut();
+		$ionicViewSwitcher.nextDirection("back");
+		$state.go("tabsNaoLogado.home");
+     	$('#preloader').fadeOut();
+	} 
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+});
+
+app.controller('VisualizarOfertaTriagemCtrl', function($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+
+	var id = $stateParams.id;
+	var ref = firebase.database().ref('ofertas/' + id);
+	$scope.oferta = $firebaseObject(ref);
+
+	$scope.aprovar = function(){
+		$scope.oferta.status = "APROVADO";
+		$scope.oferta.$save();
+		$ionicHistory.goBack(-1);
+	};
+
+	$scope.recusar = function(){
+		$scope.oferta.status = "RECUSADO";
+		$scope.oferta.$save();
+		$ionicHistory.goBack(-1);
+	};
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+	
 });

@@ -17,19 +17,21 @@
         </div>
     </div>
 
-    <form class="cadastro-form">
+    <form name="cadastroForm" ng-submit="create(oferta)" ng-controller="ValidacaoCtrl" class="cadastro-form">
 
 <ion-content style="padding: 60px 40px 40px 40px">
 
         <ion-list>            
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtProduto.$invalid && !cadastroForm.txtProduto.$pristine) || cadastroForm.txtProduto.$invalid && submitted, 'no-errors' : cadastroForm.txtProduto.$valid}">
                 <span class="input-label">Produto</span>
-                <input type="text" placeholder="Produto" ng-model="oferta.produto"/>
+                <input type="text" ng-required="true" placeholder="Produto" name="txtProduto" ng-model="oferta.produto"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtCategoria.$invalid && !cadastroForm.txtCategoria.$pristine) || cadastroForm.txtCategoria.$invalid && submitted, 'no-errors' : cadastroForm.txtCategoria.$valid}">
                 <span class="input-label">Categoria</span>
-                <select ng-model="oferta.categoria">
+                <select ng-required="true" name="txtCategoria" ng-model="oferta.categoria">
                     <option value="TV">TV</option>
                     <option value="CELULARES">Celulares</option>
                     <option value="ELETRONICOS">Eletrônicos</option>
@@ -41,29 +43,33 @@
                 </select>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtDataLimite.$invalid && !cadastroForm.txtDataLimite.$pristine) || cadastroForm.txtDataLimite.$invalid && submitted, 'no-errors' : cadastroForm.txtDataLimite.$valid}">
                 <span class="input-label">Data limite</span>
-                <input type="text" placeholder="Data limite" class="date" ng-model="oferta.dataLimite"/>
+                <input type="text" name="txtDataLimite" ng-required="true" placeholder="Data limite" mask='39/19/9999' ng-model="oferta.dataLimite"/>
             </label>
 
             <div class="row no-padding">
                 <div class="col col-50 no-padding-left">
-                    <label class="item-input-coletivando item-floating-label">
+                    <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtPrecoInicial.$invalid && !cadastroForm.txtPrecoInicial.$pristine) || cadastroForm.txtPrecoInicial.$invalid && submitted, 'no-errors' : cadastroForm.txtPrecoInicial.$valid}">
                         <span class="input-label">Preço</span>
-                        <input type="text" placeholder="Preço inicial" class="money oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
+                        <input type="text" clean="true" ng-required="true" name="txtPrecoInicial" placeholder="Preço inicial" mask='9?9?9?9?9?9?9?9?9.99' class="oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
                     </label>
                 </div>
                 <div class="col col-50 no-padding-right">                
-                    <label class="item-input-coletivando item-floating-label">
+                    <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtDesconto.$invalid && !cadastroForm.txtDesconto.$pristine) || cadastroForm.txtDesconto.$invalid && submitted, 'no-errors' : cadastroForm.txtDesconto.$valid}">
                         <span class="input-label">Desconto(%)</span>
-                        <input type="text" placeholder="Desconto (%)" class="porcent oferta-desconto" ng-model="oferta.desconto"/>
+                        <input type="text" clean="true" ng-required="true" placeholder="Desconto (%)" class="oferta-desconto" mask='99.99' name="txtDesconto" ng-model="oferta.desconto"/>
                     </label>
                 </div>
             </div>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtPessoas.$invalid && !cadastroForm.txtPessoas.$pristine) || cadastroForm.txtPessoas.$invalid && submitted, 'no-errors' : cadastroForm.txtPessoas.$valid}">
                 <span class="input-label">Pessoas</span>
-                <input type="text" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
+                <input type="text" ng-required="true" name="txtPessoas" placeholder="Quantidade de Pessoas" ng-model="oferta.qtdPessoas"/>
             </label>
 
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
@@ -73,7 +79,7 @@
                         <img ng-src="{{url}}">
 
                         <div class="exclude-image-box">
-                           <span class="icon ion-close-circled"></span>
+                           <span ng-click="removerImagemLista(url)" class="icon-exclude-image icon ion-close-circled"></span>
                         </div>
                     </div>
 
@@ -87,13 +93,14 @@
             </button>
             <input type="file" id="fileInput"/>
 
-            <label class="item-input-coletivando item-floating-label">
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtDescricao.$invalid && !cadastroForm.txtDescricao.$pristine) || cadastroForm.txtDescricao.$invalid && submitted, 'no-errors' : cadastroForm.txtDescricao.$valid}">
                 <span class="input-label">Descrição</span>
-                <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/>
+                <input type="text" ng-required="true" ng-minlength="50" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
             <button ng-click="create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
-             
+             <!-- ng-click="submit(cadastroForm)" -->
         </ion-list>
     </form>
   </ion-content> 

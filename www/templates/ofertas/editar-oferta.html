@@ -35,20 +35,20 @@
 
             <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Data limite</span>
-                <input type="text" placeholder="Data limite" class="date" ng-model="oferta.dataLimite"/>
+                <input type="text" placeholder="Data limite" mask='39/19/9999' ng-model="oferta.dataLimite"/>
             </label>
 
             <div class="row no-padding">
                 <div class="col col-50 no-padding-left">
                     <label class="item-input-coletivando item-floating-label">
                         <span class="input-label">Preço</span>
-                        <input type="text" placeholder="Preço inicial" class="money oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
+                        <input type="text" placeholder="Preço inicial" class="oferta-precoinicial" mask='9?9?9?9?9?9?9?9?9.99' ng-model="oferta.precoInicialUn"/>
                     </label>
                 </div>
                 <div class="col col-50 no-padding-right">                
                     <label class="item-input-coletivando item-floating-label">
                         <span class="input-label">Desconto(%)</span>
-                        <input type="text" placeholder="Desconto (%)" class="porcent oferta-desconto" ng-model="oferta.desconto"/>
+                        <input type="text" mask='99.99' placeholder="Desconto (%)" class="oferta-desconto" ng-model="oferta.desconto"/>
                     </label>
                 </div>
             </div>
@@ -60,8 +60,13 @@
 
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
                 <div class="slide" ng-repeat="url in listaUrls">
-                    <img ng-src="{{url}}">
-                    <a ng-click="removerImagemLista(url)">botão teste para remover a imagem</a>
+                    <div class="box-images">
+                        <img ng-src="{{url}}">
+
+                        <div class="exclude-image-box">
+                           <span ng-click="removerImagemLista(url)" class="icon-exclude-image icon ion-close-circled"></span>
+                        </div>
+                    </div>
                 </div>
             </ion-scroll>
             
@@ -76,7 +81,7 @@
                 <input type="text" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <button ng-click="salvar(oferta)" class="margin-top button button-block btn btn-green">Salvar oferta</button>
+            <button ng-click="salvar(oferta)" class="margin-top button button-block btn btn-blue">Salvar oferta</button>
 
             <button ng-click="finalizar(oferta)" class="margin-top button button-block btn btn-green">Finalizar oferta</button>
              

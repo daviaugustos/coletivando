@@ -1113,3 +1113,19 @@ ion-slides{
 	color: #b1b1b1;
 
 }
+
+.btn-red{
+	width: 100%; 
+	background-color: #FA8072;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.btn-red:hover {
+
+	color: #fff;
+}
+.btn-red:active, .btn-red:focus {
+	background-color: #FA8072;
+	color: #fff;
+}

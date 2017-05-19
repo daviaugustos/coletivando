@@ -492,6 +492,11 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 	$scope.showDescricao = function (id) {
 		$state.go('descricao', { id: id });
 	}
+
+	$scope.showEmpresa = function (id) {
+		$state.go('perfil-empresa', { id: id });
+	}
+	
 });
 
 app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaService, $state, $ionicHistory) {

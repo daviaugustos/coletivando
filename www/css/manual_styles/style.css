@@ -667,6 +667,7 @@ form {
     text-align:center;
     text-align: right;
 }
+
 .buttonbtn{
 	color: #f2827e;
 }
@@ -845,6 +846,13 @@ ion-view #perfil-empresa{
 	padding-bottom: 10px;
 }
 
+.info-perfil-empresa{
+	color: #AA79B8;
+	font-weight: 340;
+	font-size: 16px;
+    text-align:center;
+    text-align: right;
+}
 
 /* View - Editar User */
 .editar-user h2{

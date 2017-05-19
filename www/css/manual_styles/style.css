@@ -1082,10 +1082,50 @@ ion-slides{
 	padding-right: 10px;
 }
 
+
+/*Editar Oferta*/
+.btn-blue{
+	background: transparent;
+    color: #ffffff;
+    border: solid 1px;
+	width: 100%; 
+	background-color: #63b8d2;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	border: none;
+}
+
+.btn-blue:hover {
+	/*background-color: #63d2aa;*/
+	color: #fff;
+}
+.btn-blue:active, .btn-blue:focus {
+	background-color: #83d6b8;
+	color: #fff;
+}
+
 /*Triagem*/
 .oferta-triagem label{
 	color: #868686;
 }
 .oferta-triagem p{
 	color: #b1b1b1;
+
+}
+
+.btn-red{
+	width: 100%; 
+	background-color: #FA8072;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.btn-red:hover {
+
+	color: #fff;
+}
+.btn-red:active, .btn-red:focus {
+	background-color: #FA8072;
+	color: #fff;
 }

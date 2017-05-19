@@ -525,19 +525,19 @@ form {
 #home .list{
 	background-color: #f7f7f7;
 }
-#home .card:nth-child(1){
-	margin: 10px 10px;
-}
-#home .card{
-	box-shadow: 0 14px 20px rgba(0, 0, 0, 0.18),  0 10px 10px rgba(0,0,0,0.18); 
-	margin: 40px 10px;
-}
 #home .bg-card{
 	display: block;
 	max-height: 56.62vw;
 }
 #home ion-item{
 	padding: 0;
+}
+.card:nth-child(1){
+	margin: 10px 10px;
+}
+.card{
+	box-shadow: 0 14px 20px rgba(0, 0, 0, 0.18),  0 10px 10px rgba(0,0,0,0.18); 
+	margin: 40px 10px;
 }
 .info-card-home{
 	padding: 5px;

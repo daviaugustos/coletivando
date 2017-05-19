@@ -97,6 +97,9 @@
 .right {
 	text-align: right;
 }
+.font-20{
+	font-size: 20px !important;
+}
 
 /*Select personalizado*/
 select {
@@ -297,9 +300,6 @@ span.input-label{
 form {
 	padding-left: 40px;
 	padding-right: 40px;
-}
-.interagiu{
- 	border-bottom-color: yellow;
 }
 .has-errors {
     border-bottom-color: #e88a83;
@@ -525,19 +525,19 @@ form {
 #home .list{
 	background-color: #f7f7f7;
 }
-#home .card:nth-child(1){
-	margin: 10px 10px;
-}
-#home .card{
-	box-shadow: 0 14px 20px rgba(0, 0, 0, 0.18),  0 10px 10px rgba(0,0,0,0.18); 
-	margin: 40px 10px;
-}
 #home .bg-card{
 	display: block;
 	max-height: 56.62vw;
 }
 #home ion-item{
 	padding: 0;
+}
+.card:nth-child(1){
+	margin: 10px 10px;
+}
+.card{
+	box-shadow: 0 14px 20px rgba(0, 0, 0, 0.18),  0 10px 10px rgba(0,0,0,0.18); 
+	margin: 40px 10px;
 }
 .info-card-home{
 	padding: 5px;
@@ -1040,12 +1040,20 @@ ion-slides{
 .exclude-image-box {
 	cursor: pointer;
 	color: rgb(226, 12, 12);
-	font-size: 22px;
+	font-size: 24px;
 	width: 20px;
 	height: 20px;
 	position: absolute;
 	top: 7px;
     left: 250px;
+}
+
+.icon-exclude-image::before {
+	background-color: white;
+	border-radius: 50px;
+	line-height: 19px;
+	height: 19px;
+	width: 20px;
 }
 
 .box-images {
@@ -1074,6 +1082,7 @@ ion-slides{
 	padding-right: 10px;
 }
 
+
 /*Editar Oferta*/
 .btn-blue{
 	background: transparent;
@@ -1094,4 +1103,13 @@ ion-slides{
 .btn-blue:active, .btn-blue:focus {
 	background-color: #83d6b8;
 	color: #fff;
+}
+
+/*Triagem*/
+.oferta-triagem label{
+	color: #868686;
+}
+.oferta-triagem p{
+	color: #b1b1b1;
+
 }

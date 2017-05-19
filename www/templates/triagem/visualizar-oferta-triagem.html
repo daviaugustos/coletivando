@@ -1,0 +1,72 @@
+<ion-view  id="cadastro-empresa">
+
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            Visualizar oferta
+        </div>
+    </div>
+
+    <form class="cadastro-form">
+
+    <ion-content style="padding: 60px 40px 40px 40px">
+
+        <ion-list class="oferta-triagem">            
+            <label class="item-input-coletivando">
+                <span class="input-label">Produto</span>
+                <p>{{oferta.produto}}</p>
+            </label>
+
+            <label class="item-input-coletivando">
+                <span class="input-label">Categoria</span>
+                <p>{{oferta.categoria}}</p>
+            </label>
+
+            <label class="item-input-coletivando">
+                <span class="input-label">Data Limite</span>
+                <p>{{oferta.dataLimite}}</p>
+            </label>
+
+            <div class="row no-padding">
+                <div class="col col-50 no-padding-left">
+                    <label class="item-input-coletivando">
+                        <span class="input-label">Preço</span>
+                        <p>{{oferta.precoInicialUn}}</p>
+                    </label>
+                </div>
+                <div class="col col-50 no-padding-right">                
+                    <label class="item-input-coletivando">
+                        <span class="input-label">Desconto(%)</span>
+                        <p>{{oferta.desconto}}</p>
+                    </label>
+                </div>
+            </div>
+
+            <label class="item-input-coletivando">
+                <span class="input-label">Pessoas</span>
+                <p>{{oferta.qtdPessoas}}</p>
+            </label>
+
+            <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
+                <div class="slide" ng-repeat="url in listaUrls">
+                    <img ng-src="{{url}}">
+                </div>
+            </ion-scroll>
+          
+            <input type="file" id="fileInput"/>
+
+            <label class="item-input-coletivando">
+                <span class="input-label">Descrição</span>
+                <p>{{oferta.descricao}}</p>
+            </label>
+
+            <button ng-click="aprovar()" class="margin-top button button-block btn btn-green">Aprovar oferta</button>
+
+            <button ng-click="recusar()" class="margin-top button button-block btn btn-green">Recusar oferta</button>
+             
+        </ion-list>
+    </form>
+  </ion-content> 
+</ion-view>

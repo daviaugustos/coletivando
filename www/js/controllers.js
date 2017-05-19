@@ -574,7 +574,10 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 						if (cnpj.$value != null) {
 							$ionicViewSwitcher.nextDirection("back");
 							$state.go('tabsJuridicoLogado.home');
-						} else {
+						} else if (usuario.email = "admin@admin.com"){
+							$state.go('ofertas-triagem');
+						}						
+						else {
 							$ionicViewSwitcher.nextDirection("forward");
 							$state.go('tabsFisicoLogado.home');
 						}
@@ -1116,4 +1119,59 @@ app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ioni
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
+});
+
+
+app.controller('OfertaTriagemCtrl', function($ionicViewSwitcher, $firebaseAuth, $firebaseArray, $firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+	$("#preloader").fadeIn();
+
+	var id = $stateParams.id;
+	var ref = firebase.database().ref('ofertas');
+
+	var query = ref.orderByChild("status").equalTo("AGUARDANDO");
+
+	$firebaseArray(query).$loaded(function (ofertas) {
+		$scope.ofertas = ofertas;
+		$("#preloader").fadeOut();
+	});
+
+	$scope.showVisualizarOferta = function(id){
+		$state.go('visualizar-oferta-triagem', { id: id });
+	}
+	
+	$scope.logout = function () {
+		$('#preloader').fadeIn();
+		firebase.auth().signOut();
+		$ionicViewSwitcher.nextDirection("back");
+		$state.go("tabsNaoLogado.home");
+     	$('#preloader').fadeOut();
+	} 
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+});
+
+app.controller('VisualizarOfertaTriagemCtrl', function($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+
+	var id = $stateParams.id;
+	var ref = firebase.database().ref('ofertas/' + id);
+	$scope.oferta = $firebaseObject(ref);
+
+	$scope.aprovar = function(){
+		$scope.oferta.status = "APROVADO";
+		$scope.oferta.$save();
+		$ionicHistory.goBack(-1);
+	};
+
+	$scope.recusar = function(){
+		$scope.oferta.status = "RECUSADO";
+		$scope.oferta.$save();
+		$ionicHistory.goBack(-1);
+	};
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+	
 });

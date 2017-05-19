@@ -97,6 +97,9 @@
 .right {
 	text-align: right;
 }
+.font-20{
+	font-size: 20px !important;
+}
 
 /*Select personalizado*/
 select {
@@ -297,9 +300,6 @@ span.input-label{
 form {
 	padding-left: 40px;
 	padding-right: 40px;
-}
-.interagiu{
- 	border-bottom-color: yellow;
 }
 .has-errors {
     border-bottom-color: #e88a83;
@@ -1082,3 +1082,10 @@ ion-slides{
 	padding-right: 10px;
 }
 
+/*Triagem*/
+.oferta-triagem label{
+	color: #868686;
+}
+.oferta-triagem p{
+	color: #b1b1b1;
+}

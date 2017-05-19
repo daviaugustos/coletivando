@@ -297,6 +297,18 @@ angular.module('coletivando')
             controller: 'VisualizarOfertaCtrl'
         });
 
+        $stateProvider.state('ofertas-triagem', {
+            url: '/ofertas-triagem',
+            templateUrl: 'templates/triagem/ofertas-triagem.html',
+            controller: 'OfertaTriagemCtrl'
+        });
+
+        $stateProvider.state('visualizar-oferta-triagem', {
+            url: '/visualizar-oferta-triagem/:id',
+            templateUrl: 'templates/triagem/visualizar-oferta-triagem.html',
+            controller: 'VisualizarOfertaTriagemCtrl'
+        });
+
         $urlRouterProvider.otherwise('/tabsNaoLogado/nao-logado-home');
     });
 

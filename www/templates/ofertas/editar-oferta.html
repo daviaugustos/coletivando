@@ -60,8 +60,13 @@
 
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
                 <div class="slide" ng-repeat="url in listaUrls">
-                    <img ng-src="{{url}}">
-                    <a ng-click="removerImagemLista(url)">botão teste para remover a imagem</a>
+                    <div class="box-images">
+                        <img ng-src="{{url}}">
+
+                        <div class="exclude-image-box">
+                           <span ng-click="removerImagemLista(url)" class="icon-exclude-image icon ion-close-circled"></span>
+                        </div>
+                    </div>
                 </div>
             </ion-scroll>
             

@@ -123,7 +123,10 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 				$scope.listaUrls.push(objModeloImagemLocal);
 			});
 		} else {
-			//TODO: Erro_ArquivoNaoImagem
+			$ionicPopup.alert({
+				title: 'Erro',
+				template: 'Por favor, insira uma imagem válida'
+			});
 		}
 	}
 
@@ -326,13 +329,10 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 						$scope.listaUrls.push(srcImagem);
 					});
 				} else {
-
 					$ionicPopup.alert({
-							title: 'Erro',
-							template: 'Por favor, insira uma imagem válida'
-						});
-
-					//TODO: Erro_ArquivoNaoImagem
+						title: 'Erro',
+						template: 'Por favor, insira uma imagem válida'
+					});
 				}
 			}
 

@@ -751,9 +751,27 @@ form {
 
 
 /*Perfil-empresa*/
+
 #perfil-empresa ion-content{
 	top:0;
+	background: #63d2aa;
+	background: -webkit-linear-gradient(bottom, #B3E5FC, #673AB7);
+	background: -o-linear-gradient(bottom, #B3E5FC, #673AB7);
+	background: linear-gradient(to bottom, #B3E5FC 5%, #673AB7 40%);
 }
+
+#perfil-empresa .info-company{
+    background-color: white;
+	height: 100vh;
+}
+/*#perfil-empresa .background-empresa{
+
+	background: #63d2aa;
+	background: -webkit-linear-gradient(bottom, #B3E5FC, #673AB7);
+	background: -o-linear-gradient(bottom, #B3E5FC, #673AB7);
+	background: linear-gradient(to bottom, #B3E5FC, #673AB7);
+}*/
+
 #perfil-empresa .full-image{
 	max-height: 150px;
 }
@@ -762,6 +780,10 @@ form {
 }
 .card-company{
 	position: relative;
+}
+.avatar-company {
+	margin-top: 175px;
+
 }
 .avatar-company img{
     width: 130px;
@@ -779,13 +801,12 @@ form {
 	text-align: center;
 }
 .header-company h3{
-	color: #464646;
+	color: white;
 }
 .header-company p{
-	color: #808080;
+	color: #ddd;
 	font-size: 15px;
 	padding-bottom: 40px;
-	border-bottom: solid 1px;
 	border-color: #dcdcdc;
 }
 .info-company .item{

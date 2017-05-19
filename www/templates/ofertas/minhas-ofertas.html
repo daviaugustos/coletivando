@@ -21,7 +21,7 @@
 
         <ion-list>
 
-            <a class="item minhas-ofertas-item" ng-repeat="ofertaCriando in ofertasCriandoPorPessoaJuridica" ng-click="showOpcoesOfertas(oferta.$id)">
+            <a class="item minhas-ofertas-item" ng-repeat="ofertaCriando in ofertasCriandoPorPessoaJuridica" ng-click="showOpcoesOfertas(ofertaCriando.$id)">
                 <div class="criando">
                     <h2>{{ofertaCriando.produto}}</h2>
                     <p>EM CONSTRUÇÃO 
@@ -29,19 +29,19 @@
                     </p>
                 </div>
             </a>
-            <a class="item minhas-ofertas-item" ng-repeat="ofertaAguardando in ofertasAguardandoPorPessoaJuridica" ng-click="showOpcoesOfertas(oferta.$id)">
+            <a class="item minhas-ofertas-item" ng-repeat="ofertaAguardando in ofertasAguardandoPorPessoaJuridica" ng-click="showOpcoesOfertas(ofertaAguardando.$id)">
                 <div class="aguardando">
                     <h2>{{ofertaAguardando.produto}}</h2>
                     <p>{{ofertaAguardando.status}}</p>
                 </div>
             </a>
-            <a class="item minhas-ofertas-item" ng-repeat="ofertaAprovada in ofertasAprovadasPorPessoaJuridica" ng-click="showOpcoesOfertas(oferta.$id)">
+            <a class="item minhas-ofertas-item" ng-repeat="ofertaAprovada in ofertasAprovadasPorPessoaJuridica" ng-click="showOpcoesOfertas(ofertaAprovada.$id)">
                 <div class="aprovado">
                     <h2>{{ofertaAprovada.produto}}</h2>
                     <p>{{ofertaAprovada.status}}</p>
                 </div>
             </a>
-            <a class="item minhas-ofertas-item" ng-repeat="ofertaRecusada in ofertasRecusadasPorPessoaJuridica" ng-click="showOpcoesOfertas(oferta.$id)">
+            <a class="item minhas-ofertas-item" ng-repeat="ofertaRecusada in ofertasRecusadasPorPessoaJuridica" ng-click="showOpcoesOfertas(ofertaRecusada.$id)">
                 <div class="recusado">
                     <h2>{{ofertaRecusada.produto}}</h2>
                     <p>{{ofertaRecusada.status}}</p>

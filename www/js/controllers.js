@@ -54,8 +54,14 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		if (oferta.precoInicialUn > 0.0) {
 			if (data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
 				if (data_limite >= data_atual) {
-					ofertas.$add(oferta);
-					
+					ofertas.$add(oferta).then(function (referencia) {
+						var idOfertaSalva = referencia.key;
+						$scope.idOferta = idOfertaSalva;
+						var idPessoaJuridica = firebaseUser.uid;
+						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
+						console.log(caminhoArmazenamentoImagens);
+						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
+					});
 				} else {
 					$ionicPopup.alert({
 						title: 'Erro',
@@ -203,7 +209,6 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	};
 
 	$scope.removerImagemFirebase = function (listaImagems) {
-		debugger;
 		var imagensFirebase = $scope.listaUrlsFirebase;
 		var imagensSeremRemovidas = _.difference(imagensFirebase, listaImagems);
 		var storageRef = firebase.storage().ref();

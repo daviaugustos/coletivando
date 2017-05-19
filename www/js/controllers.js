@@ -17,8 +17,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 
 	/* Mask */
 	//$('.date').mask('00/00/0000');
-	$('.money').mask('000.000.000.000.000,00', { reverse: true });
-	$('.porcent').mask('00,00', { reverse: true });
+	// $('.money').mask('000.000.000.000.000,00', { reverse: true });
+	// $('.porcent').mask('00,00', { reverse: true });
 
 	$scope.create = function (oferta) {
 		$scope.authObj = $firebaseAuth();
@@ -30,13 +30,13 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
-		$('.oferta-precoinicial').bind();
-		$('.oferta-desconto').bind();
+		// $('.oferta-precoinicial').bind();
+		// $('.oferta-desconto').bind();
 
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto     = parseFloat(desconto) * .01;
+		// desconto     = parseFloat(desconto) * .01;
 		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
@@ -57,14 +57,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		if (oferta.precoInicialUn > 0.0) {
 			if (data[0] <= 31 && data[1] <= 12 && data[2] < 2100) {
 				if (data_limite >= data_atual) {
-					ofertas.$add(oferta).then(function (referencia) {
-						var idOfertaSalva = referencia.key;
-						$scope.idOferta = idOfertaSalva;
-						var idPessoaJuridica = firebaseUser.uid;
-						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
-						console.log(caminhoArmazenamentoImagens);
-						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
-					});
+					ofertas.$add(oferta);
+					
 				} else {
 					$ionicPopup.alert({
 						title: 'Erro',

@@ -637,7 +637,7 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 						if (cnpj.$value != null) {
 							$ionicViewSwitcher.nextDirection("back");
 							$state.go('tabsJuridicoLogado.home');
-						} else if (usuario.email = "admin@admin.com"){
+						} else if (usuario.email == "admin@admin.com"){
 							$state.go('ofertas-triagem');
 						}						
 						else {

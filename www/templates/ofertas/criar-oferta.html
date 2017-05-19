@@ -61,7 +61,7 @@
                     <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtDesconto.$invalid && !cadastroForm.txtDesconto.$pristine) || cadastroForm.txtDesconto.$invalid && submitted, 'no-errors' : cadastroForm.txtDesconto.$valid}">
                         <span class="input-label">Desconto(%)</span>
-                        <input type="text" clean="true" ng-required="true" placeholder="Desconto (%)" class="oferta-desconto" mask='99.99' name="txtDesconto" ng-model="oferta.desconto"/>
+                        <input type="text" clean="true" ng-required="true" placeholder="Desconto (%)" class="oferta-desconto" mask='99' name="txtDesconto" ng-model="oferta.desconto"/>
                     </label>
                 </div>
             </div>

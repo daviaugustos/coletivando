@@ -168,6 +168,8 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 	getImagensSlider(id).then(function (arrayImagens) {
 		$scope.listaUrls = arrayImagens;
+		//lista usada posteriormente para fazer o merge das imagens recém-salvas e imagens no firebase
+		$scope.listaUrlsFirebase = arrayImagens;
 	}, function (error) {
 		console.log(error);
 	})
@@ -183,11 +185,30 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		});
 	};
 
-	$scope.removerImagemLista = function (urlRemovida){
-		console.log(urlRemovida);
-		var listaAtualizada = _.filter($scope.listaUrls, function(url){ return url != urlRemovida });
-		console.log(listaAtualizada);
+	$scope.removerImagemLista = function (urlRemovida) {
+		var listaAtualizada = _.filter($scope.listaUrls, function (url) { return url != urlRemovida });
 		$scope.listaUrls = listaAtualizada;
+	};
+
+	$scope.removerImagemFirebase = function (listaImagems) {
+		debugger;
+		var imagensFirebase = $scope.listaUrlsFirebase;
+		var imagensSeremRemovidas = _.difference(imagensFirebase, listaImagems);
+		var storageRef = firebase.storage();
+
+		storageRef.constructor.prototype.removeFiles = function (imagensSeremRemovidas) {
+			var ref = this;
+			return Promise.all(imagensSeremRemovidas.map(function (imagemUrl) {
+				return ref.refFromUrl(imagemUrl).delete();
+			}));
+		}
+
+		storageRef.removeFiles(imagensSeremRemovidas).then(function (resultado) {
+			console.log(resultado);
+		}).catch(function (error) {
+			console.log(error);
+		});
+
 	};
 
 	/* Mask */
@@ -233,7 +254,8 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 						$scope.idOferta = idOfertaSalva;
 						var idPessoaJuridica = firebaseUser.uid;
 						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
-						console.log(caminhoArmazenamentoImagens);
+
+						$scope.removerImagemFirebase($scope.listaUrls, caminhoArmazenamentoImagens);
 						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
 					});
 				} else {

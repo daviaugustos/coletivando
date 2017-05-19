@@ -435,7 +435,28 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 
 	$firebaseArray(query).$loaded(function (array) {
 		$('#preloader').fadeOut();
-		$scope.ofertasPorPessoaJuridica = array;
+
+		var arrayAprovadas = [];
+		var arrayAguardando = [];
+		var arrayCriando = [];
+		var arrayRecusadas = [];
+
+		array.forEach(function (item, index) {
+			if (item.status == 'APROVADO') {
+				arrayAprovadas.push(item);
+			} else if (item.status == 'AGUARDANDO') {
+				arrayAguardando.push(item);
+			} else if (item.status == 'CRIANDO') {
+				arrayCriando.push(item);
+			} else if (item.status == 'RECUSADO') {
+				arrayRecusadas.push(item);
+			}		
+		});
+
+		$scope.ofertasAprovadasPorPessoaJuridica = arrayAprovadas;
+		$scope.ofertasAguardandoPorPessoaJuridica = arrayAguardando;
+		$scope.ofertasCriandoPorPessoaJuridica = arrayCriando;
+		$scope.ofertasRecusadasPorPessoaJuridica = arrayRecusadas;
 	});
 
 	$scope.showOpcoesOfertas = function (id) {
@@ -882,6 +903,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 
 		obj = _.extend(obj, $scope.pessoaJuridica);
 		delete obj.password;
+		delete obj.confirmPassword;
 		obj.$save();
 		$ionicHistory.goBack(-1);
 	}
@@ -1037,6 +1059,7 @@ app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $s
 
 		obj = _.extend(obj, $scope.pessoaFisica);
 		delete obj.password;
+		delete obj.confirmPassword;
 		obj.$save();
 	}
 

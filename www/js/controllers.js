@@ -188,9 +188,9 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	$scope.oferta = $firebaseObject(ref);
 
 	getImagensSlider(id).then(function (arrayImagens) {
-		$scope.listaUrls = arrayImagens;
+		$scope.listaObjetoImagem = arrayImagens;
 		//lista usada posteriormente para fazer o merge das imagens recém-salvas e imagens no firebase
-		$scope.listaUrlsFirebase = arrayImagens;
+		$scope.listaObjetoImagemFirebase = arrayImagens;
 	}, function (error) {
 		console.log(error);
 	})
@@ -199,20 +199,20 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		var query = refImagens.orderByChild("ofertaId").equalTo(id);
 
 		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
-			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
-				return noImagem.imagemUrl;
+			var arrayObjectImagem = arrayImagensOfertaEspecifica.map(function (noImagem) {
+				return {imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath};
 			});
-			return arrayImagensUrl;
+			return arrayObjectImagem;
 		});
 	};
 
 	$scope.removerImagemLista = function (urlRemovida) {
-		var listaAtualizada = _.filter($scope.listaUrls, function (url) { return url != urlRemovida });
-		$scope.listaUrls = listaAtualizada;
+		var listaAtualizada = _.filter($scope.listaObjetoImagem, function (url) { return url.imagemUrl != urlRemovida });
+		$scope.listaObjetoImagem = listaAtualizada;
 	};
 
 	$scope.removerImagemFirebase = function (listaImagems) {
-		var imagensFirebase = $scope.listaUrlsFirebase;
+		var imagensFirebase = $scope.listaObjetoImagemFirebase;
 		var imagensSeremRemovidas = _.difference(imagensFirebase, listaImagems);
 		var storageRef = firebase.storage().ref();
 
@@ -275,7 +275,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 						var idPessoaJuridica = $firebaseAuth().$getAuth().uid;
 						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
 
-						$scope.removerImagemFirebase($scope.listaUrls, caminhoArmazenamentoImagens);
+						$scope.removerImagemFirebase($scope.listaObjetoImagem);
 						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
 					});
 				} else {
@@ -310,7 +310,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	};
-	$scope.listaUrls = [];
+	$scope.listaObjetoImagem = [];
 	$scope.fileArray = [];
 	$scope.idOferta = "";
 

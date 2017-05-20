@@ -200,7 +200,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
 			var arrayObjectImagem = arrayImagensOfertaEspecifica.map(function (noImagem) {
-				return {imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath};
+				return { imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath };
 			});
 			return arrayObjectImagem;
 		});
@@ -212,23 +212,39 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	};
 
 	$scope.removerImagemFirebase = function (listaImagems) {
-		var imagensFirebase = $scope.listaObjetoImagemFirebase;
+		var imagensAlteradas = _.pluck($scope.listaObjetoImagem, 'imagemUrl');
+		var imagensFirebase = _.pluck($scope.listaObjetoImagemFirebase, 'imagemUrl');
+		//PAREI_AQUI - difference não está retornando as imagens que precisam ser deletadas
 		var imagensSeremRemovidas = _.difference(imagensFirebase, listaImagems);
+		var arrayObjImagensSeremRemovidos = $scope.listaObjetoImagemFirebase.map(function (imagemObj) {
+			var flag = "";
+			imagensSeremRemovidas.forEach(function (urlImagemSerRemovida) {
+				if (imagemObj.imagemUrl == urlImagemSerRemovida) {
+					flag = true;
+				}
+			});
+			if (flag) { return imagemObj; };
+		})
 		var storageRef = firebase.storage().ref();
+		var storageImagemRef = $firebaseStorage(storageRef);
 
-		storageRef.constructor.prototype.removeFiles = function (imagensSeremRemovidas) {
-			var ref = this;
-			return Promise.all(imagensSeremRemovidas.map(function (imagemUrl) {
-				return ref.refFromUrl(imagemUrl).delete();
+		storageRef.constructor.prototype.removeFiles = function (arrayObjImagensSeremRemovidos) {
+			return Promise.all(arrayObjImagensSeremRemovidos.map(function (imagemObj) {
+				return storageImagemRef.$delete(imagemObj.fullPath);
 			}));
 		}
 
-		storageRef.removeFiles(imagensSeremRemovidas).then(function (resultado) {
+		storageRef.removeFiles(arrayObjImagensSeremRemovidos).then(function (resultado) {
 			console.log(resultado);
 		}).catch(function (error) {
 			console.log(error);
 		});
 
+	};
+
+	function removerImagensFirebase() {
+		var storageRef = firebase.storage().ref();
+		$scope.storage = $firebaseStorage(storageRef);
 	};
 
 	/* Mask */
@@ -275,7 +291,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 						var idPessoaJuridica = $firebaseAuth().$getAuth().uid;
 						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
 
-						$scope.removerImagemFirebase($scope.listaObjetoImagem);
+						$scope.removerImagemFirebase();
 						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
 					});
 				} else {
@@ -472,7 +488,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 				arrayCriando.push(item);
 			} else if (item.status == 'RECUSADO') {
 				arrayRecusadas.push(item);
-			}		
+			}
 		});
 
 		$scope.ofertasAprovadasPorPessoaJuridica = arrayAprovadas;

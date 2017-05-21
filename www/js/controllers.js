@@ -215,7 +215,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		var imagensAlteradas = _.pluck($scope.listaObjetoImagem, 'imagemUrl');
 		var imagensFirebase = _.pluck($scope.listaObjetoImagemFirebase, 'imagemUrl');
 		//PAREI_AQUI - difference não está retornando as imagens que precisam ser deletadas
-		var imagensSeremRemovidas = _.difference(imagensFirebase, listaImagems);
+		var imagensSeremRemovidas = _.difference(imagensFirebase, imagensAlteradas);
 		var arrayObjImagensSeremRemovidos = $scope.listaObjetoImagemFirebase.map(function (imagemObj) {
 			var flag = "";
 			imagensSeremRemovidas.forEach(function (urlImagemSerRemovida) {
@@ -225,16 +225,8 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 			});
 			if (flag) { return imagemObj; };
 		})
-		var storageRef = firebase.storage().ref();
-		var storageImagemRef = $firebaseStorage(storageRef);
 
-		storageRef.constructor.prototype.removeFiles = function (arrayObjImagensSeremRemovidos) {
-			return Promise.all(arrayObjImagensSeremRemovidos.map(function (imagemObj) {
-				return storageImagemRef.$delete(imagemObj.fullPath);
-			}));
-		}
-
-		storageRef.removeFiles(arrayObjImagensSeremRemovidos).then(function (resultado) {
+		removerImagensFirebase(arrayObjImagensSeremRemovidos).then(function (resultado) {
 			console.log(resultado);
 		}).catch(function (error) {
 			console.log(error);
@@ -242,9 +234,12 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 	};
 
-	function removerImagensFirebase() {
-		var storageRef = firebase.storage().ref();
-		$scope.storage = $firebaseStorage(storageRef);
+	function removerImagensFirebase(arrayObjImagensSeremRemovidos) {
+		return Promise.all(arrayObjImagensSeremRemovidos.map(function (imagemObj) {
+			var storageRef = firebase.storage().ref(imagemObj.fullPath);
+			var storageImagemRef = $firebaseStorage(storageRef);
+			return storageImagemRef.$delete();
+		}));
 	};
 
 	/* Mask */

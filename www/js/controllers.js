@@ -199,14 +199,14 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
 			var arrayObjectImagem = arrayImagensOfertaEspecifica.map(function (noImagem) {
-				return { imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath };
+				return { id:gerarIdUnico(),imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath };
 			});
 			return arrayObjectImagem;
 		});
 	};
 
-	$scope.removerImagemLista = function (urlRemovida) {
-		var listaAtualizada = _.filter($scope.listaObjetoImagem, function (url) { return url.imagemUrl != urlRemovida });
+	$scope.removerImagemLista = function (idImagemRemovida) {
+		var listaAtualizada = _.filter($scope.listaObjetoImagem, function (objImagem) { return objImagem.id != idImagemRemovida });
 		$scope.listaObjetoImagem = listaAtualizada;
 	};
 
@@ -379,7 +379,13 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	}
 
 	function gerarIdUnico() {
-		return "teste";
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+			s4() + '-' + s4() + s4() + s4();
 	}
 
 	//Método que executa todo o processo de persistência das imagens.

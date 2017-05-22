@@ -162,8 +162,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 					console.log(referencia);
 				});
 			});
+			$state.go('tabsJuridicoLogado.minhasOfertas')
 			$("#preloader").fadeOut();
-			$ionicHistory.goBack(-1);
 		}).catch(function (error) {
 			console.log("deu erro");
 		});
@@ -210,7 +210,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		$scope.listaObjetoImagem = listaAtualizada;
 	};
 
-	$scope.removerImagemFirebase = function (listaImagems) {
+	$scope.removerImagemFirebase = function () {
 		var imagensAlteradas = _.pluck($scope.listaObjetoImagem, 'imagemUrl');
 		var imagensFirebase = _.pluck($scope.listaObjetoImagemFirebase, 'imagemUrl');
 		var imagensSeremRemovidas = _.difference(imagensFirebase, imagensAlteradas);
@@ -240,7 +240,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 			var refImagens = firebase.database().ref("imagens");
 			var query = refImagens.orderByChild("imagemUrl").equalTo(imagem.imagemUrl);
 
-			$firebaseObject(query).$remove().then(function(){
+			$firebaseObject(query).$remove().then(function () {
 				console.log("excluido com sucesso");
 			});
 		})
@@ -303,6 +303,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 						$scope.removerImagemFirebase();
 						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
+						$scope.fileArray = [];
 					});
 				} else {
 					$ionicPopup.alert({

@@ -59,7 +59,6 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 						$scope.idOferta = idOfertaSalva;
 						var idPessoaJuridica = firebaseUser.uid;
 						var caminhoArmazenamentoImagens = idPessoaJuridica + "/" + idOfertaSalva + "/";
-						console.log(caminhoArmazenamentoImagens);
 						$scope.executarSalvarImagem(caminhoArmazenamentoImagens);
 					});
 				} else {
@@ -214,31 +213,35 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	$scope.removerImagemFirebase = function (listaImagems) {
 		var imagensAlteradas = _.pluck($scope.listaObjetoImagem, 'imagemUrl');
 		var imagensFirebase = _.pluck($scope.listaObjetoImagemFirebase, 'imagemUrl');
-		//PAREI_AQUI - difference não está retornando as imagens que precisam ser deletadas
 		var imagensSeremRemovidas = _.difference(imagensFirebase, imagensAlteradas);
-		var arrayObjImagensSeremRemovidos = $scope.listaObjetoImagemFirebase.map(function (imagemObj) {
-			var flag = "";
-			imagensSeremRemovidas.forEach(function (urlImagemSerRemovida) {
-				if (imagemObj.imagemUrl == urlImagemSerRemovida) {
-					flag = true;
-				}
-			});
-			if (flag) { return imagemObj; };
-		})
 
-		removerImagensFirebase(arrayObjImagensSeremRemovidos).then(function (resultado) {
-			console.log(resultado);
-		}).catch(function (error) {
-			console.log(error);
-		});
+		if (imagensSeremRemovidas.length > 0) {
+			var arrayObjImagensSeremRemovidos = $scope.listaObjetoImagemFirebase.map(function (imagemObj) {
+				var flag = "";
+				imagensSeremRemovidas.forEach(function (urlImagemSerRemovida) {
+					if (imagemObj.imagemUrl == urlImagemSerRemovida) {
+						flag = true;
+					}
+				});
+				if (flag) { return imagemObj; };
+			})
+			var arraySemValoresNulos = _.compact(arrayObjImagensSeremRemovidos)
+			removerImagensFirebaseStorage(arraySemValoresNulos).then(function (resultado) {
+				console.log(resultado);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
 
 	};
 
-	function removerImagensFirebase(arrayObjImagensSeremRemovidos) {
+	function removerImagensFirebaseStorage(arrayObjImagensSeremRemovidos) {
 		return Promise.all(arrayObjImagensSeremRemovidos.map(function (imagemObj) {
-			var storageRef = firebase.storage().ref(imagemObj.fullPath);
-			var storageImagemRef = $firebaseStorage(storageRef);
-			return storageImagemRef.$delete();
+			if (imagemObj.fullPath != null) {
+				var storageRef = firebase.storage().ref(imagemObj.fullPath);
+				var storageImagemRef = $firebaseStorage(storageRef);
+				return storageImagemRef.$delete();
+			}
 		}));
 	};
 
@@ -335,21 +338,36 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 			reader.onload = function (e) {
 				var srcImagem = reader.result;
-				if (srcImagem.match(/^data:image\//)) {
-					$scope.$apply(function () {
-						$scope.listaUrls.push(srcImagem);
-					});
-				} else {
-					$ionicPopup.alert({
-						title: 'Erro',
-						template: 'Por favor, insira uma imagem válida'
-					});
-				}
+				validarImagem(srcImagem);
 			}
 
 			reader.readAsDataURL(fileList[i]);
 		}
 	});
+
+	function validarImagem(base64Imagem) {
+		if (base64Imagem.match(/^data:image\//)) {
+			$scope.$apply(function () {
+				var objModeloImagemLocal = {
+					id: "",
+					imagemUrl: ""
+				}
+				var idImagem = gerarIdUnico();
+				objModeloImagemLocal.id = idImagem;
+				objModeloImagemLocal.imagemUrl = base64Imagem;
+				$scope.listaObjetoImagem.push(objModeloImagemLocal);
+			});
+		} else {
+			$ionicPopup.alert({
+				title: 'Erro',
+				template: 'Por favor, insira uma imagem válida'
+			});
+		}
+	}
+
+	function gerarIdUnico() {
+		return "teste";
+	}
 
 	//Método que executa todo o processo de persistência das imagens.
 	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
@@ -367,11 +385,13 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
 			var objetoModeloImagem = {
 				ofertaId: $scope.idOferta,
-				imagemUrl: ""
+				imagemUrl: "",
+				fullPath: "",
 			}
 			arrayMetadados.forEach(function (infoImagem) {
 				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
 				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
+				objetoModeloImagem.fullPath = infoImagem.metadata.fullPath;
 
 				imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
 					console.log(referencia);

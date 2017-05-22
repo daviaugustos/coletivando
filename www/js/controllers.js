@@ -225,15 +225,27 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 				});
 				if (flag) { return imagemObj; };
 			})
-			var arraySemValoresNulos = _.compact(arrayObjImagensSeremRemovidos)
-			removerImagensFirebaseStorage(arraySemValoresNulos).then(function (resultado) {
-				console.log(resultado);
+			$scope.arraySemValoresNulos = _.compact(arrayObjImagensSeremRemovidos)
+			removerImagensFirebaseStorage($scope.arraySemValoresNulos).then(function () {
+				removerImagensFirebaseDatabase($scope.arraySemValoresNulos);
 			}).catch(function (error) {
 				console.log(error);
 			});
 		}
 
 	};
+
+	function removerImagensFirebaseDatabase(arrayObjImagensSeremRemovidos) {
+		arrayObjImagensSeremRemovidos.forEach(function (imagem) {
+			var refImagens = firebase.database().ref("imagens");
+			var query = refImagens.orderByChild("imagemUrl").equalTo(imagem.imagemUrl);
+
+			$firebaseObject(query).$remove().then(function(){
+				console.log("excluido com sucesso");
+			});
+		})
+
+	}
 
 	function removerImagensFirebaseStorage(arrayObjImagensSeremRemovidos) {
 		return Promise.all(arrayObjImagensSeremRemovidos.map(function (imagemObj) {

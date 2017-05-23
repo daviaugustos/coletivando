@@ -82,11 +82,10 @@
             </button>
             <input type="file" id="fileInput"/>
 
-            <label class="item-input-coletivando item-floating-label" 
-            ng-class="{'has-errors' : (cadastroForm.txtDescricao.$invalid && !cadastroForm.txtDescricao.$pristine) || cadastroForm.txtDescricao.$invalid && submitted, 'no-errors' : cadastroForm.txtDescricao.$valid}">
-                <span class="input-label">Descrição</span>
-                <input type="text" ng-required="true" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
-            </label>
+
+            <textarea class="txtarea" name="txtDescricao" placeholder="Descrição" ng-required="true" ng-model="oferta.descricao" ng-class="{'has-errors' : (cadastroForm.txtDescricao.$invalid && !cadastroForm.txtDescricao.$pristine) || cadastroForm.txtDescricao.$invalid && submitted, 'no-errors' : cadastroForm.txtDescricao.$valid}">
+                   
+            </textarea>
 
             <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
         </ion-list>

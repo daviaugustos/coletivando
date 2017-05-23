@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <form name="cadastroForm" ng-submit="" ng-controller="ValidacaoCtrl" class="cadastro-form">
+    <form name="cadastroForm" ng-submit="create(oferta)" ng-controller="ValidacaoCtrl" class="cadastro-form">
 
     <ion-content style="padding: 60px 40px 40px 40px">
 
@@ -76,10 +76,10 @@
                 </div>
             </ion-scroll>
             
-            <button id="labelInput" for="fileInput">
+            <a id="labelInput" for="fileInput">
                 <i class="icon ion-image"></i>
                 Adicionar imagem
-            </button>
+            </a>
             <input type="file" id="fileInput"/>
 
             <label class="item-input-coletivando item-floating-label" 
@@ -88,7 +88,7 @@
                 <input type="text" ng-required="true" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <button type="submit" ng-click="submit(cadastroForm);create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
+            <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
         </ion-list>
     </form>
   </ion-content> 

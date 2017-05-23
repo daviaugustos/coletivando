@@ -1077,6 +1077,15 @@ ion-slides{
 	width: 20px;*/
 }
 
+.txtarea{
+	margin-top: 20px;
+    border: 1px solid;
+    height: 60px;
+    width: 100%;
+    border-color: #d2c4c4;
+    color: #7d8280;
+	overflow:auto;
+}
 .box-images {
 	position: relative;
 }

@@ -9,9 +9,9 @@
         </div>
     </div>
 
-    <form name="cadastroForm" ng-submit="create(oferta)" ng-controller="ValidacaoCtrl" class="cadastro-form">
+    <form name="cadastroForm" ng-submit="" ng-controller="ValidacaoCtrl" class="cadastro-form">
 
-<ion-content style="padding: 60px 40px 40px 40px">
+    <ion-content style="padding: 60px 40px 40px 40px">
 
         <ion-list>            
             <label class="item-input-coletivando item-floating-label" 
@@ -88,7 +88,7 @@
                 <input type="text" ng-required="true" name="txtDescricao" placeholder="Descrição" ng-model="oferta.descricao"/>
             </label>
 
-            <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
+            <button type="submit" ng-click="submit(cadastroForm);create(oferta)" class="margin-top button button-block btn btn-green">Enviar oferta</button>
         </ion-list>
     </form>
   </ion-content> 

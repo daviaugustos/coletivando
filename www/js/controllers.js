@@ -326,7 +326,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 			});
 		}
 	};
-
+	
 	$scope.finalizar = function (oferta) {
 		oferta.status = "AGUARDANDO";
 		$scope.salvar(oferta);

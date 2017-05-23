@@ -70,16 +70,16 @@
                         <img ng-src="{{imagem.imagemUrl}}">
 
                         <div class="exclude-image-box">
-                           <span ng-click="removerImagemLista(imagem.imagemUrl)" class="icon-exclude-image icon ion-close-circled"></span>
+                           <span ng-click="removerImagemLista(imagem.id)" class="icon-exclude-image icon ion-close"></span>
                         </div>
                     </div>
                 </div>
             </ion-scroll>
             
-            <button id="labelInput" for="fileInput">
+            <a id="labelInput" for="fileInput">
                 <i class="icon ion-image"></i>
                 Adicionar imagem
-            </button>
+            </a>
             <input type="file" id="fileInput"/>
 
               <textarea class="txtarea" name="txtDescricao" placeholder="Descrição" ng-required="true" ng-model="oferta.descricao" ng-class="{'has-errors' : (cadastroForm.txtDescricao.$invalid && !cadastroForm.txtDescricao.$pristine) || cadastroForm.txtDescricao.$invalid && submitted, 'no-errors' : cadastroForm.txtDescricao.$valid}">

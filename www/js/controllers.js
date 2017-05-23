@@ -199,15 +199,17 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
 			var arrayObjectImagem = arrayImagensOfertaEspecifica.map(function (noImagem) {
-				return { imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath };
+				return { id: gerarIdUnico(), imagemUrl: noImagem.imagemUrl, fullPath: noImagem.fullPath };
 			});
 			return arrayObjectImagem;
 		});
 	};
 
-	$scope.removerImagemLista = function (urlRemovida) {
-		var listaAtualizada = _.filter($scope.listaObjetoImagem, function (url) { return url.imagemUrl != urlRemovida });
+	$scope.removerImagemLista = function (idImagemRemovida) {
+		var listaAtualizada = _.filter($scope.listaObjetoImagem, function (objImagem) { return objImagem.id != idImagemRemovida });
+		var listaFilesObjectAtualizada = _.filter($scope.fileArray, function (objModeloFile) { return objModeloFile.id != idImagemRemovida });
 		$scope.listaObjetoImagem = listaAtualizada;
+		$scope.fileArray = listaFilesObjectAtualizada;
 	};
 
 	$scope.removerImagemFirebase = function () {
@@ -346,76 +348,93 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		var fileList = event.target.files;
 
 		for (var i = 0; i < fileList.length; i++) {
-			$scope.fileArray.push(fileList[i]);
+			$scope.fileAux = fileList[i];
 			var reader = new FileReader();
 
-			reader.onload = function (e) {
-				var srcImagem = reader.result;
-				validarImagem(srcImagem);
+			reader.onload = function (e) { 
+			var objModeloImagemLocal = {
+				id: "",
+				fileObject: ""
 			}
+			//Adiciona a imagem de novas imagens a serem salvas
+			var idImagem = gerarIdUnico();
+			objModeloImagemLocal.id = idImagem;
+			objModeloImagemLocal.fileObject = $scope.fileAux;
+			$scope.fileArray.push(objModeloImagemLocal);
+			$scope.fileAux = "";
 
-			reader.readAsDataURL(fileList[i]);
+			//Adiciona a imagem em base64 a lista de imagens a serem exibidas no preview
+			var srcImagem = reader.result;
+			var objModeloImagemLocal = {
+				id: "",
+				imagemUrl: ""
+			}
+			objModeloImagemLocal.id = idImagem;
+			objModeloImagemLocal.imagemUrl = srcImagem;
+			validarImagem(objModeloImagemLocal);
 		}
+
+		reader.readAsDataURL(fileList[i]);
+	}
 	});
 
-	function validarImagem(base64Imagem) {
-		if (base64Imagem.match(/^data:image\//)) {
-			$scope.$apply(function () {
-				var objModeloImagemLocal = {
-					id: "",
-					imagemUrl: ""
-				}
-				var idImagem = gerarIdUnico();
-				objModeloImagemLocal.id = idImagem;
-				objModeloImagemLocal.imagemUrl = base64Imagem;
-				$scope.listaObjetoImagem.push(objModeloImagemLocal);
-			});
-		} else {
-			$ionicPopup.alert({
-				title: 'Erro',
-				template: 'Por favor, insira uma imagem válida'
-			});
-		}
-	}
-
-	function gerarIdUnico() {
-		return "teste";
-	}
-
-	//Método que executa todo o processo de persistência das imagens.
-	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
-		$("#preloader").fadeIn();
-		var listaArquivos = $scope.fileArray;
-
-		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
-		storageRef.constructor.prototype.putFiles = function (listaArquivos) {
-			var ref = this;
-			return Promise.all(listaArquivos.map(function (file) {
-				return ref.child(file.name).put(file);
-			}));
-		}
-
-		storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
-			var objetoModeloImagem = {
-				ofertaId: $scope.idOferta,
-				imagemUrl: "",
-				fullPath: "",
-			}
-			arrayMetadados.forEach(function (infoImagem) {
-				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
-				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
-				objetoModeloImagem.fullPath = infoImagem.metadata.fullPath;
-
-				imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
-					console.log(referencia);
-				});
-			});
-			$("#preloader").fadeOut();
-			$ionicHistory.goBack(-1);
-		}).catch(function (error) {
-			console.log("deu erro");
+function validarImagem(objModeloImagemLocal) {
+	if (objModeloImagemLocal.imagemUrl.match(/^data:image\//)) {
+		$scope.$apply(function () {
+			$scope.listaObjetoImagem.push(objModeloImagemLocal);
+		});
+	} else {
+		$ionicPopup.alert({
+			title: 'Erro',
+			template: 'Por favor, insira uma imagem válida'
 		});
 	}
+}
+
+function gerarIdUnico() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+	}
+	return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+		s4() + '-' + s4() + s4() + s4();
+}
+
+//Método que executa todo o processo de persistência das imagens.
+$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
+	$("#preloader").fadeIn();
+	var listaArquivos = $scope.fileArray;
+
+	var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
+	storageRef.constructor.prototype.putFiles = function (listaArquivos) {
+		var ref = this;
+		return Promise.all(listaArquivos.map(function (objetoArquivo) {
+			return ref.child(objetoArquivo.fileObject.name).put(objetoArquivo.fileObject);
+		}));
+	}
+
+	storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
+		var objetoModeloImagem = {
+			ofertaId: $scope.idOferta,
+			imagemUrl: "",
+			fullPath: "",
+		}
+		arrayMetadados.forEach(function (infoImagem) {
+			var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
+			objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
+			objetoModeloImagem.fullPath = infoImagem.metadata.fullPath;
+
+			imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
+				console.log(referencia);
+			});
+		});
+		$("#preloader").fadeOut();
+		$ionicHistory.goBack(-1);
+	}).catch(function (error) {
+		console.log("deu erro");
+	});
+}
 });
 
 

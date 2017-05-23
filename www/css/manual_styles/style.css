@@ -1060,7 +1060,7 @@ ion-slides{
 
 .exclude-image-box {
 	cursor: pointer;
-	color: rgb(226, 12, 12);
+	color: rgb(119, 119, 119);
 	font-size: 24px;
 	width: 20px;
 	height: 20px;
@@ -1070,11 +1070,11 @@ ion-slides{
 }
 
 .icon-exclude-image::before {
-	background-color: white;
+	/*background-color: white;
 	border-radius: 50px;
 	line-height: 19px;
 	height: 19px;
-	width: 20px;
+	width: 20px;*/
 }
 
 .txtarea{
@@ -1099,13 +1099,14 @@ ion-slides{
 	background-color: #fff;
     border-radius: 3px;
     border: 1px solid;
-    /* color: #b070c1; */
+    display: inline-block;
     color: #8e8e8e;
     border-color: #d4d4d4;
     cursor: pointer;
     padding: 7px 20px;
-    /* font-weight: 600; */
 	width: 100%;
+	text-align: center;
+	margin-top: 10px;
 }
 
 #labelInput i{

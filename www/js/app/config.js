@@ -233,16 +233,24 @@ angular.module('coletivando')
             }
         });
 
-        $stateProvider.state('editar-user', {
+        $stateProvider.state('tabsFisicoLogado.editarUser', {
             url: '/editar-user/:id',
-            templateUrl: 'templates/usuarios/editar-user.html',
-            controller: 'UsuarioFisicoUpdateCtrl'
+            views:{
+                'fisicoLogado-conta-tab': {
+                    templateUrl: 'templates/usuarios/editar-user.html',
+                    controller: 'UsuarioFisicoUpdateCtrl'
+                }
+            }
         });
 
-        $stateProvider.state('editar-user-endereco', {
+        $stateProvider.state('tabsFisicoLogado.editarUserEndereco', {
             url: '/editar-user-endereco/:id',
-            templateUrl: 'templates/usuarios/editar-user-endereco.html',
-            controller: 'UsuarioFisicoUpdateEnderecoCtrl'
+            views:{
+                'fisicoLogado-conta-tab': {
+                    templateUrl: 'templates/usuarios/editar-user-endereco.html',
+                    controller: 'UsuarioFisicoUpdateEnderecoCtrl'
+                }
+            }
         });
 
         $stateProvider.state('alterar-senha-fisica', {

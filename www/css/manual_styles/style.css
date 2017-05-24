@@ -207,7 +207,7 @@ i.icon.ion-android-arrow-back::before{
 		/*Para navbars com seta de voltar*/
 		/*ion-header-bar.back .title.title-center.header-item {*/
 		.title.title-center.header-item {
-			margin-left: 3%;
+			margin-left: 6vh;
 			
 		}
 /*<---*/
@@ -756,9 +756,9 @@ form {
 #perfil-empresa ion-content{
 	top:0;
 	background: #63d2aa;
-	background: -webkit-linear-gradient(bottom, #B3E5FC, #673AB7);
-	background: -o-linear-gradient(bottom, #B3E5FC, #673AB7);
-	background: linear-gradient(to bottom, #B3E5FC 5%, #673AB7 40%);
+	background: -webkit-linear-gradient(bottom, #655876, #45637b);
+	background: -o-linear-gradient(bottom, #655876, #45637b);
+	background: linear-gradient(to bottom, #655876 5%, #45637b 40%);
 }
 
 #perfil-empresa .info-company{

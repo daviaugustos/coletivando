@@ -30,7 +30,6 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
-
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
@@ -184,7 +183,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
-	$scope.oferta = $firebaseObject(ref);
+	$scope.oferta = $firebaseObject(ref); 
 
 	getImagensSlider(id).then(function (arrayImagens) {
 		$scope.listaObjetoImagem = arrayImagens;
@@ -265,18 +264,12 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	$('.porcent').mask('00,00', { reverse: true });
 
 	$scope.salvar = function (oferta) {
-		// Tratativa de armazenamento como número no banco e calculo de preço final
-		$('.oferta-precoinicial').bind();
-		$('.oferta-desconto').bind();
 
+		// Tratativa de armazenamento como número no banco e calculo de preço final
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto = desconto.toString().replace('.', '').replace(',', '.');
-		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
-
-		desconto = parseFloat(desconto);
-		precoInicial = parseFloat(precoInicial);
+		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;
@@ -520,28 +513,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 
 	$firebaseArray(query).$loaded(function (array) {
 		$('#preloader').fadeOut();
-
-		var arrayAprovadas = [];
-		var arrayAguardando = [];
-		var arrayCriando = [];
-		var arrayRecusadas = [];
-
-		array.forEach(function (item, index) {
-			if (item.status == 'APROVADO') {
-				arrayAprovadas.push(item);
-			} else if (item.status == 'AGUARDANDO') {
-				arrayAguardando.push(item);
-			} else if (item.status == 'CRIANDO') {
-				arrayCriando.push(item);
-			} else if (item.status == 'RECUSADO') {
-				arrayRecusadas.push(item);
-			}
-		});
-
-		$scope.ofertasAprovadasPorPessoaJuridica = arrayAprovadas;
-		$scope.ofertasAguardandoPorPessoaJuridica = arrayAguardando;
-		$scope.ofertasCriandoPorPessoaJuridica = arrayCriando;
-		$scope.ofertasRecusadasPorPessoaJuridica = arrayRecusadas;
+		$scope.ofertasPorPessoaJuridica = array;
 	});
 
 	$scope.showOpcoesOfertas = function (id) {
@@ -1168,10 +1140,16 @@ app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $s
 
 });
 
-app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
-	var id = $stateParams.id;
-	var ref = firebase.database().ref('pessoaFisica/' + id);
-	$scope.pessoaFisica = $firebaseObject(ref);
+app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseAuth, $firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
+	$("#preloader").fadeIn();
+	$scope.authObj = $firebaseAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
+	
+	var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
+	$firebaseObject(ref).$loaded(function (pessoaFisica) {
+		$("#preloader").fadeOut();
+		$scope.pessoaFisica = $firebaseObject(ref);
+	});
 
 	$scope.update = function (pessoaFisica) {
 		ref = pessoaFisica;
@@ -1181,7 +1159,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $sc
 	}
 
 	$scope.showEndereco = function (id) {
-		$state.go('editar-user-endereco', { id: id })
+		$state.go('tabsFisicoLogado.editarUserEndereco', { id: id })
 	}
 
 	$scope.goBackHandler = function () {
@@ -1192,6 +1170,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $sc
 
 app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
 	var id = $stateParams.id;
+	console.log(id);
 	var ref = firebase.database().ref('pessoaFisica/' + id);
 	$scope.pessoaFisica = $firebaseObject(ref);
 

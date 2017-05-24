@@ -33,7 +33,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		precoInicial = parseFloat(precoInicial) * .01;
+		precoInicial = parseFloat(precoInicial);
+		precoInicial = precoInicial.toFixed(2);
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;
@@ -269,7 +270,8 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		precoInicial = parseFloat(precoInicial) * .01;
+		precoInicial = parseFloat(precoInicial);
+		precoInicial = precoInicial.toFixed(2);
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;
@@ -537,7 +539,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
+app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate, PaypalService) {
 	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
@@ -585,6 +587,18 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 		$scope.activeIndex = data.slider.activeIndex;
 		$scope.previousIndex = data.slider.previousIndex;
 	});
+
+	//Paypal
+
+	$scope.aderirOferta = function (valor) {
+		PaypalService.initPaymentUI().then(function () {
+			PaypalService.makePayment(valor, "Total Amount").then(function (response) {
+				alert("success: " + JSON.stringify(response));
+			}, function (error) {
+				alert("error:" + JSON.stringify(error));
+			});
+		});
+	}
 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);

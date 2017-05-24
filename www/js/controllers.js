@@ -30,7 +30,6 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		oferta.pessoaJuridicaId = firebaseUser.uid;
 
 		// Tratativa de armazenamento como número no banco e calculo de preço final
-
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
@@ -184,7 +183,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
-	$scope.oferta = $firebaseObject(ref);
+	$scope.oferta = $firebaseObject(ref); 
 
 	getImagensSlider(id).then(function (arrayImagens) {
 		$scope.listaObjetoImagem = arrayImagens;
@@ -265,18 +264,12 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 	$('.porcent').mask('00,00', { reverse: true });
 
 	$scope.salvar = function (oferta) {
-		// Tratativa de armazenamento como número no banco e calculo de preço final
-		$('.oferta-precoinicial').bind();
-		$('.oferta-desconto').bind();
 
+		// Tratativa de armazenamento como número no banco e calculo de preço final
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		desconto = desconto.toString().replace('.', '').replace(',', '.');
-		precoInicial = precoInicial.toString().replace('.', '').replace(',', '.');
-
-		desconto = parseFloat(desconto);
-		precoInicial = parseFloat(precoInicial);
+		precoInicial = parseFloat(precoInicial) * .01;
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;

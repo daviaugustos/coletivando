@@ -33,7 +33,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		precoInicial = parseFloat(precoInicial) * .01;
+		precoInicial = parseFloat(precoInicial);
+		precoInicial = precoInicial.toFixed(2);
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;
@@ -269,7 +270,8 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 		var desconto = oferta.desconto;
 		var precoInicial = oferta.precoInicialUn;
 
-		precoInicial = parseFloat(precoInicial) * .01;
+		precoInicial = parseFloat(precoInicial);
+		precoInicial = precoInicial.toFixed(2);
 
 		oferta.precoInicialUn = precoInicial;
 		oferta.desconto = desconto;

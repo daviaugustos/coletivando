@@ -565,7 +565,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
+app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate, PaypalService) {
 	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
@@ -613,6 +613,18 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 		$scope.activeIndex = data.slider.activeIndex;
 		$scope.previousIndex = data.slider.previousIndex;
 	});
+
+	//Paypal
+
+	$scope.aderirOferta = function (valor) {
+		PaypalService.initPaymentUI().then(function () {
+			PaypalService.makePayment(valor, "Total Amount").then(function (response) {
+				alert("success: " + JSON.stringify(response));
+			}, function (error) {
+				alert("error:" + JSON.stringify(error));
+			});
+		});
+	}
 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);

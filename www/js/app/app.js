@@ -17,3 +17,10 @@ app.run(function($ionicPlatform) {
     }
   });
 });
+
+app.constant('shopSettings', {
+  payPalSandboxId : 'AY-pdA47XeOcmLjjkhSkciQmH0k-io8_Aq-_lOHzIYnG_xkZorvnrORLrcSuTkRAR_u-uXWpEcSDI5G7',
+  //payPalProductionId : 'nosso production id',
+  payPalEnv : 'PayPalEnvironmentSandbox',
+  payPalShopName : 'ColetivandoShop',
+});

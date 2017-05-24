@@ -1,24 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.coletivando289211" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>coletivando</name>
-  <description>&#xD;
-        An Ionic Framework and Cordova project.&#xD;
+    <name>coletivando</name>
+    <description>
+        An Ionic Framework and Cordova project.
     </description>
-  <author email="you@example.com" href="http://example.com/">&#xD;
-      Your Name Here&#xD;
+    <author email="you@example.com" href="http://example.com/">
+      Your Name Here
     </author>
-  <content src="index.html"/>
-  <access origin="*"/>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="SplashScreenDelay" value="2000"/>
-  <preference name="FadeSplashScreenDuration" value="2000"/>
-  <preference name="android-minSdkVersion" value="16"/>
-  <preference name="BackupWebStorage" value="none"/>
-  <feature name="StatusBar">
-    <param name="ios-package" onload="true" value="CDVStatusBar"/>
-  </feature>
-  <engine name="android" spec="~6.1.2"/>
-  <allow-navigation href="http://192.168.0.100:8100"/>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="SplashScreenDelay" value="2000" />
+    <preference name="FadeSplashScreenDuration" value="2000" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="BackupWebStorage" value="none" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <engine name="android" spec="~6.1.2" />
+    <allow-navigation href="http://192.168.0.100:8100" />
+    <plugin name="com.paypal.cordova.mobilesdk" spec="~3.5.0" />
+    <plugin name="cordova-plugin-device" spec="~1.1.4" />
+    <engine name="browser" spec="~4.1.0" />
 </widget>

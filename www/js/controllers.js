@@ -513,28 +513,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 
 	$firebaseArray(query).$loaded(function (array) {
 		$('#preloader').fadeOut();
-
-		var arrayAprovadas = [];
-		var arrayAguardando = [];
-		var arrayCriando = [];
-		var arrayRecusadas = [];
-
-		array.forEach(function (item, index) {
-			if (item.status == 'APROVADO') {
-				arrayAprovadas.push(item);
-			} else if (item.status == 'AGUARDANDO') {
-				arrayAguardando.push(item);
-			} else if (item.status == 'CRIANDO') {
-				arrayCriando.push(item);
-			} else if (item.status == 'RECUSADO') {
-				arrayRecusadas.push(item);
-			}
-		});
-
-		$scope.ofertasAprovadasPorPessoaJuridica = arrayAprovadas;
-		$scope.ofertasAguardandoPorPessoaJuridica = arrayAguardando;
-		$scope.ofertasCriandoPorPessoaJuridica = arrayCriando;
-		$scope.ofertasRecusadasPorPessoaJuridica = arrayRecusadas;
+		$scope.ofertasPorPessoaJuridica = array;
 	});
 
 	$scope.showOpcoesOfertas = function (id) {

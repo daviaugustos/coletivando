@@ -756,8 +756,8 @@ form {
 #perfil-empresa ion-content{
 	top:0;
 	background: #63d2aa;
-	background: -webkit-linear-gradient(bottom, #B3E5FC, #673AB7);
-	background: -o-linear-gradient(bottom, #B3E5FC, #673AB7);
+	background: -webkit-linear-gradient(bottom, #655876, #45637b);
+	background: -o-linear-gradient(bottom, #655876, #45637b);
 	background: linear-gradient(to bottom, #655876 5%, #45637b 40%);
 }
 

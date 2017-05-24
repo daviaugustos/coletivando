@@ -207,7 +207,8 @@ i.icon.ion-android-arrow-back::before{
 		/*Para navbars com seta de voltar*/
 		/*ion-header-bar.back .title.title-center.header-item {*/
 		.title.title-center.header-item {
-			margin-left: 50px;
+			margin-left: 6vh;
+			
 		}
 /*<---*/
 

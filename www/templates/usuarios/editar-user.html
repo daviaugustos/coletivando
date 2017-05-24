@@ -19,12 +19,12 @@
 
                 <ion-item>
                     <h2>Nome</h2>
-                    <input type="text" ng-model="pessoaFisica.name"/>
+                    <input type="text" ng-model="pessoaFisica.nome"/>
                 </ion-item>
 
                 <ion-item>
                     <h2>Telefone</h2>
-                    <input type="text" ng-model="pessoaFisica.telefone"/>
+                    <input mask="(99) 9?9999-9999" type="text" ng-model="pessoaFisica.celular"/>
                 </ion-item>
 
                 <ion-item ng-click="showEndereco(pessoaFisica.$id)">

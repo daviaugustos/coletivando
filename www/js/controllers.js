@@ -1128,10 +1128,16 @@ app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $s
 
 });
 
-app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
-	var id = $stateParams.id;
-	var ref = firebase.database().ref('pessoaFisica/' + id);
-	$scope.pessoaFisica = $firebaseObject(ref);
+app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseAuth, $firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
+	$("#preloader").fadeIn();
+	$scope.authObj = $firebaseAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
+	
+	var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
+	$firebaseObject(ref).$loaded(function (pessoaFisica) {
+		$("#preloader").fadeOut();
+		$scope.pessoaFisica = $firebaseObject(ref);
+	});
 
 	$scope.update = function (pessoaFisica) {
 		ref = pessoaFisica;
@@ -1141,7 +1147,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $sc
 	}
 
 	$scope.showEndereco = function (id) {
-		$state.go('editar-user-endereco', { id: id })
+		$state.go('tabsFisicoLogado.editarUserEndereco', { id: id })
 	}
 
 	$scope.goBackHandler = function () {
@@ -1152,6 +1158,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseObject, $state, $sc
 
 app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $state, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
 	var id = $stateParams.id;
+	console.log(id);
 	var ref = firebase.database().ref('pessoaFisica/' + id);
 	$scope.pessoaFisica = $firebaseObject(ref);
 

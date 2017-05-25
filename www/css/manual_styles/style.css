@@ -523,6 +523,9 @@ form {
 
 
 /*View Home*/
+.card{
+	border: 0;
+}
 #home .list{
 	background-color: #f7f7f7;
 }
@@ -1171,7 +1174,7 @@ ion-slides{
 .ofertas-apoiadas .em-andamento p{
 	color: #5e89a2;
 }
-.ofertas-apoiadas .cancelado p{
+.ofertas-apoiadas .INCOMPLETO p{
 	color: #e45e5e !important;
 }
 #apoiadas a{

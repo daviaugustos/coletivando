@@ -736,20 +736,6 @@ form {
 
 /*Notifications*/
 
-/*ofertas-apoiadas*/
-#apoiadas label.item-input-wrapper{
-	background-color: rgba(0,0,0,0);
-}
-#apoiadas i::before{
-	font-size: 22px;
-}
-#apoiadas a{
-	border: none;
-}
-#apoiadas p{
-	color: #AA79B8; 
-}
-
 
 /*Perfil-empresa*/
 
@@ -1145,7 +1131,6 @@ ion-slides{
 	color: #b1b1b1;
 
 }
-
 .btn-red{
 	width: 100%; 
 	background-color: #FA8072;
@@ -1160,4 +1145,35 @@ ion-slides{
 .btn-red:active, .btn-red:focus {
 	background-color: #FA8072;
 	color: #fff;
+}
+
+
+/*Ofertas apoiadas*/
+.ofertas-apoiadas.item{
+	padding: 10px 16px 10px 16px;
+}
+.ofertas-apoiadas{
+	border-color: #e6e6e6;
+}
+.ofertas-apoiadas h2{
+	color: #464646;
+}
+.ofertas-apoiadas p{
+	margin-top: 25px;
+}
+.ofertas-apoiadas h3{
+	margin-top: 7px;
+	color: #a5a5a5;
+}
+.ofertas-apoiadas .realizado p{
+	color: #70bf9f !important;
+}
+.ofertas-apoiadas .em-andamento p{
+	color: #5e89a2;
+}
+.ofertas-apoiadas .cancelado p{
+	color: #e45e5e !important;
+}
+#apoiadas a{
+	border: none;
 }

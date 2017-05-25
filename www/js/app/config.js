@@ -287,10 +287,14 @@ angular.module('coletivando')
             controller: 'NotificationCtrl'
         });
 
-        $stateProvider.state('ofertas-apoiadas', {
+        $stateProvider.state('tabsFisicoLogado.ofertasApoiadas', {
             url: '/ofertas-apoiadas',
-            templateUrl: 'templates/ofertas/ofertas-apoiadas.html',
-            controller: 'OfertasApoiadasCtrl'
+            views:{
+                'fisicoLogado-conta-tab': {
+                    templateUrl: 'templates/ofertas/ofertas-apoiadas.html',
+                    controller: 'OfertasApoiadasCtrl'
+                }
+            }
         });
 
         $stateProvider.state('perfil-empresa', {

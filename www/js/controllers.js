@@ -646,8 +646,7 @@ app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaS
 	}
 });
 
-app.controller('SearchCtrl',
-	function ($scope, PesquisaService, $state, $ionicHistory) {
+app.controller('SearchCtrl', function ($scope, PesquisaService, $state, $ionicHistory) {
 
 		$scope.pesquisas = PesquisaService.readAll();
 
@@ -657,43 +656,26 @@ app.controller('SearchCtrl',
 
 	});
 
-app.controller('OfertasApoiadasCtrl',
-	function ($scope, OfertasApoiadasService, OfertasRealizadasService, OfertasIncompletasService, $state, $ionicHistory) {
+app.controller('OfertasApoiadasCtrl', function ($firebaseArray, $firebaseAuth, $scope, $state, $ionicHistory) {
 
-		$scope.apoiadas = OfertasApoiadasService.readAll();
-		$scope.realizadas = OfertasRealizadasService.readAll();
-		$scope.incompletas = OfertasIncompletasService.readAll();
+	var ref = firebase.database().ref('ofertas');
 
-		$scope.showIndex = function () {
-			$state.go('oferta-lista');
-		};
+	$scope.ofertasApoiadas = $firebaseArray(ref);
 
-		$scope.showAndamento = function () {
-			$state.go('ofertas-apoiadas');
-		};
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+});
 
-		$scope.showRealizadas = function () {
-			$state.go('ofertas-apoiadas-realizadas');
-		};
+app.controller('NotificationCtrl', function ($scope, NotificationService, $state) {
 
-		$scope.showIncompletas = function () {
-			$state.go('ofertas-apoiadas-incompletas');
-		};
-		$scope.goBackHandler = function () {
-			$ionicHistory.goBack(-1);
-		}
-	});
+	$scope.notification = NotificationService.readAll();
 
-app.controller('NotificationCtrl',
-	function ($scope, NotificationService, $state) {
+	$scope.showIndex = function () {
+		$state.go('oferta-lista');
+	};
 
-		$scope.notification = NotificationService.readAll();
-
-		$scope.showIndex = function () {
-			$state.go('oferta-lista');
-		};
-
-	});
+});
 
 app.controller('RegisterChooseCtrl', function ($scope, $state, $ionicHistory) {
 	$scope.goBackHandler = function () {

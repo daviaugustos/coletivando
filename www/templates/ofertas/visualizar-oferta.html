@@ -7,14 +7,18 @@
         </ion-nav-buttons> 
     </ion-nav-bar>
 
+
+
     <ion-content scroll="false">
 
-
+        
         <ion-slides  options="options" slider="data.slider">
             <ion-slide-page ng-repeat="url in imagensUrlSlider">
                 <div class="box"><img height="250px" ng-src="{{url}}" class="centralizarElemento"/></div>
             </ion-slide-page>
         </ion-slides>
+        
+<ion-scroll>
 
         <div class="info-card-home">
             <div class="row">
@@ -60,6 +64,8 @@
                 </div>
                 <div class="col"></div>
             </div>
+
+            </ion-scroll>
 
     </ion-content>
     

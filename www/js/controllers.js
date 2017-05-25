@@ -656,16 +656,41 @@ app.controller('SearchCtrl', function ($scope, PesquisaService, $state, $ionicHi
 
 	});
 
-app.controller('OfertasApoiadasCtrl', function ($firebaseArray, $firebaseAuth, $scope, $state, $ionicHistory) {
+app.controller('OfertasApoiadasCtrl', function ($ionicViewSwitcher, $firebaseArray, $firebaseAuth, $scope, $state, $ionicHistory) {
 
 	var ref = firebase.database().ref('ofertas');
+	$firebaseArray(ref).$loaded(function (ofertas) {
+		ofertas = ofertas.map(function (oferta) {
+			getImagemExibicao(oferta.$id).then(function (urlImagem) {
+				oferta.imagem = urlImagem;
+			});
+			return oferta;
+		});
+		$scope.ofertasApoiadas = ofertas;
+	});
 
-	$scope.ofertasApoiadas = $firebaseArray(ref);
+	function getImagemExibicao(ofertaId) {
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
+
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl[0];
+		});
+	};
+
+	$scope.showOferta = function (id) {
+		$ionicViewSwitcher.nextDirection("forward");
+		$state.go('visualizar-oferta', { id: id });
+	}
 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
 });
+
 
 app.controller('NotificationCtrl', function ($scope, NotificationService, $state) {
 

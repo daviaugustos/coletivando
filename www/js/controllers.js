@@ -612,6 +612,10 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 		$state.go('perfil-empresa', { id: id });
 	}
 
+	$scope.showAderirOferta = function(){
+		$state.go('aderir-oferta');
+	}
+
 });
 
 app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaService, $state, $ionicHistory) {

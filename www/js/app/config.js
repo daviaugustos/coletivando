@@ -275,10 +275,14 @@ angular.module('coletivando')
             controller: 'SearchCtrl'
         });
 
-        $stateProvider.state('aderir-oferta', {
+        $stateProvider.state('tabsFisicoLogado.aderirOferta', {
             url: '/aderir-oferta',
-            templateUrl: 'templates/ofertas/aderir-oferta.html',
-            controller: 'OfertaCtrl'
+            views:{
+                'fisicoLogado-conta-tab': {
+                    templateUrl: 'templates/ofertas/aderir-oferta.html',
+                    controller: 'AderirOfertaCtrl'
+                }
+            }
         });
 
         $stateProvider.state('notifications', {

@@ -539,10 +539,28 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
+app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
+	console.log("entrou no controller visu ofertas");
 	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
+	
+	var firebaseUser = $firebaseAuth().$getAuth();
+
+	var refOfertas = firebase.database().ref('ofertasUsuarios');
+	var queryOferta = refOfertas.orderByChild("ofertaId").equalTo(ofertaId);
+
+	$firebaseArray(queryOferta).$loaded(function(listaDadosOferta){
+		$scope.aderiu = false;
+		$scope.qtdPessoas = listaDadosOferta.length;
+		
+		for(var i = 0; i < listaDadosOferta.length; i++) {
+			if (listaDadosOferta[i].usuarioId == firebaseUser.uid) {
+				$scope.aderiu = true;
+				break;
+			}
+		}
+	});
 
 	getImagensSlider(ofertaId).then(function (arrayImagens) {
 		$scope.imagensUrlSlider = arrayImagens;
@@ -1330,7 +1348,7 @@ app.controller('OfertaTriagemCtrl', function ($ionicViewSwitcher, $firebaseAuth,
 });
 
 app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
-
+	
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
 	$scope.oferta = $firebaseObject(ref);
@@ -1353,7 +1371,7 @@ app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state,
 
 });
 
-app.controller('AderirOfertaCtrl', function ($ionicViewSwitcher, $ionicHistory, $firebaseArray, $firebaseAuth, $stateParams, $firebaseObject, $scope, PaypalService){
+app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ionicViewSwitcher, $ionicHistory, $firebaseArray, $firebaseAuth, $stateParams, $firebaseObject, $scope, PaypalService){
 	
 	$scope.authObj = $firebaseAuth();
 	var firebaseUser = $scope.authObj.$getAuth();
@@ -1366,7 +1384,6 @@ app.controller('AderirOfertaCtrl', function ($ionicViewSwitcher, $ionicHistory, 
 
 	$firebaseObject(refOferta).$loaded(function(dados){
 		$scope.oferta = dados;
-		console.log(dados.precoFinalUn);
 	}); 
 
 	$scope.aderirOferta = function() {
@@ -1382,8 +1399,9 @@ app.controller('AderirOfertaCtrl', function ($ionicViewSwitcher, $ionicHistory, 
 
 		ofertasUsuarios.$add(ofertaUsuario);
 		
+		//tentativa falha de atualizar o visualizar oferta dps de aderir
 		$ionicViewSwitcher.nextDirection("back");
-		$ionicHistory.goBack(-1);
+		$state.go('visualizar-oferta', { id: id });
 
 		// PaypalService.initPaymentUI().then(function () {
 		// 	PaypalService.makePayment(valor, "Total Amount").then(function (response) {

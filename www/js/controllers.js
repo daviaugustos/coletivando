@@ -1263,7 +1263,7 @@ app.controller('CategoriaOfertasCtrl', function ($ionicHistory, $state, $ionicVi
 
 });
 
-app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams, $firebaseArray) {
 	$("#preloader").fadeIn();
 
 	var id = $stateParams.id;
@@ -1279,6 +1279,29 @@ app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ioni
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
+
+   //usado para utilizar como referencia no perfil-empresa
+	$scope.OfertasPessoaJuridicaRealizada;
+
+	var refOfertas = firebase.database().ref('ofertas')
+	var query = refOfertas.orderByChild("pessoaJuridicaId").equalTo(id);
+	$scope.OfertasPessoaJuridicaRealizada = 0;
+   //Pegando a lista de objetos total do usuario pessoa juridica(utilizar loaded para esperar o firebasearray trazer os dados)
+	$firebaseArray(query).$loaded(function(listaObjetos)
+	{
+		listaObjetos.forEach(function (laranja)
+		{
+			// Se o objeto oferta estiver com status REALIZADO, conta +1
+            if (laranja.status == "REALIZADO")
+			{
+            $scope.OfertasPessoaJuridicaRealizada += 1;		
+            }	
+		
+		})
+	});
+   // Para ver o total de ofertas com status REALIZADO independente de usuario juridico
+	var query2 = refOfertas.orderByChild("status").equalTo("REALIZADO");
+	 $firebaseArray(query2).$loaded(function(ofertasRealizadas){ });
 });
 
 

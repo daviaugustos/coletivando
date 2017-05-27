@@ -539,7 +539,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate, PaypalService) {
+app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
 	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
@@ -590,16 +590,6 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 
 	//Paypal
 
-	$scope.aderirOferta = function (valor) {
-		PaypalService.initPaymentUI().then(function () {
-			PaypalService.makePayment(valor, "Total Amount").then(function (response) {
-				alert("success: " + JSON.stringify(response));
-			}, function (error) {
-				alert("error:" + JSON.stringify(error));
-			});
-		});
-	}
-
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
@@ -612,8 +602,8 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseArray, $stateParams, $
 		$state.go('perfil-empresa', { id: id });
 	}
 
-	$scope.showAderirOferta = function(){
-		$state.go('aderir-oferta');
+	$scope.showAderirOferta = function(id){
+		$state.go('tabsFisicoLogado.aderirOferta', { id: id });
 	}
 
 });
@@ -1362,3 +1352,46 @@ app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state,
 	}
 
 });
+
+app.controller('AderirOfertaCtrl', function ($ionicViewSwitcher, $ionicHistory, $firebaseArray, $firebaseAuth, $stateParams, $firebaseObject, $scope, PaypalService){
+	
+	$scope.authObj = $firebaseAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
+
+	refUser = firebase.database().ref('pessoaFisica/' + firebaseUser.uid)
+	$scope.pessoaFisica = $firebaseObject(refUser);
+
+	var id = $stateParams.id;
+	refOferta = firebase.database().ref('ofertas/' + id)
+
+	$firebaseObject(refOferta).$loaded(function(dados){
+		$scope.oferta = dados;
+		console.log(dados.precoFinalUn);
+	}); 
+
+	$scope.aderirOferta = function() {
+		var ofertaUsuario = {
+			ofertaId: id,
+			usuarioId: firebaseUser.uid,
+			data: '01/01/1999',
+			valorPago: $scope.oferta.precoFinalUn //ou o q vir do gateway
+		}
+		
+		var refOfertasUsuarios = firebase.database().ref('ofertasUsuarios');
+		var ofertasUsuarios = $firebaseArray(refOfertasUsuarios);
+
+		ofertasUsuarios.$add(ofertaUsuario);
+		
+		$ionicViewSwitcher.nextDirection("back");
+		$ionicHistory.goBack(-1);
+
+		// PaypalService.initPaymentUI().then(function () {
+		// 	PaypalService.makePayment(valor, "Total Amount").then(function (response) {
+		// 		alert("success: " + JSON.stringify(response));
+		// 	}, function (error) {
+		// 		alert("error:" + JSON.stringify(error));
+		// 	});
+		// });
+	}
+});
+

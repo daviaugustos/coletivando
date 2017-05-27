@@ -276,7 +276,7 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('tabsFisicoLogado.aderirOferta', {
-            url: '/aderir-oferta',
+            url: '/aderir-oferta/:id',
             views:{
                 'fisicoLogado-conta-tab': {
                     templateUrl: 'templates/ofertas/aderir-oferta.html',

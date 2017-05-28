@@ -53,14 +53,17 @@
         </button>
         
         <div class="info-visualizar-oferta">
-            <p>{{oferta.qtdPessoas}} pessoas já aderiram esta oferta</p>
+            <p>{{qtdPessoas}} pessoas já aderiram esta oferta</p>
             <p>Vence em {{oferta.dataLimite}}</p>
         </div>
 
         <div class="row">
                 <div class="col"></div>
-                <div class="col col-80 center">
-                    <button ng-click="aderirOferta(oferta.precoFinalUn)" class="button btn btn-green">Aderir Oferta</button>
+                <div ng-show="aderiu == false" class="col col-80 center">
+                    <button ng-click="showAderirOferta(oferta.$id)" class="button btn btn-green">Aderir Oferta</button>
+                </div>
+                <div ng-show="aderiu == true" class="col col-80 center">
+                    Você aderiu esta oferta.
                 </div>
                 <div class="col"></div>
             </div>

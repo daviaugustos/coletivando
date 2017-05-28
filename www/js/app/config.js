@@ -36,7 +36,7 @@ angular.module('coletivando')
                 }
             }
         });
-
+        
         $stateProvider.state('visualizar-oferta', {
             url: '/visualizar-oferta/:id',
             templateUrl: 'templates/ofertas/visualizar-oferta.html',
@@ -285,10 +285,14 @@ angular.module('coletivando')
             controller: 'SearchCtrl'
         });
 
-        $stateProvider.state('aderir-oferta', {
-            url: '/aderir-oferta',
-            templateUrl: 'templates/ofertas/aderir-oferta.html',
-            controller: 'OfertaCtrl'
+        $stateProvider.state('tabsFisicoLogado.aderirOferta', {
+            url: '/aderir-oferta/:id',
+            views:{
+                'fisicoLogado-conta-tab': {
+                    templateUrl: 'templates/ofertas/aderir-oferta.html',
+                    controller: 'AderirOfertaCtrl'
+                }
+            }
         });
 
         $stateProvider.state('notifications', {

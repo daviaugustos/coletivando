@@ -180,6 +180,16 @@ angular.module('coletivando')
             }
         });
 
+        $stateProvider.state('tabsJuridicoLogado.editarSenha', {
+            url: '/juridicoLogado-editar-senha/:id',
+            views: {
+                'juridicoLogado-conta-tab': {
+                    templateUrl: 'templates/empresa/editar-senha.html',
+                    controller: 'AlterarSenhaCtrl'
+                }
+            }
+        });
+
         $stateProvider.state('tabsFisicoLogado', {
             url: '/tabsFisicoLogado',
             abstract: true,

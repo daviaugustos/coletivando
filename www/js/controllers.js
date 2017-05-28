@@ -1007,6 +1007,7 @@ app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseA
 
 	$scope.authObj = $firebaseAuth();
 	var firebaseUser = $scope.authObj.$getAuth();
+	$scope.usuario = angular.copy(firebaseUser);
 
 	$ionicPlatform.ready(function () {
 		$('#preloader').fadeIn();
@@ -1070,7 +1071,69 @@ app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseA
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
+	
+
+	// $scope.atualizarSenha = function(usuario){
+    //   return auth.$changePassword(firebaseUser.email, usuario.senha, usuario.senhaNova).catch(function(error) {
+	// console.log(error); });
+	// // or...
+	// // return auth.$changePassword(...).then(null, function(error) { ... });
+	// };
+
 });
+
+app.controller('AlterarSenhaCtrl', function($scope, $state, $firebaseAuth, $firebaseObject, $ionicPopup, $ionicHistory) {
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+
+	$scope.authObj = $firebaseAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
+	$scope.usuario = angular.copy(firebaseUser);
+
+
+		$scope.atualizarSenha = function(password) {
+				if ($scope.usuario.password == $scope.usuario.password2){
+
+
+					$scope.authObj.$updatePassword(password)
+							.then(function() {
+							console.log("Password changed successfully!");
+					}).catch(function(error) {
+							console.error("Error: ", error);
+					});
+
+							$ionicPopup.alert({
+							title: 'Senha alterada',
+							template: 'Sua senha foi alterada com sucesso!'
+					});
+
+						$scope.usuario.password = "";
+						$scope.usuario.password2 = "";
+
+				}
+				else {
+
+						$ionicPopup.alert({
+						title: 'Senhas não coincidem',
+						template: 'Por favor informe as senhas corretamente'
+					});
+
+					$scope.usuario.password = "";
+					$scope.usuario.password2 = "";
+
+				}
+				
+			}
+
+
+
+
+
+});
+
+
 
 app.controller('UsuarioFisicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $ionicHistory, $state, $ionicPopup, $ionicViewSwitcher) {
 	$scope.goBackHandler = function () {
@@ -1197,7 +1260,7 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 
 app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scope) {
 	$scope.submit = function (form) {
-		$scope.submitted = true;
+		$scope.submitted = true; 
 
 		if (form.$invalid) {
 			var formInputs = [];
@@ -1209,8 +1272,8 @@ app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scop
 				}
 			});
 
-			$location.hash(formInputs[0].$name);
-			$ionicScrollDelegate.anchorScroll(true);
+			$location.hash(formInputs[0].$name); 
+			$ionicScrollDelegate.anchorScroll(true); 
 		}
 	}
 });

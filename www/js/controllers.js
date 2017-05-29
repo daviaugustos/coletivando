@@ -1410,10 +1410,17 @@ app.controller('OfertaTriagemCtrl', function ($ionicViewSwitcher, $firebaseAuth,
 	}
 });
 
-app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams) {
+app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams, $firebaseAuth, $firebaseArray, $ionicSlideBoxDelegate) {
 	
-	var id = $stateParams.id;
-	var ref = firebase.database().ref('ofertas/' + id);
+    var empresa;
+	var ofertaId = $stateParams.id;
+	var ref = firebase.database().ref('ofertas/' + ofertaId);
+	
+	var firebaseUser = $firebaseAuth().$getAuth();
+
+	var refOfertas = firebase.database().ref('ofertasUsuarios');
+	var queryOferta = refOfertas.orderByChild("ofertaId").equalTo(ofertaId);
+	
 	$scope.oferta = $firebaseObject(ref);
 
 	$scope.aprovar = function () {
@@ -1431,6 +1438,26 @@ app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state,
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
+
+
+
+	getImagensSlider(ofertaId).then(function (arrayImagens) {
+		$scope.imagensUrlSlider = arrayImagens;
+	}, function (error) {
+		console.log(error);
+	})
+	function getImagensSlider(ofertaId) {
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
+
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl;
+		});
+	};
+	
 
 });
 

@@ -49,12 +49,16 @@
                 <p>{{oferta.qtdPessoas}}</p>
             </label>
 
+
             <ion-scroll direction="x" class="wide-as-needed lista-img" overflow-scroll="false" has-bouncing="true">
-                <div class="slide" ng-repeat="url in listaUrls">
-                    <img ng-src="{{url}}">
+                <div class="slide" ng-repeat="url in imagensUrlSlider">
+                    <div class="box-images">
+                        <img ng-src="{{url}}">
+                    </div>
                 </div>
             </ion-scroll>
-          
+
+
             <input type="file" id="fileInput"/>
 
             <label class="item-input-coletivando">

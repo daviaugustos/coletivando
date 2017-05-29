@@ -38,10 +38,21 @@ angular.module('coletivando')
         });
         
         $stateProvider.state('visualizar-oferta', {
+            cache: false,
             url: '/visualizar-oferta/:id',
             templateUrl: 'templates/ofertas/visualizar-oferta.html',
             controller: 'VisualizarOfertaCtrl'
         });
+
+        // $stateProvider.state('visualizar-oferta', {
+        //     url: '/visualizar-oferta/:id',
+        //     views: {
+        //         'juridicoLogado-home-tab': {
+        //             templateUrl: 'templates/ofertas/visualizar-oferta.html',
+        //             controller: 'VisualizarOfertaCtrl'
+        //         }
+        //     }
+        // });
 
         $stateProvider.state('tabsNaoLogado.explore', {
             url: '/nao-logado-explore',

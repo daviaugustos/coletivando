@@ -623,6 +623,7 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, 
 	$scope.showAderirOferta = function(id){
 		$state.go('tabsFisicoLogado.aderirOferta', { id: id });
 	}
+	$ionicHistory.clearCache();
 
 });
 

@@ -1178,3 +1178,7 @@ ion-slides{
 #apoiadas a{
 	border: none;
 }
+
+.swiper-slide{
+	display: block !important;
+}

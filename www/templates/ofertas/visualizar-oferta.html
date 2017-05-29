@@ -14,7 +14,11 @@
         
         <ion-slides  options="options" slider="data.slider">
             <ion-slide-page ng-repeat="url in imagensUrlSlider">
-                <div class="box"><img height="250px" ng-src="{{url}}" class="centralizarElemento"/></div>
+                <div class="box">
+                    <center>
+                        <img height="250px" ng-src="{{url}}" class="centralizarElemento"/>
+                    </center>
+                </div>
             </ion-slide-page>
         </ion-slides>
         

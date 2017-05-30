@@ -897,8 +897,9 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 						//teste
 					});
 				}
+				$('#preloader').fadeOut();
 			});
-			$('#preloader').fadeOut();
+			
 		};
 	}
 

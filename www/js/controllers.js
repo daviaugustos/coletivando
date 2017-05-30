@@ -752,7 +752,7 @@ app.controller('OfertasApoiadasCtrl', function ($firebaseObject, $ionicViewSwitc
 			return oferta;
 		});
 		listaOfertasApoidadas();
-		$scope.ofertasApoiadas = ofertas;
+		// $scope.ofertasApoiadas = ofertas;
 	});
 
 	function listaOfertasApoidadas() {
@@ -772,15 +772,26 @@ app.controller('OfertasApoiadasCtrl', function ($firebaseObject, $ionicViewSwitc
 		var ofertasApoiadas = [];
 		
 		listaOfertaIds.forEach(function(ofertaId) {
-		
 			var refOfertaApoiada = firebase.database().ref('ofertas/' + ofertaId);
+			
 			$firebaseObject(refOfertaApoiada).$loaded(function(obj){
 				ofertasApoiadas.push(obj);
-				console.log(obj);
+				if (ofertasApoiadas.length === listaOfertaIds.length){
+					listaImagens(ofertasApoiadas); //promise do futuro
+				}
 			});
-			$scope.ofertasApoiadas = ofertasApoiadas;
 		});
 	};
+
+	function listaImagens(ofertasApoiadas){
+		ofertasApoiadas = ofertasApoiadas.map(function (oferta) {
+			getImagemExibicao(oferta.$id).then(function (urlImagem) {
+				oferta.imagem = urlImagem;
+			});
+			return oferta;
+		});
+		$scope.ofertasApoiadas = ofertasApoiadas;
+	}
 
 	function getImagemExibicao(ofertaId) {
 		var refImagens = firebase.database().ref("imagens");

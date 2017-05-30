@@ -46,7 +46,7 @@
                     <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtPrecoInicial.$invalid && !cadastroForm.txtPrecoInicial.$pristine) || cadastroForm.txtPrecoInicial.$invalid && submitted, 'no-errors' : cadastroForm.txtPrecoInicial.$valid}">
                         <span class="input-label">Preço</span>
-                        <input type="text" clean="true" ng-required="true" name="txtPrecoInicial" placeholder="Preço inicial" mask='9?9?9?9?9?9?9?9?9.99' class="oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
+                        <input type="text" clean="true" ng-required="true" name="txtPrecoInicial" placeholder="Preço inicial" class="oferta-precoinicial" ng-model="oferta.precoInicialUn"/>
                     </label>
                 </div>
                 <div class="col col-50 no-padding-right">                

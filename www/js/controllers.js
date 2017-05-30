@@ -478,7 +478,7 @@ app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, 
 		var query = refOfertasUsuarios.orderByChild("ofertaId").equalTo(oferta.$id);
 
 		$firebaseArray(query).$loaded(function (listaOfertasUsuarios) {
-			var porcentagem = (listaOfertasUsuarios.length / oferta.qtdPessoas)*100;
+			var porcentagem = (listaOfertasUsuarios.length / oferta.qtdPessoas) * 100;
 			oferta.porcentagem = porcentagem;
 			// $scope.porcentagem = porcentagem;
 			console.log(oferta.produto + ' ' + porcentagem);
@@ -899,8 +899,9 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 						//teste
 					});
 				}
+				$('#preloader').fadeOut();
 			});
-			$('#preloader').fadeOut();
+
 		};
 	}
 
@@ -1018,6 +1019,134 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 
 app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $stateParams) {
 
+	/* Mask */
+	$('.date').mask('00/00/0000');
+	$('.time').mask('00:00:00');
+	$('.date_time').mask('00/00/0000 00:00:00');
+	$('.cep').mask('00000-000');
+	$('.cpf').mask('000.000.000-00');
+	$('.cnpj').mask('00.000.000/0000-00');
+	$('.money').mask('000.000.000.000.000,00', { reverse: true });
+
+	var SPMaskBehavior = function (val) {
+		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+	},
+		spOptions = {
+			onKeyPress: function (val, e, field, options) {
+				field.mask(SPMaskBehavior.apply({}, arguments), options);
+			}
+		};
+
+	if ($('.phone').length > 0) {
+		$('.phone').mask(SPMaskBehavior, spOptions);
+	}
+
+
+
+
+	/* validate */
+	$('form').submit(function () {
+		var valid = $(this).validationEngine("validate");
+		if (valid) {
+			$(this).submit();
+		} else {
+			return false;
+		}
+	});
+
+	$('form').validationEngine({
+		binded: true,
+		updatePromptsPosition: true,
+		promptPosition: 'inline',
+		scroll: false
+	});
+
+	$('input').blur(function () {
+
+		var field_id = $(this).attr('id');
+
+		var isValid = !$(this).validationEngine('validate');
+
+		if (!isValid) {
+			$(this).addClass('validation_error');
+		} else {
+			$(this).removeClass('validation_error');
+		}
+
+	});
+
+	/* /validate */
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	}
+
+	var cnpj;
+
+	$scope.validarCnpj = function () {
+
+		cnpj = apenasNumeros($('#txtCnpj').val());
+
+		if (cnpj > 0) {
+			$('#preloader').fadeIn();
+			$.ajax({
+				dataType: 'jsonp',
+				url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
+			}).done(function (data) {
+				if (data['situacao'] == 'ATIVA') {
+
+					if (data['atividade_principal'][0]['code']) {
+						$scope.pessoaJuridica.cnae = data['atividade_principal'][0]['code'];
+					}
+
+					if (data['fantasia']) {
+						$scope.pessoaJuridica.nomeFantasia = data['fantasia'];
+					}
+
+					if (data['cep']) {
+						$scope.pessoaJuridica.enderecoCep = data['cep'];
+					}
+
+					if (data['complemento']) {
+						$scope.pessoaJuridica.enderecoComplemento = data['complemento'];
+					}
+
+					if (data['numero']) {
+						$scope.pessoaJuridica.enderecoNumero = data['numero'];
+					}
+
+					if (data['bairro']) {
+						$scope.pessoaJuridica.enderecoBairro = data['bairro'];
+					}
+
+					if (data['nome']) {
+						$scope.pessoaJuridica.nome = data['nome'];
+					}
+
+					if (data['telefone']) {
+						$scope.pessoaJuridica.telefone = data['telefone'];
+					}
+
+
+
+				} else if (data['status'] == "ERROR" || data['situacao'] == 'INATIVA') {
+					$ionicPopup.alert({
+						title: 'CPNJ Inválido!',
+						template: 'Por favor <b>verifique</b> se os dados estão corretos'
+					}).then(function () {
+						$('#txtCnpj').val('');
+						//teste
+					});
+				}
+			});
+			$('#preloader').fadeOut();
+		};
+	}
+
+	function apenasNumeros(string) {
+		var numsStr = string.replace(/[^0-9]/g, '');
+		return parseInt(numsStr);
+	}
+
 	var jsonpUrl = "lib/base_enderecos/estados_cidades.json";
 
 	$scope.authObj = $firebaseAuth();
@@ -1126,9 +1255,10 @@ app.controller('AlterarSenhaCtrl', function ($scope, $state, $firebaseAuth, $fir
 
 			$scope.usuario.password = "";
 			$scope.usuario.password2 = "";
-
+			$ionicHistory.goBack(-1);
 		}
 		else {
+
 
 			$ionicPopup.alert({
 				title: 'Senhas não coincidem',

@@ -1313,16 +1313,8 @@ app.controller('AlterarSenhaCtrl', function ($scope, $state, $firebaseAuth, $fir
 
 			$scope.usuario.password = "";
 			$scope.usuario.password2 = "";
-<<<<<<< HEAD
-
 		}
 		else {
-=======
-			$ionicHistory.goBack(-1);
-		}
-		else {
-
->>>>>>> 3ff351eb66952afa2065cb4f9dce7a6eda8e42c6
 
 			$ionicPopup.alert({
 				title: 'Senhas não coincidem',
@@ -1331,15 +1323,8 @@ app.controller('AlterarSenhaCtrl', function ($scope, $state, $firebaseAuth, $fir
 
 			$scope.usuario.password = "";
 			$scope.usuario.password2 = "";
-
 		}
-
 	}
-
-
-
-
-
 });
 
 

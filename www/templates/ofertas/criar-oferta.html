@@ -10,9 +10,9 @@
     </div>
 
     <form name="cadastroForm" ng-submit="create(oferta)" ng-controller="ValidacaoCtrl" class="cadastro-form">
-
+    
     <ion-content style="padding: 60px 40px 40px 40px">
-
+        
         <ion-list>            
             <label class="item-input-coletivando item-floating-label" 
             ng-class="{'has-errors' : (cadastroForm.txtProduto.$invalid && !cadastroForm.txtProduto.$pristine) || cadastroForm.txtProduto.$invalid && submitted, 'no-errors' : cadastroForm.txtProduto.$valid}">

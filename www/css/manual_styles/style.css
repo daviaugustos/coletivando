@@ -554,6 +554,28 @@ form {
 	 height: 5px; 
 	 background: #79C9AD;
 }
+
+progress[value]{
+	background: #333;
+	-webkit-text-fill-color: lawngreen;
+	color: #333;
+	border-color: #65476d;
+}
+
+progress[value] {
+  -webkit-appearance: none;
+  height: 6px;
+}
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  /*border-radius: 2px;*/
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;*/
+}
+progress[value]::-webkit-progress-value {
+	/*background-image:-webkit-linear-gradient(left, #79C9AD, #AA79B8);*/
+	background: #79C9AD;
+}
+
 .info-card-home h2{
 	font-weight: 700;
 	color: #5d5d5d;

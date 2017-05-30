@@ -13,7 +13,7 @@
 
           <ion-list>
             <ion-item class="ofertas-apoiadas" ng-repeat="oferta in ofertasApoiadas">
-              <a ng-click="showOferta(oferta.$id)" ng-if="oferta.status == 'AGUARDANDO'" class="item item-thumbnail-right em-andamento">
+              <a ng-click="showOferta(oferta.$id)" ng-if="oferta.status == 'APROVADO'" class="item item-thumbnail-right em-andamento">
                   <img src="{{oferta.imagem}}">
                   <h2>{{oferta.produto}}</h2>
                   <h3>R$ {{oferta.precoFinalUn}}</h3>

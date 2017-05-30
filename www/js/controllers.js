@@ -480,8 +480,6 @@ app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, 
 		$firebaseArray(query).$loaded(function (listaOfertasUsuarios) {
 			var porcentagem = (listaOfertasUsuarios.length / oferta.qtdPessoas) * 100;
 			oferta.porcentagem = porcentagem;
-			// $scope.porcentagem = porcentagem;
-			console.log(oferta.produto + ' ' + porcentagem);
 		});
 	};
 
@@ -741,7 +739,9 @@ app.controller('SearchCtrl', function ($firebaseObject, $ionicPlatform, $ionicVi
 
 });
 
-app.controller('OfertasApoiadasCtrl', function ($ionicViewSwitcher, $firebaseArray, $firebaseAuth, $scope, $state, $ionicHistory) {
+app.controller('OfertasApoiadasCtrl', function ($firebaseObject, $ionicViewSwitcher, $firebaseArray, $firebaseAuth, $scope, $state, $ionicHistory) {
+	$scope.authObj = $firebaseAuth();
+	var firebaseUser = $scope.authObj.$getAuth();
 
 	var ref = firebase.database().ref('ofertas');
 	$firebaseArray(ref).$loaded(function (ofertas) {
@@ -751,8 +751,36 @@ app.controller('OfertasApoiadasCtrl', function ($ionicViewSwitcher, $firebaseArr
 			});
 			return oferta;
 		});
+		listaOfertasApoidadas();
 		$scope.ofertasApoiadas = ofertas;
 	});
+
+	function listaOfertasApoidadas() {
+		var refOfertasUsuarios = firebase.database().ref('ofertasUsuarios');
+		var query = refOfertasUsuarios.orderByChild("usuarioId").equalTo(firebaseUser.uid);
+		
+		$firebaseArray(query).$loaded(function(lista){
+			var listaOfertaIds = lista.map(function(oferta){
+				return oferta.ofertaId;
+			});
+			buscaOfertasApoiadas(listaOfertaIds);
+		});
+		
+	};
+
+	function buscaOfertasApoiadas(listaOfertaIds){
+		var ofertasApoiadas = [];
+		
+		listaOfertaIds.forEach(function(ofertaId) {
+		
+			var refOfertaApoiada = firebase.database().ref('ofertas/' + ofertaId);
+			$firebaseObject(refOfertaApoiada).$loaded(function(obj){
+				ofertasApoiadas.push(obj);
+				console.log(obj);
+			});
+			$scope.ofertasApoiadas = ofertasApoiadas;
+		});
+	};
 
 	function getImagemExibicao(ofertaId) {
 		var refImagens = firebase.database().ref("imagens");

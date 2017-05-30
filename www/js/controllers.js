@@ -184,7 +184,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 
 	var id = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + id);
-	$scope.oferta = $firebaseObject(ref); 
+	$scope.oferta = $firebaseObject(ref);
 
 	getImagensSlider(id).then(function (arrayImagens) {
 		$scope.listaObjetoImagem = arrayImagens;
@@ -321,7 +321,7 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 			});
 		}
 	};
-	
+
 	$scope.finalizar = function (oferta) {
 		oferta.status = "AGUARDANDO";
 		$scope.salvar(oferta);
@@ -346,90 +346,90 @@ app.controller('UpdateOfertaCtrl', function ($firebaseAuth, $firebaseObject, $sc
 			$scope.fileAux = fileList[i];
 			var reader = new FileReader();
 
-			reader.onload = function (e) { 
-			var objModeloImagemLocal = {
-				id: "",
-				fileObject: ""
-			}
-			//Adiciona a imagem de novas imagens a serem salvas
-			var idImagem = gerarIdUnico();
-			objModeloImagemLocal.id = idImagem;
-			objModeloImagemLocal.fileObject = $scope.fileAux;
-			$scope.fileArray.push(objModeloImagemLocal);
-			$scope.fileAux = "";
+			reader.onload = function (e) {
+				var objModeloImagemLocal = {
+					id: "",
+					fileObject: ""
+				}
+				//Adiciona a imagem de novas imagens a serem salvas
+				var idImagem = gerarIdUnico();
+				objModeloImagemLocal.id = idImagem;
+				objModeloImagemLocal.fileObject = $scope.fileAux;
+				$scope.fileArray.push(objModeloImagemLocal);
+				$scope.fileAux = "";
 
-			//Adiciona a imagem em base64 a lista de imagens a serem exibidas no preview
-			var srcImagem = reader.result;
-			var objModeloImagemLocal = {
-				id: "",
-				imagemUrl: ""
+				//Adiciona a imagem em base64 a lista de imagens a serem exibidas no preview
+				var srcImagem = reader.result;
+				var objModeloImagemLocal = {
+					id: "",
+					imagemUrl: ""
+				}
+				objModeloImagemLocal.id = idImagem;
+				objModeloImagemLocal.imagemUrl = srcImagem;
+				validarImagem(objModeloImagemLocal);
 			}
-			objModeloImagemLocal.id = idImagem;
-			objModeloImagemLocal.imagemUrl = srcImagem;
-			validarImagem(objModeloImagemLocal);
+
+			reader.readAsDataURL(fileList[i]);
 		}
-
-		reader.readAsDataURL(fileList[i]);
-	}
 	});
 
-function validarImagem(objModeloImagemLocal) {
-	if (objModeloImagemLocal.imagemUrl.match(/^data:image\//)) {
-		$scope.$apply(function () {
-			$scope.listaObjetoImagem.push(objModeloImagemLocal);
-		});
-	} else {
-		$ionicPopup.alert({
-			title: 'Erro',
-			template: 'Por favor, insira uma imagem válida'
-		});
-	}
-}
-
-function gerarIdUnico() {
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000)
-			.toString(16)
-			.substring(1);
-	}
-	return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-		s4() + '-' + s4() + s4() + s4();
-}
-
-//Método que executa todo o processo de persistência das imagens.
-$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
-	$("#preloader").fadeIn();
-	var listaArquivos = $scope.fileArray;
-
-	var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
-	storageRef.constructor.prototype.putFiles = function (listaArquivos) {
-		var ref = this;
-		return Promise.all(listaArquivos.map(function (objetoArquivo) {
-			return ref.child(objetoArquivo.fileObject.name).put(objetoArquivo.fileObject);
-		}));
-	}
-
-	storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
-		var objetoModeloImagem = {
-			ofertaId: $scope.idOferta,
-			imagemUrl: "",
-			fullPath: "",
-		}
-		arrayMetadados.forEach(function (infoImagem) {
-			var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
-			objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
-			objetoModeloImagem.fullPath = infoImagem.metadata.fullPath;
-
-			imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
-				console.log(referencia);
+	function validarImagem(objModeloImagemLocal) {
+		if (objModeloImagemLocal.imagemUrl.match(/^data:image\//)) {
+			$scope.$apply(function () {
+				$scope.listaObjetoImagem.push(objModeloImagemLocal);
 			});
+		} else {
+			$ionicPopup.alert({
+				title: 'Erro',
+				template: 'Por favor, insira uma imagem válida'
+			});
+		}
+	}
+
+	function gerarIdUnico() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+			s4() + '-' + s4() + s4() + s4();
+	}
+
+	//Método que executa todo o processo de persistência das imagens.
+	$scope.executarSalvarImagem = function (caminhoArmazenamentoImagens) {
+		$("#preloader").fadeIn();
+		var listaArquivos = $scope.fileArray;
+
+		var storageRef = firebase.storage().ref(caminhoArmazenamentoImagens);
+		storageRef.constructor.prototype.putFiles = function (listaArquivos) {
+			var ref = this;
+			return Promise.all(listaArquivos.map(function (objetoArquivo) {
+				return ref.child(objetoArquivo.fileObject.name).put(objetoArquivo.fileObject);
+			}));
+		}
+
+		storageRef.putFiles(listaArquivos).then(function (arrayMetadados) {
+			var objetoModeloImagem = {
+				ofertaId: $scope.idOferta,
+				imagemUrl: "",
+				fullPath: "",
+			}
+			arrayMetadados.forEach(function (infoImagem) {
+				var imagensCollection = $firebaseArray(firebase.database().ref('imagens'));
+				objetoModeloImagem.imagemUrl = infoImagem.downloadURL;
+				objetoModeloImagem.fullPath = infoImagem.metadata.fullPath;
+
+				imagensCollection.$add(objetoModeloImagem).then(function (referencia) {
+					console.log(referencia);
+				});
+			});
+			$("#preloader").fadeOut();
+			$ionicHistory.goBack(-1);
+		}).catch(function (error) {
+			console.log("deu erro");
 		});
-		$("#preloader").fadeOut();
-		$ionicHistory.goBack(-1);
-	}).catch(function (error) {
-		console.log("deu erro");
-	});
-}
+	}
 });
 
 
@@ -500,9 +500,16 @@ app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, 
 		$state.go('visualizar-oferta', { id: id });
 	}
 
+	$scope.showPesquisa = function () {
+		$ionicViewSwitcher.nextDirection("forward");
+		$state.go('pesquisar');
+	}
+
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
+
+
 });
 app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $firebaseObject, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup, $ionicLoading) {
 
@@ -544,17 +551,17 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, 
 	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
-	
+
 	var firebaseUser = $firebaseAuth().$getAuth();
 
 	var refOfertas = firebase.database().ref('ofertasUsuarios');
 	var queryOferta = refOfertas.orderByChild("ofertaId").equalTo(ofertaId);
 
-	$firebaseArray(queryOferta).$loaded(function(listaDadosOferta){
+	$firebaseArray(queryOferta).$loaded(function (listaDadosOferta) {
 		$scope.aderiu = false;
 		$scope.qtdPessoas = listaDadosOferta.length;
-		
-		for(var i = 0; i < listaDadosOferta.length; i++) {
+
+		for (var i = 0; i < listaDadosOferta.length; i++) {
 			if (listaDadosOferta[i].usuarioId == firebaseUser.uid) {
 				$scope.aderiu = true;
 				break;
@@ -620,7 +627,7 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, 
 		$state.go('perfil-empresa', { id: id });
 	}
 
-	$scope.showAderirOferta = function(id){
+	$scope.showAderirOferta = function (id) {
 		$state.go('tabsFisicoLogado.aderirOferta', { id: id });
 	}
 	$ionicHistory.clearCache();
@@ -659,15 +666,66 @@ app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaS
 	}
 });
 
-app.controller('SearchCtrl', function ($scope, PesquisaService, $state, $ionicHistory) {
+app.controller('SearchCtrl', function ($firebaseObject, PesquisaService, $ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
 
-		$scope.pesquisas = PesquisaService.readAll();
 
-		$scope.goBackHandler = function () {
-			$ionicHistory.goBack(-1);
-		};
+	$ionicPlatform.ready(function () {
 
+		$("#preloader").fadeIn();
+		getObjOfertaComImagem();
 	});
+
+	function getObjOfertaComImagem() {
+		var ref = firebase.database().ref('ofertas');
+		$firebaseArray(ref).$loaded(function (dadosOfertas) {
+			dadosOfertas = dadosOfertas.map(function (oferta) {
+				carregaEmpresa(oferta.pessoaJuridicaId);
+
+				getImagemExibicao(oferta.$id).then(function (urlImagem) {
+					oferta.imagem = urlImagem;
+				});
+				return oferta;
+			});
+			$scope.ofertas = dadosOfertas;
+			$("#preloader").fadeOut();
+		});
+	}
+
+	function carregaEmpresa(empresaId) {
+
+		var refEmpresa = firebase.database().ref('pessoaJuridica/' + empresaId);
+		$firebaseObject(refEmpresa).$loaded(function (empresa) {
+			$scope.empresa = empresa;
+		});
+
+	}
+
+	function getImagemExibicao(ofertaId) {
+		var refImagens = firebase.database().ref("imagens");
+		var query = refImagens.orderByChild("ofertaId").equalTo(ofertaId);
+
+		return $firebaseArray(query).$loaded(function (arrayImagensOfertaEspecifica) {
+			var arrayImagensUrl = arrayImagensOfertaEspecifica.map(function (noImagem) {
+				return noImagem.imagemUrl;
+			});
+			return arrayImagensUrl[0];
+		});
+	};
+	
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	};
+
+	$scope.showOferta = function (id) {
+		$ionicViewSwitcher.nextDirection("forward");
+		$state.go('visualizar-oferta', { id: id });
+	}
+
+	$scope.showEmpresa = function (id) {
+		$state.go('perfil-empresa', { id: id });
+	}
+
+});
 
 app.controller('OfertasApoiadasCtrl', function ($ionicViewSwitcher, $firebaseArray, $firebaseAuth, $scope, $state, $ionicHistory) {
 
@@ -1084,10 +1142,10 @@ app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseA
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	}
-	
+
 
 	// $scope.atualizarSenha = function(usuario){
-    //   return auth.$changePassword(firebaseUser.email, usuario.senha, usuario.senhaNova).catch(function(error) {
+	//   return auth.$changePassword(firebaseUser.email, usuario.senha, usuario.senhaNova).catch(function(error) {
 	// console.log(error); });
 	// // or...
 	// // return auth.$changePassword(...).then(null, function(error) { ... });
@@ -1095,7 +1153,7 @@ app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseA
 
 });
 
-app.controller('AlterarSenhaCtrl', function($scope, $state, $firebaseAuth, $firebaseObject, $ionicPopup, $ionicHistory) {
+app.controller('AlterarSenhaCtrl', function ($scope, $state, $firebaseAuth, $firebaseObject, $ionicPopup, $ionicHistory) {
 
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
@@ -1106,39 +1164,39 @@ app.controller('AlterarSenhaCtrl', function($scope, $state, $firebaseAuth, $fire
 	$scope.usuario = angular.copy(firebaseUser);
 
 
-		$scope.atualizarSenha = function(password) {
-				if ($scope.usuario.password == $scope.usuario.password2){
+	$scope.atualizarSenha = function (password) {
+		if ($scope.usuario.password == $scope.usuario.password2) {
 
 
-					$scope.authObj.$updatePassword(password)
-							.then(function() {
-							console.log("Password changed successfully!");
-					}).catch(function(error) {
-							console.error("Error: ", error);
-					});
+			$scope.authObj.$updatePassword(password)
+				.then(function () {
+					console.log("Password changed successfully!");
+				}).catch(function (error) {
+					console.error("Error: ", error);
+				});
 
-							$ionicPopup.alert({
-							title: 'Senha alterada',
-							template: 'Sua senha foi alterada com sucesso!'
-					});
+			$ionicPopup.alert({
+				title: 'Senha alterada',
+				template: 'Sua senha foi alterada com sucesso!'
+			});
 
-						$scope.usuario.password = "";
-						$scope.usuario.password2 = "";
+			$scope.usuario.password = "";
+			$scope.usuario.password2 = "";
 
-				}
-				else {
+		}
+		else {
 
-						$ionicPopup.alert({
-						title: 'Senhas não coincidem',
-						template: 'Por favor informe as senhas corretamente'
-					});
+			$ionicPopup.alert({
+				title: 'Senhas não coincidem',
+				template: 'Por favor informe as senhas corretamente'
+			});
 
-					$scope.usuario.password = "";
-					$scope.usuario.password2 = "";
+			$scope.usuario.password = "";
+			$scope.usuario.password2 = "";
 
-				}
-				
-			}
+		}
+
+	}
 
 
 
@@ -1229,7 +1287,7 @@ app.controller('UsuarioFisicoUpdateCtrl', function ($firebaseAuth, $firebaseObje
 	$("#preloader").fadeIn();
 	$scope.authObj = $firebaseAuth();
 	var firebaseUser = $scope.authObj.$getAuth();
-	
+
 	var ref = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
 	$firebaseObject(ref).$loaded(function (pessoaFisica) {
 		$("#preloader").fadeOut();
@@ -1273,7 +1331,7 @@ app.controller('UsuarioFisicoUpdateEnderecoCtrl', function ($firebaseObject, $st
 
 app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scope) {
 	$scope.submit = function (form) {
-		$scope.submitted = true; 
+		$scope.submitted = true;
 
 		if (form.$invalid) {
 			var formInputs = [];
@@ -1285,8 +1343,8 @@ app.controller('ValidacaoCtrl', function ($ionicScrollDelegate, $location, $scop
 				}
 			});
 
-			$location.hash(formInputs[0].$name); 
-			$ionicScrollDelegate.anchorScroll(true); 
+			$location.hash(formInputs[0].$name);
+			$ionicScrollDelegate.anchorScroll(true);
 		}
 	}
 });
@@ -1356,28 +1414,25 @@ app.controller('PerfilEmpresa', function ($firebaseObject, $state, $scope, $ioni
 		$ionicHistory.goBack(-1);
 	}
 
-   //usado para utilizar como referencia no perfil-empresa
+	//usado para utilizar como referencia no perfil-empresa
 	$scope.OfertasPessoaJuridicaRealizada;
 
 	var refOfertas = firebase.database().ref('ofertas')
 	var query = refOfertas.orderByChild("pessoaJuridicaId").equalTo(id);
 	$scope.OfertasPessoaJuridicaRealizada = 0;
-   //Pegando a lista de objetos total do usuario pessoa juridica(utilizar loaded para esperar o firebasearray trazer os dados)
-	$firebaseArray(query).$loaded(function(listaObjetos)
-	{
-		listaObjetos.forEach(function (laranja)
-		{
+	//Pegando a lista de objetos total do usuario pessoa juridica(utilizar loaded para esperar o firebasearray trazer os dados)
+	$firebaseArray(query).$loaded(function (listaObjetos) {
+		listaObjetos.forEach(function (laranja) {
 			// Se o objeto oferta estiver com status REALIZADO, conta +1
-            if (laranja.status == "REALIZADO")
-			{
-            $scope.OfertasPessoaJuridicaRealizada += 1;		
-            }	
-		
+			if (laranja.status == "REALIZADO") {
+				$scope.OfertasPessoaJuridicaRealizada += 1;
+			}
+
 		})
 	});
-   // Para ver o total de ofertas com status REALIZADO independente de usuario juridico
+	// Para ver o total de ofertas com status REALIZADO independente de usuario juridico
 	var query2 = refOfertas.orderByChild("status").equalTo("REALIZADO");
-	 $firebaseArray(query2).$loaded(function(ofertasRealizadas){ });
+	$firebaseArray(query2).$loaded(function (ofertasRealizadas) { });
 });
 
 
@@ -1412,16 +1467,16 @@ app.controller('OfertaTriagemCtrl', function ($ionicViewSwitcher, $firebaseAuth,
 });
 
 app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state, $scope, $ionicHistory, $stateParams, $firebaseAuth, $firebaseArray, $ionicSlideBoxDelegate) {
-	
-    var empresa;
+
+	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
-	
+
 	var firebaseUser = $firebaseAuth().$getAuth();
 
 	var refOfertas = firebase.database().ref('ofertasUsuarios');
 	var queryOferta = refOfertas.orderByChild("ofertaId").equalTo(ofertaId);
-	
+
 	$scope.oferta = $firebaseObject(ref);
 
 	$scope.aprovar = function () {
@@ -1458,12 +1513,12 @@ app.controller('VisualizarOfertaTriagemCtrl', function ($firebaseObject, $state,
 			return arrayImagensUrl;
 		});
 	};
-	
+
 
 });
 
-app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ionicViewSwitcher, $ionicHistory, $firebaseArray, $firebaseAuth, $stateParams, $firebaseObject, $scope, PaypalService){
-	
+app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ionicViewSwitcher, $ionicHistory, $firebaseArray, $firebaseAuth, $stateParams, $firebaseObject, $scope, PaypalService) {
+
 	$scope.authObj = $firebaseAuth();
 	var firebaseUser = $scope.authObj.$getAuth();
 
@@ -1473,23 +1528,23 @@ app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ioni
 	var id = $stateParams.id;
 	refOferta = firebase.database().ref('ofertas/' + id)
 
-	$firebaseObject(refOferta).$loaded(function(dados){
+	$firebaseObject(refOferta).$loaded(function (dados) {
 		$scope.oferta = dados;
-	}); 
+	});
 
-	$scope.aderirOferta = function() {
+	$scope.aderirOferta = function () {
 		var ofertaUsuario = {
 			ofertaId: id,
 			usuarioId: firebaseUser.uid,
 			data: '01/01/1999',
 			valorPago: $scope.oferta.precoFinalUn //ou o q vir do gateway
 		}
-		
+
 		var refOfertasUsuarios = firebase.database().ref('ofertasUsuarios');
 		var ofertasUsuarios = $firebaseArray(refOfertasUsuarios);
 
 		ofertasUsuarios.$add(ofertaUsuario);
-		
+
 		//tentativa falha de atualizar o visualizar oferta dps de aderir
 		$ionicViewSwitcher.nextDirection("back");
 		$state.go('visualizar-oferta', { id: id });

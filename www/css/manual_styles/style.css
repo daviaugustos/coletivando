@@ -180,6 +180,8 @@ i.icon.ion-android-arrow-back::before{
 	color: #fffffd;
 }
 
+
+
 /*para excluir --->*/
 		ion-nav-bar.transp ion-header-bar{
 			background-color: rgba(0,0,0,0);
@@ -699,12 +701,27 @@ form {
 }
 #pesquisar i::before{
 	font-size: 22px;
+	color: black;
 }
 #pesquisar a{
 	border: none;
 }
 #pesquisar p1{
 	color: #AA79B8; 
+}
+.bg-card-pesquisar
+{
+	display: block;
+	max-height: 56.62vw;
+	float: right;
+}
+
+p.price-pesquisar{
+	font-size:15px;
+	font-weight: 700;
+	margin-top: 7px;
+	margin-bottom: 7px;
+	color: #797979;
 }
 
 

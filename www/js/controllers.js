@@ -592,9 +592,21 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, 
 		var refEmpresa = firebase.database().ref('pessoaJuridica/' + oferta.pessoaJuridicaId);
 		$firebaseObject(refEmpresa).$loaded(function (empresa) {
 			$scope.empresa = empresa;
+			oferta.porcentagem = preencheBarraAndamento(oferta);
 			$scope.oferta = oferta;
 		});
 	});
+
+	function preencheBarraAndamento(oferta) {
+		var refOfertasUsuarios = firebase.database().ref('ofertasUsuarios');
+		var query = refOfertasUsuarios.orderByChild("ofertaId").equalTo(oferta.$id);
+
+		$firebaseArray(query).$loaded(function (listaOfertasUsuarios) {
+			var porcentagem = (listaOfertasUsuarios.length / oferta.qtdPessoas) * 100;
+			oferta.porcentagem = porcentagem;
+		});
+		return oferta.porcentagem;
+	};
 
 	$scope.options = {
 		loop: true,

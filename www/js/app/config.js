@@ -191,14 +191,11 @@ angular.module('coletivando')
             }
         });
 
-        $stateProvider.state('tabsJuridicoLogado.editarSenha', {
+        $stateProvider.state('editar-senha', {
+            cache: false,
             url: '/juridicoLogado-editar-senha/:id',
-            views: {
-                'juridicoLogado-conta-tab': {
-                    templateUrl: 'templates/empresa/editar-senha.html',
-                    controller: 'AlterarSenhaCtrl'
-                }
-            }
+            templateUrl: 'templates/empresa/editar-senha.html',
+            controller: 'AlterarSenhaCtrl'
         });
 
         $stateProvider.state('tabsFisicoLogado', {
@@ -274,15 +271,15 @@ angular.module('coletivando')
             }
         });
 
-        $stateProvider.state('alterar-senha-fisica', {
-            url: '/alterar-senha-fisica',
-            controller: 'UsuarioFisicoCtrl'
-        });
+        // $stateProvider.state('alterar-senha-fisica', {
+        //     url: '/alterar-senha-fisica',
+        //     controller: 'UsuarioFisicoCtrl'
+        // });
 
-        $stateProvider.state('alterar-senha-juridica', {
-            url: '/alterar-senha-juridica',
-            controller: 'UsuarioJuridicoCtrl'
-        });
+        // $stateProvider.state('alterar-senha-juridica', {
+        //     url: '/alterar-senha-juridica',
+        //     controller: 'UsuarioJuridicoCtrl'
+        // });
 
         $stateProvider.state('minha-conta-fisica', {
             url: '/minha-conta-fisica',

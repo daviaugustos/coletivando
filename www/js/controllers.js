@@ -891,7 +891,7 @@ app.controller("LoginCtrl", function ($scope, $state, $firebaseAuth, $firebaseOb
 	};
 });
 
-app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state, $ionicViewSwitcher) {
+app.controller('UsuarioJuridicoCtrl', function ($ionicViewSwitcher, $firebaseAuth, $firebaseObject, $scope, $http, $ionicHistory, $ionicPopup, $state, $ionicViewSwitcher) {
 
 	/* Mask */
 	$('.date').mask('00/00/0000');
@@ -1023,7 +1023,7 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 	$http.get(jsonpUrl)
 		.then(
 		function (resposta) {
-			console.log(resposta['data']);
+			//console.log(resposta['data']);
 			var items = [];
 			var options = '<option value="">Escolha um estado</option>';
 
@@ -1114,6 +1114,11 @@ app.controller('UsuarioJuridicoCtrl', function ($firebaseAuth, $firebaseObject, 
 	$scope.showUpdateJuridica = function (id) {
 		$state.go('editar-empresa', { id: id })
 	}
+
+	$scope.showAlterarSenha = function(){
+		$ionicViewSwitcher.nextDirection('forward');
+		$state.go('editar-senha');
+	};
 
 	$scope.logout = function () {
 		$('#preloader').fadeIn();
@@ -1335,9 +1340,10 @@ app.controller('UsuarioJuridicoUpdateCtrl', function ($ionicPlatform, $firebaseA
 
 });
 
-app.controller('AlterarSenhaCtrl', function ($scope, $state, $firebaseAuth, $firebaseObject, $ionicPopup, $ionicHistory) {
+app.controller('AlterarSenhaCtrl', function ($ionicViewSwitcher, $scope, $state, $firebaseAuth, $firebaseObject, $ionicPopup, $ionicHistory) {
 
 	$scope.goBackHandler = function () {
+		$ionicViewSwitcher.nextDirection('back');
 		$ionicHistory.goBack(-1);
 	}
 
@@ -1364,6 +1370,7 @@ app.controller('AlterarSenhaCtrl', function ($scope, $state, $firebaseAuth, $fir
 
 			$scope.usuario.password = "";
 			$scope.usuario.password2 = "";
+			$ionicHistory.goBack(-1);
 		}
 		else {
 

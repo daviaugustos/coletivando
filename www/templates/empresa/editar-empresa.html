@@ -16,11 +16,11 @@
         <ion-list>
             
             <div class="item-form">
-                <label class="item-input-coletivando item-floating-label"
-                ng-class="{'has-errors' : (cadastroForm.txtCNPJ.$invalid && !cadastroForm.txtCNPJ.$pristine) || (cadastroForm.txtCNPJ.$invalid && submitted), 'no-errors' : cadastroForm.txtCNPJ.$valid}">
-                    <span class="input-label">CNPJ</span>
-                    <input id="txtCnpj" ng-required="true" name="txtCNPJ" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="validate[required] cnpj"/>
-                </label>
+                <label class="item-input-coletivando item-floating-label" 
+                 ng-class="{'has-errors' : (cadastroForm.txtCnpj.$invalid && !cadastroForm.txtCnpj.$pristine) || cadastroForm.txtCnpj.$invalid && submitted, 'no-errors' : cadastroForm.txtCnpj.$valid}">
+                 <span class="input-label">CNPJ</span>
+                <input ng-minlength="18" ng-required="true" name="txtCnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
+              </label>
             </div>
 
              <div class="item-form">

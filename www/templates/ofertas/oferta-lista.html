@@ -8,22 +8,6 @@
     </ion-nav-bar>
 
 	<ion-content class="has-header" overflow-scroll="false" has-bouncing="true">
-       <ion-scroll direction="x" class="wide-as-needed" overflow-scroll="false" has-bouncing="true">
-
-           <button type="button" class="button btn-nav-menu">
-               Novidades
-           </button>
-           <button type="button" class="button btn-nav-menu">
-               Populares
-           </button>
-           <button type="button" class="button btn-nav-menu">
-               Mais arrecadados
-           </button>
-           <button type="button" class="button btn-nav-menu">
-               Finalizando
-           </button>
-
-        </ion-scroll>
 
         <ion-list>
             <ion-item ng-repeat="oferta in ofertas | filter:{ status: 'APROVADO' }" class="card">

@@ -162,8 +162,8 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 					console.log(referencia);
 				});
 			});
-			
-		$ionicHistory.goBack(-1);
+
+			$ionicHistory.goBack(-1);
 
 			$("#preloader").fadeOut();
 		}).catch(function (error) {
@@ -725,7 +725,7 @@ app.controller('SearchCtrl', function ($firebaseObject, $ionicPlatform, $ionicVi
 			return arrayImagensUrl[0];
 		});
 	};
-	
+
 	$scope.goBackHandler = function () {
 		$ionicHistory.goBack(-1);
 	};
@@ -760,32 +760,32 @@ app.controller('OfertasApoiadasCtrl', function ($firebaseObject, $ionicViewSwitc
 	function listaOfertasApoidadas() {
 		var refOfertasUsuarios = firebase.database().ref('ofertasUsuarios');
 		var query = refOfertasUsuarios.orderByChild("usuarioId").equalTo(firebaseUser.uid);
-		
-		$firebaseArray(query).$loaded(function(lista){
-			var listaOfertaIds = lista.map(function(oferta){
+
+		$firebaseArray(query).$loaded(function (lista) {
+			var listaOfertaIds = lista.map(function (oferta) {
 				return oferta.ofertaId;
 			});
 			buscaOfertasApoiadas(listaOfertaIds);
 		});
-		
+
 	};
 
-	function buscaOfertasApoiadas(listaOfertaIds){
+	function buscaOfertasApoiadas(listaOfertaIds) {
 		var ofertasApoiadas = [];
-		
-		listaOfertaIds.forEach(function(ofertaId) {
+
+		listaOfertaIds.forEach(function (ofertaId) {
 			var refOfertaApoiada = firebase.database().ref('ofertas/' + ofertaId);
-			
-			$firebaseObject(refOfertaApoiada).$loaded(function(obj){
+
+			$firebaseObject(refOfertaApoiada).$loaded(function (obj) {
 				ofertasApoiadas.push(obj);
-				if (ofertasApoiadas.length === listaOfertaIds.length){
+				if (ofertasApoiadas.length === listaOfertaIds.length) {
 					listaImagens(ofertasApoiadas); //promise do futuro
 				}
 			});
 		});
 	};
 
-	function listaImagens(ofertasApoiadas){
+	function listaImagens(ofertasApoiadas) {
 		ofertasApoiadas = ofertasApoiadas.map(function (oferta) {
 			getImagemExibicao(oferta.$id).then(function (urlImagem) {
 				oferta.imagem = urlImagem;
@@ -1117,7 +1117,7 @@ app.controller('UsuarioJuridicoCtrl', function ($ionicViewSwitcher, $firebaseAut
 		$state.go('editar-empresa', { id: id })
 	}
 
-	$scope.showAlterarSenha = function(){
+	$scope.showAlterarSenha = function () {
 		$ionicViewSwitcher.nextDirection('forward');
 		$state.go('editar-senha');
 	};
@@ -1731,7 +1731,6 @@ app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ioni
 		//tentativa falha de atualizar o visualizar oferta dps de aderir
 		$ionicViewSwitcher.nextDirection("back");
 		$state.go('visualizar-oferta', { id: id });
-
 		// PaypalService.initPaymentUI().then(function () {
 		// 	PaypalService.makePayment(valor, "Total Amount").then(function (response) {
 		// 		alert("success: " + JSON.stringify(response));
@@ -1740,5 +1739,9 @@ app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ioni
 		// 	});
 		// });
 	}
+
+	$scope.goBackHandler = function () {
+		$ionicHistory.goBack(-1);
+	};
 });
 

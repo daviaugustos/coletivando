@@ -548,7 +548,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 	}
 });
 
-app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
+app.controller('VisualizarOfertaCtrl', function ($ionicViewSwitcher, $firebaseAuth, $firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
 
 	var firebaseUser = $firebaseAuth().$getAuth();
 	if (firebaseUser == null) {
@@ -648,6 +648,7 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, 
 	//Paypal
 
 	$scope.goBackHandler = function () {
+		$ionicViewSwitcher.nextDirection("back");
 		$ionicHistory.goBack(-1);
 	}
 
@@ -698,7 +699,7 @@ app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaS
 	}
 });
 
-app.controller('SearchCtrl', function ($firebaseObject, $ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
+app.controller('SearchCtrl', function ($ionicViewSwitcher, $firebaseObject, $ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
 
 	$ionicPlatform.ready(function () {
 
@@ -745,6 +746,7 @@ app.controller('SearchCtrl', function ($firebaseObject, $ionicPlatform, $ionicVi
 	};
 
 	$scope.goBackHandler = function () {
+		$ionicViewSwitcher.nextDirection("back");
 		$ionicHistory.goBack(-1);
 	};
 

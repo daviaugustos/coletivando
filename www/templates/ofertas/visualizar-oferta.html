@@ -58,7 +58,7 @@
 
         <div class="row">
             <div class="col"></div>
-            <div ng-show="aderiu == false" class="col col-80 center">
+            <div ng-show="aderiu == false && logado == true" class="col col-80 center">
                 <button ng-click="showAderirOferta(oferta.$id)" class="button btn btn-green">Aderir Oferta</button>
             </div>
             <div ng-show="aderiu == true" class="col col-80 center">
@@ -66,7 +66,7 @@
             </div>
             <div class="col"></div>
         </div>
-        
+
     </ion-content>
 
 </ion-view>

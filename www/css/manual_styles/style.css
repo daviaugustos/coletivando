@@ -772,6 +772,19 @@ p.price-pesquisar{
 	padding: 3px 0px;
 }
 
+#aderir-oferta .valortotal{
+	color: #5a5a5a;
+	font-size: 20px;
+
+}
+
+#aderir-oferta .valortotal2{
+	color: #797979;
+	font-size: 20px;
+
+}
+
+
 
 
 /*Notifications*/

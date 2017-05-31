@@ -530,7 +530,7 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 	$scope.showOpcoesOfertas = function (id) {
 		var refStatus = firebase.database().ref('ofertas/' + id);
 		$firebaseObject(refStatus).$loaded(function (oferta) {
-			if (oferta.status == 'APROVADO') {
+			if (oferta.status == 'APROVADO' || oferta.status == 'REALIZADO') {
 				$ionicViewSwitcher.nextDirection('forward');
 				$state.go('visualizar-oferta', { id: id });
 			}
@@ -556,11 +556,11 @@ app.controller('VisualizarOfertaCtrl', function ($ionicViewSwitcher, $firebaseAu
 	}
 	else {
 		var refUsuarioLogado = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);
-		$firebaseObject(refUsuarioLogado).$loaded(function(user) {
-			if(user.cnpj!=null){
-				
+		$firebaseObject(refUsuarioLogado).$loaded(function (user) {
+			if (user.cnpj != null) {
+
 			}
-			else{
+			else {
 				$scope.logado = true;
 				console.log("chegou");
 			}
@@ -1748,16 +1748,18 @@ app.controller('AderirOfertaCtrl', function ($state, $ionicNavBarDelegate, $ioni
 
 		ofertasUsuarios.$add(ofertaUsuario);
 
-		//tentativa falha de atualizar o visualizar oferta dps de aderir
 		$ionicViewSwitcher.nextDirection("back");
 		$state.go('visualizar-oferta', { id: id });
-		// PaypalService.initPaymentUI().then(function () {
-		// 	PaypalService.makePayment(valor, "Total Amount").then(function (response) {
-		// 		alert("success: " + JSON.stringify(response));
-		// 	}, function (error) {
-		// 		alert("error:" + JSON.stringify(error));
-		// 	});
-		// });
+
+		var query = refOfertasUsuarios.orderByChild("ofertaId").equalTo(id);
+		$firebaseArray(query).$loaded(function (listaOfertaUsuarios) {
+			if (listaOfertaUsuarios.length >= $scope.oferta.qtdPessoas) {
+				$scope.oferta.status = "REALIZADO";
+				$scope.oferta.$save();
+				console.log("oferta realizada!")
+			}
+		});
+
 	}
 
 	$scope.goBackHandler = function () {

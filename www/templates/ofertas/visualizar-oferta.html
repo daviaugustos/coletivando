@@ -61,8 +61,11 @@
             <div ng-show="aderiu == false && logado == true" class="col col-80 center">
                 <button ng-click="showAderirOferta(oferta.$id)" class="button btn btn-green">Aderir Oferta</button>
             </div>
-            <div ng-show="aderiu == true" class="col col-80 center">
+            <div ng-show="aderiu == true && oferta.status !== 'REALIZADO'" class="col col-80 center">
                 Você aderiu esta oferta.
+            </div>
+            <div ng-show="oferta.status == 'REALIZADO'" class="col col-80 center">
+                Esta oferta foi concluída!
             </div>
             <div class="col"></div>
         </div>

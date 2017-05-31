@@ -162,7 +162,9 @@ app.controller('OfertaCtrl', function ($firebaseAuth, $scope, $state, $ionicHist
 					console.log(referencia);
 				});
 			});
-			$state.go('tabsJuridicoLogado.minhasOfertas')
+			
+		$ionicHistory.goBack(-1);
+
 			$("#preloader").fadeOut();
 		}).catch(function (error) {
 			console.log("deu erro");

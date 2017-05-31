@@ -549,12 +549,26 @@ app.controller('MinhasOfertasCtrl', function ($ionicViewSwitcher, $state, $fireb
 });
 
 app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, $stateParams, $firebaseObject, $state, $scope, $ionicHistory, $ionicSlideBoxDelegate) {
+
+	var firebaseUser = $firebaseAuth().$getAuth();
+	if (firebaseUser == null) {
+		console.log("Ninguem ta logado");
+	}
+	else {
+		var refUsuarioLogado = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
+		$firebaseObject(refUsuarioLogado).$loaded(function (user) {
+			console.log(user);
+		});
+
+	}
+
+
 	console.log("entrou no controller visu ofertas");
 	var empresa;
 	var ofertaId = $stateParams.id;
 	var ref = firebase.database().ref('ofertas/' + ofertaId);
 
-	var firebaseUser = $firebaseAuth().$getAuth();
+	// var firebaseUser = $firebaseAuth().$getAuth();
 
 	var refOfertas = firebase.database().ref('ofertasUsuarios');
 	var queryOferta = refOfertas.orderByChild("ofertaId").equalTo(ofertaId);

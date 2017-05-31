@@ -62,9 +62,9 @@
             <p>Vence em {{oferta.dataLimite}}</p>
         </div>
 
-        <div class="row">
+        <div class="row" ng-controller="LoginCtrl">
                 <div class="col"></div>
-                <div ng-show="aderiu == false" class="col col-80 center">
+                <div ng-show="aderiu == false && logado == true" class="col col-80 center">
                     <button ng-click="showAderirOferta(oferta.$id)" class="button btn btn-green">Aderir Oferta</button>
                 </div>
                 <div ng-show="aderiu == true" class="col col-80 center">

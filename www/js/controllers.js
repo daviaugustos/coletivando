@@ -552,16 +552,20 @@ app.controller('VisualizarOfertaCtrl', function ($firebaseAuth, $firebaseArray, 
 
 	var firebaseUser = $firebaseAuth().$getAuth();
 	if (firebaseUser == null) {
-		console.log("Ninguem ta logado");
+		console.log("Nenhum user logado");
 	}
 	else {
-		var refUsuarioLogado = firebase.database().ref('pessoaFisica/' + firebaseUser.uid);
-		$firebaseObject(refUsuarioLogado).$loaded(function (user) {
-			console.log(user);
+		var refUsuarioLogado = firebase.database().ref('pessoaJuridica/' + firebaseUser.uid);
+		$firebaseObject(refUsuarioLogado).$loaded(function(user) {
+			if(user.cnpj!=null){
+				
+			}
+			else{
+				$scope.logado = true;
+				console.log("chegou");
+			}
 		});
-
 	}
-
 
 	console.log("entrou no controller visu ofertas");
 	var empresa;

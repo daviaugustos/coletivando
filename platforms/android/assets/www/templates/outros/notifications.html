@@ -1,0 +1,35 @@
+<ion-view id="pesquisar" title="Notifications">
+
+
+  <div class="bar coletivando-bar green">
+    <div class="title nav-title left white">
+      Notificações
+    </div>
+  </div>
+
+  <!--</ion-nav-bar>-->
+
+
+  <!--<div class="bar bar-header bar-royal">
+    <button class="button button-icon">
+      <i class="icon ion-android-arrow-back"></i>
+    </button>
+    <button class="button button-icon">
+        <i class="icon ion-android-close"></i>
+    </button>
+  </div>-->
+
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="n in notification">
+
+        <a class="item item-avatar-right">
+          <!--<img src="{{n.image}}">-->
+          <h2>{{n.text}}</h2>
+          <p2>{{n.time}}</p2>
+        </a>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-view>

@@ -1,0 +1,30 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "br.com.f4b.coletivando"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "br.com.f4b.coletivando"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "br.com.f4b.coletivando"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "br.com.f4b.coletivando"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "br.com.f4b.coletivando"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "br.com.f4b.coletivando"
+        }
+    },
+    "dependent_plugins": {}
+}

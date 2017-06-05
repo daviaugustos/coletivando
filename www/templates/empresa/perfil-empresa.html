@@ -1,0 +1,44 @@
+<ion-view id="perfil-empresa" title="">
+   
+    <ion-nav-bar class="transp">
+        <ion-nav-buttons side="left">
+            <button ng-click="goBackHandler()" class="button button-icon">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content>
+        <div class="full-image" src="img/perfil-empresa/bg.jpg">
+        <div class="card-company"> 
+            <div class="avatar-company">
+                <center>    
+                    <img src="img/perfil-empresa/foto-perfil-empresa.png">
+                </center>
+            </div>
+
+            <div class="header-company">
+                <h3>{{pessoaJuridica.nomeFantasia}}</h3>
+                <p>{{OfertasPessoaJuridicaRealizada}} Ofertas realizadas </p>
+            </div>
+            </div>
+            <div class="info-company">
+                <div class="item item-icon-left">
+                    <i class="icon ion-ios-telephone"></i>
+                    {{pessoaJuridica.telefone}}
+                </div>
+                <div class="item item-icon-left">
+                    <i class="icon ion-ios-location"></i>
+                    {{enderecoRua}}
+                    <p>{{enderecoCidade}}</p>
+                </div>
+                <div class="item item-icon-left">
+                    <i class="icon ion-email"></i>
+                    {{pessoaJuridica.email}}
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+
+</ion-view>

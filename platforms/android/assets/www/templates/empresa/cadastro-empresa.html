@@ -1,0 +1,122 @@
+<ion-view  id="cadastro-empresa" title="">
+
+    <div class="bar coletivando-bar transparente"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+        </div>
+    </div>
+
+    <form name="cadastroForm" ng-submit="create(pessoaJuridica)" ng-controller="ValidacaoCtrl" class="cadastro-form">
+
+    <ion-content overflow-scroll="false" class="has-header" has-bouncing="true" style="padding:40px 20px 20px 20px">
+        <ion-list>
+
+            <h2 class="text-center">Cadastre sua empresa</h2>
+
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtCnpj.$invalid && !cadastroForm.txtCnpj.$pristine) || cadastroForm.txtCnpj.$invalid && submitted, 'no-errors' : cadastroForm.txtCnpj.$valid}">
+                <span class="input-label">CNPJ</span>
+                <input ng-minlength="18" ng-required="true" name="txtCnpj" id="txtCnpj" type="text" placeholder="CNPJ" ng-model="pessoaJuridica.cnpj" ng-blur="validarCnpj()" class="cnpj"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtNomeFantasia.$invalid && !cadastroForm.txtNomeFantasia.$pristine) || (cadastroForm.txtNomeFantasia.$invalid && submitted), 'no-errors' : cadastroForm.txtNomeFantasia.$valid}">
+                <span class="input-label">Nome(Fantasia)</span>
+                <input ng-required="true" name="txtNomeFantasia" id="txtNomeFantasia" type="text" placeholder="Nome(Fantasia)" ng-model="pessoaJuridica.nomeFantasia"/>
+            </label>
+            
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtNome.$invalid && !cadastroForm.txtNome.$pristine) || (cadastroForm.txtNome.$invalid && submitted), 'no-errors' : cadastroForm.txtNome.$valid}">
+                <span class="input-label">Nome</span>
+                <input ng-required="true" name="txtNome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaJuridica.nome"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtCnae.$invalid && !cadastroForm.txtCnae.$pristine) || (cadastroForm.txtCnae.$invalid && submitted), 'no-errors' : cadastroForm.txtCnae.$valid}">
+                <span class="input-label">CNAE(Principal)</span>
+                <input ng-required="true" name="txtCnae" id="txtCnae" type="text" placeholder="CNAE(Principal)" ng-model="pessoaJuridica.cnae"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label"
+            ng-class="{'has-errors' : (cadastroForm.txtCep.$invalid && !cadastroForm.txtCep.$pristine) || (cadastroForm.txtCep.$invalid && submitted), 'no-errors' : cadastroForm.txtCep.$valid}">
+                <span class="input-label">CEP</span>
+                <input ng-required="true" name="txtCep" id="txtCep" type="text" class"cep" placeholder="CEP" ng-model="pessoaJuridica.enderecoCep" maxlength="9" class="cep"/>
+            </label>
+
+            <div class="row no-padding">
+                <div class="col col-70 no-padding-left">
+                    <label class="item-input-coletivando item-floating-label" 
+                    ng-class="{'has-errors' : (cadastroForm.txtRua.$invalid && !cadastroForm.txtRua.$pristine) || (cadastroForm.txtRua.$invalid && submitted), 'no-errors' : cadastroForm.txtRua.$valid}">
+                        <span class="input-label">Rua</span>
+                        <input ng-required="true" name="txtRua" id="txtRua" type="text" placeholder="Rua" ng-model="pessoaJuridica.enderecoRua"/>
+                    </label>
+                </div>
+                <div class="col col-30 no-padding-right">
+                    <label class="item-input-coletivando item-floating-label" 
+                    ng-class="{'has-errors' : (cadastroForm.txtNumero.$invalid && !cadastroForm.txtNumero.$pristine) || (cadastroForm.txtNumero.$invalid && submitted), 'no-errors' : cadastroForm.txtNumero.$valid}">
+                        <span class="input-label">Número</span>
+                        <input ng-required="true" id="txtNumero" name="txtNumero" type="text" placeholder="Número" ng-model="pessoaJuridica.enderecoNumero"/>
+                    </label>
+                </div>
+            </div>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Complemento</span>
+                <input id="txtComplemento" type="text" placeholder="Complemento" ng-model="pessoaJuridica.enderecoComplemento"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Bairro</span>
+                <input id="txtBairro" type="text" placeholder="Bairro" ng-model="pessoaJuridica.enderecoBairro"/>
+            </label>
+
+            <!-- SELECT ESTADO E CIDADE -->
+            <span class="input-label">Estado</span>
+            <select ng-required="true" name="txtEstado" id="txtEstado" ng-model="pessoaJuridica.enderecoEstado"></select>
+
+            <span class="input-label">Cidade</span>
+            <select ng-required="true" name="txtCidade" id="txtCidade" ng-model="pessoaJuridica.enderecoCidade"></select>
+            <!-- /SELECT ESTADO E CIDADE -->
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Telefone</span>
+                <input id="txtTelefone" type="text" id="telefone" placeholder="Telefone" ng-model="pessoaJuridica.telefone" class="phone"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label">
+                <span class="input-label">Celular</span>
+                <input id="txtCelular" type="text" id="Celular" placeholder="Celular" ng-model="pessoaJuridica.celular" class="phone"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtEmail.$invalid && !cadastroForm.txtEmail.$pristine) || (cadastroForm.txtEmail.$invalid && submitted), 'no-errors' : cadastroForm.txtEmail.$valid}">
+                <span class="input-label">Email</span>
+                <input ng-required="true" name="txtEmail" id="txtEmail" type="email" placeholder="Email" ng-model="pessoaJuridica.email"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtSenhaNovo.$invalid && !cadastroForm.txtSenhaNovo.$pristine) || (cadastroForm.txtSenhaNovo.$invalid && submitted), 'no-errors' : cadastroForm.txtSenhaNovo.$valid}">
+                <span class="input-label">Senha</span>
+                <input ng-required="true" ng-minlength="6" name="txtSenhaNovo" id="txtSenhaNovo" type="password" placeholder="Senha" ng-model="pessoaJuridica.password"/>
+            </label>
+
+            <label class="item-input-coletivando item-floating-label" 
+            ng-class="{'has-errors' : (cadastroForm.txtConfirmSenha.$invalid && !cadastroForm.txtConfirmSenha.$pristine) || (cadastroForm.txtConfirmSenha.$invalid && submitted), 'no-errors' : cadastroForm.txtConfirmSenha.$valid}">
+                <span class="input-label">Confirmar senha</span>
+                <input ng-required="true" ng-minlength="6" name="txtConfirmSenha" type="password" id="txtConfirmSenha" placeholder="Confirmar senha" ng-model="pessoaJuridica.confirmPassword"/>
+            </label>
+
+            <!--<label class="termos-de-uso">
+                <span>Eu li e aceito os termos de uso</span>
+                <input type="checkbox" class="validate[required]">
+            </label>-->
+            <button ng-click="submit(cadastroForm)" class="margin-top button button-block btn btn-green">Cadastrar</button>
+
+        </ion-list>
+        </ion-content> 
+        
+    </form>
+
+</ion-view>

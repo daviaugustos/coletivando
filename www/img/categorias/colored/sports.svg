@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Rugbyball</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="colored" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Rugbyball" sketch:type="MSLayerGroup" transform="translate(32.353553, 31.353553) rotate(-315.000000) translate(-32.353553, -31.353553) translate(12.853553, 0.353553)" stroke="#314E55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19,61.5207788 C30.2553799,55.9786123 38,44.3937326 38,31 C38,17.6062674 30.2553799,6.02138774 19,0.479221167 C7.74462005,6.02138774 1.02318154e-12,17.6062674 1.02318154e-12,31 C1.02318154e-12,44.3937326 7.74462005,55.9786123 19,61.5207788 Z" id="Oval-817" fill="#E4AD40" sketch:type="MSShapeGroup"></path>
+            <path d="M8.51382986,9.15336021 C11.721312,9.69772042 15.2688745,10 19,10 C22.7751156,10 26.3623143,9.69055063 29.599477,9.13400529" id="Oval-819" sketch:type="MSShapeGroup"></path>
+            <path d="M8.51382986,51.1533602 C11.721312,51.6977204 15.2688745,52 19,52 C22.7751156,52 26.3623143,51.6905506 29.599477,51.1340053" id="Oval-819" sketch:type="MSShapeGroup" transform="translate(19.056653, 51.634005) rotate(-180.000000) translate(-19.056653, -51.634005) "></path>
+            <path d="M10.6168741,19.6611207 C10.6168741,19.6611207 3.5268925,28.8121318 9.78681027,41.5059286" id="Path-1907" sketch:type="MSShapeGroup"></path>
+            <path d="M6,23 L11,25" id="Line" sketch:type="MSShapeGroup"></path>
+            <path d="M7.35456896,19.6611207 L12.354569,21.6611207" id="Line" sketch:type="MSShapeGroup"></path>
+            <path d="M5.13584699,27.5 L9.85456896,28" id="Line" sketch:type="MSShapeGroup"></path>
+            <path d="M4.80576183,32.46207 L9.60352175,32" id="Line" sketch:type="MSShapeGroup"></path>
+            <path d="M5.78624864,37.3807886 L10.6035218,35.96207" id="Line" sketch:type="MSShapeGroup"></path>
+            <path d="M7.20464179,41.5059286 L11.2218256,40.1923882" id="Line" sketch:type="MSShapeGroup"></path>
+        </g>
+        <g id="Free_sliced" sketch:type="MSLayerGroup" transform="translate(-240.000000, 0.000000)"></g>
+    </g>
+</svg>

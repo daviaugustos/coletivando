@@ -1,0 +1,24 @@
+<ion-view id="descricao" title="Descrição">
+
+    <div class="bar coletivando-bar green"> 
+        <button ng-click="goBackHandler()" class="button button-icon">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <div class="title nav-title left white">
+            Descrição
+        </div>
+    </div>
+
+    <ion-content overflow-scroll="false" has-bouncing="true" class="has-header">
+  
+      <div class="info-desc">
+        <div class="row">
+          <div class="col col-100 left">
+            <h3>{{oferta.produto}}</h3>
+            <p ng-bind-html="oferta.descricao"></p>
+          </div>
+        </div>
+      </div>
+    
+    </ion-content>
+</ion-view>

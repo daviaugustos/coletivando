@@ -1,0 +1,39 @@
+<ion-view id="apoiadas" title="Ofertas Apoiadas">
+ 
+      <div class="bar coletivando-bar green"> 
+          <button ng-click="goBackHandler()" class="button button-icon">
+              <i class="icon ion-android-arrow-back"></i>
+          </button>
+          <div class="title nav-title left white">
+              Ofertas Apoiadas
+          </div>
+      </div>
+
+      <ion-content class="has-header">
+
+          <ion-list>
+            <ion-item class="ofertas-apoiadas" ng-repeat="oferta in ofertasApoiadas">
+              <a ng-click="showOferta(oferta.$id)" ng-if="oferta.status == 'APROVADO'" class="item item-thumbnail-right em-andamento">
+                  <img src="{{oferta.imagem}}">
+                  <h2>{{oferta.produto}}</h2>
+                  <h3>R$ {{oferta.precoFinalUn}}</h3>
+                  <p>EM ANDAMENTO</p>
+              </a>
+              <a ng-click="showOferta(oferta.$id)" ng-if="oferta.status == 'REALIZADO'" class="item item-thumbnail-right realizado">
+                  <img src="{{oferta.imagem}}">
+                  <h2>{{oferta.produto}}</h2>
+                  <h3>R$ {{oferta.precoFinalUn}}</h3>
+                  <p>{{oferta.status}}</p>
+              </a>
+              <a ng-if="oferta.status == 'INCOMPLETO'" class="item item-thumbnail-right incompleto">
+                  <img src="{{oferta.imagem}}">
+                  <h2>{{oferta.produto}}</h2>
+                  <h3>R$ {{oferta.precoFinalUn}}</h3>
+                  <p>{{oferta.status}}</p>
+              </a>
+            </ion-item>
+          </ion-list>
+
+      </ion-content>
+
+</ion-view>

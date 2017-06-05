@@ -28,6 +28,7 @@ angular.module('coletivando')
         });
 
         $stateProvider.state('tabsNaoLogado.home', {
+            cache: false,
             url: '/nao-logado-home',
             views: {
                 'naoLogado-home-tab': {

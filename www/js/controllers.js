@@ -699,7 +699,7 @@ app.controller('CategoriaCtrl', function ($ionicViewSwitcher, $scope, CategoriaS
 	}
 });
 
-app.controller('SearchCtrl', function ($ionicViewSwitcher, $firebaseObject, $ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
+app.controller('SearchCtrl', function ($firebaseObject, $ionicPlatform, $ionicViewSwitcher, $state, $firebaseAuth, $firebaseArray, $scope, $http, $ionicHistory, $ionicPopup) {
 
 	$ionicPlatform.ready(function () {
 
@@ -707,12 +707,17 @@ app.controller('SearchCtrl', function ($ionicViewSwitcher, $firebaseObject, $ion
 		getObjOfertaComImagem();
 	});
 
-
 	function getObjOfertaComImagem() {
 		var ref = firebase.database().ref('ofertas');
 		$firebaseArray(ref).$loaded(function (dadosOfertas) {
 			dadosOfertas = dadosOfertas.map(function (oferta) {
-				carregaEmpresa(oferta.pessoaJuridicaId);
+
+				carregaEmpresa(oferta.pessoaJuridicaId).then(function (dados) {
+					console.log(dados);
+					oferta.empresa = dados.nomeFantasia;
+				});
+
+				// console.log($scope.empresa)
 
 				getImagemExibicao(oferta.$id).then(function (urlImagem) {
 					oferta.imagem = urlImagem;
@@ -725,12 +730,10 @@ app.controller('SearchCtrl', function ($ionicViewSwitcher, $firebaseObject, $ion
 	}
 
 	function carregaEmpresa(empresaId) {
-
 		var refEmpresa = firebase.database().ref('pessoaJuridica/' + empresaId);
-		$firebaseObject(refEmpresa).$loaded(function (empresa) {
-			$scope.empresa = empresa;
+		return $firebaseObject(refEmpresa).$loaded(function (empresa) {
+			return empresa;
 		});
-
 	}
 
 	function getImagemExibicao(ofertaId) {

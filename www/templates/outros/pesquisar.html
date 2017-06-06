@@ -23,7 +23,7 @@
               <div class="col col-50 left">
                 <h2>{{oferta.produto}}</h2>
                 <p class="price-pesquisar">{{oferta.precoFinalUn | currency: "R$ "}}</p>
-                <a class="info-perfil-empresa" ng-click="showEmpresa(empresa.$id)">por {{empresa.nomeFantasia}}</a>
+                <a class="info-perfil-empresa" ng-click="showEmpresa(oferta.pessoaJuridicaId)">por {{oferta.empresa}}</a>
               </div>
 
               <div class="col col-50 right">

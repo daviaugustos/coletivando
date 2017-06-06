@@ -25,7 +25,7 @@
                         <a class="info-perfil-empresa" ng-click="showEmpresa(empresa.$id)">por {{empresa.nomeFantasia}}</a>
                 </div>
                 <div class="col col-50 right">
-                    <p class="price">R$ {{oferta.precoFinalUn}}</p>
+                    <p class="price">R$ {{oferta.precoFinalUn.toFixed(2)}}</p>
                     <p class="price-old">R$ {{oferta.precoInicialUn}}</p>
                 </div>
             </div>

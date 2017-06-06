@@ -467,6 +467,9 @@ app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, 
 				getImagemExibicao(oferta.$id).then(function (urlImagem) {
 					oferta.imagem = urlImagem;
 				});
+
+				oferta.precoFinalUn = Number(oferta.precoFinalUn).toFixed(2);
+
 				return oferta;
 			});
 
@@ -481,7 +484,7 @@ app.controller('OfertaListaCtrl', function ($ionicPlatform, $ionicViewSwitcher, 
 
 		$firebaseArray(query).$loaded(function (listaOfertasUsuarios) {
 			var porcentagem = (listaOfertasUsuarios.length / oferta.qtdPessoas) * 100;
-			oferta.porcentagem = porcentagem;
+			oferta.porcentagem = porcentagem.toFixed(2);
 		});
 	};
 
@@ -621,7 +624,7 @@ app.controller('VisualizarOfertaCtrl', function ($ionicViewSwitcher, $firebaseAu
 
 		$firebaseArray(query).$loaded(function (listaOfertasUsuarios) {
 			var porcentagem = (listaOfertasUsuarios.length / oferta.qtdPessoas) * 100;
-			oferta.porcentagem = porcentagem;
+			oferta.porcentagem = porcentagem.toFixed(2);
 		});
 		return oferta.porcentagem;
 	};

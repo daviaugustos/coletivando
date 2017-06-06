@@ -1,40 +1,41 @@
 <ion-view id="cadastro-user" title="">
 
-    <div class="bar coletivando-bar transparente"> 
+    <div class="bar coletivando-bar transparente">
         <button ng-click="goBackHandler()" class="button button-icon">
             <i class="icon ion-android-arrow-back"></i>
         </button>
         <div class="title nav-title left white">
         </div>
     </div>
+    <ion-content scroll="true" >
+        <form novalidate ng-submit="create(pessoaFisica)" class="cadastro-form">
 
-    <form novalidate ng-submit="create(pessoaFisica)" class="cadastro-form">
+            <ion-list>
+                <h2 class="text-center">Cadastre-se</h2>
 
-        <ion-list>
-            <h2 class="text-center">Cadastre-se</h2>
-
-            <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nome.$invalid && !cadastroForm.nome.$pristine, 'no-errors' : cadastroForm.nome.$valid}">
+                <label class="item-input-coletivando item-floating-label" ng-class="{'has-errors' : cadastroForm.nome.$invalid && !cadastroForm.nome.$pristine, 'no-errors' : cadastroForm.nome.$valid}">
                 <span class="input-label">Nome</span>
                 <input ng-required="true" name="nome" id="txtNome" type="text" placeholder="Nome" ng-model="pessoaFisica.nome"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+                <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Email</span>
                 <input  ng-required="true" id="txtEmail" type="email" placeholder="Email" ng-model="pessoaFisica.email"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+                <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Senha</span>
                 <input data-ng-minlength="6" ng-required="true" id="txtSenha" type="password" placeholder="Senha" ng-model="pessoaFisica.password"/>
             </label>
 
-            <label class="item-input-coletivando item-floating-label">
+                <label class="item-input-coletivando item-floating-label">
                 <span class="input-label">Confirmar</span>
                 <input data-ng-minlength="6" ng-required="true" id="txtConfirmacaoSenha" type="password" placeholder="Confirmar senha" ng-model="pessoaFisica.confirmPassword"/>
             </label>
-            
-            <button class="margin-top button button-block btn btn-green">Cadastrar</button>
 
-        </ion-list>
-    </form>
+                <button class="margin-top button button-block btn btn-green">Cadastrar</button>
+
+            </ion-list>
+        </form>
+    </ion-content>
 </ion-view>
